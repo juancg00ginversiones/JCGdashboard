@@ -114,6 +114,48 @@ def calcular_medias(close):
     ema200 = close.ewm(span=200, adjust=False).mean()
     return ema21, sma30, ema150, ema200
 
+def calcular_semanal(ticker):
+    """Calcula RSI, KONCORD y SMA200 en velas semanales"""
+    try:
+        df = yf.download(ticker, period="10y", interval="1wk",
+                         auto_adjust=True, progress=False)
+        if df is None or len(df) < 30: return None
+        o = df["Open"].squeeze().dropna()
+        h = df["High"].squeeze().dropna()
+        l = df["Low"].squeeze().dropna()
+        c = df["Close"].squeeze().dropna()
+        v = df["Volume"].squeeze().dropna()
+        idx = c.index
+        o,h,l,v = o.reindex(idx),h.reindex(idx),l.reindex(idx),v.reindex(idx)
+        if len(c) < 30: return None
+
+        precio = float(c.iloc[-1])
+
+        # RSI Wilder semanal
+        rsi_w = rsi_wilder(c)
+        rsi_val = r(rsi_w.iloc[-1], 1)
+
+        # KONCORD semanal
+        marron_w, media_k_w = calcular_marron_tv(o,h,l,c,v)
+        marron_v  = r(marron_w.iloc[-1], 2)
+        media_k_v = r(media_k_w.iloc[-1], 2)
+        konc_dir  = "up" if (marron_v and media_k_v and marron_v > media_k_v) else "dn"
+
+        # SMA200 semanal
+        sma200_w = c.rolling(200).mean()
+        sma200_v = float(sma200_w.iloc[-1]) if not pd.isna(sma200_w.iloc[-1]) else None
+        dist_sma200 = dist_pct(precio, sma200_v) if sma200_v else None
+
+        return {
+            "rsi_1w":      rsi_val,
+            "marron_1w":   marron_v,
+            "media_k_1w":  media_k_v,
+            "konc_dir_1w": konc_dir,
+            "dist_sma200_1w": dist_sma200,
+        }
+    except Exception as e:
+        return None
+
 def dist_pct(precio, media):
     if pd.isna(media) or media == 0: return None
     return round(((precio - media) / media) * 100, 2)
@@ -278,11 +320,19 @@ def procesar_ticker(ticker):
             elif rsi_val >= 68:
                 hist_rsi = analizar_rsi_historico(ticker, 70, c)
 
+        # Datos semanales
+        semanal = calcular_semanal(ticker)
+
         return {
             "ticker":      ticker,
             "pct_dia":     pct_dia,
             "rsi_1d":      rsi_val,
             "rsi_1h":      None,
+            "rsi_1w":      semanal["rsi_1w"]      if semanal else None,
+            "marron_1w":   semanal["marron_1w"]    if semanal else None,
+            "media_k_1w":  semanal["media_k_1w"]   if semanal else None,
+            "konc_dir_1w": semanal["konc_dir_1w"]  if semanal else None,
+            "dist_sma200_1w": semanal["dist_sma200_1w"] if semanal else None,
             "macd_h":      r(macd_h.iloc[-1], 2),
             "marron":      r(marron_v, 2),
             "media_k":     r(media_k_v, 2),
