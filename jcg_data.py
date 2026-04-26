@@ -141,17 +141,32 @@ def calcular_semanal(ticker):
         media_k_v = r(media_k_w.iloc[-1], 2)
         konc_dir  = "up" if (marron_v and media_k_v and marron_v > media_k_v) else "dn"
 
-        # SMA200 semanal
+        # Medias semanales
+        wma10_w  = c.rolling(10).apply(lambda x: np.dot(x, np.arange(1,11))/np.arange(1,11).sum(), raw=True)
+        ema30_w  = c.ewm(span=30,  adjust=False).mean()
+        ema50_w  = c.ewm(span=50,  adjust=False).mean()
         sma200_w = c.rolling(200).mean()
-        sma200_v = float(sma200_w.iloc[-1]) if not pd.isna(sma200_w.iloc[-1]) else None
-        dist_sma200 = dist_pct(precio, sma200_v) if sma200_v else None
+
+        def rv(s): return float(s.iloc[-1]) if not pd.isna(s.iloc[-1]) else None
+        wma10_v  = rv(wma10_w)
+        ema30_v  = rv(ema30_w)
+        ema50_v  = rv(ema50_w)
+        sma200_v = rv(sma200_w)
+
+        # % cambio semanal
+        precio_sem_prev = float(c.iloc[-2]) if len(c) >= 2 else precio
+        pct_semana = round(((precio - precio_sem_prev) / precio_sem_prev) * 100, 2)
 
         return {
-            "rsi_1w":      rsi_val,
-            "marron_1w":   marron_v,
-            "media_k_1w":  media_k_v,
-            "konc_dir_1w": konc_dir,
-            "dist_sma200_1w": dist_sma200,
+            "rsi_1w":          rsi_val,
+            "marron_1w":       marron_v,
+            "media_k_1w":      media_k_v,
+            "konc_dir_1w":     konc_dir,
+            "pct_semana":      pct_semana,
+            "dist_wma10_1w":   dist_pct(precio, wma10_v),
+            "dist_ema30_1w":   dist_pct(precio, ema30_v),
+            "dist_ema50_1w":   dist_pct(precio, ema50_v),
+            "dist_sma200_1w":  dist_pct(precio, sma200_v),
         }
     except Exception as e:
         return None
@@ -328,11 +343,15 @@ def procesar_ticker(ticker):
             "pct_dia":     pct_dia,
             "rsi_1d":      rsi_val,
             "rsi_1h":      None,
-            "rsi_1w":      semanal["rsi_1w"]      if semanal else None,
-            "marron_1w":   semanal["marron_1w"]    if semanal else None,
-            "media_k_1w":  semanal["media_k_1w"]   if semanal else None,
-            "konc_dir_1w": semanal["konc_dir_1w"]  if semanal else None,
-            "dist_sma200_1w": semanal["dist_sma200_1w"] if semanal else None,
+            "rsi_1w":          semanal["rsi_1w"]          if semanal else None,
+            "marron_1w":       semanal["marron_1w"]       if semanal else None,
+            "media_k_1w":      semanal["media_k_1w"]      if semanal else None,
+            "konc_dir_1w":     semanal["konc_dir_1w"]     if semanal else None,
+            "pct_semana":      semanal["pct_semana"]       if semanal else None,
+            "dist_wma10_1w":   semanal["dist_wma10_1w"]   if semanal else None,
+            "dist_ema30_1w":   semanal["dist_ema30_1w"]   if semanal else None,
+            "dist_ema50_1w":   semanal["dist_ema50_1w"]   if semanal else None,
+            "dist_sma200_1w":  semanal["dist_sma200_1w"]  if semanal else None,
             "macd_h":      r(macd_h.iloc[-1], 2),
             "marron":      r(marron_v, 2),
             "media_k":     r(media_k_v, 2),
