@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JCGdashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070710;--bg2:#0a0a14;--border:#111120;--border2:#1a1a2e;--text:#c8ccd8;--muted:#2a2a3e;--muted2:#1a1a2a;--accent:#4f8ef7;--mono:'Share Tech Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:12px;min-height:100vh}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:var(--bg2);border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:100}
+.logo{color:var(--accent);font-size:14px;letter-spacing:3px}
+.tabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--border2);padding:0 20px}
+.tab{padding:8px 20px;font-size:11px;letter-spacing:1.5px;color:var(--muted);border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;font-family:var(--mono)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-content{display:none;padding:16px 20px}
+.tab-content.active{display:block}
+.region{font-size:9px;letter-spacing:2px;color:var(--accent);margin:14px 0 6px;opacity:.7}
+.sector-lbl{font-size:9px;color:var(--muted);letter-spacing:1px;padding:6px 2px 3px;border-top:1px solid var(--border);margin-top:4px}
+table{width:100%;border-collapse:collapse}
+th{font-size:9px;letter-spacing:1px;color:var(--muted);padding:3px 10px;text-align:right;border-bottom:1px solid var(--border);font-weight:400}
+th:first-child{text-align:left}
+td{padding:3px 10px;text-align:right;border-bottom:1px solid rgba(17,17,32,.8);font-size:11px}
+td:first-child{text-align:left;font-weight:500;color:#4a4f66}
+tr:hover td{background:rgba(79,142,247,.03)}
+.rsi{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:700;min-width:40px;text-align:center}
+.r-sbv2{background:#003319;color:#00e676;box-shadow:0 0 10px rgba(0,230,118,.5)}
+.r-sbv1{background:#001a0d;color:#00c853}
+.r-neu{background:transparent;color:var(--muted);font-weight:400}
+.r-hi1{background:#1a0a00;color:#ff6d00}
+.r-hi2{background:#2d0008;color:#ff1744;box-shadow:0 0 10px rgba(255,23,68,.5)}
+.cpp{color:#00e676;font-weight:700;text-shadow:0 0 8px rgba(0,230,118,.5)}
+.cp{color:#1e3a20}.cz{color:var(--muted2)}.cn{color:#2d0a0a}
+.cnn{color:#ff1744;font-weight:700;text-shadow:0 0 8px rgba(255,23,68,.5)}
+.m-hi{color:#ff1744;font-weight:700}.m-lo{color:#00e676;font-weight:700}.m-neu{color:var(--muted2)}
+.mhi{color:#ff1744;font-weight:700}.mlo{color:#00e676;font-weight:700}.mne{color:var(--muted2)}
+.d-faru{color:#00e676}.d-nearu{color:#ffd600}.d-neu{color:var(--muted2)}.d-neard{color:#ff6d00}
+.d-fard{color:#ff1744;font-weight:700}
+.grid1h{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:4px;margin:6px 0 12px}
+.cell1h{padding:6px 4px;border-radius:3px;text-align:center;font-size:11px;font-weight:700}
+.c-over{background:#2d0008;color:#ff1744;box-shadow:0 0 8px rgba(255,23,68,.5)}
+.c-sbv{background:#003319;color:#00e676;box-shadow:0 0 8px rgba(0,230,118,.5)}
+.c-neu{background:#0d0d18;color:var(--muted2);font-weight:400}
+.val1h{font-size:9px;margin-top:2px;opacity:.6}
+.loading{text-align:center;padding:60px;color:var(--muted)}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{color:#ff1744;padding:20px;font-size:11px;line-height:2}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo">◈ JCGdashboard</div>
+  <div style="display:flex;gap:20px;align-items:center">
+    <span style="color:#1e3a1e;font-size:10px" id="upd-time">—</span>
+    <span style="color:var(--muted);font-size:10px" id="tcnt">—</span>
+    <span style="color:var(--muted);font-size:10px" id="next-upd">—</span>
+  </div>
+</div>
+<div class="tabs">
+  <button class="tab active" onclick="sw('ind',this)">INDICADORES</button>
+  <button class="tab" onclick="sw('med',this)">MEDIAS</button>
+  <button class="tab" onclick="sw('h1',this)">RSI 1H</button>
+</div>
+<div class="tab-content active" id="ind"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="med"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="h1"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+
+<script>
+// ── URL del JSON — se actualiza automáticamente por GitHub Actions ──
+// Reemplazá TU_USUARIO con tu usuario de GitHub
+const JSON_URL = 'https://juancg00ginversiones.github.io/JCGdashboard/jcg_data.json';
+
+function clsChg(v){if(v===null)return'cz';if(v>2)return'cpp';if(v>0)return'cp';if(v<-2)return'cnn';if(v<0)return'cn';return'cz'}
+function clsRsi(v){if(v===null)return'r-neu';if(v<=30)return'r-sbv2';if(v<=40)return'r-sbv1';if(v>=70)return'r-hi2';if(v>=65)return'r-hi1';return'r-neu'}
+function clsMrn(v){if(v===null)return'm-neu';if(v>40)return'm-hi';if(v<5)return'm-lo';return'm-neu'}
+function clsMcd(v){if(v===null)return'mne';if(v>30)return'mhi';if(v<-30)return'mlo';return'mne'}
+function clsDist(v){if(v===null)return'd-neu';if(v>5)return'd-faru';if(v>1)return'd-nearu';if(v<-5)return'd-fard';if(v<-1)return'd-neard';return'd-neu'}
+function cls1h(v){if(v===null||v===undefined)return'c-neu';if(v>=70)return'c-over';if(v<=30)return'c-sbv';return'c-neu'}
+function fv(v,d){if(v===null||v===undefined)return'--';return parseFloat(v).toFixed(d!==undefined?d:1)}
+function fc(v){if(v===null)return'--';return(v>=0?'+':'')+parseFloat(v).toFixed(2)+'%'}
+function fd(v){if(v===null)return'--';return(v>=0?'▲':'▼')+Math.abs(parseFloat(v)).toFixed(1)+'%'}
+
+function renderInd(sec,dat,lbl){
+  let h=`<div class="region">▸ ${lbl}</div>`;
+  for(const[s,ts]of Object.entries(sec)){
+    const vt=ts.filter(t=>dat[t]);if(!vt.length)continue;
+    h+=`<div class="sector-lbl">── ${s}</div><table><thead><tr><th>Ticker</th><th>%Día</th><th>RSI 1D</th><th>Marron</th><th>MediaK</th><th>K</th><th>MACD H</th></tr></thead><tbody>`;
+    for(const t of vt){
+      const d=dat[t];
+      h+=`<tr><td>${t}</td><td><span class="${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td><td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td><td><span class="${clsMrn(d.marron)}">${fv(d.marron,1)}</span></td><td><span class="${clsMrn(d.media_k)}">${fv(d.media_k,1)}</span></td><td style="color:var(--muted2);font-size:10px">${d.konc_dir==='up'?'▲':'▼'}</td><td><span class="${clsMcd(d.macd_h)}">${fv(d.macd_h,1)}</span></td></tr>`;
+    }
+    h+='</tbody></table>';
+  }
+  return h;
+}
+
+function renderMed(sec,dat,lbl){
+  let h=`<div class="region">▸ ${lbl}</div>`;
+  for(const[s,ts]of Object.entries(sec)){
+    const vt=ts.filter(t=>dat[t]);if(!vt.length)continue;
+    h+=`<div class="sector-lbl">── ${s}</div><table><thead><tr><th>Ticker</th><th>%Día</th><th>RSI</th><th>EMA21</th><th>SMA30</th><th>EMA150</th><th>EMA200</th></tr></thead><tbody>`;
+    for(const t of vt){
+      const d=dat[t];
+      h+=`<tr><td>${t}</td><td><span class="${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td><td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td><td><span class="${clsDist(d.dist_ema21)}">${fd(d.dist_ema21)}</span></td><td><span class="${clsDist(d.dist_sma30)}">${fd(d.dist_sma30)}</span></td><td><span class="${clsDist(d.dist_ema150)}">${fd(d.dist_ema150)}</span></td><td><span class="${clsDist(d.dist_ema200)}">${fd(d.dist_ema200)}</span></td></tr>`;
+    }
+    h+='</tbody></table>';
+  }
+  return h;
+}
+
+function renderH1(sec,dat,lbl){
+  let h=`<div class="region">▸ ${lbl}</div><div class="grid1h">`;
+  for(const ts of Object.values(sec))
+    for(const t of ts){
+      const d=dat[t];if(!d)continue;
+      const v=d.rsi_1h;
+      h+=`<div class="cell1h ${cls1h(v)}"><div>${t}</div><div class="val1h">${v!=null?fv(v,1):'--'}</div></div>`;
+    }
+  return h+'</div>';
+}
+
+function nextUpdate(){
+  const now=new Date();
+  const next=new Date(now);
+  next.setMinutes(30,0,0);
+  if(next<=now) next.setHours(next.getHours()+1);
+  const diff=Math.round((next-now)/60000);
+  document.getElementById('next-upd').textContent=`próx. act. en ~${diff} min`;
+}
+
+async function loadData(){
+  try{
+    const resp=await fetch(JSON_URL+'?t='+Date.now());
+    if(!resp.ok)throw new Error('HTTP '+resp.status);
+    const data=await resp.json();
+    const{sectores_usa,sectores_world,datos,actualizado}=data;
+    if(!datos||!Object.keys(datos).length)throw new Error('Sin datos aún — esperando primer run de GitHub Actions');
+    document.getElementById('upd-time').textContent='Act: '+actualizado;
+    document.getElementById('tcnt').textContent=Object.keys(datos).length+' tickers';
+    document.getElementById('ind').innerHTML=renderInd(sectores_usa,datos,'USA')+renderInd(sectores_world,datos,'MUNDIAL');
+    document.getElementById('med').innerHTML=renderMed(sectores_usa,datos,'USA')+renderMed(sectores_world,datos,'MUNDIAL');
+    document.getElementById('h1').innerHTML=renderH1(sectores_usa,datos,'USA')+renderH1(sectores_world,datos,'MUNDIAL');
+    nextUpdate();
+  }catch(e){
+    ['ind','med','h1'].forEach(id=>{
+      document.getElementById(id).innerHTML=`<div class="err">❌ ${e.message}<br>Verificá que el repo esté publicado en GitHub Pages.</div>`;
+    });
+  }
+}
+
+function sw(id,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+loadData();
+// Auto-refresh cada 60 minutos
+setInterval(loadData, 60*60*1000);
+</script>
+</body>
+</html>

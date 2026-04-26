@@ -1,0 +1,47 @@
+name: Actualizar datos JCGdashboard
+
+on:
+  schedule:
+    # Corre cada hora de lunes a viernes
+    # 14:30 UTC = 11:30 AM Argentina (UTC-3)
+    # 23:30 UTC = 20:30 Argentina — último update del día
+    - cron: '30 14 * * 1-5'
+    - cron: '30 15 * * 1-5'
+    - cron: '30 16 * * 1-5'
+    - cron: '30 17 * * 1-5'
+    - cron: '30 18 * * 1-5'
+    - cron: '30 19 * * 1-5'
+    - cron: '30 20 * * 1-5'
+    - cron: '30 21 * * 1-5'
+    - cron: '30 22 * * 1-5'
+    - cron: '30 23 * * 1-5'
+
+  # Permite correrlo manualmente desde GitHub
+  workflow_dispatch:
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: pip install yfinance pandas numpy
+
+      - name: Correr script de datos
+        run: python jcg_data.py
+
+      - name: Commit y push jcg_data.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add jcg_data.json
+          git diff --staged --quiet || git commit -m "Update jcg_data.json - $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
