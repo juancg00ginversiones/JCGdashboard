@@ -21,6 +21,8 @@ SECTORES_USA = {
     "Consumer Defensive": ["BG","CL","COST","HSY","KO","MDLZ","PEP","PG","TGT","WMT"],
     "HealthCare":         ["ABBV","ABT","AMGN","BMY","DHR","GILD","ISRG","LLY","MDT","MRK","MRNA","PFE","TMO","UNH","VRTX"],
     "Utilities":          ["CEG","OKLO","VST"],
+    "ETF Sectores USA":   ["XLK","XLF","XLV","XLE","XLI","XLY","XLP","XLB","XLRE","XLU","XLC","IBB","SMH"],
+    "ETF Globales":       ["EEM","EMB","EWJ","IEUR","IJH","IVE","VEA","IVW","VIG","ICLN","EWZ","FXI","EWG","EWU","EWT"],
 }
 SECTORES_WORLD = {
     "China":       ["BABA","BIDU","JD","NIO","NTES","PDD","XPEV"],
