@@ -10,8 +10,11 @@ warnings.filterwarnings("ignore")
 # SECTORES
 # ══════════════════════════════════════════════════════════
 SECTORES_USA = {
-    "ETFs":               ["SPY","QQQ","DIA","IWM","IBIT","GLD","SLV","URA","EWZ","FXI"],
-    "Technology":         ["AAPL","ADBE","AMAT","AMD","ASTS","AVGO","CSCO","FSLR","IBM","INTC","LRCX","MU","NVDA","ORCL","PANW","QCOM","RGTI","RKLB","SNOW","TXN","UBER"],
+    "ETFs":               ["SPY","QQQ","DIA","IWM","IBIT","EWZ","FXI","MAGS","RSP","VIX"],
+    "ETF Sectores USA":   ["XLK","XLF","XLV","XLE","XLI","XLY","XLP","XLB","XLRE","XLU","XLC","IBB","SMH"],
+    "Commodities":        ["GLD","SLV","URA","USO","GDX"],
+    "Magnificas":         ["AAPL","MSFT","NVDA","AMZN","GOOGL","META","TSLA","AVGO"],
+    "Technology":         ["ADBE","AMAT","AMD","ASTS","CSCO","FSLR","IBM","INTC","LRCX","MU","ORCL","PANW","QCOM","RGTI","RKLB","SNOW","TXN","UBER"],
     "Financial":          ["AIG","AXP","BAC","C","COIN","HOOD","HUT","IREN","JPM","MA","PYPL","RIOT","SCHW","USB","V","WFC"],
     "Consumer Cyclical":  ["AMZN","ARCO","BKNG","EBAY","ETSY","F","GM","HD","LVS","MCD","NKE","SBUX","TSLA"],
     "Industrials":        ["AAL","ADP","BA","CAAP","DAL","DE","FDX","GE","HWM","LMT","MMM","RTX","UAL","UNP"],
@@ -21,8 +24,6 @@ SECTORES_USA = {
     "Consumer Defensive": ["BG","CL","COST","HSY","KO","MDLZ","PEP","PG","TGT","WMT"],
     "HealthCare":         ["ABBV","ABT","AMGN","BMY","DHR","GILD","ISRG","LLY","MDT","MRK","MRNA","PFE","TMO","UNH","VRTX"],
     "Utilities":          ["CEG","OKLO","VST"],
-    "ETF Sectores USA":   ["XLK","XLF","XLV","XLE","XLI","XLY","XLP","XLB","XLRE","XLU","XLC","IBB","SMH"],
-    "ETF Globales":       ["EEM","EMB","EWJ","IEUR","IJH","IVE","VEA","IVW","VIG","ICLN","EWZ","FXI","EWG","EWU","EWT"],
 }
 SECTORES_WORLD = {
     "China":       ["BABA","BIDU","JD","NIO","NTES","PDD","XPEV"],
