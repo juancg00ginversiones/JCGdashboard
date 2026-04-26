@@ -21,9 +21,9 @@ body{background:var(--bg);color:#c8ccd8;font-family:var(--mono);font-size:11px;m
 
 /* BUSCADOR */
 .search-wrap{flex:1;max-width:280px}
-.search-input{width:100%;background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;padding:6px 12px;font-family:var(--mono);font-size:11px;color:#c8ccd8;outline:none;letter-spacing:1px}
-.search-input::placeholder{color:#252540}
-.search-input:focus{border-color:#4f8ef7;box-shadow:0 0 8px rgba(79,142,247,.2)}
+.search-input{width:100%;background:#0d0d18;border:1px solid #2a2a4a;border-radius:3px;padding:7px 14px;font-family:var(--mono);font-size:12px;color:#c8ccd8;outline:none;letter-spacing:1px}
+.search-input::placeholder{color:#3a3a6a}
+.search-input:focus{border-color:#4f8ef7;box-shadow:0 0 10px rgba(79,142,247,.25);background:#0f0f1e}
 .search-active-banner{display:none;background:#0d0d18;border-bottom:1px solid #1a1a2e;padding:6px 20px;font-size:10px;color:#4f8ef7}
 .search-active-banner.visible{display:flex;align-items:center;gap:12px}
 tr.search-match td{background:rgba(79,142,247,.08)!important}
@@ -53,10 +53,10 @@ tr.search-match td{background:rgba(79,142,247,.08)!important}
   .sector-avg{font-size:11px}
 }
 
-.topbar-right{display:flex;gap:16px;align-items:center;font-size:10px;flex-shrink:0}
-#upd-time{color:#1a4a1a}
-#tcnt{color:#1a1a4a}
-#next-upd{color:#2a2a5a}
+.topbar-right{display:flex;gap:16px;align-items:center;font-size:11px;flex-shrink:0}
+#upd-time{color:#00c853;font-weight:700;font-size:11px}
+#tcnt{color:#4a4a7a;font-size:10px}
+#next-upd{color:#3a3a6a;font-size:10px}
 
 /* TABS */
 .tabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--border2);padding:0 20px}
@@ -224,6 +224,24 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
   display:none;
 }
 
+/* OPCIONES */
+.opc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:16px;margin-top:12px}
+.opc-card{background:#0a0a14;border:1px solid #111128;border-radius:4px;overflow:hidden}
+.opc-card-header{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;background:#0d0d18;border-bottom:1px solid #111128}
+.opc-symbol{font-family:var(--sans);font-size:16px;font-weight:700;letter-spacing:1px}
+.opc-spot{font-size:12px;color:#7a7ab0}
+.opc-regime-pos{color:#00ff88;font-size:10px;font-weight:700;padding:2px 8px;background:#003319;border-radius:2px}
+.opc-regime-neg{color:#ff1744;font-size:10px;font-weight:700;padding:2px 8px;background:#330010;border-radius:2px}
+.opc-tabs{display:flex;border-bottom:1px solid #111128}
+.opc-tab{padding:5px 14px;font-size:10px;color:#2a2a4a;cursor:pointer;background:none;border:none;font-family:var(--mono);border-bottom:2px solid transparent}
+.opc-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.opc-chart-wrap{padding:10px 14px 6px;height:300px;position:relative}
+.opc-levels{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px 14px}
+.opc-level{text-align:center;padding:6px 4px;border-radius:3px;background:#0d0d18}
+.opc-level-label{font-size:9px;letter-spacing:1px;margin-bottom:3px}
+.opc-level-value{font-size:13px;font-weight:700;font-family:var(--sans)}
+.opc-explain{padding:10px 14px;font-size:10px;color:#3a3a5e;line-height:1.8;border-top:1px solid #0f0f1e}
+
 .loading{text-align:center;padding:60px;color:#252540}
 .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -260,6 +278,7 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
   <button class="tab" onclick="sw('sem',this)">SEMANAL</button>
   <button class="tab" onclick="sw('fun',this)">ANÁLISIS FUND.</button>
   <button class="tab" onclick="sw('glos',this)">GLOSARIO</button>
+  <button class="tab" onclick="sw('opc',this)">OPCIONES</button>
 </div>
 
 <div class="filter-bar" id="filterBar" style="display:none;padding:8px 20px;background:var(--bg2);border-bottom:1px solid var(--border2)">
@@ -288,6 +307,7 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 <div class="tab-content" id="sem"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="fun"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="glos"></div>
+<div class="tab-content" id="opc"><div class="loading"><span class="spin"></span>Cargando opciones...</div></div>
 
 <script>
 const JSON_URL='https://juancg00ginversiones.github.io/JCGdashboard/jcg_data.json';
@@ -992,7 +1012,21 @@ async function loadData(){
     const data=await resp.json();
     const{sectores_usa,sectores_world,datos,actualizado}=data;
     if(!datos||!Object.keys(datos).length)throw new Error('Sin datos aún');
-    document.getElementById('upd-time').textContent='Act: '+actualizado;
+    // Convertir a hora Argentina (UTC-3)
+    const rawTime = actualizado; // formato "YYYY-MM-DD HH:MM"
+    let dispTime = rawTime;
+    try {
+      const parts = rawTime.split(' ');
+      if(parts.length === 2){
+        const [datePart, timePart] = parts;
+        const utcDate = new Date(datePart + 'T' + timePart + ':00Z');
+        // Argentina UTC-3
+        const arDate = new Date(utcDate.getTime() - 3*60*60*1000);
+        const pad = n => String(n).padStart(2,'0');
+        dispTime = pad(arDate.getUTCDate())+'/'+pad(arDate.getUTCMonth()+1)+' '+pad(arDate.getUTCHours())+':'+pad(arDate.getUTCMinutes())+' AR';
+      }
+    } catch(e){ dispTime = rawTime; }
+    document.getElementById('upd-time').textContent = '🕐 ' + dispTime;
     window._datos = datos;
     document.getElementById('filterBar').style.display='flex';
     updateFilterCounts(datos);
@@ -1043,6 +1077,253 @@ function sw(id,btn){
 
 loadData();
 setInterval(loadData,60*60*1000);
+
+// ── OPCIONES ─────────────────────────────────────────────
+const OPC_URL = 'https://juancg00ginversiones.github.io/JCGdashboard/opciones_data.json';
+
+const NIVEL_INFO = {
+  call_wall:  { label:'CALL WALL',  color:'#4f8ef7', desc:'Zona de mayor resistencia. Los dealers venden calls aquí, lo que frena el precio. Actúa como "techo" del mercado.' },
+  put_wall:   { label:'PUT WALL',   color:'#ff5252', desc:'Zona de mayor soporte. Los dealers compran puts aquí, lo que sostiene el precio. Actúa como "piso" del mercado.' },
+  gamma_flip: { label:'GAMMA FLIP', color:'#ffab00', desc:'El nivel más importante. Por encima: mercado estable (dealers compran caídas). Por debajo: mercado volátil (dealers venden caídas y amplifican los movimientos).' },
+  max_pain:   { label:'MAX PAIN',   color:'#ce93d8', desc:'El precio donde más opciones expiran sin valor. El mercado tiende a gravitar hacia aquí cerca del vencimiento.' },
+};
+
+function renderChart(canvasId, data, spot){
+  const canvas = document.getElementById(canvasId);
+  if(!canvas || typeof Chart === 'undefined') return;
+
+  // Destruir chart anterior si existe
+  const existing = Chart.getChart(canvas);
+  if(existing) existing.destroy();
+
+  const strikes  = data.strikes;
+  const gexNet   = data.gex_net;
+  const oisCall  = data.oi_calls;
+  const oisPut   = data.oi_puts.map(v => -v);
+
+  new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: strikes,
+      datasets: [
+        {
+          label: 'GEX Neto (M$)',
+          data: gexNet,
+          backgroundColor: gexNet.map(v => v >= 0 ? 'rgba(0,230,118,0.7)' : 'rgba(255,82,82,0.7)'),
+          borderColor:     gexNet.map(v => v >= 0 ? '#00e676' : '#ff5252'),
+          borderWidth: 1,
+          yAxisID: 'y1',
+          order: 1,
+        },
+        {
+          label: 'OI Calls (k)',
+          data: oisCall,
+          type: 'bar',
+          backgroundColor: 'rgba(79,142,247,0.35)',
+          borderColor: '#4f8ef7',
+          borderWidth: 1,
+          yAxisID: 'y2',
+          order: 2,
+        },
+        {
+          label: 'OI Puts (k)',
+          data: oisPut,
+          type: 'bar',
+          backgroundColor: 'rgba(255,82,82,0.25)',
+          borderColor: '#ff5252',
+          borderWidth: 1,
+          yAxisID: 'y2',
+          order: 2,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { labels: { color: '#4a4a7a', font: { size: 10 } } },
+        tooltip: {
+          backgroundColor: '#0d0d18',
+          borderColor: '#1a1a2e',
+          borderWidth: 1,
+          titleColor: '#c8ccd8',
+          bodyColor: '#7a7ab0',
+          callbacks: {
+            label: ctx => {
+              const v = ctx.parsed.y;
+              if(ctx.dataset.label.includes('GEX')) return ` GEX: ${v>=0?'+':''}${v.toFixed(2)}M$`;
+              if(ctx.dataset.label.includes('Call')) return ` Calls OI: ${Math.abs(v).toFixed(1)}k`;
+              return ` Puts OI: ${Math.abs(v).toFixed(1)}k`;
+            }
+          }
+        },
+        annotation: {
+          annotations: {
+            spot: { type:'line', scaleID:'x', value: spot, borderColor:'#ffffff', borderWidth:2, borderDash:[5,5],
+                    label:{display:true, content:'SPOT', color:'#fff', backgroundColor:'#1a1a2e', font:{size:9}} },
+            cw:   { type:'line', scaleID:'x', value: data.call_wall,  borderColor:'#4f8ef7', borderWidth:2,
+                    label:{display:true, content:'CW',  color:'#4f8ef7', backgroundColor:'#0a0a14', font:{size:9}} },
+            pw:   { type:'line', scaleID:'x', value: data.put_wall,   borderColor:'#ff5252', borderWidth:2,
+                    label:{display:true, content:'PW',  color:'#ff5252', backgroundColor:'#0a0a14', font:{size:9}} },
+            gf:   { type:'line', scaleID:'x', value: data.gamma_flip, borderColor:'#ffab00', borderWidth:2.5,
+                    label:{display:true, content:'GF',  color:'#ffab00', backgroundColor:'#0a0a14', font:{size:9}} },
+            mp:   { type:'line', scaleID:'x', value: data.max_pain,   borderColor:'#ce93d8', borderWidth:1.5, borderDash:[3,3],
+                    label:{display:true, content:'MP',  color:'#ce93d8', backgroundColor:'#0a0a14', font:{size:9}} },
+          }
+        }
+      },
+      scales: {
+        x: { ticks:{ color:'#3a3a5e', font:{size:9}, maxRotation:45 }, grid:{ color:'rgba(26,26,46,.5)' } },
+        y1:{ position:'left',  ticks:{ color:'#00e676', font:{size:9} }, grid:{ color:'rgba(26,26,46,.5)' },
+             title:{ display:true, text:'GEX Neto (M$)', color:'#00e676', font:{size:9} } },
+        y2:{ position:'right', ticks:{ color:'#4f8ef7',  font:{size:9} }, grid:{ display:false },
+             title:{ display:true, text:'Open Interest (k)', color:'#4f8ef7', font:{size:9} } },
+      }
+    }
+  });
+}
+
+function switchOpcTab(cardId, label){
+  const card = document.getElementById(cardId);
+  if(!card) return;
+  card.querySelectorAll('.opc-tab').forEach(t=>{
+    t.classList.toggle('active', t.textContent.trim()===label);
+  });
+  card.querySelectorAll('.opc-pane').forEach(p=>{
+    p.style.display = p.getAttribute('data-label')===label ? 'block' : 'none';
+  });
+  // Re-render chart del pane activo
+  const pane = card.querySelector('.opc-pane[data-label="'+label+'"]');
+  if(pane){
+    const canvas = pane.querySelector('canvas');
+    const dataStr = pane.getAttribute('data-exp');
+    const spotVal = parseFloat(card.getAttribute('data-spot'));
+    if(canvas && dataStr) renderChart(canvas.id, JSON.parse(dataStr), spotVal);
+  }
+}
+
+function renderOpciones(opcData){
+  if(!opcData||!opcData.indices){
+    document.getElementById('opc').innerHTML='<div class="err">❌ Corré opciones.py y subí opciones_data.json</div>';
+    return;
+  }
+
+  let h = `<div style="font-size:10px;color:#3a3a5e;margin-bottom:12px">
+    Act: ${opcData.actualizado} · Fuente: Yahoo Finance Options
+  </div>`;
+
+  // Leyenda global
+  h += `<div style="background:#0a0a14;border:1px solid #111128;border-radius:4px;padding:10px 14px;margin-bottom:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px">`;
+  for(const [key, info] of Object.entries(NIVEL_INFO)){
+    h += `<div style="display:flex;gap:8px;align-items:flex-start">
+      <span style="color:${info.color};font-weight:700;font-size:11px;white-space:nowrap;min-width:80px">${info.label}</span>
+      <span style="color:#4a4a7a;font-size:10px;line-height:1.5">${info.desc}</span>
+    </div>`;
+  }
+  h += `</div>`;
+
+  h += `<div class="opc-grid">`;
+
+  for(const [sym, idx] of Object.entries(opcData.indices)){
+    const expKeys = Object.keys(idx.expiries);
+    if(!expKeys.length) continue;
+    const cardId = 'opc-card-'+sym;
+    const firstLabel = expKeys[0];
+    const regCls = idx.expiries[firstLabel]?.regime==='POSITIVO' ? 'opc-regime-pos' : 'opc-regime-neg';
+    const regTxt = idx.expiries[firstLabel]?.regime==='POSITIVO' ? '✅ RÉGIMEN POSITIVO' : '⚠️ RÉGIMEN NEGATIVO';
+
+    h += `<div class="opc-card" id="${cardId}" data-spot="${idx.spot}">
+      <div class="opc-card-header">
+        <div>
+          <span class="opc-symbol" style="color:${idx.color}">${sym}</span>
+          <span class="opc-spot"> — ${idx.nombre} @ $${idx.spot}</span>
+        </div>
+        <span class="${regCls}">${regTxt}</span>
+      </div>
+
+      <div class="opc-tabs">`;
+    expKeys.forEach((label,i) => {
+      const exp = idx.expiries[label];
+      h += `<button class="opc-tab ${i===0?'active':''}" onclick="switchOpcTab('${cardId}','${label}')">${label} (${exp.dte}d)</button>`;
+    });
+    h += `</div>`;
+
+    // Panes
+    expKeys.forEach((label,i) => {
+      const exp = idx.expiries[label];
+      const canvasId = `chart-${sym}-${i}`;
+      const expJson = JSON.stringify(exp).replace(/'/g,"\'");
+      h += `<div class="opc-pane" data-label="${label}" data-exp='${JSON.stringify(exp)}' style="display:${i===0?'block':'none'}">
+        <div class="opc-chart-wrap">
+          <canvas id="${canvasId}"></canvas>
+        </div>
+        <div class="opc-levels">`;
+
+      for(const [key,info] of Object.entries(NIVEL_INFO)){
+        const val = exp[key];
+        const dist = val ? ((val - idx.spot)/idx.spot*100).toFixed(1) : null;
+        const distTxt = dist ? ` (${parseFloat(dist)>=0?'+':''}${dist}%)` : '';
+        h += `<div class="opc-level">
+          <div class="opc-level-label" style="color:${info.color}">${info.label}</div>
+          <div class="opc-level-value" style="color:${info.color}">$${val}</div>
+          <div style="font-size:9px;color:#3a3a5e">${distTxt}</div>
+        </div>`;
+      }
+
+      h += `</div></div>`;
+    });
+
+    h += `</div>`;
+  }
+  h += `</div>`;
+
+  document.getElementById('opc').innerHTML = h;
+
+  // Cargar Chart.js con annotation plugin y renderizar
+  if(typeof Chart === 'undefined'){
+    const s1 = document.createElement('script');
+    s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
+    s1.onload = () => {
+      const s2 = document.createElement('script');
+      s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js';
+      s2.onload = () => {
+        // Renderizar todos los primeros panes
+        for(const [sym, idx] of Object.entries(opcData.indices)){
+          const expKeys = Object.keys(idx.expiries);
+          if(!expKeys.length) continue;
+          const exp = idx.expiries[expKeys[0]];
+          renderChart('chart-'+sym+'-0', exp, idx.spot);
+        }
+      };
+      document.head.appendChild(s2);
+    };
+    document.head.appendChild(s1);
+  } else {
+    for(const [sym, idx] of Object.entries(opcData.indices)){
+      const expKeys = Object.keys(idx.expiries);
+      if(!expKeys.length) continue;
+      const exp = idx.expiries[expKeys[0]];
+      renderChart('chart-'+sym+'-0', exp, idx.spot);
+    }
+  }
+}
+
+// Cargar opciones al entrar a la pestaña
+window._opcLoaded = false;
+function loadOpciones(){
+  if(window._opcLoaded) return;
+  window._opcLoaded = true;
+  fetch(OPC_URL+'?t='+Date.now())
+    .then(r=>r.ok?r.json():null)
+    .then(data=>{
+      if(data) renderOpciones(data);
+      else document.getElementById('opc').innerHTML='<div class="err">❌ Corré opciones.py y subí opciones_data.json al repo</div>';
+    })
+    .catch(()=>{
+      document.getElementById('opc').innerHTML='<div class="err">❌ Corré opciones.py y subí opciones_data.json al repo</div>';
+    });
+}
 
 // ── GLOSARIO ─────────────────────────────────────────────
 function renderGlosario(){
@@ -1147,6 +1428,7 @@ function sw(id,btn){
   if(fb) fb.style.display=(['ind','med','h1','sem'].includes(id)&&window._datos)?'flex':'none';
   window._activeTab=id;
   if(id==='glos' && document.getElementById('glos').innerHTML==='') renderGlosario();
+  if(id==='opc') loadOpciones();
   const q=document.getElementById('searchBox').value;
   if(q && id!=='glos') filterTickers(q);
 }
