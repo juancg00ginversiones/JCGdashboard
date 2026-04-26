@@ -20,10 +20,38 @@ body{background:var(--bg);color:#c8ccd8;font-family:var(--mono);font-size:11px;m
 .logo-sub{font-family:var(--sans);font-size:11px;font-weight:600;color:#e53935;letter-spacing:3px}
 
 /* BUSCADOR */
-.search-wrap{flex:1;max-width:260px}
-.search-input{width:100%;background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;padding:5px 10px;font-family:var(--mono);font-size:11px;color:#c8ccd8;outline:none;letter-spacing:1px}
+.search-wrap{flex:1;max-width:280px}
+.search-input{width:100%;background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;padding:6px 12px;font-family:var(--mono);font-size:11px;color:#c8ccd8;outline:none;letter-spacing:1px}
 .search-input::placeholder{color:#252540}
-.search-input:focus{border-color:#4f8ef7}
+.search-input:focus{border-color:#4f8ef7;box-shadow:0 0 8px rgba(79,142,247,.2)}
+.search-active-banner{display:none;background:#0d0d18;border-bottom:1px solid #1a1a2e;padding:6px 20px;font-size:10px;color:#4f8ef7}
+.search-active-banner.visible{display:flex;align-items:center;gap:12px}
+tr.search-match td{background:rgba(79,142,247,.08)!important}
+/* MOBILE */
+@media(max-width:768px){
+  .topbar{flex-wrap:wrap;gap:8px;padding:8px 12px}
+  .topbar-left .logo-main{font-size:14px}
+  .topbar-left .logo-sub{font-size:9px}
+  .logo-img{width:28px;height:28px}
+  .search-wrap{max-width:100%;order:3;flex:0 0 100%}
+  .search-input{width:100%;font-size:13px;padding:8px 12px}
+  .tabs{overflow-x:auto;padding:0 8px;-webkit-overflow-scrolling:touch}
+  .tab{padding:8px 12px;font-size:9px;letter-spacing:1px;white-space:nowrap}
+  .tab-content{padding:8px 10px}
+  .sectors-grid{grid-template-columns:1fr!important}
+  table{font-size:12px}
+  td,th{padding:5px 8px!important}
+  .tk{font-size:12px!important}
+  .rsi{font-size:12px!important;padding:3px 8px!important}
+  .chg{font-size:12px!important}
+  .logo-img-tk{width:16px!important;height:16px!important}
+  .filter-bar{padding:8px 12px;flex-wrap:wrap;gap:6px}
+  .filter-btn{font-size:10px;padding:6px 12px}
+  .cell1h{min-width:60px}
+  .grid1h{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))!important}
+  .sector-name{font-size:12px}
+  .sector-avg{font-size:11px}
+}
 
 .topbar-right{display:flex;gap:16px;align-items:center;font-size:10px;flex-shrink:0}
 #upd-time{color:#1a4a1a}
@@ -158,6 +186,44 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 .btn-clear:hover{color:#6a6a9a}
 .filter-count{font-size:10px;color:#3a3a5e;margin-left:4px}
 
+/* MOBILE */
+@media (max-width: 768px) {
+  .topbar{flex-wrap:wrap;gap:6px;padding:6px 12px}
+  .topbar-left{flex:1}
+  .logo-main{font-size:15px}
+  .logo-sub{font-size:9px}
+  .search-wrap{order:3;width:100%;max-width:100%}
+  .search-input{width:100%;font-size:13px;padding:8px 12px}
+  .topbar-right{font-size:9px;gap:8px}
+  .tabs{overflow-x:auto;padding:0 8px;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{padding:8px 12px;font-size:10px;white-space:nowrap;letter-spacing:1px}
+  .tab-content{padding:8px 10px}
+  .sectors-grid{grid-template-columns:1fr!important}
+  .sector-name{font-size:12px}
+  th{font-size:9px;padding:4px 8px;letter-spacing:0}
+  td{font-size:11px;padding:4px 8px}
+  .tk{font-size:11px}
+  .tk-logo{width:13px;height:13px}
+  .rsi{font-size:10px;padding:2px 6px;min-width:32px}
+  .chg{font-size:11px;padding:1px 4px}
+  .filter-bar{padding:6px 10px;gap:6px;flex-wrap:wrap}
+  .filter-btn{font-size:10px;padding:5px 10px}
+  .grid1h{grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:3px;padding:6px 8px}
+  .cell1h{padding:5px 2px;font-size:10px}
+}
+
+/* SEARCH RESULT HIGHLIGHT */
+.search-match td{background:rgba(79,142,247,.08)!important}
+.search-match .tk, .search-match .tk-double-green, .search-match .tk-double-red{
+  font-size:13px!important;
+}
+.search-result-banner{
+  background:#0d0d18;border:1px solid #4f8ef7;border-radius:3px;
+  padding:8px 14px;margin-bottom:10px;font-size:11px;color:#4f8ef7;
+  display:none;
+}
+
 .loading{text-align:center;padding:60px;color:#252540}
 .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -193,6 +259,7 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
   <button class="tab" onclick="sw('sig',this)">SEÑALES</button>
   <button class="tab" onclick="sw('sem',this)">SEMANAL</button>
   <button class="tab" onclick="sw('fun',this)">ANÁLISIS FUND.</button>
+  <button class="tab" onclick="sw('glos',this)">GLOSARIO</button>
 </div>
 
 <div class="filter-bar" id="filterBar" style="display:none;padding:8px 20px;background:var(--bg2);border-bottom:1px solid var(--border2)">
@@ -209,12 +276,18 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
     <button class="filter-btn btn-clear" onclick="setFilter(null,this)">✕ VER TODO</button>
 </div>
 
+<div class="search-result-banner" id="searchBanner"></div>
+<div class="search-active-banner" id="searchBanner">
+  <div id="searchBannerContent" style="flex:1"></div>
+  <button onclick="clearSearch()" style="background:#1a1a2e;border:none;color:#4a4a7a;cursor:pointer;font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:2px;flex-shrink:0">✕ limpiar</button>
+</div>
 <div class="tab-content active" id="ind"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="med"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="h1"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="sig"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="sem"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="fun"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="glos"></div>
 
 <script>
 const JSON_URL='https://juancg00ginversiones.github.io/JCGdashboard/jcg_data.json';
@@ -252,26 +325,105 @@ function toggleChip(el){
   el.querySelector('.sig-chip-body').classList.toggle('open');
 }
 
-// ── BUSCADOR ─────────────────────────────────────────────
+// ── BUSCADOR — solo ticker exacto ────────────────────────
 function filterTickers(query){
-  const q=query.trim().toUpperCase();
-  // Filtrar filas de tablas (indicadores y medias)
+  const q      = query.trim().toUpperCase();
+  const banner = document.getElementById('searchBanner');
+  let   found  = null;  // primer row exacto encontrado
+
+  // Reset todo si vacío
+  if(!q){
+    document.querySelectorAll('tbody tr').forEach(r=>{
+      r.classList.remove('hidden-row','search-match');
+      r.style.display='';
+    });
+    document.querySelectorAll('.cell1h').forEach(c=>{
+      c.style.display=''; c.style.outline='';
+    });
+    document.querySelectorAll('.sector-wrap').forEach(s=>s.style.display='');
+    if(banner) banner.classList.remove('visible');
+    return;
+  }
+
+  // Filas de tablas — mostrar SOLO el ticker exacto
   document.querySelectorAll('tbody tr').forEach(row=>{
-    const tk=row.querySelector('.tk');
-    if(!tk){row.classList.remove('hidden-row');return}
-    row.classList.toggle('hidden-row', q.length>0 && !tk.textContent.includes(q));
+    const tkEl = row.querySelector('[class*="tk"]');
+    if(!tkEl){ row.style.display='none'; return; }
+    // Extraer solo el texto del ticker (ignorar img y texto del logo)
+    const spans = tkEl.querySelectorAll('div,span');
+    let tickerText = '';
+    if(spans.length){
+      spans.forEach(s=>{ if(!s.querySelector('img') && s.textContent.trim()) tickerText = s.textContent.trim(); });
+    }
+    if(!tickerText) tickerText = tkEl.textContent.replace(/[^A-Z0-9\-]/g,'').trim();
+    tickerText = tickerText.toUpperCase();
+
+    if(tickerText === q){
+      row.style.display = '';
+      row.classList.add('search-match');
+      if(!found) found = {ticker: q, row};
+    } else {
+      row.style.display = 'none';
+      row.classList.remove('search-match');
+    }
   });
-  // Filtrar chips 1H
+
+  // Chips 1H — solo exacto
   document.querySelectorAll('.cell1h').forEach(cell=>{
-    const t=cell.querySelector('div')?.textContent||'';
-    cell.style.display=(q.length===0||t.includes(q))?'':'none';
+    const t = (cell.querySelector('div')?.textContent||'').trim().toUpperCase();
+    if(t === q){
+      cell.style.display='';
+      cell.style.outline='2px solid #4f8ef7';
+    } else {
+      cell.style.display='none';
+      cell.style.outline='';
+    }
   });
-  // Mostrar/ocultar sectores vacíos
+
+  // Sectores — mostrar solo el que tiene el ticker, abrir automático
   document.querySelectorAll('.sector-wrap').forEach(sw=>{
-    if(!sw.querySelector('tbody'))return;
-    const rows=sw.querySelectorAll('tbody tr:not(.hidden-row)');
-    sw.style.display=rows.length===0&&q.length>0?'none':'';
+    const hasTbl  = sw.querySelector('tbody');
+    const hasGrid = sw.querySelector('.grid1h');
+    let hasMatch  = false;
+    if(hasTbl)  hasMatch = [...sw.querySelectorAll('tbody tr')].some(r=>r.style.display!=='none');
+    if(hasGrid) hasMatch = [...sw.querySelectorAll('.cell1h')].some(c=>c.style.display!=='none');
+    sw.style.display = hasMatch ? '' : 'none';
+    if(hasMatch){
+      sw.querySelector('.sector-body')?.classList.add('open');
+      sw.querySelector('.arrow')?.classList.add('open');
+    }
   });
+
+  // Banner info ticker
+  if(!banner) return;
+  if(!found){ banner.classList.remove('visible'); return; }
+
+  const d  = window._datos?.[q];
+  const g  = (typeof GLOSARIO !== 'undefined') ? GLOSARIO[q] : null;
+  const rc = g ? riesgoColor(g.riesgo) : '#4a4a7a';
+
+  banner.classList.add('visible');
+  const bc = document.getElementById('searchBannerContent');
+  if(bc) bc.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:${g?.desc?'4px':'0'}">
+      ${logoImg(q)}
+      <span style="color:#fff;font-size:15px;font-weight:700">${q}</span>
+      ${g ? `<span style="color:#7a7aaa;font-size:11px">${g.nombre}</span>` : ''}
+      ${g ? `<span style="color:${rc};font-size:10px;font-weight:700">● ${g.riesgo.toUpperCase()}</span>` : ''}
+      ${d ? `<span class="chg ${clsChg(d?.pct_dia)}">${fc(d?.pct_dia)}</span>` : ''}
+      ${d ? `<span class="rsi ${clsRsi(d?.rsi_1d)}">RSI ${fv(d?.rsi_1d,1)}</span>` : ''}
+      ${d?.rsi_1h ? `<span style="color:#4a4a7a;font-size:10px">1H: ${fv(d.rsi_1h,1)}</span>` : ''}
+      ${g?.pais ? `<span style="color:#3a3a5e;font-size:10px">${g.pais}</span>` : ''}
+    </div>
+    ${g?.desc ? `<div style="color:#6a6a9a;font-size:11px;line-height:1.5">${g.desc}</div>` : ''}`;
+
+  // Scroll al ticker encontrado
+  found.row.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function clearSearch(){
+  const box = document.getElementById('searchBox');
+  if(box){ box.value=''; filterTickers(''); }
 }
 
 function sectorCard(s,ts,dat,thHtml,rowFn){
@@ -511,27 +663,89 @@ function renderSenales(data){
   }
 
   // ── RSI Extremo ─────────────────────────────────────────
-  h+=`<div class="sig-section-title" style="margin-top:18px">◈ RSI EN ZONA EXTREMA — ANALISIS HISTORICO</div>`;
+  h+=`<div class="sig-section-title" style="margin-top:18px">◈ RSI EN ZONA EXTREMA — ANÁLISIS HISTÓRICO</div>`;
+  h+=`<div style="font-size:10px;color:#3a3a5e;margin-bottom:10px;line-height:1.8">
+    Tickers cuyo RSI está en zona extrema (&lt;32 sobreventa / &gt;68 sobrecompra).
+    Muestra qué pasó históricamente <b style="color:#5a5a8a">los 10 últimos años</b> cada vez que el RSI tocó ese nivel.
+    <span style="margin-left:8px;color:#4a4a7a">
+      <b style="color:#5a5a8a">Prom%</b> = rendimiento promedio posterior ·
+      <b style="color:#5a5a8a">Prob%</b> = % de veces que el precio subió ·
+      <b style="color:#5a5a8a">N</b> = eventos históricos contabilizados
+    </span>
+  </div>`;
   if(!senales_rsi.length){
-    h+=`<div class="no-sig">Sin tickers en zona extrema de RSI</div>`;
+    h+=`<div class="no-sig">Sin tickers en zona extrema de RSI en este momento</div>`;
   } else {
-    h+=`<div class="sig-grid">`;
+    h+=`<div style="width:100%;overflow-x:auto"><table style="width:100%;border-collapse:collapse;min-width:800px">
+      <thead>
+        <tr style="background:#0a0a14;border-bottom:1px solid #1a1a2e">
+          <th style="text-align:left;padding:7px 14px;font-size:9px;color:#3a3a5e;letter-spacing:1px;min-width:130px">TICKER</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#3a3a5e;letter-spacing:1px">RSI</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#3a3a5e;letter-spacing:1px">ZONA</th>
+          <th style="text-align:right;padding:7px 10px;font-size:9px;color:#3a3a5e;letter-spacing:1px">%DÍA</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px;border-left:1px solid #1a1a2e">Al día sig.</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px">Prom% 1d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px">Prob% 1d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px;border-left:1px solid #1a1a2e">A 2 días</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px">Prom% 2d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px">Prob% 2d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px;border-left:1px solid #1a1a2e">A 5 días</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px">Prom% 5d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px">Prob% 5d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px;border-left:1px solid #1a1a2e">Al mes</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px">Prom% 1m</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px">Prob% 1m</th>
+          <th style="text-align:right;padding:7px 10px;font-size:9px;color:#3a3a5e;letter-spacing:1px">Eventos</th>
+        </tr>
+      </thead><tbody>`;
+
     for(const s of senales_rsi){
-      const esOver=s.rsi_1d>=68;
-      const cls=esOver?'rsi-over':'rsi-sbv';
-      const label=esOver?'SOBRECOMPRA':'SOBREVENTA';
-      h+=`<div class="sig-chip ${cls}" onclick="toggleChip(this)">
-        <div class="sig-chip-head">
-          <div class="chip-ticker">${s.ticker}</div>
-          <div class="chip-sub">RSI ${fv(s.rsi_1d,1)} · ${label}</div>
-        </div>
-        <div class="sig-chip-body">
-          <div class="chip-meta">${fc(s.pct_dia)} · ${s.sector}${s.hist?' · '+s.hist.total_eventos+' eventos':''}</div>
-          ${histTable(s.hist)}
-        </div>
-      </div>`;
+      const esOver = s.rsi_1d >= 68;
+      const zonaColor = esOver ? '#ff1744' : '#00ff88';
+      const zonaLbl   = esOver ? '🔴 SOBRE' : '🟢 SUB';
+      const hist = s.hist;
+
+      function tramoCell(tramo, borderLeft){
+        const bl = borderLeft ? 'border-left:1px solid #111128;' : '';
+        if(!hist || !hist.resumen){ return `<td style="${bl}text-align:center;color:#1a1a2e;padding:5px 10px" colspan="3">—</td>`; }
+        const r = hist.resumen.find(x=>x.tramo===tramo);
+        if(!r){ return `<td style="${bl}text-align:center;color:#1a1a2e;padding:5px 10px" colspan="3">—</td>`; }
+        const pCls = r.avg>0 ? 'color:#00c853;font-weight:700' : 'color:#ff5252;font-weight:700';
+        const prCls = r.prob>=55 ? 'color:#00c853' : r.prob<=45 ? 'color:#ff5252' : 'color:#4a4a7a';
+        return `<td style="${bl}text-align:center;padding:5px 10px;font-size:11px">
+            <span style="${pCls}">${r.avg>=0?'+':''}${r.avg}%</span>
+          </td>
+          <td style="text-align:center;padding:5px 10px;font-size:11px">
+            <span style="${prCls}">${r.prob}%</span>
+          </td>
+          <td style="text-align:center;padding:5px 10px;color:#2a2a4a;font-size:10px">${r.total}</td>`;
+      }
+
+      h+=`<tr style="border-bottom:1px solid rgba(15,15,30,.8)">
+        <td style="padding:6px 14px;white-space:nowrap">
+          <div style="display:flex;align-items:center;gap:7px">
+            ${logoImg(s.ticker)}
+            <span style="color:#c8ccd8;font-weight:700;font-size:12px">${s.ticker}</span>
+            <span style="color:#2a2a4a;font-size:9px">${s.sector||''}</span>
+          </div>
+        </td>
+        <td style="text-align:center;padding:6px 10px">
+          <span class="rsi ${clsRsi(s.rsi_1d)}">${fv(s.rsi_1d,1)}</span>
+        </td>
+        <td style="text-align:center;padding:6px 10px">
+          <span style="color:${zonaColor};font-size:10px;font-weight:700">${zonaLbl}</span>
+        </td>
+        <td style="text-align:right;padding:6px 10px">
+          <span class="chg ${clsChg(s.pct_dia)}">${fc(s.pct_dia)}</span>
+        </td>
+        ${tramoCell('1d', true)}
+        ${tramoCell('2d', true)}
+        ${tramoCell('5d', true)}
+        ${tramoCell('1m', true)}
+        <td style="text-align:right;padding:6px 10px;color:#3a3a5e;font-size:10px">${hist?hist.total_eventos+' hist.':'—'}</td>
+      </tr>`;
     }
-    h+=`</div>`;
+    h+=`</tbody></table></div>`;
   }
   return h;
 }
@@ -829,6 +1043,114 @@ function sw(id,btn){
 
 loadData();
 setInterval(loadData,60*60*1000);
+
+// ── GLOSARIO ─────────────────────────────────────────────
+function renderGlosario(){
+  if(typeof GLOSARIO === 'undefined'){
+    document.getElementById('glos').innerHTML='<div class="err">❌ No se cargó glosario_data.js</div>';
+    return;
+  }
+
+  // Agrupar por sector
+  const grupos = {};
+  for(const [ticker, d] of Object.entries(GLOSARIO)){
+    const k = d.sector || 'Otros';
+    if(!grupos[k]) grupos[k] = [];
+    grupos[k].push({ticker, ...d});
+  }
+
+  let h = `<div style="margin-bottom:12px;font-size:10px;color:#3a3a5e">
+    ${Object.keys(GLOSARIO).length} instrumentos · Ordenados por sector
+    <span style="margin-left:20px">
+      Riesgo: 
+      <span style="color:#00e676">● Bajo</span>
+      <span style="color:#ffd600;margin-left:8px">● Medio</span>
+      <span style="color:#ff6d00;margin-left:8px">● Alto</span>
+      <span style="color:#ff1744;margin-left:8px">● Muy Alto</span>
+    </span>
+  </div>`;
+
+  // Buscador interno
+  h += `<div style="margin-bottom:12px">
+    <input id="glosSearch" type="text" placeholder="Buscar ticker o empresa..."
+      style="background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;
+             padding:6px 12px;font-family:var(--mono);font-size:11px;
+             color:#c8ccd8;outline:none;width:280px"
+      oninput="filtrarGlosario(this.value)">
+  </div>`;
+
+  h += `<div style="width:100%;overflow-x:auto">`;
+
+  for(const [sector, items] of Object.entries(grupos)){
+    h += `<div class="glos-sector" style="margin-bottom:20px">
+      <div style="font-family:var(--sans);font-size:14px;font-weight:700;
+                  color:#8888c0;letter-spacing:2px;padding:8px 14px;
+                  background:#0d0d18;border-left:3px solid #4f8ef7;margin-bottom:2px">
+        ${sector} <span style="color:#3a3a5e;font-size:11px;font-weight:400">(${items.length})</span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;min-width:700px">
+        <thead>
+          <tr style="background:#0a0a14">
+            <th style="text-align:left;padding:5px 12px;font-size:9px;color:#3a3a5e;letter-spacing:1px;min-width:90px">TICKER</th>
+            <th style="text-align:left;padding:5px 12px;font-size:9px;color:#3a3a5e;letter-spacing:1px;min-width:200px">NOMBRE</th>
+            <th style="text-align:left;padding:5px 12px;font-size:9px;color:#3a3a5e;letter-spacing:1px;min-width:80px">PAÍS</th>
+            <th style="text-align:left;padding:5px 12px;font-size:9px;color:#3a3a5e;letter-spacing:1px;min-width:90px">RIESGO</th>
+            <th style="text-align:left;padding:5px 12px;font-size:9px;color:#3a3a5e;letter-spacing:1px">DESCRIPCIÓN</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+    for(const item of items){
+      const rc = riesgoColor(item.riesgo);
+      h += `<tr class="glos-row" data-search="${item.ticker.toLowerCase()} ${item.nombre.toLowerCase()} ${item.pais.toLowerCase()}"
+                style="border-bottom:1px solid rgba(15,15,30,.8)">
+        <td style="padding:6px 12px;white-space:nowrap">
+          <div style="display:flex;align-items:center;gap:6px">
+            ${logoImg(item.ticker)}
+            <span style="color:#c8ccd8;font-weight:700;font-size:12px">${item.ticker}</span>
+          </div>
+        </td>
+        <td style="padding:6px 12px;color:#7a7aaa;font-size:11px;white-space:nowrap">${item.nombre}</td>
+        <td style="padding:6px 12px;color:#4a4a7a;font-size:11px">${item.pais}</td>
+        <td style="padding:6px 12px;white-space:nowrap">
+          <span style="color:${rc};font-size:10px;font-weight:700">● ${item.riesgo.toUpperCase()}</span>
+        </td>
+        <td style="padding:6px 12px;color:#5a5a8a;font-size:11px;line-height:1.5">${item.desc}</td>
+      </tr>`;
+    }
+    h += `</tbody></table></div>`;
+  }
+  h += `</div>`;
+  document.getElementById('glos').innerHTML = h;
+}
+
+function filtrarGlosario(q){
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('.glos-row').forEach(row=>{
+    const txt = row.getAttribute('data-search')||'';
+    row.style.display = (!q || txt.includes(q)) ? '' : 'none';
+  });
+  // Ocultar sectores vacíos
+  document.querySelectorAll('.glos-sector').forEach(sec=>{
+    const vis = [...sec.querySelectorAll('.glos-row')].filter(r=>r.style.display!=='none');
+    sec.style.display = vis.length ? '' : 'none';
+  });
+}
+
+// Activar glosario cuando se carga el script
+function sw(id,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  const fb=document.getElementById('filterBar');
+  if(fb) fb.style.display=(['ind','med','h1','sem'].includes(id)&&window._datos)?'flex':'none';
+  window._activeTab=id;
+  if(id==='glos' && document.getElementById('glos').innerHTML==='') renderGlosario();
+  const q=document.getElementById('searchBox').value;
+  if(q && id!=='glos') filterTickers(q);
+}
 </script>
+<script src="glosario_data.js"></script>
 </body>
 </html>
