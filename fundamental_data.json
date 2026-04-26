@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-04-26 14:27",
+  "actualizado": "2026-04-26 15:59",
   "sectores": {
     "Top 20 Cap": [
       "AAPL",
@@ -630,7 +630,7 @@
     "CVX": {
       "ticker": "CVX",
       "pe": 27.94,
-      "pe_fwd": 16.05,
+      "pe_fwd": 15.79,
       "pb": 1.97,
       "ps": null,
       "roe": 7.0,
@@ -638,7 +638,7 @@
       "margen": 7.0,
       "deuda_eq": 0.24,
       "eps": 6.63,
-      "eps_fwd": 11.54,
+      "eps_fwd": 11.73,
       "revenue_g": -8.0,
       "earn_g": -24.0,
       "payout": 103.0,
@@ -1079,7 +1079,7 @@
       "ticker": "PLD",
       "pe": 39.8,
       "pe_fwd": 41.82,
-      "pb": 2.47,
+      "pb": 2.49,
       "ps": null,
       "roe": 7.0,
       "roa": 2.0,
