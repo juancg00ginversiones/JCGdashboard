@@ -1,352 +1,618 @@
-import yfinance as yf
-import pandas as pd
-import numpy as np
-import json
-from datetime import datetime
-import warnings
-warnings.filterwarnings("ignore")
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JCG Inversiones — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050508;--bg2:#08080f;--bg3:#0d0d18;--border:#0f0f1e;--border2:#1a1a2e;--accent:#4f8ef7;--mono:'Share Tech Mono',monospace;--sans:'Rajdhani',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:#c8ccd8;font-family:var(--mono);font-size:11px;min-height:100vh}
 
-# ══════════════════════════════════════════════════════════
-# SECTORES
-# ══════════════════════════════════════════════════════════
-SECTORES_USA = {
-    "ETFs":               ["SPY","QQQ","DIA","IWM","IBIT","GLD","SLV","URA","EWZ","FXI"],
-    "Technology":         ["AAPL","ADBE","AMAT","AMD","ASTS","AVGO","CSCO","FSLR","IBM","INTC","LRCX","MU","NVDA","ORCL","PANW","QCOM","RGTI","RKLB","SNOW","TXN","UBER"],
-    "Financial":          ["AIG","AXP","BAC","C","COIN","HOOD","HUT","IREN","JPM","MA","PYPL","RIOT","SCHW","USB","V","WFC"],
-    "Consumer Cyclical":  ["AMZN","ARCO","BKNG","EBAY","ETSY","F","GM","HD","LVS","MCD","NKE","SBUX","TSLA"],
-    "Industrials":        ["AAL","ADP","BA","CAAP","DAL","DE","FDX","GE","HWM","LMT","MMM","RTX","UAL","UNP"],
-    "Energy":             ["BKR","CVX","HAL","OXY","PSX","SLB","XOM"],
-    "Basic Materials":    ["CDE","DD","DOW","ECL","FCX","HL","MOS","NEM","NUE","SCCO"],
-    "Comm. Services":     ["DIS","GOOGL","META","NFLX","RBLX","ROKU","T","VZ","ZM"],
-    "Consumer Defensive": ["BG","CL","COST","HSY","KO","MDLZ","PEP","PG","TGT","WMT"],
-    "HealthCare":         ["ABBV","ABT","AMGN","BMY","DHR","GILD","ISRG","LLY","MDT","MRK","MRNA","PFE","TMO","UNH","VRTX"],
-    "Utilities":          ["CEG","OKLO","VST"],
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:6px 20px;background:var(--bg2);border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:100;gap:12px}
+.topbar-left{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.logo-img{width:36px;height:36px;border-radius:4px;object-fit:cover}
+.logo-text{display:flex;flex-direction:column;line-height:1.1}
+.logo-main{font-family:var(--sans);font-size:18px;font-weight:700;color:#fff;letter-spacing:2px}
+.logo-sub{font-family:var(--sans);font-size:11px;font-weight:600;color:#e53935;letter-spacing:3px}
+
+/* BUSCADOR */
+.search-wrap{flex:1;max-width:260px}
+.search-input{width:100%;background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;padding:5px 10px;font-family:var(--mono);font-size:11px;color:#c8ccd8;outline:none;letter-spacing:1px}
+.search-input::placeholder{color:#252540}
+.search-input:focus{border-color:#4f8ef7}
+
+.topbar-right{display:flex;gap:16px;align-items:center;font-size:10px;flex-shrink:0}
+#upd-time{color:#1a4a1a}
+#tcnt{color:#1a1a4a}
+#next-upd{color:#2a2a5a}
+
+/* TABS */
+.tabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--border2);padding:0 20px}
+.tab{padding:10px 18px;font-size:11px;letter-spacing:2px;color:#4a4a7a;border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;font-family:var(--mono);transition:color .15s}
+.tab:hover{color:#8a8ab8}
+.tab.active{color:#7ab4ff;border-bottom-color:#7ab4ff;text-shadow:0 0 8px rgba(122,180,255,.4)}
+.tab-content{display:none;padding:12px 20px}
+.tab-content.active{display:block}
+
+/* SEARCH BANNER */
+.search-banner{display:none;background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;padding:8px 14px;margin-bottom:10px;font-size:11px;color:#5a5a9a}
+.search-banner.visible{display:block}
+.search-result-count{color:var(--accent)}
+
+.region{font-size:10px;letter-spacing:3px;color:var(--accent);margin:10px 0 6px;font-weight:700;opacity:.8}
+
+/* SECTOR GRID */
+.sectors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:7px}
+.sector-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.sector-header{display:flex;align-items:center;justify-content:space-between;padding:6px 12px;background:var(--bg3);cursor:pointer;user-select:none}
+.sector-header:hover{background:#111120}
+.sector-name{font-family:var(--sans);font-size:13px;font-weight:700;color:#8888c0;letter-spacing:1.5px}
+.sector-right{display:flex;align-items:center;gap:8px}
+.sector-avg{font-size:11px;font-weight:700;padding:2px 8px;border-radius:2px;min-width:60px;text-align:center}
+.arrow{font-size:9px;color:#252540;transition:transform .2s}
+.arrow.open{transform:rotate(90deg)}
+.sector-body{display:none}
+.sector-body.open{display:block}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse}
+th{font-size:9px;letter-spacing:1px;color:#3a3a5e;padding:4px 10px;text-align:right;border-bottom:1px solid var(--border2);font-weight:700}
+th:first-child{text-align:left}
+td{padding:3px 10px;text-align:right;border-bottom:1px solid rgba(15,15,30,.8);font-size:11px}
+td:first-child{text-align:left}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(79,142,247,.03)}
+tr.hidden-row{display:none}
+.tk{color:#7a7ab0;font-weight:700;font-size:11px}
+.tk-double-green{color:#00ff88;font-weight:700;font-size:11px;text-shadow:0 0 10px rgba(0,255,136,.8);animation:pulse-green 1.5s infinite}
+.tk-double-red{color:#ff1744;font-weight:700;font-size:11px;text-shadow:0 0 10px rgba(255,23,68,.8);animation:pulse-red 1.5s infinite}
+@keyframes pulse-green{0%,100%{text-shadow:0 0 6px rgba(0,255,136,.6)}50%{text-shadow:0 0 16px rgba(0,255,136,1)}}
+@keyframes pulse-red{0%,100%{text-shadow:0 0 6px rgba(255,23,68,.6)}50%{text-shadow:0 0 16px rgba(255,23,68,1)}}
+
+/* %DÍA */
+.chg{font-size:11px;font-weight:600;display:inline-block;padding:1px 5px;border-radius:2px}
+.cpp{color:#00ff88;font-weight:700;background:#003319;box-shadow:0 0 8px rgba(0,255,136,.3)}
+.cp {color:#00c853;background:#001a0d}
+.cz {color:#1a1a30;background:transparent;font-weight:400}
+.cn {color:#ff5252;background:#160008}
+.cnn{color:#ff1744;font-weight:700;background:#330010;box-shadow:0 0 8px rgba(255,23,68,.3)}
+
+/* RSI */
+.rsi{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:700;min-width:38px;text-align:center}
+.r-sbv2{background:#004d1f;color:#00ff88;box-shadow:0 0 12px rgba(0,255,136,.55);border:1px solid rgba(0,255,136,.2)}
+.r-sbv1{color:#00c853;font-weight:600}
+.r-neu {color:#252540;font-weight:400}
+.r-hi1 {color:#ff7043;font-weight:600}
+.r-hi2 {background:#4d0010;color:#ff1744;box-shadow:0 0 12px rgba(255,23,68,.55);border:1px solid rgba(255,23,68,.2)}
+
+/* MEDIAS SEMANALES — colores suaves, solo SMA200 intensa */
+.dw-up   { color:#4a7a5a }           /* suave arriba */
+.dw-dn   { color:#6a3a3a }           /* suave abajo */
+.dw-neu  { color:#1a1a30 }           /* neutral */
+.dw-s200u{ color:#00c853 }           /* arriba SMA200 — verde moderado */
+.dw-s200d{ color:#ff5252;font-weight:700 }  /* abajo SMA200 — rojo visible */
+
+/* KONC */
+.m-mar{color:#00ff88;font-weight:700;text-shadow:0 0 10px rgba(0,255,136,.7)}.m-lo{color:#00c853;font-weight:600}.m-neu{color:#1a1a30}.m-hi1{color:#ff7043;font-weight:600}.m-hi2{color:#ff1744;font-weight:700;text-shadow:0 0 10px rgba(255,23,68,.7)}
+.mhi{color:#ff1744;font-weight:700}.mlo{color:#00e676;font-weight:700}.mne{color:#1a1a30}
+
+/* MEDIAS */
+.d-faru{color:#00ff88;font-weight:700}.d-nearu{color:#ffd600}
+.d-neu{color:#1a1a30}.d-neard{color:#ff6d00}
+.d-fard{color:#ff1744;font-weight:700}
+
+/* RSI 1H */
+.grid1h{display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:4px;padding:8px 10px}
+.cell1h{padding:6px 3px;border-radius:3px;text-align:center;font-size:11px;font-weight:700}
+.c-over{background:#4d0010;color:#ff1744;box-shadow:0 0 8px rgba(255,23,68,.45)}
+.c-sbv {background:#004d1f;color:#00ff88;box-shadow:0 0 8px rgba(0,255,136,.45)}
+.c-neu {background:#0a0a18;color:#1a1a30;font-weight:400}
+.val1h{font-size:9px;margin-top:2px;opacity:.6}
+
+/* SEÑALES — chips más anchos */
+.sig-section-title{font-size:10px;letter-spacing:2px;color:#4a4a7a;margin:14px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--border2)}
+.sig-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px;margin-bottom:12px}
+.sig-chip{border-radius:4px;overflow:hidden;cursor:pointer;border:1px solid transparent}
+.sig-chip-head{padding:10px 12px;font-size:13px;font-weight:700;user-select:none;font-family:var(--sans)}
+.sig-chip-head .chip-ticker{font-size:15px;letter-spacing:1px}
+.sig-chip-head .chip-sub{font-size:10px;font-weight:600;margin-top:2px;font-family:var(--mono);opacity:.85}
+.sig-chip-body{display:none;background:#0a0a18;border-top:1px solid var(--border2);padding:10px 12px;font-size:11px;line-height:1.9}
+.sig-chip-body.open{display:block}
+.sig-chip-body .chip-meta{color:#4a4a7a;margin-bottom:6px}
+.sig-chip-body table{width:100%;border-collapse:collapse}
+.sig-chip-body th{font-size:9px;color:#3a3a5e;padding:3px 8px;text-align:right;border-bottom:1px solid var(--border2);letter-spacing:1px}
+.sig-chip-body th:first-child{text-align:left}
+.sig-chip-body td{font-size:11px;padding:3px 8px;text-align:right;border-bottom:1px solid rgba(15,15,30,.6)}
+.sig-chip-body td:first-child{text-align:left;color:#4a4a7a}
+.sig-chip-body tr:last-child td{border-bottom:none}
+
+.sig-chip.wt-fuerte{border-color:rgba(0,255,136,.2)}
+.sig-chip.wt-fuerte .sig-chip-head{background:#004d1f;color:#00ff88}
+.sig-chip.wt-normal .sig-chip-head{background:#001a0d;color:#00c853}
+.sig-chip.rsi-over{border-color:rgba(255,23,68,.2)}
+.sig-chip.rsi-over .sig-chip-head{background:#4d0010;color:#ff1744}
+.sig-chip.rsi-sbv{border-color:rgba(0,255,136,.2)}
+.sig-chip.rsi-sbv .sig-chip-head{background:#004d1f;color:#00ff88}
+
+.ret-pos{color:#00c853}.ret-neg{color:#ff5252}.ret-neu{color:#252540}
+.no-sig{color:#252540;font-size:11px;padding:12px 0}
+
+/* FILTER BUTTONS */
+.filter-bar{display:flex;gap:8px;margin-bottom:10px;align-items:center}
+.filter-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:3px;border:none;cursor:pointer;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1px;transition:all .15s}
+.filter-btn .dot{width:8px;height:8px;border-radius:50%}
+.btn-buy{background:#003319;color:#00ff88;border:1px solid rgba(0,255,136,.25)}
+.btn-buy:hover,.btn-buy.active{background:#004d1f;box-shadow:0 0 10px rgba(0,255,136,.3)}
+.btn-sell{background:#330010;color:#ff1744;border:1px solid rgba(255,23,68,.25)}
+.btn-sell:hover,.btn-sell.active{background:#4d0010;box-shadow:0 0 10px rgba(255,23,68,.3)}
+.btn-clear{background:#0d0d18;color:#3a3a5e;border:1px solid #1a1a2e}
+.btn-clear:hover{color:#6a6a9a}
+.filter-count{font-size:10px;color:#3a3a5e;margin-left:4px}
+
+.loading{text-align:center;padding:60px;color:#252540}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{color:#ff1744;padding:20px;font-size:11px;line-height:2}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <img class="logo-img" src="https://raw.githubusercontent.com/juancg00ginversiones/JCGdashboard/main/logoJCG.png" alt="JCG" onerror="this.style.display='none'">
+    <div class="logo-text">
+      <span class="logo-main">JCG</span>
+      <span class="logo-sub">Inversiones</span>
+    </div>
+  </div>
+
+  <div class="search-wrap">
+    <input class="search-input" id="searchBox" type="text" placeholder="Buscar ticker... ej: SPY" oninput="filterTickers(this.value)">
+  </div>
+
+  <div class="topbar-right">
+    <span id="upd-time">—</span>
+    <span id="tcnt">—</span>
+    <span id="next-upd">—</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="sw('ind',this)">INDICADORES</button>
+  <button class="tab" onclick="sw('med',this)">MEDIAS</button>
+  <button class="tab" onclick="sw('h1',this)">RSI 1H</button>
+  <button class="tab" onclick="sw('sig',this)">SEÑALES</button>
+  <button class="tab" onclick="sw('sem',this)">SEMANAL</button>
+</div>
+
+<div class="filter-bar" id="filterBar" style="display:none;padding:8px 20px;background:var(--bg2);border-bottom:1px solid var(--border2)">
+    <button class="filter-btn btn-buy" onclick="setFilter('buy',this)">
+      <span class="dot" style="background:#00ff88;box-shadow:0 0 6px rgba(0,255,136,.6)"></span>
+      OPORTUNIDADES
+      <span class="filter-count" id="cnt-buy"></span>
+    </button>
+    <button class="filter-btn btn-sell" onclick="setFilter('sell',this)">
+      <span class="dot" style="background:#ff1744;box-shadow:0 0 6px rgba(255,23,68,.6)"></span>
+      SOBRECOMPRA
+      <span class="filter-count" id="cnt-sell"></span>
+    </button>
+    <button class="filter-btn btn-clear" onclick="setFilter(null,this)">✕ VER TODO</button>
+</div>
+
+<div class="tab-content active" id="ind"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="med"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="h1"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="sig"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="sem"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+
+<script>
+const JSON_URL='https://juancg00ginversiones.github.io/JCGdashboard/jcg_data.json';
+
+function clsChg(v){if(v===null)return'cz';if(v>5)return'cpp';if(v>0)return'cp';if(v<-5)return'cnn';if(v<0)return'cn';return'cz'}
+function clsRsi(v){if(v===null)return'r-neu';if(v<=30)return'r-sbv2';if(v<=45)return'r-sbv1';if(v>=70)return'r-hi2';if(v>=65)return'r-hi1';return'r-neu'}
+function clsMrn(v){if(v===null)return'm-neu';if(v<0)return'm-mar';if(v<20)return'm-lo';if(v<85)return'm-neu';if(v<=105)return'm-hi1';return'm-hi2'}
+function clsMcd(v){if(v===null)return'mne';if(v>30)return'mhi';if(v<-30)return'mlo';return'mne'}
+function clsDist(v){if(v===null)return'd-neu';if(v>5)return'd-faru';if(v>1)return'd-nearu';if(v<-5)return'd-fard';if(v<-1)return'd-neard';return'd-neu'}
+function cls1h(v){if(v===null||v===undefined)return'c-neu';if(v>=70)return'c-over';if(v<=30)return'c-sbv';return'c-neu'}
+function fv(v,d){if(v===null||v===undefined)return'--';return parseFloat(v).toFixed(d!==undefined?d:1)}
+function fc(v){if(v===null)return'--';return(v>=0?'+':'')+parseFloat(v).toFixed(2)+'%'}
+function fd(v){if(v===null)return'--';return(v>=0?'▲':'▼')+Math.abs(parseFloat(v)).toFixed(1)+'%'}
+function clsRet(v){if(v===null)return'ret-neu';return v>0?'ret-pos':'ret-neg'}
+
+function avgHtml(ts,dat){
+  const vals=ts.filter(t=>dat[t]&&dat[t].pct_dia!==null).map(t=>dat[t].pct_dia);
+  if(!vals.length)return'';
+  const avg=vals.reduce((a,b)=>a+b,0)/vals.length;
+  let c,bg,sh;
+  if(avg>2){c='#00ff88';bg='#003319';sh='0 0 6px rgba(0,255,136,.3)'}
+  else if(avg>0){c='#00c853';bg='#001a0d';sh='none'}
+  else if(avg<-2){c='#ff1744';bg='#330010';sh='0 0 6px rgba(255,23,68,.3)'}
+  else{c='#ff5252';bg='#160008';sh='none'}
+  return `<span class="sector-avg" style="color:${c};background:${bg};box-shadow:${sh}">${avg>=0?'+':''}${avg.toFixed(2)}%</span>`;
 }
-SECTORES_WORLD = {
-    "China":       ["BABA","BIDU","JD","NIO","NTES","PDD","XPEV"],
-    "Mexico":      ["AMX","ASR","CX","KOF","PAC"],
-    "Africa":      ["GFI","HMY","JMIA"],
-    "Canada":      ["ALM","CLS","LAC","MUX","NG","NXE","PAAS","SHOP"],
-    "Brasil":      ["ABEV","BAK","BBD","GGB","NU","PAGS","PBR","SUZ","VALE","XP"],
-    "Reino Unido": ["ARM","AZN","BCS","BP","DEO","GSK","HSBC","LYG","NGG","RIO","VOD"],
-    "Europa":      ["ACN","ASML","BBVA","EQNR","GRMN","ING","NVS","SAP","SHEL","TTE"],
-    "Asia":        ["BHP","HDB","HMC","INFY","PKX","SE","SONY","TM","TSM"],
-    "Argentina":   ["BMA","CEPU","EDN","GGAL","LOMA","MELI","PAM","SUPV","YPF"],
+
+function toggle(el){
+  const b=el.nextElementSibling;
+  const a=el.querySelector('.arrow');
+  b.classList.toggle('open');
+  a.classList.toggle('open');
+}
+function toggleChip(el){
+  el.querySelector('.sig-chip-body').classList.toggle('open');
 }
 
-def get_all_tickers():
-    seen, all_t = {}, []
-    for tickers in {**SECTORES_USA, **SECTORES_WORLD}.values():
-        for t in tickers:
-            if t not in seen:
-                seen[t] = 1
-                all_t.append(t)
-    return all_t
+// ── BUSCADOR ─────────────────────────────────────────────
+function filterTickers(query){
+  const q=query.trim().toUpperCase();
+  // Filtrar filas de tablas (indicadores y medias)
+  document.querySelectorAll('tbody tr').forEach(row=>{
+    const tk=row.querySelector('.tk');
+    if(!tk){row.classList.remove('hidden-row');return}
+    row.classList.toggle('hidden-row', q.length>0 && !tk.textContent.includes(q));
+  });
+  // Filtrar chips 1H
+  document.querySelectorAll('.cell1h').forEach(cell=>{
+    const t=cell.querySelector('div')?.textContent||'';
+    cell.style.display=(q.length===0||t.includes(q))?'':'none';
+  });
+  // Mostrar/ocultar sectores vacíos
+  document.querySelectorAll('.sector-wrap').forEach(sw=>{
+    if(!sw.querySelector('tbody'))return;
+    const rows=sw.querySelectorAll('tbody tr:not(.hidden-row)');
+    sw.style.display=rows.length===0&&q.length>0?'none':'';
+  });
+}
 
-# ══════════════════════════════════════════════════════════
-# INDICADORES BASE
-# ══════════════════════════════════════════════════════════
-def rsi_wilder(serie, period=14):
-    delta    = serie.diff()
-    gain     = delta.where(delta > 0, 0)
-    loss     = -delta.where(delta < 0, 0)
-    avg_gain = gain.ewm(alpha=1/period, min_periods=period, adjust=False).mean()
-    avg_loss = loss.ewm(alpha=1/period, min_periods=period, adjust=False).mean()
-    rs = avg_gain / avg_loss.replace(0, np.nan)
-    return 100 - (100 / (1 + rs))
+function sectorCard(s,ts,dat,thHtml,rowFn){
+  const vt=ts.filter(t=>dat[t]);
+  if(!vt.length)return'';
+  return `<div class="sector-wrap">
+    <div class="sector-header" onclick="toggle(this)">
+      <span class="sector-name">${s}</span>
+      <span class="sector-right">${avgHtml(vt,dat)}<span class="arrow open">▶</span></span>
+    </div>
+    <div class="sector-body open">
+      <table><thead><tr>${thHtml}</tr></thead><tbody>
+        ${vt.map(t=>rowFn(t,dat[t])).join('')}
+      </tbody></table>
+    </div>
+  </div>`;
+}
 
-def calcular_marron_tv(o, h, l, c, v):
-    """
-    Koncord Marron exacto de TradingView:
-    marron = (RSI(ohlc4,14) + MFI(14) + BollOsc + Stoch(21,3)/3) / 2
-    media  = EMA(marron, 21)
+const thInd=`<th>Ticker</th><th>%Día</th><th>RSI</th><th>KONC</th>`;
+function clsTicker(d){
+  const rsi=d.rsi_1d,mrn=d.marron;
+  const rg=rsi!==null&&rsi<=30, rr=rsi!==null&&rsi>=70;
+  const mg=mrn!==null&&mrn<0,   mr=mrn!==null&&mrn>105;
+  if(rg&&mg)return'tk-double-green';
+  if(rr&&mr)return'tk-double-red';
+  return'tk';
+}
+const rowInd=(t,d)=>`<tr data-ticker="${t}">
+  <td class="${clsTicker(d)}">${t}</td>
+  <td><span class="chg ${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td>
+  <td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td>
+  <td><span class="${clsMrn(d.marron)}">${fv(d.marron,1)}</span></td>
+</tr>`;
 
-    MFI en TV = rsi(sum(vol*hlc3 si sube, 14), sum(vol*hlc3 si baja, 14))
-    Es decir: RSI Wilder aplicado sobre flujos positivos/negativos acumulados
-    Rango resultante de Marron: aprox -50 a +100
-    Nivel 0 = "debajo del mar" = zona de oportunidad
-    """
-    ohlc4 = (o + h + l + c) / 4
-    hlc3  = (h + l + c) / 3
+const thMed=`<th>Ticker</th><th>%Día</th><th>RSI</th><th>EMA21</th><th>SMA30</th><th>EMA150</th><th>EMA200</th>`;
+const rowMed=(t,d)=>`<tr data-ticker="${t}">
+  <td class="tk">${t}</td>
+  <td><span class="chg ${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td>
+  <td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td>
+  <td><span class="${clsDist(d.dist_ema21)}">${fd(d.dist_ema21)}</span></td>
+  <td><span class="${clsDist(d.dist_sma30)}">${fd(d.dist_sma30)}</span></td>
+  <td><span class="${clsDist(d.dist_ema150)}">${fd(d.dist_ema150)}</span></td>
+  <td><span class="${clsDist(d.dist_ema200)}">${fd(d.dist_ema200)}</span></td>
+</tr>`;
 
-    # RSI sobre ohlc4
-    xrsi = rsi_wilder(ohlc4)
-
-    # MFI exacto TV: rsi(sum_pos, sum_neg) donde sum usa RSI Wilder interno
-    chg_hlc3 = hlc3.diff()
-    # flujo positivo cuando hlc3 sube, negativo cuando baja
-    pos_flow = (v * hlc3.where(chg_hlc3 > 0, 0.0)).rolling(14).sum()
-    neg_flow = (v * hlc3.where(chg_hlc3 < 0, 0.0)).abs().rolling(14).sum()
-    # aplicar RSI Wilder sobre los flujos acumulados
-    xmf = rsi_wilder(pos_flow - neg_flow)
-
-    # Bollinger Oscillator sobre ohlc4
-    basis = ohlc4.rolling(25).mean()
-    dev   = 2.0 * ohlc4.rolling(25).std(ddof=0)
-    upper = basis + dev
-    lower = basis - dev
-    ob1   = (upper + lower) / 2.0
-    ob2   = (upper - lower).replace(0, np.nan)
-    boll  = ((ohlc4 - ob1) / ob2) * 100
-
-    # Stochastic(21,3) sobre ohlc4 como source (igual que TV)
-    low21 = l.rolling(21).min()
-    hi21  = h.rolling(21).max()
-    rango = (hi21 - low21).replace(0, np.nan)
-    stoc  = ((ohlc4 - low21) / rango * 100).rolling(3).mean()
-
-    # Marron y MediaK
-    marron  = (xrsi + xmf + boll + (stoc / 3)) / 2
-    media_k = marron.ewm(span=21, adjust=False).mean()
-    return marron, media_k
-
-def calcular_macd_tv(close):
-    e12  = close.ewm(span=12, adjust=False).mean()
-    e26  = close.ewm(span=26, adjust=False).mean()
-    macd = (e12 - e26) / e26.replace(0, np.nan) * 1000 * 5
-    sig  = macd.ewm(span=9, adjust=False).mean()
-    return macd - sig
-
-def calcular_medias(close):
-    ema21  = close.ewm(span=21,  adjust=False).mean()
-    sma30  = close.rolling(30).mean()
-    ema150 = close.ewm(span=150, adjust=False).mean()
-    ema200 = close.ewm(span=200, adjust=False).mean()
-    return ema21, sma30, ema150, ema200
-
-def dist_pct(precio, media):
-    if pd.isna(media) or media == 0: return None
-    return round(((precio - media) / media) * 100, 2)
-
-def r(v, d=2):
-    return round(float(v), d) if (v is not None and not pd.isna(v)) else None
-
-# ══════════════════════════════════════════════════════════
-# ANÁLISIS HISTÓRICO RSI
-# ══════════════════════════════════════════════════════════
-HORIZONTES = {"1d":1, "2d":2, "5d":5, "1m":21}
-
-def analizar_rsi_historico(ticker, nivel_rsi, close):
-    """Analiza qué pasó históricamente cuando RSI tocó el nivel dado"""
-    try:
-        rsi = rsi_wilder(close)
-        eventos = []
-        n = len(close)
-        for i in range(1, n):
-            rp, rc = rsi.iloc[i-1], rsi.iloc[i]
-            if pd.isna(rp) or pd.isna(rc): continue
-            sube = rp < nivel_rsi and rc >= nivel_rsi
-            baja = rp > nivel_rsi and rc <= nivel_rsi
-            if sube or baja:
-                precio_base = float(close.iloc[i])
-                fila = {"dir": "↑" if sube else "↓", "rsi": round(float(rc),1)}
-                for label, dias in HORIZONTES.items():
-                    j = i + dias
-                    fila[f"ret_{label}"] = round((float(close.iloc[j])/precio_base-1)*100,2) if j < n else None
-                eventos.append(fila)
-        if not eventos:
-            return None
-        # Resumen estadístico
-        resumen = []
-        for label in HORIZONTES:
-            vals = [e[f"ret_{label}"] for e in eventos if e[f"ret_{label}"] is not None]
-            if vals:
-                resumen.append({
-                    "tramo": label,
-                    "avg": round(sum(vals)/len(vals), 2),
-                    "pos": sum(1 for v in vals if v > 0),
-                    "total": len(vals),
-                    "prob": round(sum(1 for v in vals if v > 0)/len(vals)*100, 1)
-                })
-        # Últimos 5 eventos
-        ultimos = eventos[-5:]
-        return {"nivel": nivel_rsi, "total_eventos": len(eventos), "resumen": resumen, "ultimos": ultimos}
-    except Exception as e:
-        return None
-
-# ══════════════════════════════════════════════════════════
-# VMC WAVETREND (solo 1D)
-# ══════════════════════════════════════════════════════════
-WT_CHAN = 9
-WT_AVG  = 12
-WT_MA   = 3
-WT_OS_EXTREMO = -53
-WT_OS_NORMAL  = -30
-
-def calcular_wt(df):
-    try:
-        if df is None or len(df) < 40: return None
-        h = df["High"].squeeze()
-        l = df["Low"].squeeze()
-        c = df["Close"].squeeze()
-        hlc3 = (h + l + c) / 3
-        esa  = hlc3.ewm(span=WT_CHAN, adjust=False).mean()
-        de   = (hlc3 - esa).abs().ewm(span=WT_CHAN, adjust=False).mean()
-        ci   = (hlc3 - esa) / (0.015 * de.replace(0, np.nan))
-        wt1  = ci.ewm(span=WT_AVG, adjust=False).mean()
-        wt2  = wt1.rolling(WT_MA).mean()
-        return wt1, wt2
-    except:
-        return None
-
-def get_wt_signal(wt1, wt2):
-    if wt1 is None: return None
-    v0_wt1, v0_wt2 = float(wt1.iloc[-1]), float(wt2.iloc[-1])
-    v1_wt1, v1_wt2 = float(wt1.iloc[-2]), float(wt2.iloc[-2])
-    v2_wt1, v2_wt2 = float(wt1.iloc[-3]), float(wt2.iloc[-3])
-    cruce_hoy  = v1_wt1 <= v1_wt2 and v0_wt1 > v0_wt2
-    cruce_ayer = v2_wt1 <= v2_wt2 and v1_wt1 > v1_wt2
-    if not cruce_hoy and not cruce_ayer: return None
-    val_cruce = v0_wt2 if cruce_hoy else v1_wt2
-    momento   = "HOY" if cruce_hoy else "AYER"
-    if val_cruce <= WT_OS_EXTREMO:
-        return {"tipo": "FUERTE", "momento": momento, "wt2": round(val_cruce,1)}
-    elif val_cruce <= WT_OS_NORMAL:
-        return {"tipo": "NORMAL", "momento": momento, "wt2": round(val_cruce,1)}
-    return None
-
-# ══════════════════════════════════════════════════════════
-# RSI 1H BATCH
-# ══════════════════════════════════════════════════════════
-def obtener_rsi_horario(all_tickers):
-    print("📡 RSI 1H...")
-    rsi_1h = {}
-    try:
-        data = yf.download(
-            tickers=" ".join(all_tickers),
-            period="10d", interval="1h",
-            auto_adjust=True, group_by="ticker",
-            threads=True, progress=False
-        )
-        if data is None or data.shape[0] == 0: return rsi_1h
-        for ticker in all_tickers:
-            try:
-                if ticker not in data.columns.get_level_values(0): continue
-                close = data[ticker]["Close"].dropna()
-                if len(close) < 16: continue
-                val = rsi_wilder(close).iloc[-1]
-                if not pd.isna(val):
-                    rsi_1h[ticker] = round(float(val), 1)
-            except: continue
-        print(f"✅ RSI 1H: {len(rsi_1h)} tickers")
-    except Exception as e:
-        print(f"⚠ 1H: {e}")
-    return rsi_1h
-
-# ══════════════════════════════════════════════════════════
-# PROCESAR TICKER
-# ══════════════════════════════════════════════════════════
-def procesar_ticker(ticker):
-    try:
-        df = yf.download(ticker, period="10y", interval="1d",
-                         auto_adjust=True, progress=False)
-        if df is None or len(df) < 30: return None
-        o = df["Open"].squeeze().dropna()
-        h = df["High"].squeeze().dropna()
-        l = df["Low"].squeeze().dropna()
-        c = df["Close"].squeeze().dropna()
-        v = df["Volume"].squeeze().dropna()
-        idx = c.index
-        o,h,l,v = o.reindex(idx),h.reindex(idx),l.reindex(idx),v.reindex(idx)
-        if len(c) < 30: return None
-
-        precio      = float(c.iloc[-1])
-        precio_prev = float(c.iloc[-2])
-        pct_dia     = round(((precio-precio_prev)/precio_prev)*100, 2)
-
-        rsi_c   = rsi_wilder(c)
-        rsi_val = r(rsi_c.iloc[-1], 1)
-
-        marron, media_k = calcular_marron_tv(o,h,l,c,v)
-        macd_h  = calcular_macd_tv(c)
-        ema21,sma30,ema150,ema200 = calcular_medias(c)
-
-        marron_v  = marron.iloc[-1]
-        media_k_v = media_k.iloc[-1]
-
-        # WaveTrend
-        wt_result = calcular_wt(df)
-        wt_signal = None
-        if wt_result:
-            wt_signal = get_wt_signal(wt_result[0], wt_result[1])
-
-        # Análisis histórico RSI (solo si está en zona extrema)
-        hist_rsi = None
-        if rsi_val is not None:
-            if rsi_val <= 32:
-                hist_rsi = analizar_rsi_historico(ticker, 30, c)
-            elif rsi_val >= 68:
-                hist_rsi = analizar_rsi_historico(ticker, 70, c)
-
-        return {
-            "ticker":      ticker,
-            "pct_dia":     pct_dia,
-            "rsi_1d":      rsi_val,
-            "rsi_1h":      None,
-            "macd_h":      r(macd_h.iloc[-1], 2),
-            "marron":      r(marron_v, 2),
-            "media_k":     r(media_k_v, 2),
-            "konc_dir":    "up" if (not pd.isna(marron_v) and not pd.isna(media_k_v) and marron_v > media_k_v) else "dn",
-            "dist_ema21":  dist_pct(precio, float(ema21.iloc[-1])),
-            "dist_sma30":  dist_pct(precio, float(sma30.iloc[-1])),
-            "dist_ema150": dist_pct(precio, float(ema150.iloc[-1])),
-            "dist_ema200": dist_pct(precio, float(ema200.iloc[-1])),
-            "wt_signal":   wt_signal,
-            "hist_rsi":    hist_rsi,
-        }
-    except Exception as e:
-        print(f"  ⚠ {ticker}: {e}")
-        return None
-
-# ══════════════════════════════════════════════════════════
-# MAIN
-# ══════════════════════════════════════════════════════════
-def main():
-    all_t = get_all_tickers()
-    rsi_1h_map = obtener_rsi_horario(all_t)
-
-    print("📡 Procesando datos diarios (10 años para análisis histórico)...")
-    resultados = []
-    todos = {**SECTORES_USA, **SECTORES_WORLD}
-
-    for sector, tickers in todos.items():
-        for ticker in tickers:
-            print(f"  → {ticker}")
-            d = procesar_ticker(ticker)
-            if d:
-                d["rsi_1h"] = rsi_1h_map.get(ticker)
-                d["sector"] = sector
-                resultados.append(d)
-
-    # Señales WaveTrend
-    senales_wt = [
-        {"ticker": d["ticker"], "sector": d["sector"],
-         "rsi_1d": d["rsi_1d"], "signal": d["wt_signal"]}
-        for d in resultados if d.get("wt_signal")
-    ]
-
-    # Señales RSI extremo
-    senales_rsi = [
-        {"ticker": d["ticker"], "sector": d["sector"],
-         "rsi_1d": d["rsi_1d"], "pct_dia": d["pct_dia"],
-         "hist": d["hist_rsi"]}
-        for d in resultados if d.get("hist_rsi")
-    ]
-
-    output = {
-        "actualizado":    datetime.now().strftime("%Y-%m-%d %H:%M"),
-        "sectores_usa":   SECTORES_USA,
-        "sectores_world": SECTORES_WORLD,
-        "datos":          {d["ticker"]: d for d in resultados},
-        "senales_wt":     senales_wt,
-        "senales_rsi":    senales_rsi,
+function renderGrid(sec,dat,thHtml,rowFn,lbl,isH1=false){
+  let h=`<div class="region">▸ ${lbl}</div><div class="sectors-grid">`;
+  for(const [s,ts] of Object.entries(sec)){
+    const vt=ts.filter(t=>dat[t]);
+    if(!vt.length)continue;
+    if(isH1){
+      h+=`<div class="sector-wrap">
+        <div class="sector-header" onclick="toggle(this)">
+          <span class="sector-name">${s}</span>
+          <span class="sector-right">${avgHtml(vt,dat)}<span class="arrow open">▶</span></span>
+        </div>
+        <div class="sector-body open"><div class="grid1h">${vt.map(t=>{
+          const d=dat[t];const v=d.rsi_1h;
+          return `<div class="cell1h ${cls1h(v)}" data-ticker="${t}"><div>${t}</div><div class="val1h">${v!=null?fv(v,1):'--'}</div></div>`;
+        }).join('')}</div></div>
+      </div>`;
+    } else {
+      h+=sectorCard(s,ts,dat,thHtml,rowFn);
     }
+  }
+  return h+'</div>';
+}
 
-    with open("jcg_data.json","w",encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, indent=2)
+function histTable(hist){
+  if(!hist||!hist.resumen)return'';
+  let h=`<table><thead><tr><th>Tramo</th><th>Prom%</th><th>Prob%</th><th>N</th></tr></thead><tbody>`;
+  for(const r of hist.resumen){
+    h+=`<tr>
+      <td>${r.tramo}</td>
+      <td class="${clsRet(r.avg)}">${r.avg>=0?'+':''}${r.avg}%</td>
+      <td class="${r.prob>=55?'ret-pos':r.prob<=45?'ret-neg':'ret-neu'}">${r.prob}%</td>
+      <td style="color:#3a3a5e">${r.total}</td>
+    </tr>`;
+  }
+  return h+'</tbody></table>';
+}
 
-    print(f"\n✅ {len(resultados)} tickers — {len(senales_wt)} señales WT — {len(senales_rsi)} en zona RSI extrema")
-    print(f"   Actualizado: {output['actualizado']}")
+// ── SEMANAL ──────────────────────────────────────────────
+function clsRsiW(v){
+  if(v===null)return'r-neu';
+  if(v<=30)return'r-sbv2';if(v<=45)return'r-sbv1';
+  if(v>=70)return'r-hi2';if(v>=65)return'r-hi1';
+  return'r-neu';
+}
+function clsMrnW(v){
+  if(v===null)return'm-neu';
+  if(v<0)return'm-mar';if(v<20)return'm-lo';
+  if(v<85)return'm-neu';if(v<=105)return'm-hi1';
+  return'm-hi2';
+}
+function clsDistW(v){
+  // Medias WMA10/EMA30/EMA50 — colores muy suaves
+  if(v===null)return'dw-neu';
+  if(v>0) return'dw-up';
+  if(v<0) return'dw-dn';
+  return'dw-neu';
+}
+function clsDistSMA200W(v){
+  // SMA200 semanal — más relevante
+  if(v===null)return'dw-neu';
+  if(v>0) return'dw-s200u';
+  if(v<0) return'dw-s200d';
+  return'dw-neu';
+}
+function clsTickerW(d){
+  const rsi=d.rsi_1w, mrn=d.marron_1w;
+  const rg=rsi!==null&&rsi<=30, rr=rsi!==null&&rsi>=70;
+  const mg=mrn!==null&&mrn<10,  mr=mrn!==null&&mrn>95;
+  if(rg&&mg)return'tk-double-green';
+  if(rr&&mr)return'tk-double-red';
+  return'tk';
+}
 
-if __name__ == "__main__":
-    main()
+const thSem=`<th>Ticker</th><th>%Sem</th><th>RSI W</th><th>KONC W</th><th>WMA10</th><th>EMA30</th><th>EMA50</th><th>SMA200</th>`;
+const rowSem=(t,d)=>`<tr data-ticker="${t}">
+  <td class="${clsTickerW(d)}">${t}</td>
+  <td><span class="chg ${clsChg(d.pct_semana)}">${fc(d.pct_semana)}</span></td>
+  <td><span class="rsi ${clsRsiW(d.rsi_1w)}">${fv(d.rsi_1w,1)}</span></td>
+  <td><span class="${clsMrnW(d.marron_1w)}">${fv(d.marron_1w,1)}</span></td>
+  <td><span class="${clsDistW(d.dist_wma10_1w)}">${fd(d.dist_wma10_1w)}</span></td>
+  <td><span class="${clsDistW(d.dist_ema30_1w)}">${fd(d.dist_ema30_1w)}</span></td>
+  <td><span class="${clsDistW(d.dist_ema50_1w)}">${fd(d.dist_ema50_1w)}</span></td>
+  <td><span class="${clsDistSMA200W(d.dist_sma200_1w)}">${fd(d.dist_sma200_1w)}</span></td>
+</tr>`;
+
+function isBuySignalW(d){
+  return (d.rsi_1w!==null&&d.rsi_1w<=30)&&(d.marron_1w!==null&&d.marron_1w<10);
+}
+function isSellSignalW(d){
+  return (d.rsi_1w!==null&&d.rsi_1w>=70)&&(d.marron_1w!==null&&d.marron_1w>95);
+}
+
+function renderSemanal(sec,dat,lbl){
+  let h=`<div class="region">▸ ${lbl}</div><div class="sectors-grid">`;
+  for(const [s,ts] of Object.entries(sec)){
+    const vt=ts.filter(t=>dat[t]&&dat[t].rsi_1w!==null);
+    if(!vt.length)continue;
+    h+=sectorCard(s,vt,dat,thSem,rowSem);
+  }
+  return h+'</div>';
+}
+
+function renderSenales(data){
+  const {senales_wt=[],senales_rsi=[]}=data;
+  let h='';
+  h+=`<div class="sig-section-title">◈ WAVETREND — CRUCES ALCISTAS 1D</div>`;
+  if(!senales_wt.length){
+    h+=`<div class="no-sig">Sin cruces alcistas detectados</div>`;
+  } else {
+    h+=`<div class="sig-grid">`;
+    for(const s of senales_wt){
+      const cls=s.signal.tipo==='FUERTE'?'wt-fuerte':'wt-normal';
+      h+=`<div class="sig-chip ${cls}" onclick="toggleChip(this)">
+        <div class="sig-chip-head">
+          <div class="chip-ticker">${s.ticker}</div>
+          <div class="chip-sub">WT ${s.signal.tipo} · ${s.signal.momento}</div>
+        </div>
+        <div class="sig-chip-body">
+          <div class="chip-meta">RSI: ${fv(s.rsi_1d,1)} · WT2: ${s.signal.wt2} · ${s.sector}</div>
+        </div>
+      </div>`;
+    }
+    h+=`</div>`;
+  }
+
+  h+=`<div class="sig-section-title" style="margin-top:18px">◈ RSI EN ZONA EXTREMA — ANÁLISIS HISTÓRICO</div>`;
+  if(!senales_rsi.length){
+    h+=`<div class="no-sig">Sin tickers en zona extrema de RSI</div>`;
+  } else {
+    h+=`<div class="sig-grid">`;
+    for(const s of senales_rsi){
+      const esOver=s.rsi_1d>=68;
+      const cls=esOver?'rsi-over':'rsi-sbv';
+      const label=esOver?'SOBRECOMPRA':'SOBREVENTA';
+      h+=`<div class="sig-chip ${cls}" onclick="toggleChip(this)">
+        <div class="sig-chip-head">
+          <div class="chip-ticker">${s.ticker}</div>
+          <div class="chip-sub">RSI ${fv(s.rsi_1d,1)} · ${label}</div>
+        </div>
+        <div class="sig-chip-body">
+          <div class="chip-meta">${fc(s.pct_dia)} · ${s.sector}${s.hist?' · '+s.hist.total_eventos+' eventos':''}</div>
+          ${histTable(s.hist)}
+        </div>
+      </div>`;
+    }
+    h+=`</div>`;
+  }
+  return h;
+}
+
+// ── FILTRO COMPRA / VENTA ────────────────────────────────
+let activeFilter = null;
+window._activeTab = 'ind';
+
+function setFilter(type, btn){
+  activeFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn && type) btn.classList.add('active');
+  applyFilter();
+}
+
+function isBuySignal(d){
+  // Oportunidad CLARA: RSI <= 30 Y KONCORD < 10
+  const rsi=d.rsi_1d, mrn=d.marron;
+  return (rsi!==null && rsi<=30) && (mrn!==null && mrn<10);
+}
+function isSellSignal(d){
+  // Sobrecompra CLARA: RSI >= 70 Y KONCORD > 95
+  const rsi=d.rsi_1d, mrn=d.marron;
+  return (rsi!==null && rsi>=70) && (mrn!==null && mrn>95);
+}
+
+function applyFilter(){
+  const tab = window._activeTab || 'ind';
+  const prefix = tab==='h1' ? '' : '';
+
+  // Filas de tabla (ind y med)
+  if(tab==='ind'||tab==='med'){
+    document.querySelectorAll('#'+tab+' tbody tr').forEach(row=>{
+      if(row.classList.contains('hidden-row')) return;
+      const t=row.getAttribute('data-ticker');
+      if(!t||!window._datos||!window._datos[t]){row.style.display=activeFilter?'none':'';return;}
+      const d=window._datos[t];
+      if(!activeFilter){row.style.display='';return;}
+      const match = activeFilter==='buy' ? isBuySignal(d) : isSellSignal(d);
+      row.style.display = match ? '' : 'none';
+    });
+    document.querySelectorAll('#'+tab+' .sector-wrap').forEach(sw=>{
+      if(!sw.querySelector('tbody'))return;
+      const vis=[...sw.querySelectorAll('tbody tr')].filter(r=>r.style.display!=='none'&&!r.classList.contains('hidden-row'));
+      sw.style.display=vis.length===0&&activeFilter?'none':'';
+      if(vis.length>0&&activeFilter){
+        sw.querySelector('.sector-body').classList.add('open');
+        const arr=sw.querySelector('.arrow');if(arr)arr.classList.add('open');
+      }
+    });
+  }
+
+  // Chips 1H
+  if(tab==='sem'){
+    document.querySelectorAll('#sem tbody tr').forEach(row=>{
+      if(row.classList.contains('hidden-row'))return;
+      const t=row.getAttribute('data-ticker');
+      if(!t||!window._datos||!window._datos[t]){row.style.display=activeFilter?'none':'';return;}
+      const d=window._datos[t];
+      if(!activeFilter){row.style.display='';return;}
+      const match=activeFilter==='buy'?isBuySignalW(d):isSellSignalW(d);
+      row.style.display=match?'':'none';
+    });
+    document.querySelectorAll('#sem .sector-wrap').forEach(sw=>{
+      if(!sw.querySelector('tbody'))return;
+      const vis=[...sw.querySelectorAll('tbody tr')].filter(r=>r.style.display!=='none'&&!r.classList.contains('hidden-row'));
+      sw.style.display=vis.length===0&&activeFilter?'none':'';
+      if(vis.length>0&&activeFilter){
+        sw.querySelector('.sector-body').classList.add('open');
+        const arr=sw.querySelector('.arrow');if(arr)arr.classList.add('open');
+      }
+    });
+  }
+
+  if(tab==='h1'){
+    document.querySelectorAll('#h1 .cell1h').forEach(cell=>{
+      const t=cell.getAttribute('data-ticker');
+      if(!t||!window._datos||!window._datos[t]){cell.style.display=activeFilter?'none':'';return;}
+      const d=window._datos[t];
+      if(!activeFilter){cell.style.display='';return;}
+      const match = activeFilter==='buy' ? isBuySignal(d) : isSellSignal(d);
+      cell.style.display=match?'':'none';
+    });
+    // ocultar sectores sin chips visibles
+    document.querySelectorAll('#h1 .sector-wrap').forEach(sw=>{
+      const grid=sw.querySelector('.grid1h');if(!grid)return;
+      const vis=[...grid.querySelectorAll('.cell1h')].filter(c=>c.style.display!=='none');
+      sw.style.display=vis.length===0&&activeFilter?'none':'';
+      if(vis.length>0&&activeFilter){
+        sw.querySelector('.sector-body').classList.add('open');
+        const arr=sw.querySelector('.arrow');if(arr)arr.classList.add('open');
+      }
+    });
+  }
+}
+
+function updateFilterCounts(datos){
+  let buy=0, sell=0;
+  Object.values(datos).forEach(d=>{
+    if(isBuySignal(d))  buy++;
+    if(isSellSignal(d)) sell++;
+  });
+  document.getElementById('cnt-buy').textContent  = buy  ? '('+buy+')' : '';
+  document.getElementById('cnt-sell').textContent = sell ? '('+sell+')': '';
+}
+
+function nextUpdate(){
+  const now=new Date(),next=new Date(now);
+  next.setMinutes(40,0,0);
+  if(next<=now)next.setHours(next.getHours()+1);
+  document.getElementById('next-upd').textContent='próx. ~'+Math.round((next-now)/60000)+'min';
+}
+
+async function loadData(){
+  try{
+    const resp=await fetch(JSON_URL+'?t='+Date.now());
+    if(!resp.ok)throw new Error('HTTP '+resp.status);
+    const data=await resp.json();
+    const{sectores_usa,sectores_world,datos,actualizado}=data;
+    if(!datos||!Object.keys(datos).length)throw new Error('Sin datos aún');
+    document.getElementById('upd-time').textContent='Act: '+actualizado;
+    window._datos = datos;
+    document.getElementById('filterBar').style.display='flex';
+    updateFilterCounts(datos);
+    document.getElementById('tcnt').textContent=Object.keys(datos).length+' tickers';
+    document.getElementById('ind').innerHTML=renderGrid(sectores_usa,datos,thInd,rowInd,'USA')+renderGrid(sectores_world,datos,thInd,rowInd,'MUNDIAL');
+    document.getElementById('med').innerHTML=renderGrid(sectores_usa,datos,thMed,rowMed,'USA')+renderGrid(sectores_world,datos,thMed,rowMed,'MUNDIAL');
+    document.getElementById('h1').innerHTML=renderGrid(sectores_usa,datos,null,null,'USA',true)+renderGrid(sectores_world,datos,null,null,'MUNDIAL',true);
+    document.getElementById('sig').innerHTML=renderSenales(data);
+    document.getElementById('sem').innerHTML=renderSemanal(sectores_usa,datos,'USA')+renderSemanal(sectores_world,datos,'MUNDIAL');
+    // re-aplicar filtro si había algo escrito
+    const q=document.getElementById('searchBox').value;
+    if(q)filterTickers(q);
+    if(activeFilter) applyFilter();
+    nextUpdate();
+  }catch(e){
+    ['ind','med','h1','sig'].forEach(id=>{
+      document.getElementById(id).innerHTML=`<div class="err">❌ ${e.message}</div>`;
+    });
+  }
+}
+
+function sw(id,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  // mostrar botones solo en INDICADORES
+  const fb=document.getElementById('filterBar');
+  if(fb) fb.style.display = (['ind','med','h1','sem'].includes(id) && window._datos) ? 'flex' : 'none';
+  window._activeTab = id;
+  // re-aplicar filtro al cambiar pestaña
+  const q=document.getElementById('searchBox').value;
+  if(q)filterTickers(q);
+}
+
+loadData();
+setInterval(loadData,60*60*1000);
+</script>
+</body>
+</html>
