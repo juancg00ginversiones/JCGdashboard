@@ -314,6 +314,32 @@ def procesar_ticker(ticker):
         rsi_c   = rsi_wilder(c)
         rsi_val = r(rsi_c.iloc[-1], 1)
 
+        # RSI WMA21 (igual que en el script de TradingView)
+        weights = np.arange(1, 22)
+        rsi_wma21 = rsi_c.rolling(21).apply(
+            lambda x: np.dot(x, weights) / weights.sum(), raw=True
+        )
+        # Señal alcista del RSI — dos casos válidos:
+        # CASO 1: Cruce fresco al alza (ayer RSI <= WMA21, hoy RSI > WMA21) Y RSI sube Y precio sube
+        # CASO 2: RSI ya arriba de WMA21 Y ambos subiendo Y precio sube
+        rsi_cruza_alza = False
+        if len(rsi_c) >= 2 and not pd.isna(rsi_wma21.iloc[-1]) and not pd.isna(rsi_wma21.iloc[-2]):
+            rsi_hoy     = float(rsi_c.iloc[-1])
+            rsi_ayer    = float(rsi_c.iloc[-2])
+            wma_hoy     = float(rsi_wma21.iloc[-1])
+            wma_ayer    = float(rsi_wma21.iloc[-2])
+            rsi_sube    = rsi_hoy > rsi_ayer
+            wma_sube    = wma_hoy > wma_ayer
+            precio_sube = pct_dia > 0
+
+            # Caso 1: cruce fresco al alza
+            cruce_fresco = (rsi_ayer <= wma_ayer) and (rsi_hoy > wma_hoy) and rsi_sube and precio_sube
+
+            # Caso 2: RSI ya arriba, ambos subiendo
+            ambos_suben = (rsi_hoy > wma_hoy) and rsi_sube and wma_sube and precio_sube
+
+            rsi_cruza_alza = cruce_fresco or ambos_suben
+
         marron, media_k = calcular_marron_tv(o,h,l,c,v)
         macd_h  = calcular_macd_tv(c)
         ema21,sma30,ema150,ema200 = calcular_medias(c)
@@ -342,6 +368,7 @@ def procesar_ticker(ticker):
             "ticker":      ticker,
             "pct_dia":     pct_dia,
             "rsi_1d":      rsi_val,
+            "rsi_cruza_alza": rsi_cruza_alza,
             "rsi_1h":      None,
             "rsi_1w":          semanal["rsi_1w"]          if semanal else None,
             "marron_1w":       semanal["marron_1w"]       if semanal else None,
