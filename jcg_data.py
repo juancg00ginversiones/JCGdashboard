@@ -6,6 +6,9 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
 
+# ══════════════════════════════════════════════════════════
+# SECTORES
+# ══════════════════════════════════════════════════════════
 SECTORES_USA = {
     "ETFs":               ["SPY","QQQ","DIA","IWM","IBIT","GLD","SLV","URA","EWZ","FXI"],
     "Technology":         ["AAPL","ADBE","AMAT","AMD","ASTS","AVGO","CSCO","FSLR","IBM","INTC","LRCX","MU","NVDA","ORCL","PANW","QCOM","RGTI","RKLB","SNOW","TXN","UBER"],
@@ -19,7 +22,6 @@ SECTORES_USA = {
     "HealthCare":         ["ABBV","ABT","AMGN","BMY","DHR","GILD","ISRG","LLY","MDT","MRK","MRNA","PFE","TMO","UNH","VRTX"],
     "Utilities":          ["CEG","OKLO","VST"],
 }
-
 SECTORES_WORLD = {
     "China":       ["BABA","BIDU","JD","NIO","NTES","PDD","XPEV"],
     "Mexico":      ["AMX","ASR","CX","KOF","PAC"],
@@ -41,6 +43,9 @@ def get_all_tickers():
                 all_t.append(t)
     return all_t
 
+# ══════════════════════════════════════════════════════════
+# INDICADORES BASE
+# ══════════════════════════════════════════════════════════
 def rsi_wilder(serie, period=14):
     delta    = serie.diff()
     gain     = delta.where(delta > 0, 0)
@@ -54,29 +59,28 @@ def calcular_marron_tv(o, h, l, c, v):
     ohlc4 = (o + h + l + c) / 4
     hlc3  = (h + l + c) / 3
     xrsi  = rsi_wilder(ohlc4)
-    chg_hlc3 = hlc3.diff()
-    pos_flow = (v * hlc3.where(chg_hlc3 > 0, 0)).rolling(14).sum()
-    neg_flow = (v * (-hlc3).where(chg_hlc3 < 0, 0)).rolling(14).sum()
-    mfi_rs   = pos_flow / neg_flow.replace(0, np.nan)
-    xmf      = 100 - (100 / (1 + mfi_rs))
-    basis    = ohlc4.rolling(25).mean()
-    dev      = 2.0 * ohlc4.rolling(25).std(ddof=0)
-    upper    = basis + dev
-    lower    = basis - dev
-    BollOsc  = ((ohlc4 - ((upper+lower)/2)) / (upper-lower).replace(0, np.nan)) * 100
-    low21    = l.rolling(21).min()
-    high21   = h.rolling(21).max()
-    stoc     = ((ohlc4 - low21) / (high21-low21).replace(0, np.nan) * 100).rolling(3).mean()
-    marron   = (xrsi + xmf + BollOsc + (stoc/3)) / 2
-    media_k  = marron.ewm(span=21, adjust=False).mean()
+    chg   = hlc3.diff()
+    pos   = (v * hlc3.where(chg > 0, 0)).rolling(14).sum()
+    neg   = (v * (-hlc3).where(chg < 0, 0)).rolling(14).sum()
+    xmf   = 100 - (100 / (1 + pos / neg.replace(0, np.nan)))
+    basis = ohlc4.rolling(25).mean()
+    dev   = 2.0 * ohlc4.rolling(25).std(ddof=0)
+    upper = basis + dev
+    lower = basis - dev
+    boll  = ((ohlc4 - (upper+lower)/2) / (upper-lower).replace(0, np.nan)) * 100
+    low21 = l.rolling(21).min()
+    hi21  = h.rolling(21).max()
+    stoc  = ((ohlc4 - low21) / (hi21-low21).replace(0, np.nan) * 100).rolling(3).mean()
+    marron  = (xrsi + xmf + boll + stoc/3) / 2
+    media_k = marron.ewm(span=21, adjust=False).mean()
     return marron, media_k
 
-def calcular_macd_tv(close, fast=12, slow=26, signal=9, mult=5):
-    ema12   = close.ewm(span=fast,   adjust=False).mean()
-    ema26   = close.ewm(span=slow,   adjust=False).mean()
-    macd_tv = (ema12 - ema26) / ema26.replace(0, np.nan) * 1000 * mult
-    sig     = macd_tv.ewm(span=signal, adjust=False).mean()
-    return macd_tv - sig
+def calcular_macd_tv(close):
+    e12  = close.ewm(span=12, adjust=False).mean()
+    e26  = close.ewm(span=26, adjust=False).mean()
+    macd = (e12 - e26) / e26.replace(0, np.nan) * 1000 * 5
+    sig  = macd.ewm(span=9, adjust=False).mean()
+    return macd - sig
 
 def calcular_medias(close):
     ema21  = close.ewm(span=21,  adjust=False).mean()
@@ -92,8 +96,95 @@ def dist_pct(precio, media):
 def r(v, d=2):
     return round(float(v), d) if (v is not None and not pd.isna(v)) else None
 
+# ══════════════════════════════════════════════════════════
+# ANÁLISIS HISTÓRICO RSI
+# ══════════════════════════════════════════════════════════
+HORIZONTES = {"1d":1, "2d":2, "5d":5, "1m":21}
+
+def analizar_rsi_historico(ticker, nivel_rsi, close):
+    """Analiza qué pasó históricamente cuando RSI tocó el nivel dado"""
+    try:
+        rsi = rsi_wilder(close)
+        eventos = []
+        n = len(close)
+        for i in range(1, n):
+            rp, rc = rsi.iloc[i-1], rsi.iloc[i]
+            if pd.isna(rp) or pd.isna(rc): continue
+            sube = rp < nivel_rsi and rc >= nivel_rsi
+            baja = rp > nivel_rsi and rc <= nivel_rsi
+            if sube or baja:
+                precio_base = float(close.iloc[i])
+                fila = {"dir": "↑" if sube else "↓", "rsi": round(float(rc),1)}
+                for label, dias in HORIZONTES.items():
+                    j = i + dias
+                    fila[f"ret_{label}"] = round((float(close.iloc[j])/precio_base-1)*100,2) if j < n else None
+                eventos.append(fila)
+        if not eventos:
+            return None
+        # Resumen estadístico
+        resumen = []
+        for label in HORIZONTES:
+            vals = [e[f"ret_{label}"] for e in eventos if e[f"ret_{label}"] is not None]
+            if vals:
+                resumen.append({
+                    "tramo": label,
+                    "avg": round(sum(vals)/len(vals), 2),
+                    "pos": sum(1 for v in vals if v > 0),
+                    "total": len(vals),
+                    "prob": round(sum(1 for v in vals if v > 0)/len(vals)*100, 1)
+                })
+        # Últimos 5 eventos
+        ultimos = eventos[-5:]
+        return {"nivel": nivel_rsi, "total_eventos": len(eventos), "resumen": resumen, "ultimos": ultimos}
+    except Exception as e:
+        return None
+
+# ══════════════════════════════════════════════════════════
+# VMC WAVETREND (solo 1D)
+# ══════════════════════════════════════════════════════════
+WT_CHAN = 9
+WT_AVG  = 12
+WT_MA   = 3
+WT_OS_EXTREMO = -53
+WT_OS_NORMAL  = -30
+
+def calcular_wt(df):
+    try:
+        if df is None or len(df) < 40: return None
+        h = df["High"].squeeze()
+        l = df["Low"].squeeze()
+        c = df["Close"].squeeze()
+        hlc3 = (h + l + c) / 3
+        esa  = hlc3.ewm(span=WT_CHAN, adjust=False).mean()
+        de   = (hlc3 - esa).abs().ewm(span=WT_CHAN, adjust=False).mean()
+        ci   = (hlc3 - esa) / (0.015 * de.replace(0, np.nan))
+        wt1  = ci.ewm(span=WT_AVG, adjust=False).mean()
+        wt2  = wt1.rolling(WT_MA).mean()
+        return wt1, wt2
+    except:
+        return None
+
+def get_wt_signal(wt1, wt2):
+    if wt1 is None: return None
+    v0_wt1, v0_wt2 = float(wt1.iloc[-1]), float(wt2.iloc[-1])
+    v1_wt1, v1_wt2 = float(wt1.iloc[-2]), float(wt2.iloc[-2])
+    v2_wt1, v2_wt2 = float(wt1.iloc[-3]), float(wt2.iloc[-3])
+    cruce_hoy  = v1_wt1 <= v1_wt2 and v0_wt1 > v0_wt2
+    cruce_ayer = v2_wt1 <= v2_wt2 and v1_wt1 > v1_wt2
+    if not cruce_hoy and not cruce_ayer: return None
+    val_cruce = v0_wt2 if cruce_hoy else v1_wt2
+    momento   = "HOY" if cruce_hoy else "AYER"
+    if val_cruce <= WT_OS_EXTREMO:
+        return {"tipo": "FUERTE", "momento": momento, "wt2": round(val_cruce,1)}
+    elif val_cruce <= WT_OS_NORMAL:
+        return {"tipo": "NORMAL", "momento": momento, "wt2": round(val_cruce,1)}
+    return None
+
+# ══════════════════════════════════════════════════════════
+# RSI 1H BATCH
+# ══════════════════════════════════════════════════════════
 def obtener_rsi_horario(all_tickers):
-    print("📡 Descargando RSI 1H...")
+    print("📡 RSI 1H...")
     rsi_1h = {}
     try:
         data = yf.download(
@@ -102,8 +193,7 @@ def obtener_rsi_horario(all_tickers):
             auto_adjust=True, group_by="ticker",
             threads=True, progress=False
         )
-        if data is None or data.shape[0] == 0:
-            return rsi_1h
+        if data is None or data.shape[0] == 0: return rsi_1h
         for ticker in all_tickers:
             try:
                 if ticker not in data.columns.get_level_values(0): continue
@@ -115,12 +205,15 @@ def obtener_rsi_horario(all_tickers):
             except: continue
         print(f"✅ RSI 1H: {len(rsi_1h)} tickers")
     except Exception as e:
-        print(f"⚠ Error 1H: {e}")
+        print(f"⚠ 1H: {e}")
     return rsi_1h
 
+# ══════════════════════════════════════════════════════════
+# PROCESAR TICKER
+# ══════════════════════════════════════════════════════════
 def procesar_ticker(ticker):
     try:
-        df = yf.download(ticker, period="1y", interval="1d",
+        df = yf.download(ticker, period="10y", interval="1d",
                          auto_adjust=True, progress=False)
         if df is None or len(df) < 30: return None
         o = df["Open"].squeeze().dropna()
@@ -131,19 +224,39 @@ def procesar_ticker(ticker):
         idx = c.index
         o,h,l,v = o.reindex(idx),h.reindex(idx),l.reindex(idx),v.reindex(idx)
         if len(c) < 30: return None
+
         precio      = float(c.iloc[-1])
         precio_prev = float(c.iloc[-2])
         pct_dia     = round(((precio-precio_prev)/precio_prev)*100, 2)
-        rsi_c       = rsi_wilder(c)
+
+        rsi_c   = rsi_wilder(c)
+        rsi_val = r(rsi_c.iloc[-1], 1)
+
         marron, media_k = calcular_marron_tv(o,h,l,c,v)
-        macd_h      = calcular_macd_tv(c)
+        macd_h  = calcular_macd_tv(c)
         ema21,sma30,ema150,ema200 = calcular_medias(c)
-        marron_v    = marron.iloc[-1]
-        media_k_v   = media_k.iloc[-1]
+
+        marron_v  = marron.iloc[-1]
+        media_k_v = media_k.iloc[-1]
+
+        # WaveTrend
+        wt_result = calcular_wt(df)
+        wt_signal = None
+        if wt_result:
+            wt_signal = get_wt_signal(wt_result[0], wt_result[1])
+
+        # Análisis histórico RSI (solo si está en zona extrema)
+        hist_rsi = None
+        if rsi_val is not None:
+            if rsi_val <= 32:
+                hist_rsi = analizar_rsi_historico(ticker, 30, c)
+            elif rsi_val >= 68:
+                hist_rsi = analizar_rsi_historico(ticker, 70, c)
+
         return {
             "ticker":      ticker,
             "pct_dia":     pct_dia,
-            "rsi_1d":      r(rsi_c.iloc[-1], 1),
+            "rsi_1d":      rsi_val,
             "rsi_1h":      None,
             "macd_h":      r(macd_h.iloc[-1], 2),
             "marron":      r(marron_v, 2),
@@ -153,41 +266,62 @@ def procesar_ticker(ticker):
             "dist_sma30":  dist_pct(precio, float(sma30.iloc[-1])),
             "dist_ema150": dist_pct(precio, float(ema150.iloc[-1])),
             "dist_ema200": dist_pct(precio, float(ema200.iloc[-1])),
+            "wt_signal":   wt_signal,
+            "hist_rsi":    hist_rsi,
         }
     except Exception as e:
         print(f"  ⚠ {ticker}: {e}")
         return None
 
+# ══════════════════════════════════════════════════════════
+# MAIN
+# ══════════════════════════════════════════════════════════
 def main():
     all_t = get_all_tickers()
     rsi_1h_map = obtener_rsi_horario(all_t)
-    print("📡 Procesando datos diarios...")
+
+    print("📡 Procesando datos diarios (10 años para análisis histórico)...")
     resultados = []
     todos = {**SECTORES_USA, **SECTORES_WORLD}
+
     for sector, tickers in todos.items():
         for ticker in tickers:
+            print(f"  → {ticker}")
             d = procesar_ticker(ticker)
             if d:
                 d["rsi_1h"] = rsi_1h_map.get(ticker)
                 d["sector"] = sector
                 resultados.append(d)
-                print(f"  ✅ {ticker}")
-            else:
-                print(f"  ❌ {ticker}")
+
+    # Señales WaveTrend
+    senales_wt = [
+        {"ticker": d["ticker"], "sector": d["sector"],
+         "rsi_1d": d["rsi_1d"], "signal": d["wt_signal"]}
+        for d in resultados if d.get("wt_signal")
+    ]
+
+    # Señales RSI extremo
+    senales_rsi = [
+        {"ticker": d["ticker"], "sector": d["sector"],
+         "rsi_1d": d["rsi_1d"], "pct_dia": d["pct_dia"],
+         "hist": d["hist_rsi"]}
+        for d in resultados if d.get("hist_rsi")
+    ]
 
     output = {
         "actualizado":    datetime.now().strftime("%Y-%m-%d %H:%M"),
         "sectores_usa":   SECTORES_USA,
         "sectores_world": SECTORES_WORLD,
-        "datos":          {r["ticker"]: r for r in resultados}
+        "datos":          {d["ticker"]: d for d in resultados},
+        "senales_wt":     senales_wt,
+        "senales_rsi":    senales_rsi,
     }
+
     with open("jcg_data.json","w",encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
-    cols = ["sector","ticker","pct_dia","rsi_1d","rsi_1h","marron","media_k",
-            "konc_dir","macd_h","dist_ema21","dist_sma30","dist_ema150","dist_ema200"]
-    pd.DataFrame(resultados)[cols].to_csv("koncord_data.csv", index=False)
-    print(f"\n✅ jcg_data.json + koncord_data.csv — {output['actualizado']}")
+    print(f"\n✅ {len(resultados)} tickers — {len(senales_wt)} señales WT — {len(senales_rsi)} en zona RSI extrema")
+    print(f"   Actualizado: {output['actualizado']}")
 
 if __name__ == "__main__":
     main()
