@@ -6,74 +6,125 @@
 <title>JCGdashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#070710;--bg2:#0a0a14;--border:#111120;--border2:#1a1a2e;--text:#c8ccd8;--muted:#2a2a3e;--muted2:#1a1a2a;--accent:#4f8ef7;--mono:'Share Tech Mono',monospace}
+:root{--bg:#070710;--bg2:#0a0a14;--border:#111120;--border2:#1a1a2e;--accent:#4f8ef7;--mono:'Share Tech Mono',monospace}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:12px;min-height:100vh}
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:var(--bg2);border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:100}
-.logo{color:var(--accent);font-size:14px;letter-spacing:3px}
-.tabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--border2);padding:0 20px}
-.tab{padding:8px 20px;font-size:11px;letter-spacing:1.5px;color:var(--muted);border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;font-family:var(--mono)}
+body{background:var(--bg);color:#c8ccd8;font-family:var(--mono);font-size:11px;min-height:100vh}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;background:var(--bg2);border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:100}
+.logo{color:var(--accent);font-size:13px;letter-spacing:3px;font-weight:700}
+.top-meta{display:flex;gap:16px;font-size:10px;color:#2a2a4a}
+#upd-time{color:#1a3a1a}
+.tabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--border2);padding:0 16px}
+.tab{padding:7px 16px;font-size:10px;letter-spacing:1.5px;color:#2a2a4a;border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;font-family:var(--mono)}
 .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.tab-content{display:none;padding:16px 20px}
+.tab-content{display:none;padding:12px 16px}
 .tab-content.active{display:block}
-.region{font-size:9px;letter-spacing:2px;color:var(--accent);margin:14px 0 6px;opacity:.7}
-.sector-lbl{font-size:9px;color:var(--muted);letter-spacing:1px;padding:6px 2px 3px;border-top:1px solid var(--border);margin-top:4px}
+.region{font-size:10px;letter-spacing:3px;color:var(--accent);margin:10px 0 6px;font-weight:700}
+.sectors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px}
+.sector-wrap{background:#0a0a14;border:1px solid #111128;border-radius:4px;overflow:hidden}
+.sector-header{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:#0d0d1e;cursor:pointer;user-select:none}
+.sector-header:hover{background:#111128}
+.sector-name{font-size:11px;letter-spacing:1.5px;color:#7a7ab0;font-weight:700}
+.sector-avg{font-size:11px;font-weight:700;padding:2px 8px;border-radius:2px;min-width:62px;text-align:center}
+.sector-arrow{font-size:10px;color:#2a2a4a;transition:transform .2s}
+.sector-arrow.open{transform:rotate(90deg)}
+.sector-body{display:none}
+.sector-body.open{display:block}
 table{width:100%;border-collapse:collapse}
-th{font-size:9px;letter-spacing:1px;color:var(--muted);padding:3px 10px;text-align:right;border-bottom:1px solid var(--border);font-weight:400}
+th{font-size:9px;letter-spacing:1px;color:#3a3a5e;padding:4px 10px;text-align:right;border-bottom:1px solid #111128;font-weight:700}
 th:first-child{text-align:left}
-td{padding:3px 10px;text-align:right;border-bottom:1px solid rgba(17,17,32,.8);font-size:11px}
-td:first-child{text-align:left;font-weight:500;color:#4a4f66}
-tr:hover td{background:rgba(79,142,247,.03)}
-.rsi{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:700;min-width:40px;text-align:center}
-.r-sbv2{background:#003319;color:#00e676;box-shadow:0 0 10px rgba(0,230,118,.5)}
-.r-sbv1{background:#001a0d;color:#00c853}
-.r-neu{background:transparent;color:var(--muted);font-weight:400}
-.r-hi1{background:#1a0a00;color:#ff6d00}
-.r-hi2{background:#2d0008;color:#ff1744;box-shadow:0 0 10px rgba(255,23,68,.5)}
-.cpp{color:#00e676;font-weight:700;text-shadow:0 0 8px rgba(0,230,118,.5)}
-.cp{color:#1e3a20}.cz{color:var(--muted2)}.cn{color:#2d0a0a}
-.cnn{color:#ff1744;font-weight:700;text-shadow:0 0 8px rgba(255,23,68,.5)}
-.m-hi{color:#ff1744;font-weight:700}.m-lo{color:#00e676;font-weight:700}.m-neu{color:var(--muted2)}
-.mhi{color:#ff1744;font-weight:700}.mlo{color:#00e676;font-weight:700}.mne{color:var(--muted2)}
-.d-faru{color:#00e676}.d-nearu{color:#ffd600}.d-neu{color:var(--muted2)}.d-neard{color:#ff6d00}
+td{padding:3px 10px;text-align:right;border-bottom:1px solid rgba(17,17,40,.7);font-size:11px}
+td:first-child{text-align:left}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(79,142,247,.04)}
+.tk{color:#7a7aaa;font-weight:700}
+
+/* %DÍA */
+.chg{font-size:11px;font-weight:600;display:inline-block;padding:1px 5px;border-radius:2px}
+.cpp{color:#00ff88;font-weight:700;background:#003319;box-shadow:0 0 8px rgba(0,255,136,.35)}
+.cp {color:#00c853;background:#001a0d}
+.cz {color:#1e1e32;background:transparent;font-weight:400}
+.cn {color:#ff5252;background:#1a0008}
+.cnn{color:#ff1744;font-weight:700;background:#3d0010;box-shadow:0 0 8px rgba(255,23,68,.35)}
+
+/* RSI — solo extremos con glow, intermedios solo color */
+.rsi{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:700;min-width:38px;text-align:center}
+.r-sbv2{background:#004d1f;color:#00ff88;box-shadow:0 0 12px rgba(0,255,136,.6);border:1px solid rgba(0,255,136,.25)}  /* ≤30 */
+.r-sbv1{color:#00c853;font-weight:600}                                                                                    /* 30-45 sin recuadro */
+.r-neu {color:#2a2a4a;font-weight:400}                                                                                    /* 45-65 */
+.r-hi1 {color:#ff8a50;font-weight:600}                                                                                    /* 65-70 sin recuadro */
+.r-hi2 {background:#4d0010;color:#ff1744;box-shadow:0 0 12px rgba(255,23,68,.6);border:1px solid rgba(255,23,68,.25)}   /* ≥70 */
+
+/* KONCORD / MACD */
+.m-hi{color:#ff1744;font-weight:700}.m-lo{color:#00e676;font-weight:700}.m-neu{color:#1e1e32}
+.mhi{color:#ff1744;font-weight:700}.mlo{color:#00e676;font-weight:700}.mne{color:#1e1e32}
+
+/* MEDIAS */
+.d-faru{color:#00ff88;font-weight:700}.d-nearu{color:#ffd600}
+.d-neu{color:#1e1e32}.d-neard{color:#ff6d00}
 .d-fard{color:#ff1744;font-weight:700}
-.grid1h{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:4px;margin:6px 0 12px}
-.cell1h{padding:6px 4px;border-radius:3px;text-align:center;font-size:11px;font-weight:700}
-.c-over{background:#2d0008;color:#ff1744;box-shadow:0 0 8px rgba(255,23,68,.5)}
-.c-sbv{background:#003319;color:#00e676;box-shadow:0 0 8px rgba(0,230,118,.5)}
-.c-neu{background:#0d0d18;color:var(--muted2);font-weight:400}
-.val1h{font-size:9px;margin-top:2px;opacity:.6}
-.loading{text-align:center;padding:60px;color:var(--muted)}
-.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
+
+/* RSI 1H */
+.grid1h{display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:4px;padding:8px 10px}
+.cell1h{padding:6px 3px;border-radius:3px;text-align:center;font-size:11px;font-weight:700}
+.c-over{background:#4d0010;color:#ff1744;box-shadow:0 0 8px rgba(255,23,68,.5)}
+.c-sbv {background:#004d1f;color:#00ff88;box-shadow:0 0 8px rgba(0,255,136,.5)}
+.c-neu {background:#0d0d1e;color:#1e1e32;font-weight:400}
+.val1h{font-size:9px;margin-top:2px;opacity:.65}
+
+/* SEÑALES */
+.senales-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:12px;margin-top:8px}
+.senal-card{background:#0a0a14;border:1px solid #111128;border-radius:4px;overflow:hidden}
+.senal-header{padding:8px 12px;display:flex;justify-content:space-between;align-items:center}
+.senal-ticker{font-size:13px;font-weight:700;color:#c8ccd8;letter-spacing:1px}
+.senal-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:2px;letter-spacing:1px}
+.badge-fuerte{background:#004d1f;color:#00ff88;box-shadow:0 0 8px rgba(0,255,136,.4)}
+.badge-normal{background:#001a0d;color:#00c853}
+.badge-over  {background:#4d0010;color:#ff1744;box-shadow:0 0 8px rgba(255,23,68,.4)}
+.badge-sbv   {background:#004d1f;color:#00ff88;box-shadow:0 0 8px rgba(0,255,136,.4)}
+.senal-meta{font-size:10px;color:#3a3a5e;padding:0 12px 4px}
+.hist-table{width:100%;border-collapse:collapse;margin-top:4px}
+.hist-table th{font-size:9px;color:#3a3a5e;padding:3px 10px;text-align:right;border-top:1px solid #111128;letter-spacing:1px}
+.hist-table th:first-child{text-align:left}
+.hist-table td{font-size:10px;padding:3px 10px;text-align:right;border-top:1px solid rgba(17,17,40,.5)}
+.hist-table td:first-child{text-align:left;color:#4a4a7a}
+.ret-pos{color:#00c853}.ret-neg{color:#ff5252}.ret-neu{color:#2a2a4a}
+.no-signals{color:#2a2a4a;font-size:12px;padding:30px;text-align:center}
+.section-title{font-size:10px;letter-spacing:2px;color:#4a4a7a;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #111128}
+
+.loading{text-align:center;padding:60px;color:#2a2a4a}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid #111128;border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .err{color:#ff1744;padding:20px;font-size:11px;line-height:2}
 </style>
 </head>
 <body>
+
 <div class="topbar">
   <div class="logo">◈ JCGdashboard</div>
-  <div style="display:flex;gap:20px;align-items:center">
-    <span style="color:#1e3a1e;font-size:10px" id="upd-time">—</span>
-    <span style="color:var(--muted);font-size:10px" id="tcnt">—</span>
-    <span style="color:var(--muted);font-size:10px" id="next-upd">—</span>
+  <div class="top-meta">
+    <span id="upd-time">—</span>
+    <span id="tcnt">—</span>
+    <span id="next-upd">—</span>
   </div>
 </div>
+
 <div class="tabs">
   <button class="tab active" onclick="sw('ind',this)">INDICADORES</button>
   <button class="tab" onclick="sw('med',this)">MEDIAS</button>
   <button class="tab" onclick="sw('h1',this)">RSI 1H</button>
+  <button class="tab" onclick="sw('sig',this)">SEÑALES</button>
 </div>
+
 <div class="tab-content active" id="ind"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="med"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="h1"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="sig"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 
 <script>
-// ── URL del JSON — se actualiza automáticamente por GitHub Actions ──
-// Reemplazá TU_USUARIO con tu usuario de GitHub
-const JSON_URL = 'https://juancg00ginversiones.github.io/JCGdashboard/jcg_data.json';
+const JSON_URL='https://juancg00ginversiones.github.io/JCGdashboard/jcg_data.json';
 
 function clsChg(v){if(v===null)return'cz';if(v>2)return'cpp';if(v>0)return'cp';if(v<-2)return'cnn';if(v<0)return'cn';return'cz'}
-function clsRsi(v){if(v===null)return'r-neu';if(v<=30)return'r-sbv2';if(v<=40)return'r-sbv1';if(v>=70)return'r-hi2';if(v>=65)return'r-hi1';return'r-neu'}
+function clsRsi(v){if(v===null)return'r-neu';if(v<=30)return'r-sbv2';if(v<=45)return'r-sbv1';if(v>=70)return'r-hi2';if(v>=65)return'r-hi1';return'r-neu'}
 function clsMrn(v){if(v===null)return'm-neu';if(v>40)return'm-hi';if(v<5)return'm-lo';return'm-neu'}
 function clsMcd(v){if(v===null)return'mne';if(v>30)return'mhi';if(v<-30)return'mlo';return'mne'}
 function clsDist(v){if(v===null)return'd-neu';if(v>5)return'd-faru';if(v>1)return'd-nearu';if(v<-5)return'd-fard';if(v<-1)return'd-neard';return'd-neu'}
@@ -81,53 +132,161 @@ function cls1h(v){if(v===null||v===undefined)return'c-neu';if(v>=70)return'c-ove
 function fv(v,d){if(v===null||v===undefined)return'--';return parseFloat(v).toFixed(d!==undefined?d:1)}
 function fc(v){if(v===null)return'--';return(v>=0?'+':'')+parseFloat(v).toFixed(2)+'%'}
 function fd(v){if(v===null)return'--';return(v>=0?'▲':'▼')+Math.abs(parseFloat(v)).toFixed(1)+'%'}
+function clsRet(v){if(v===null)return'ret-neu';return v>0?'ret-pos':'ret-neg'}
 
-function renderInd(sec,dat,lbl){
-  let h=`<div class="region">▸ ${lbl}</div>`;
-  for(const[s,ts]of Object.entries(sec)){
-    const vt=ts.filter(t=>dat[t]);if(!vt.length)continue;
-    h+=`<div class="sector-lbl">── ${s}</div><table><thead><tr><th>Ticker</th><th>%Día</th><th>RSI 1D</th><th>Marron</th><th>MediaK</th><th>K</th><th>MACD H</th></tr></thead><tbody>`;
-    for(const t of vt){
-      const d=dat[t];
-      h+=`<tr><td>${t}</td><td><span class="${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td><td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td><td><span class="${clsMrn(d.marron)}">${fv(d.marron,1)}</span></td><td><span class="${clsMrn(d.media_k)}">${fv(d.media_k,1)}</span></td><td style="color:var(--muted2);font-size:10px">${d.konc_dir==='up'?'▲':'▼'}</td><td><span class="${clsMcd(d.macd_h)}">${fv(d.macd_h,1)}</span></td></tr>`;
-    }
-    h+='</tbody></table>';
-  }
-  return h;
+function avgHtml(ts,dat){
+  const vals=ts.filter(t=>dat[t]&&dat[t].pct_dia!==null).map(t=>dat[t].pct_dia);
+  if(!vals.length)return'';
+  const avg=vals.reduce((a,b)=>a+b,0)/vals.length;
+  let c,bg,sh;
+  if(avg>2){c='#00ff88';bg='#003319';sh='0 0 8px rgba(0,255,136,.35)'}
+  else if(avg>0){c='#00c853';bg='#001a0d';sh='none'}
+  else if(avg<-2){c='#ff1744';bg='#3d0010';sh='0 0 8px rgba(255,23,68,.35)'}
+  else{c='#ff5252';bg='#1a0008';sh='none'}
+  return `<span class="sector-avg" style="color:${c};background:${bg};box-shadow:${sh}">${avg>=0?'+':''}${avg.toFixed(2)}%</span>`;
 }
 
-function renderMed(sec,dat,lbl){
-  let h=`<div class="region">▸ ${lbl}</div>`;
-  for(const[s,ts]of Object.entries(sec)){
-    const vt=ts.filter(t=>dat[t]);if(!vt.length)continue;
-    h+=`<div class="sector-lbl">── ${s}</div><table><thead><tr><th>Ticker</th><th>%Día</th><th>RSI</th><th>EMA21</th><th>SMA30</th><th>EMA150</th><th>EMA200</th></tr></thead><tbody>`;
-    for(const t of vt){
-      const d=dat[t];
-      h+=`<tr><td>${t}</td><td><span class="${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td><td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td><td><span class="${clsDist(d.dist_ema21)}">${fd(d.dist_ema21)}</span></td><td><span class="${clsDist(d.dist_sma30)}">${fd(d.dist_sma30)}</span></td><td><span class="${clsDist(d.dist_ema150)}">${fd(d.dist_ema150)}</span></td><td><span class="${clsDist(d.dist_ema200)}">${fd(d.dist_ema200)}</span></td></tr>`;
-    }
-    h+='</tbody></table>';
-  }
-  return h;
+function toggle(el){
+  const b=el.nextElementSibling;
+  const a=el.querySelector('.sector-arrow');
+  b.classList.toggle('open');
+  a.classList.toggle('open');
 }
 
-function renderH1(sec,dat,lbl){
-  let h=`<div class="region">▸ ${lbl}</div><div class="grid1h">`;
-  for(const ts of Object.values(sec))
-    for(const t of ts){
-      const d=dat[t];if(!d)continue;
-      const v=d.rsi_1h;
-      h+=`<div class="cell1h ${cls1h(v)}"><div>${t}</div><div class="val1h">${v!=null?fv(v,1):'--'}</div></div>`;
+function sectorCard(s,ts,dat,thHtml,rowFn){
+  const vt=ts.filter(t=>dat[t]);
+  if(!vt.length)return'';
+  return `<div class="sector-wrap">
+    <div class="sector-header" onclick="toggle(this)">
+      <span class="sector-name">${s}</span>
+      <span style="display:flex;align-items:center;gap:8px">${avgHtml(vt,dat)}<span class="sector-arrow open">▶</span></span>
+    </div>
+    <div class="sector-body open">
+      <table><thead><tr>${thHtml}</tr></thead><tbody>
+        ${vt.map(t=>rowFn(t,dat[t])).join('')}
+      </tbody></table>
+    </div>
+  </div>`;
+}
+
+const thInd=`<th>Ticker</th><th>%Día</th><th>RSI</th><th>KONC</th><th>MACD</th>`;
+const rowInd=(t,d)=>`<tr>
+  <td class="tk">${t}</td>
+  <td><span class="chg ${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td>
+  <td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td>
+  <td><span class="${clsMrn(d.marron)}">${fv(d.marron,1)}</span></td>
+  <td><span class="${clsMcd(d.macd_h)}">${fv(d.macd_h,1)}</span></td>
+</tr>`;
+
+const thMed=`<th>Ticker</th><th>%Día</th><th>RSI</th><th>EMA21</th><th>SMA30</th><th>EMA150</th><th>EMA200</th>`;
+const rowMed=(t,d)=>`<tr>
+  <td class="tk">${t}</td>
+  <td><span class="chg ${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td>
+  <td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td>
+  <td><span class="${clsDist(d.dist_ema21)}">${fd(d.dist_ema21)}</span></td>
+  <td><span class="${clsDist(d.dist_sma30)}">${fd(d.dist_sma30)}</span></td>
+  <td><span class="${clsDist(d.dist_ema150)}">${fd(d.dist_ema150)}</span></td>
+  <td><span class="${clsDist(d.dist_ema200)}">${fd(d.dist_ema200)}</span></td>
+</tr>`;
+
+function renderGrid(sec,dat,thHtml,rowFn,lbl,isH1=false){
+  let h=`<div class="region">▸ ${lbl}</div><div class="sectors-grid">`;
+  for(const [s,ts] of Object.entries(sec)){
+    const vt=ts.filter(t=>dat[t]);
+    if(!vt.length)continue;
+    if(isH1){
+      h+=`<div class="sector-wrap">
+        <div class="sector-header" onclick="toggle(this)">
+          <span class="sector-name">${s}</span>
+          <span style="display:flex;align-items:center;gap:8px">${avgHtml(vt,dat)}<span class="sector-arrow open">▶</span></span>
+        </div>
+        <div class="sector-body open"><div class="grid1h">${vt.map(t=>{
+          const d=dat[t];const v=d.rsi_1h;
+          return `<div class="cell1h ${cls1h(v)}"><div>${t}</div><div class="val1h">${v!=null?fv(v,1):'--'}</div></div>`;
+        }).join('')}</div></div>
+      </div>`;
+    } else {
+      h+=sectorCard(s,ts,dat,thHtml,rowFn);
     }
+  }
   return h+'</div>';
 }
 
+// ── SEÑALES ──────────────────────────────────────────────
+function renderHistRsi(hist){
+  if(!hist||!hist.resumen) return '';
+  let h=`<table class="hist-table"><thead><tr>
+    <th>Tramo</th><th>Prom%</th><th>Prob%</th><th>Eventos</th>
+  </tr></thead><tbody>`;
+  for(const r of hist.resumen){
+    h+=`<tr>
+      <td>${r.tramo}</td>
+      <td class="${clsRet(r.avg)}">${r.avg>=0?'+':''}${r.avg}%</td>
+      <td class="${r.prob>=55?'ret-pos':r.prob<=45?'ret-neg':'ret-neu'}">${r.prob}%</td>
+      <td style="color:#3a3a5e">${r.pos}/${r.total}</td>
+    </tr>`;
+  }
+  return h+'</tbody></table>';
+}
+
+function renderSenales(data){
+  const {senales_wt, senales_rsi} = data;
+  let h='';
+
+  // ── WaveTrend ──
+  h+=`<div class="section-title">◈ WAVETREND — CRUCES ALCISTAS 1D</div>`;
+  if(!senales_wt||!senales_wt.length){
+    h+=`<div class="no-signals">Sin cruces alcistas detectados en este momento</div>`;
+  } else {
+    h+=`<div class="senales-grid">`;
+    for(const s of senales_wt){
+      const tipo = s.signal.tipo==='FUERTE'?'FUERTE':'COMPRA';
+      const badgeCls = s.signal.tipo==='FUERTE'?'badge-fuerte':'badge-normal';
+      h+=`<div class="senal-card">
+        <div class="senal-header">
+          <span class="senal-ticker">${s.ticker}</span>
+          <span class="senal-badge ${badgeCls}">WT ${tipo} ${s.signal.momento}</span>
+        </div>
+        <div class="senal-meta">
+          RSI: ${fv(s.rsi_1d,1)} &nbsp;|&nbsp; Sector: ${s.sector} &nbsp;|&nbsp; WT2: ${s.signal.wt2}
+        </div>
+      </div>`;
+    }
+    h+=`</div>`;
+  }
+
+  // ── RSI Histórico ──
+  h+=`<div class="section-title" style="margin-top:20px">◈ RSI EN ZONA EXTREMA — ANÁLISIS HISTÓRICO</div>`;
+  if(!senales_rsi||!senales_rsi.length){
+    h+=`<div class="no-signals">Sin tickers en zona extrema de RSI en este momento</div>`;
+  } else {
+    h+=`<div class="senales-grid">`;
+    for(const s of senales_rsi){
+      const esOver = s.rsi_1d >= 68;
+      const badgeCls = esOver?'badge-over':'badge-sbv';
+      const label = esOver?'SOBRECOMPRA':'SOBREVENTA';
+      h+=`<div class="senal-card">
+        <div class="senal-header">
+          <span class="senal-ticker">${s.ticker}</span>
+          <span class="senal-badge ${badgeCls}">${label} RSI ${fv(s.rsi_1d,1)}</span>
+        </div>
+        <div class="senal-meta">
+          %Día: ${fc(s.pct_dia)} &nbsp;|&nbsp; Sector: ${s.sector}
+          &nbsp;|&nbsp; ${s.hist?s.hist.total_eventos+' eventos hist.':''}
+        </div>
+        ${renderHistRsi(s.hist)}
+      </div>`;
+    }
+    h+=`</div>`;
+  }
+  return h;
+}
+
 function nextUpdate(){
-  const now=new Date();
-  const next=new Date(now);
+  const now=new Date(),next=new Date(now);
   next.setMinutes(30,0,0);
-  if(next<=now) next.setHours(next.getHours()+1);
-  const diff=Math.round((next-now)/60000);
-  document.getElementById('next-upd').textContent=`próx. act. en ~${diff} min`;
+  if(next<=now)next.setHours(next.getHours()+1);
+  document.getElementById('next-upd').textContent='próx. ~'+Math.round((next-now)/60000)+' min';
 }
 
 async function loadData(){
@@ -136,16 +295,23 @@ async function loadData(){
     if(!resp.ok)throw new Error('HTTP '+resp.status);
     const data=await resp.json();
     const{sectores_usa,sectores_world,datos,actualizado}=data;
-    if(!datos||!Object.keys(datos).length)throw new Error('Sin datos aún — esperando primer run de GitHub Actions');
+    if(!datos||!Object.keys(datos).length)throw new Error('Sin datos aún');
     document.getElementById('upd-time').textContent='Act: '+actualizado;
     document.getElementById('tcnt').textContent=Object.keys(datos).length+' tickers';
-    document.getElementById('ind').innerHTML=renderInd(sectores_usa,datos,'USA')+renderInd(sectores_world,datos,'MUNDIAL');
-    document.getElementById('med').innerHTML=renderMed(sectores_usa,datos,'USA')+renderMed(sectores_world,datos,'MUNDIAL');
-    document.getElementById('h1').innerHTML=renderH1(sectores_usa,datos,'USA')+renderH1(sectores_world,datos,'MUNDIAL');
+    document.getElementById('ind').innerHTML=
+      renderGrid(sectores_usa,datos,thInd,rowInd,'USA')+
+      renderGrid(sectores_world,datos,thInd,rowInd,'MUNDIAL');
+    document.getElementById('med').innerHTML=
+      renderGrid(sectores_usa,datos,thMed,rowMed,'USA')+
+      renderGrid(sectores_world,datos,thMed,rowMed,'MUNDIAL');
+    document.getElementById('h1').innerHTML=
+      renderGrid(sectores_usa,datos,null,null,'USA',true)+
+      renderGrid(sectores_world,datos,null,null,'MUNDIAL',true);
+    document.getElementById('sig').innerHTML=renderSenales(data);
     nextUpdate();
   }catch(e){
-    ['ind','med','h1'].forEach(id=>{
-      document.getElementById(id).innerHTML=`<div class="err">❌ ${e.message}<br>Verificá que el repo esté publicado en GitHub Pages.</div>`;
+    ['ind','med','h1','sig'].forEach(id=>{
+      document.getElementById(id).innerHTML=`<div class="err">❌ ${e.message}</div>`;
     });
   }
 }
@@ -158,8 +324,7 @@ function sw(id,btn){
 }
 
 loadData();
-// Auto-refresh cada 60 minutos
-setInterval(loadData, 60*60*1000);
+setInterval(loadData,60*60*1000);
 </script>
 </body>
 </html>
