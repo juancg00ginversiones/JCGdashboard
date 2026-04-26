@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='10' y='40' width='18' height='45' rx='3' fill='%2300ff88'/><rect x='16' y='25' width='6' height='18' rx='1' fill='%2300ff88'/><rect x='16' y='83' width='6' height='12' rx='1' fill='%2300ff88'/><rect x='41' y='20' width='18' height='65' rx='3' fill='%23ff1744'/><rect x='47' y='8' width='6' height='15' rx='1' fill='%23ff1744'/><rect x='47' y='83' width='6' height='12' rx='1' fill='%23ff1744'/><rect x='72' y='30' width='18' height='50' rx='3' fill='%2300ff88'/><rect x='78' y='18' width='6' height='15' rx='1' fill='%2300ff88'/><rect x='78' y='78' width='6' height='12' rx='1' fill='%2300ff88'/></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JCG Inversiones — Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
@@ -61,14 +62,19 @@ body{background:var(--bg);color:#c8ccd8;font-family:var(--mono);font-size:11px;m
 table{width:100%;border-collapse:collapse}
 th{font-size:9px;letter-spacing:1px;color:#3a3a5e;padding:4px 10px;text-align:right;border-bottom:1px solid var(--border2);font-weight:700}
 th:first-child{text-align:left}
-td{padding:3px 10px;text-align:right;border-bottom:1px solid rgba(15,15,30,.8);font-size:11px}
+td{padding:5px 10px;text-align:right;border-bottom:1px solid rgba(15,15,30,.8);font-size:11px}
 td:first-child{text-align:left}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(79,142,247,.03)}
 tr.hidden-row{display:none}
-.tk{color:#7a7ab0;font-weight:700;font-size:11px}
-.tk-double-green{color:#00ff88;font-weight:700;font-size:11px;text-shadow:0 0 10px rgba(0,255,136,.8);animation:pulse-green 1.5s infinite}
-.tk-double-red{color:#ff1744;font-weight:700;font-size:11px;text-shadow:0 0 10px rgba(255,23,68,.8);animation:pulse-red 1.5s infinite}
+.tk{color:#7a7ab0;font-weight:700;font-size:11px;display:flex;align-items:center;gap:5px}
+.tk-double-green{color:#00ff88;font-weight:700;font-size:11px;display:flex;align-items:center;gap:5px;text-shadow:0 0 10px rgba(0,255,136,.8);animation:pulse-green 1.5s infinite}
+.tk-double-red{color:#ff1744;font-weight:700;font-size:11px;display:flex;align-items:center;gap:5px;text-shadow:0 0 10px rgba(255,23,68,.8);animation:pulse-red 1.5s infinite}
+.tk-logo{width:14px;height:14px;border-radius:2px;object-fit:contain;background:#0d0d18;flex-shrink:0;vertical-align:middle}
+tr.row-buy td{background:rgba(0,255,136,.10)!important;border-bottom:1px solid rgba(0,255,136,.2)!important;border-top:1px solid rgba(0,255,136,.08)!important}
+tr.row-sell td{background:rgba(255,23,68,.10)!important;border-bottom:1px solid rgba(255,23,68,.2)!important;border-top:1px solid rgba(255,23,68,.08)!important}
+tr.row-buy:hover td{background:rgba(0,255,136,.16)!important}
+tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 @keyframes pulse-green{0%,100%{text-shadow:0 0 6px rgba(0,255,136,.6)}50%{text-shadow:0 0 16px rgba(0,255,136,1)}}
 @keyframes pulse-red{0%,100%{text-shadow:0 0 6px rgba(255,23,68,.6)}50%{text-shadow:0 0 16px rgba(255,23,68,1)}}
 
@@ -113,7 +119,7 @@ tr.hidden-row{display:none}
 .val1h{font-size:9px;margin-top:2px;opacity:.6}
 
 /* SEÑALES — chips más anchos */
-.sig-section-title{font-size:10px;letter-spacing:2px;color:#4a4a7a;margin:14px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--border2)}
+.sig-section-title{font-size:12px;letter-spacing:2px;color:#8888c0;font-weight:700;margin:14px 0 8px;padding-bottom:6px;border-bottom:1px solid #2a2a4a}
 .sig-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px;margin-bottom:12px}
 .sig-chip{border-radius:4px;overflow:hidden;cursor:pointer;border:1px solid transparent}
 .sig-chip-head{padding:10px 12px;font-size:13px;font-weight:700;user-select:none;font-family:var(--sans)}
@@ -283,6 +289,10 @@ function sectorCard(s,ts,dat,thHtml,rowFn){
 }
 
 const thInd=`<th>Ticker</th><th>%Día</th><th>RSI</th><th>KONC</th>`;
+const REPO_RAW = 'https://raw.githubusercontent.com/juancg00ginversiones/JCGdashboard/main/';
+function logoImg(ticker){
+  return `<img class="tk-logo" src="${REPO_RAW}logos/${ticker}.png" onerror="this.src='${REPO_RAW}${ticker}.png';this.onerror=function(){this.style.display='none'}">`;
+}
 function clsTicker(d){
   const rsi=d.rsi_1d,mrn=d.marron;
   const rg=rsi!==null&&rsi<=30, rr=rsi!==null&&rsi>=70;
@@ -291,16 +301,22 @@ function clsTicker(d){
   if(rr&&mr)return'tk-double-red';
   return'tk';
 }
-const rowInd=(t,d)=>`<tr data-ticker="${t}">
-  <td class="${clsTicker(d)}">${t}</td>
+function rowSignalCls(d){
+  const rsi=d.rsi_1d,mrn=d.marron;
+  if((rsi!==null&&rsi<=30)&&(mrn!==null&&mrn<10)) return 'row-buy';
+  if((rsi!==null&&rsi>=70)&&(mrn!==null&&mrn>95)) return 'row-sell';
+  return '';
+}
+const rowInd=(t,d)=>`<tr data-ticker="${t}" class="${rowSignalCls(d)}">
+  <td class="${clsTicker(d)}">${logoImg(t)}${t}</td>
   <td><span class="chg ${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td>
   <td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td>
   <td><span class="${clsMrn(d.marron)}">${fv(d.marron,1)}</span></td>
 </tr>`;
 
 const thMed=`<th>Ticker</th><th>%Día</th><th>RSI</th><th>EMA21</th><th>SMA30</th><th>EMA150</th><th>EMA200</th>`;
-const rowMed=(t,d)=>`<tr data-ticker="${t}">
-  <td class="tk">${t}</td>
+const rowMed=(t,d)=>`<tr data-ticker="${t}" class="${rowSignalCls(d)}">
+  <td class="tk">${logoImg(t)}${t}</td>
   <td><span class="chg ${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td>
   <td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td>
   <td><span class="${clsDist(d.dist_ema21)}">${fd(d.dist_ema21)}</span></td>
@@ -383,8 +399,8 @@ function clsTickerW(d){
 }
 
 const thSem=`<th>Ticker</th><th>%Sem</th><th>RSI W</th><th>KONC W</th><th>WMA10</th><th>EMA30</th><th>EMA50</th><th>SMA200</th>`;
-const rowSem=(t,d)=>`<tr data-ticker="${t}">
-  <td class="${clsTickerW(d)}">${t}</td>
+const rowSem=(t,d)=>`<tr data-ticker="${t}" class="${rowSignalCls(d)}">
+  <td class="${clsTickerW(d)}">${logoImg(t)}${t}</td>
   <td><span class="chg ${clsChg(d.pct_semana)}">${fc(d.pct_semana)}</span></td>
   <td><span class="rsi ${clsRsiW(d.rsi_1w)}">${fv(d.rsi_1w,1)}</span></td>
   <td><span class="${clsMrnW(d.marron_1w)}">${fv(d.marron_1w,1)}</span></td>
@@ -411,8 +427,37 @@ function renderSemanal(sec,dat,lbl){
   return h+'</div>';
 }
 
+function metodoDiario(d){
+  // Necesita datos de medias
+  if(d.rsi_1d===null||d.marron===null) return false;
+  // RSI debe estar cruzando al alza su WMA21 — entrada fresca
+  if(!d.rsi_cruza_alza) return false;
+  // Anuladores
+  if(d.rsi_1d >= 65)   return false;  // RSI saturado
+  if(d.marron >= 100)  return false;  // KONCORD saturado
+
+  const dists = [
+    {n:'EMA21',  v: d.dist_ema21},
+    {n:'SMA30',  v: d.dist_sma30},
+    {n:'EMA150', v: d.dist_ema150},
+    {n:'EMA200', v: d.dist_ema200},
+  ].filter(x => x.v !== null);
+
+  if(!dists.length) return false;
+
+  // Precio debe estar arriba de al menos una media
+  const superaAlguna = dists.some(x => x.v > 0);
+  if(!superaAlguna) return false;
+
+  // No debe haber ninguna media por encima a menos de 5%
+  const mediaArriba = dists.some(x => x.v < 0 && x.v > -5);
+  if(mediaArriba) return false;
+
+  return true;
+}
+
 function renderSenales(data){
-  const {senales_wt=[],senales_rsi=[]}=data;
+  const {senales_wt=[],senales_rsi=[],datos={}}=data;
   let h='';
   h+=`<div class="sig-section-title">◈ WAVETREND — CRUCES ALCISTAS 1D</div>`;
   if(!senales_wt.length){
@@ -434,7 +479,37 @@ function renderSenales(data){
     h+=`</div>`;
   }
 
-  h+=`<div class="sig-section-title" style="margin-top:18px">◈ RSI EN ZONA EXTREMA — ANÁLISIS HISTÓRICO</div>`;
+  // ── Método Diario ──────────────────────────────────────
+  h+=`<div class="sig-section-title" style="margin-top:18px">◈ MÉTODO DIARIO — SEÑALES DE COMPRA</div>`;
+  const metodoBuy=Object.entries(datos||{}).filter(([t,d])=>metodoDiario(d));
+  if(!metodoBuy.length){
+    h+=`<div class="no-sig">Sin señales de método diario en este momento</div>`;
+  } else {
+    h+=`<div class="sig-grid">`;
+    for(const [t,d] of metodoBuy){
+      const mediasOk=[
+        d.dist_ema21 >0?'EMA21' :null,
+        d.dist_sma30 >0?'SMA30' :null,
+        d.dist_ema150>0?'EMA150':null,
+        d.dist_ema200>0?'EMA200':null,
+      ].filter(Boolean).join(' · ');
+      h+=`<div class="sig-chip rsi-sbv" onclick="toggleChip(this)">
+        <div class="sig-chip-head">
+          <div class="chip-ticker">${logoImg(t)}${t}</div>
+          <div class="chip-sub">RSI ✕ WMA21 ↑</div>
+        </div>
+        <div class="sig-chip-body">
+          <div class="chip-meta">RSI: ${fv(d.rsi_1d,1)} · KONC: ${fv(d.marron,1)} · ${d.sector||''}</div>
+          <div class="chip-meta" style="color:#00c853;margin-top:4px">Sobre: ${mediasOk}</div>
+          <div class="chip-meta" style="color:#3a3a5e;margin-top:2px">${fc(d.pct_dia)}</div>
+        </div>
+      </div>`;
+    }
+    h+=`</div>`;
+  }
+
+  // ── RSI Extremo ─────────────────────────────────────────
+  h+=`<div class="sig-section-title" style="margin-top:18px">◈ RSI EN ZONA EXTREMA — ANALISIS HISTORICO</div>`;
   if(!senales_rsi.length){
     h+=`<div class="no-sig">Sin tickers en zona extrema de RSI</div>`;
   } else {
@@ -583,7 +658,7 @@ async function loadData(){
     document.getElementById('ind').innerHTML=renderGrid(sectores_usa,datos,thInd,rowInd,'USA')+renderGrid(sectores_world,datos,thInd,rowInd,'MUNDIAL');
     document.getElementById('med').innerHTML=renderGrid(sectores_usa,datos,thMed,rowMed,'USA')+renderGrid(sectores_world,datos,thMed,rowMed,'MUNDIAL');
     document.getElementById('h1').innerHTML=renderGrid(sectores_usa,datos,null,null,'USA',true)+renderGrid(sectores_world,datos,null,null,'MUNDIAL',true);
-    document.getElementById('sig').innerHTML=renderSenales(data);
+    document.getElementById('sig').innerHTML=renderSenales({...data, datos});
     document.getElementById('sem').innerHTML=renderSemanal(sectores_usa,datos,'USA')+renderSemanal(sectores_world,datos,'MUNDIAL');
     // re-aplicar filtro si había algo escrito
     const q=document.getElementById('searchBox').value;
