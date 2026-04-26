@@ -1,0 +1,34 @@
+name: Actualizar Opciones
+
+on:
+  schedule:
+    # 9:00 AR = 12:00 UTC (antes de apertura NYSE)
+    - cron: '0 12 * * 1-5'
+    # 13:30 AR = 16:30 UTC (mediodía mercado abierto)
+    - cron: '30 16 * * 1-5'
+    # 21:00 AR = 00:00 UTC (cierre)
+    - cron: '0 0 * * 2-6'
+
+  workflow_dispatch:
+
+jobs:
+  update-opciones:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Instalar dependencias
+        run: pip install yfinance pandas numpy scipy
+      - name: Correr análisis de opciones
+        run: python opciones.py
+      - name: Commit y push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add opciones_data.json
+          git diff --staged --quiet || git commit -m "Update opciones_data.json - $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
