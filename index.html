@@ -192,6 +192,7 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
   <button class="tab" onclick="sw('h1',this)">RSI 1H</button>
   <button class="tab" onclick="sw('sig',this)">SEÑALES</button>
   <button class="tab" onclick="sw('sem',this)">SEMANAL</button>
+  <button class="tab" onclick="sw('fun',this)">ANÁLISIS FUND.</button>
 </div>
 
 <div class="filter-bar" id="filterBar" style="display:none;padding:8px 20px;background:var(--bg2);border-bottom:1px solid var(--border2)">
@@ -213,6 +214,7 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 <div class="tab-content" id="h1"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="sig"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="sem"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="fun"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 
 <script>
 const JSON_URL='https://juancg00ginversiones.github.io/JCGdashboard/jcg_data.json';
@@ -636,6 +638,132 @@ function updateFilterCounts(datos){
   document.getElementById('cnt-sell').textContent = sell ? '('+sell+')': '';
 }
 
+// ── FUNDAMENTAL ──────────────────────────────────────────
+const FUN_URL = 'https://juancg00ginversiones.github.io/JCGdashboard/fundamental_data.json';
+
+function scoreColor(s){
+  if(s===null||s===undefined) return '#2a2a4a';
+  if(s>=3)  return '#00ff88';
+  if(s>=2)  return '#00c853';
+  if(s>=1)  return '#69f0ae';
+  if(s===0) return '#4a4a7a';
+  if(s>=-1) return '#ff8a50';
+  if(s>=-2) return '#ff5252';
+  return '#ff1744';
+}
+function scoreBg(s){
+  if(s===null||s===undefined) return 'transparent';
+  if(s>=2)  return 'rgba(0,255,136,.08)';
+  if(s>=1)  return 'rgba(0,200,100,.05)';
+  if(s===0) return 'transparent';
+  if(s>=-1) return 'rgba(255,100,0,.06)';
+  return 'rgba(255,23,68,.08)';
+}
+function fmtFun(v, suffix){
+  if(v===null||v===undefined) return '<span style="color:#2a2a4a">—</span>';
+  return v + (suffix||'');
+}
+function scoreCell(v, s, suffix){
+  const c = scoreColor(s);
+  const bg = scoreBg(s);
+  const val = (v===null||v===undefined) ? '—' : v+(suffix||'');
+  return `<span style="color:${c};background:${bg};padding:1px 5px;border-radius:2px;font-size:11px">${val}</span>`;
+}
+function globalScoreHtml(s){
+  const c = scoreColor(s);
+  const label = s>=2?'FUERTE':s>=1?'BUENO':s===0?'NEUTRO':s>=-1?'DÉBIL':'NEGATIVO';
+  return `<span style="color:${c};font-weight:700;font-size:11px;padding:2px 8px;background:${scoreBg(s)};border-radius:2px">${s>0?'+':''}${s} ${label}</span>`;
+}
+
+function renderFundamental(funData){
+  if(!funData||!funData.datos) return '<div class="err">❌ No se encontró fundamental_data.json</div>';
+  const {sectores, datos, actualizado} = funData;
+
+  // ── Leyenda explicativa ──────────────────────────────────
+  const leyenda = `<div style="background:#0d0d18;border:1px solid #1a1a2e;border-radius:4px;padding:12px 16px;margin-bottom:14px;font-size:10px;line-height:2">
+    <div style="color:#7a7ab0;font-size:11px;font-weight:700;letter-spacing:2px;margin-bottom:8px">◈ GUÍA DE RATIOS — QUÉ SIGNIFICA CADA COLUMNA</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:6px 20px">
+      <div><span style="color:#4f8ef7;font-weight:700">P/E</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Precio ÷ Ganancia. Cuánto pagás por cada $ de ganancia. Menor = más barato.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">P/E fwd</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">P/E estimado con ganancias futuras. Si es menor al P/E actual, se espera que gane más.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">P/B</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Precio ÷ Valor libro. Cuánto pagás vs lo que vale contablemente. Menor = más barato.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">P/S</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Precio ÷ Ventas. Útil para empresas sin ganancias aún. Menor = más barato.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">ROE%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Retorno sobre capital propio. Qué tan bien usa el dinero de los accionistas. Mayor = mejor.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Margen%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">% de ganancia neta sobre ventas. Qué queda de cada $ vendido. Mayor = mejor negocio.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Deuda/Eq</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Deuda ÷ Capital propio. Cuánta deuda tiene vs su patrimonio. Menor = más sólida.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">EPS</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Ganancia por acción (últimos 12 meses). Más alto y creciendo = mejor.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">EPS fwd</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Ganancia por acción estimada próximo año. Si sube vs EPS actual, la empresa crece.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Rev.G%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Crecimiento de ventas año vs año. Positivo y alto = empresa en expansión.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Yield%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Dividendo anual ÷ Precio. Rentabilidad del dividendo. Mayor = más ingreso pasivo.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Yield10Y%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Yield promedio histórico 10 años. Si el actual es mayor, la acción está barata vs historia.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Payout%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">% de ganancias que se pagan como dividendo. Muy alto (+80%) puede ser insostenible.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Score</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Puntuación global del -4 al +4. Verde = buenos fundamentos. Rojo = cara o deteriorada.</span></div>
+    </div>
+    <div style="margin-top:8px;color:#3a3a5e">
+      Colores: 
+      <span style="color:#00ff88">+3/+4 excelente</span> · 
+      <span style="color:#00c853">+2 bueno</span> · 
+      <span style="color:#69f0ae">+1 ok</span> · 
+      <span style="color:#4a4a7a">0 neutro</span> · 
+      <span style="color:#ff8a50">-1 cuidado</span> · 
+      <span style="color:#ff1744">-2/-3 caro/malo</span>
+    </div>
+  </div>`;
+  let h = leyenda;
+  h += `<div style="font-size:10px;color:#2a2a4a;margin-bottom:10px">Act: ${actualizado} — Fuente: Yahoo Finance</div>`;
+
+  const thF = `<th style="text-align:left;min-width:110px">Ticker</th>
+    <th>P/E</th><th>P/E fwd</th><th>P/B</th><th>P/S</th>
+    <th>ROE%</th><th>Margen%</th><th>Deuda/Eq</th>
+    <th>EPS</th><th>EPS fwd</th><th>Rev.G%</th>
+    <th>Yield%</th><th>Yield 10Y%</th><th>Payout%</th>
+    <th>Score</th>`;
+
+  h += `<div style="width:100%;overflow-x:auto">`;
+  for(const [sector, tickers] of Object.entries(sectores)){
+    const vt = tickers.filter(t=>datos[t]);
+    if(!vt.length) continue;
+    h += `<div style="margin-bottom:20px">
+      <div style="font-family:var(--sans);font-size:14px;font-weight:700;
+                  color:#8888c0;letter-spacing:2px;padding:8px 14px;
+                  background:#0d0d18;border-left:3px solid #4f8ef7;margin-bottom:2px">
+        ${sector}
+      </div>
+      <table style="width:100%;border-collapse:collapse;min-width:900px">
+        <thead><tr style="background:#0a0a14">${thF}</tr></thead><tbody>`;
+    for(const t of vt){
+      const d = datos[t];
+      h += `<tr data-ticker="${t}" style="border-bottom:1px solid rgba(15,15,30,.8)">
+        <td style="text-align:left;padding:5px 12px;white-space:nowrap" class="tk">${logoImg(t)}${t}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.pe,d.score_pe)}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.pe_fwd)}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.pb,d.score_pb)}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.ps,d.score_ps)}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.roe,d.score_roe,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.margen,d.score_margen,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.deuda_eq,d.score_deuda)}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.eps)}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.eps_fwd)}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.revenue_g,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.div_yield,d.score_yield,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.avg_yield_10y,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.payout,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${globalScoreHtml(d.score_global)}</td>
+      </tr>`;
+    }
+    h += `</tbody></table></div>`;
+  }
+  h += `</div>`;
+
+  // Leyenda scores
+  h += `<div style="margin-top:14px;font-size:10px;color:#4a4a7a;padding:8px 0;border-top:1px solid #1a1a2e">
+    <span style="margin-right:16px">Score: </span>
+    ${[4,3,2,1,0,-1,-2,-3].map(s=>`<span style="color:${scoreColor(s)};margin-right:10px">${s>0?'+':''}${s}</span>`).join('')}
+    — cuanto más verde, mejor el ratio
+  </div>`;
+
+  return h;
+}
+
 function nextUpdate(){
   const now=new Date(),next=new Date(now);
   next.setMinutes(40,0,0);
@@ -665,6 +793,19 @@ async function loadData(){
     if(q)filterTickers(q);
     if(activeFilter) applyFilter();
     nextUpdate();
+
+    // Cargar fundamental por separado (archivo separado)
+    fetch(FUN_URL+'?t='+Date.now())
+      .then(r=>r.ok?r.json():null)
+      .then(funData=>{
+        document.getElementById('fun').innerHTML = funData
+          ? renderFundamental(funData)
+          : '<div class="err">❌ Corré fundamental.py y subí fundamental_data.json al repo</div>';
+      })
+      .catch(()=>{
+        document.getElementById('fun').innerHTML =
+          '<div class="err">❌ Corré fundamental.py y subí fundamental_data.json al repo</div>';
+      });
   }catch(e){
     ['ind','med','h1','sig'].forEach(id=>{
       document.getElementById(id).innerHTML=`<div class="err">❌ ${e.message}</div>`;
