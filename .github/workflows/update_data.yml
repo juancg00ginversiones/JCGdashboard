@@ -32,19 +32,15 @@ jobs:
           python-version: '3.11'
 
       - name: Instalar dependencias
-        run: pip install yfinance pandas numpy requests
+        run: pip install yfinance pandas numpy
 
       - name: Correr script principal
         run: python jcg_data.py
-
-      - name: Correr script fundamental (1x por día, a las 14:40 UTC)
-        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && contains(github.event.schedule, '40 14'))
-        run: python fundamental.py
 
       - name: Commit y push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add jcg_data.json fundamental_data.json
-          git diff --staged --quiet || git commit -m "Update data - $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git add jcg_data.json
+          git diff --staged --quiet || git commit -m "Update jcg_data.json - $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
