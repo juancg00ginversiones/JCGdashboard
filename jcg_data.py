@@ -56,22 +56,47 @@ def rsi_wilder(serie, period=14):
     return 100 - (100 / (1 + rs))
 
 def calcular_marron_tv(o, h, l, c, v):
+    """
+    Koncord Marron exacto de TradingView:
+    marron = (RSI(ohlc4,14) + MFI(14) + BollOsc + Stoch(21,3)/3) / 2
+    media  = EMA(marron, 21)
+
+    MFI en TV = rsi(sum(vol*hlc3 si sube, 14), sum(vol*hlc3 si baja, 14))
+    Es decir: RSI Wilder aplicado sobre flujos positivos/negativos acumulados
+    Rango resultante de Marron: aprox -50 a +100
+    Nivel 0 = "debajo del mar" = zona de oportunidad
+    """
     ohlc4 = (o + h + l + c) / 4
     hlc3  = (h + l + c) / 3
-    xrsi  = rsi_wilder(ohlc4)
-    chg   = hlc3.diff()
-    pos   = (v * hlc3.where(chg > 0, 0)).rolling(14).sum()
-    neg   = (v * (-hlc3).where(chg < 0, 0)).rolling(14).sum()
-    xmf   = 100 - (100 / (1 + pos / neg.replace(0, np.nan)))
+
+    # RSI sobre ohlc4
+    xrsi = rsi_wilder(ohlc4)
+
+    # MFI exacto TV: rsi(sum_pos, sum_neg) donde sum usa RSI Wilder interno
+    chg_hlc3 = hlc3.diff()
+    # flujo positivo cuando hlc3 sube, negativo cuando baja
+    pos_flow = (v * hlc3.where(chg_hlc3 > 0, 0.0)).rolling(14).sum()
+    neg_flow = (v * hlc3.where(chg_hlc3 < 0, 0.0)).abs().rolling(14).sum()
+    # aplicar RSI Wilder sobre los flujos acumulados
+    xmf = rsi_wilder(pos_flow - neg_flow)
+
+    # Bollinger Oscillator sobre ohlc4
     basis = ohlc4.rolling(25).mean()
     dev   = 2.0 * ohlc4.rolling(25).std(ddof=0)
     upper = basis + dev
     lower = basis - dev
-    boll  = ((ohlc4 - (upper+lower)/2) / (upper-lower).replace(0, np.nan)) * 100
+    ob1   = (upper + lower) / 2.0
+    ob2   = (upper - lower).replace(0, np.nan)
+    boll  = ((ohlc4 - ob1) / ob2) * 100
+
+    # Stochastic(21,3) sobre ohlc4 como source (igual que TV)
     low21 = l.rolling(21).min()
     hi21  = h.rolling(21).max()
-    stoc  = ((ohlc4 - low21) / (hi21-low21).replace(0, np.nan) * 100).rolling(3).mean()
-    marron  = (xrsi + xmf + boll + stoc/3) / 2
+    rango = (hi21 - low21).replace(0, np.nan)
+    stoc  = ((ohlc4 - low21) / rango * 100).rolling(3).mean()
+
+    # Marron y MediaK
+    marron  = (xrsi + xmf + boll + (stoc / 3)) / 2
     media_k = marron.ewm(span=21, adjust=False).mean()
     return marron, media_k
 
