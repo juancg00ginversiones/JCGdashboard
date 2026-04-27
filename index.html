@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JCG Inversiones — Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--bg:#050508;--bg2:#08080f;--bg3:#0d0d18;--border:#0f0f1e;--border2:#1a1a2e;--accent:#4f8ef7;--mono:'Share Tech Mono',monospace;--sans:'Rajdhani',sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -242,6 +243,45 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 .opc-level-value{font-size:13px;font-weight:700;font-family:var(--sans)}
 .opc-explain{padding:10px 14px;font-size:10px;color:#3a3a5e;line-height:1.8;border-top:1px solid #0f0f1e}
 
+/* AUTH */
+.auth-overlay{display:none;position:fixed;inset:0;background:rgba(5,5,8,.95);z-index:1000;align-items:center;justify-content:center}
+.auth-overlay.visible{display:flex}
+.auth-box{background:#0a0a14;border:1px solid #1a1a2e;border-radius:6px;padding:32px;width:100%;max-width:380px}
+.auth-logo{text-align:center;margin-bottom:24px}
+.auth-logo .logo-main{font-family:var(--sans);font-size:22px;font-weight:700;color:#fff;letter-spacing:2px}
+.auth-logo .logo-sub{font-family:var(--sans);font-size:12px;color:#e53935;letter-spacing:3px}
+.auth-title{font-size:13px;color:#4a4a7a;text-align:center;margin-bottom:20px;letter-spacing:1px}
+.auth-input{width:100%;background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;padding:10px 14px;font-family:var(--mono);font-size:12px;color:#c8ccd8;outline:none;margin-bottom:10px;box-sizing:border-box}
+.auth-input:focus{border-color:#4f8ef7}
+.auth-btn{width:100%;padding:10px;background:#4f8ef7;border:none;border-radius:3px;color:#fff;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:6px}
+.auth-btn:hover{background:#3a7ae8}
+.auth-btn.secondary{background:#0d0d18;border:1px solid #1a1a2e;color:#4a4a7a;margin-top:8px}
+.auth-btn.secondary:hover{color:#7a7ab0;border-color:#2a2a4a}
+.auth-err{color:#ff1744;font-size:11px;text-align:center;margin-top:8px;min-height:16px}
+.auth-ok{color:#00c853;font-size:11px;text-align:center;margin-top:8px}
+.auth-link{color:#4f8ef7;font-size:11px;text-align:center;cursor:pointer;margin-top:12px}
+.auth-link:hover{color:#7ab4ff}
+.auth-sep{color:#1a1a2e;text-align:center;font-size:11px;margin:10px 0}
+.user-bar{display:none;align-items:center;gap:10px;padding:5px 12px;background:#0a0a14;border:1px solid #111128;border-radius:3px;font-size:10px;color:#4a4a7a}
+.user-bar.visible{display:flex}
+.user-email{color:#7a7ab0;font-size:11px}
+.logout-btn{background:none;border:1px solid #1a1a2e;border-radius:2px;color:#3a3a5e;font-family:var(--mono);font-size:9px;padding:2px 8px;cursor:pointer}
+.logout-btn:hover{color:#ff5252;border-color:#ff5252}
+
+/* WATCHLIST */
+.wl-wrap{padding:16px 0}
+.wl-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.wl-add-form{display:flex;gap:8px;flex:1}
+.wl-add-input{background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;padding:7px 12px;font-family:var(--mono);font-size:12px;color:#c8ccd8;outline:none;width:160px;text-transform:uppercase}
+.wl-add-input:focus{border-color:#4f8ef7}
+.wl-add-btn{background:#003319;border:1px solid rgba(0,255,136,.2);border-radius:3px;color:#00ff88;font-family:var(--mono);font-size:11px;padding:7px 14px;cursor:pointer;font-weight:700}
+.wl-add-btn:hover{background:#004d1f}
+.wl-empty{color:#252540;font-size:12px;padding:40px;text-align:center}
+.wl-locked{text-align:center;padding:60px;color:#252540}
+.wl-locked-icon{font-size:32px;margin-bottom:12px}
+.wl-locked-msg{font-size:13px;color:#3a3a5e;margin-bottom:16px}
+.wl-login-cta{background:#4f8ef7;border:none;border-radius:3px;color:#fff;font-family:var(--mono);font-size:11px;padding:8px 20px;cursor:pointer;font-weight:700}
+
 .loading{text-align:center;padding:60px;color:#252540}
 .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -249,6 +289,39 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 </style>
 </head>
 <body>
+
+<!-- AUTH OVERLAY -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <img src="https://raw.githubusercontent.com/juancg00ginversiones/JCGdashboard/main/logoJCG.png"
+           style="width:48px;height:48px;border-radius:4px;object-fit:cover;margin-bottom:8px" onerror="this.style.display='none'">
+      <div class="logo-main">JCG</div>
+      <div class="logo-sub">Inversiones</div>
+    </div>
+    <div id="authForm">
+      <div class="auth-title" id="authTitle">ACCESO AL DASHBOARD</div>
+      <input class="auth-input" id="authEmail" type="email" placeholder="Email">
+      <input class="auth-input" id="authComitente" type="text" placeholder="Número de comitente">
+      <input class="auth-input" id="authPassword" type="password" placeholder="Contraseña">
+      <button class="auth-btn" onclick="doLogin()">INGRESAR</button>
+      <div class="auth-sep">— o —</div>
+      <button class="auth-btn secondary" onclick="showRegister()">PRIMERA VEZ — CREAR CONTRASEÑA</button>
+      <div class="auth-err" id="authErr"></div>
+    </div>
+    <div id="registerForm" style="display:none">
+      <div class="auth-title">CREAR CONTRASEÑA</div>
+      <input class="auth-input" id="regEmail" type="email" placeholder="Email">
+      <input class="auth-input" id="regComitente" type="text" placeholder="Número de comitente">
+      <input class="auth-input" id="regPass1" type="password" placeholder="Contraseña">
+      <input class="auth-input" id="regPass2" type="password" placeholder="Repetir contraseña">
+      <button class="auth-btn" onclick="doRegister()">CREAR CUENTA</button>
+      <button class="auth-btn secondary" onclick="showLogin()">← VOLVER</button>
+      <div class="auth-err" id="regErr"></div>
+      <div class="auth-ok" id="regOk"></div>
+    </div>
+  </div>
+</div>
 
 <div class="topbar">
   <div class="topbar-left">
@@ -264,6 +337,10 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
   </div>
 
   <div class="topbar-right">
+    <div class="user-bar" id="userBar">
+      <span class="user-email" id="userEmail"></span>
+      <button class="logout-btn" onclick="doLogout()">SALIR</button>
+    </div>
     <span id="upd-time">—</span>
     <span id="tcnt">—</span>
     <span id="next-upd">—</span>
@@ -279,6 +356,7 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
   <button class="tab" onclick="sw('fun',this)">ANÁLISIS FUND.</button>
   <button class="tab" onclick="sw('glos',this)">GLOSARIO</button>
   <button class="tab" onclick="sw('opc',this)">OPCIONES</button>
+  <button class="tab" onclick="sw('wl',this)">MI WATCHLIST</button>
 </div>
 
 <div class="filter-bar" id="filterBar" style="display:none;padding:8px 20px;background:var(--bg2);border-bottom:1px solid var(--border2)">
@@ -307,6 +385,7 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 <div class="tab-content" id="sem"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="fun"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="glos"></div>
+<div class="tab-content" id="wl"><div class="loading"><span class="spin"></span>Cargando...</div></div>
 <div class="tab-content" id="opc"><div class="loading"><span class="spin"></span>Cargando opciones...</div></div>
 
 <script>
@@ -1012,20 +1091,11 @@ async function loadData(){
     const data=await resp.json();
     const{sectores_usa,sectores_world,datos,actualizado}=data;
     if(!datos||!Object.keys(datos).length)throw new Error('Sin datos aún');
-    // Convertir a hora Argentina (UTC-3)
-    const rawTime = actualizado; // formato "YYYY-MM-DD HH:MM"
-    let dispTime = rawTime;
-    try {
-      const parts = rawTime.split(' ');
-      if(parts.length === 2){
-        const [datePart, timePart] = parts;
-        const utcDate = new Date(datePart + 'T' + timePart + ':00Z');
-        // Argentina UTC-3
-        const arDate = new Date(utcDate.getTime() - 3*60*60*1000);
-        const pad = n => String(n).padStart(2,'0');
-        dispTime = pad(arDate.getUTCDate())+'/'+pad(arDate.getUTCMonth()+1)+' '+pad(arDate.getUTCHours())+':'+pad(arDate.getUTCMinutes())+' AR';
-      }
-    } catch(e){ dispTime = rawTime; }
+    // Hora ya viene en AR desde el Python (UTC-3 aplicado al generar)
+    const parts = actualizado.split(' ');
+    const dispTime = parts.length===2
+      ? parts[0].split('-').slice(1).join('/') + ' ' + parts[1] + ' AR'
+      : actualizado;
     document.getElementById('upd-time').textContent = '🕐 ' + dispTime;
     window._datos = datos;
     document.getElementById('filterBar').style.display='flex';
@@ -1077,6 +1147,302 @@ function sw(id,btn){
 
 loadData();
 setInterval(loadData,60*60*1000);
+
+// Esperar a que la lib de Supabase cargue antes de inicializar auth
+window.addEventListener('load', function(){
+  if(typeof supabase !== 'undefined'){
+    initAuth();
+  } else {
+    // retry
+    setTimeout(initAuth, 1000);
+  }
+});
+
+// ══════════════════════════════════════════════════════════
+// SUPABASE — AUTH + WATCHLIST
+// ══════════════════════════════════════════════════════════
+const SUPA_URL = 'https://opolgengetoypyecfdos.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wb2xnZW5nZXRveXB5ZWNmZG9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczMDA5NzEsImV4cCI6MjA5Mjg3Njk3MX0.fzNu-b1Wuek1RKtEyZl7fZQxLkyY6xpuWmw_On2us7k';
+let supa = null;
+
+let currentUser = null;
+
+// ── Inicializar auth ─────────────────────────────────────
+async function initAuth(){
+  // Inicializar cliente Supabase aquí para asegurar que la lib ya cargó
+  supa = supabase.createClient(SUPA_URL, SUPA_KEY);
+  const { data: { session } } = await supa.auth.getSession();
+  if(session?.user){
+    await onLogin(session.user);
+  } else {
+    showAuthOverlay();
+  }
+  supa.auth.onAuthStateChange(async (event, session) => {
+    if(event === 'SIGNED_IN' && session?.user){
+      await onLogin(session.user);
+    } else if(event === 'SIGNED_OUT'){
+      onLogout();
+    }
+  });
+}
+
+function showAuthOverlay(){
+  document.getElementById('authOverlay').classList.add('visible');
+}
+function hideAuthOverlay(){
+  document.getElementById('authOverlay').classList.remove('visible');
+}
+
+function showRegister(){
+  document.getElementById('authForm').style.display='none';
+  document.getElementById('registerForm').style.display='block';
+}
+function showLogin(){
+  document.getElementById('authForm').style.display='block';
+  document.getElementById('registerForm').style.display='none';
+}
+
+// ── LOGIN ────────────────────────────────────────────────
+async function doLogin(){
+  const email    = document.getElementById('authEmail').value.trim().toLowerCase();
+  const comitente= document.getElementById('authComitente').value.trim();
+  const password = document.getElementById('authPassword').value;
+  const errEl    = document.getElementById('authErr');
+  errEl.textContent = '';
+
+  if(!email||!comitente||!password){
+    errEl.textContent='Completá todos los campos'; return;
+  }
+
+  // Verificar que el email + comitente existan en la tabla
+  const { data: usuario, error: err1 } = await supa
+    .from('usuarios_dashboard')
+    .select('id,activo')
+    .eq('usuario', email)
+    .eq('cuenta_comitente', comitente)
+    .maybeSingle();
+
+  if(err1||!usuario){
+    errEl.textContent='Email o número de comitente no autorizado'; return;
+  }
+  if(!usuario.activo){
+    errEl.textContent='Cuenta suspendida. Contactá al administrador'; return;
+  }
+
+  const { error: err2 } = await supa.auth.signInWithPassword({ email, password });
+  if(err2){
+    errEl.textContent = err2.message.includes('Invalid') ? 'Contraseña incorrecta' : err2.message;
+  }
+}
+
+// ── REGISTRO ─────────────────────────────────────────────
+async function doRegister(){
+  const email    = document.getElementById('regEmail').value.trim().toLowerCase();
+  const comitente= document.getElementById('regComitente').value.trim();
+  const pass1    = document.getElementById('regPass1').value;
+  const pass2    = document.getElementById('regPass2').value;
+  const errEl    = document.getElementById('regErr');
+  const okEl     = document.getElementById('regOk');
+  errEl.textContent=''; okEl.textContent='';
+
+  if(!email||!comitente||!pass1||!pass2){
+    errEl.textContent='Completá todos los campos'; return;
+  }
+  if(pass1 !== pass2){
+    errEl.textContent='Las contraseñas no coinciden'; return;
+  }
+  if(pass1.length < 6){
+    errEl.textContent='La contraseña debe tener al menos 6 caracteres'; return;
+  }
+
+  // Verificar autorización
+  const { data: usuario } = await supa
+    .from('usuarios_dashboard')
+    .select('id,activo')
+    .eq('usuario', email)
+    .eq('cuenta_comitente', comitente)
+    .maybeSingle();
+
+  if(!usuario){
+    errEl.textContent='Email o comitente no registrado. Contactá al administrador'; return;
+  }
+  if(!usuario.activo){
+    errEl.textContent='Cuenta suspendida. Contactá al administrador'; return;
+  }
+
+  const { data: authData, error: err } = await supa.auth.signUp({ email, password: pass1 });
+  if(err){
+    errEl.textContent = err.message; return;
+  }
+
+  // Vincular auth_user_id a la tabla
+  if(authData.user){
+    await supa.from('usuarios_dashboard')
+      .update({ auth_user_id: authData.user.id })
+      .eq('id', usuario.id);
+  }
+
+  okEl.textContent='✅ Cuenta creada. Ya podés ingresar con tu contraseña.';
+  setTimeout(()=>showLogin(), 2000);
+}
+
+// ── LOGOUT ───────────────────────────────────────────────
+async function doLogout(){
+  await supa.auth.signOut();
+}
+
+// ── ON LOGIN ─────────────────────────────────────────────
+async function onLogin(user){
+  currentUser = user;
+  hideAuthOverlay();
+  document.getElementById('userBar').classList.add('visible');
+  document.getElementById('userEmail').textContent = user.email;
+  if(document.getElementById('wl').classList.contains('active')){
+    renderWatchlist();
+  }
+}
+
+function onLogout(){
+  currentUser = null;
+  document.getElementById('userBar').classList.remove('visible');
+  showAuthOverlay();
+  document.getElementById('wl').innerHTML='<div class="loading"><span class="spin"></span>Cargando...</div>';
+}
+
+// ══════════════════════════════════════════════════════════
+// WATCHLIST
+// ══════════════════════════════════════════════════════════
+async function renderWatchlist(){
+  const container = document.getElementById('wl');
+  if(!currentUser){
+    container.innerHTML=`<div class="wl-locked">
+      <div class="wl-locked-icon">🔒</div>
+      <div class="wl-locked-msg">Iniciá sesión para ver tu watchlist personal</div>
+      <button class="wl-login-cta" onclick="showAuthOverlay()">INGRESAR</button>
+    </div>`;
+    return;
+  }
+
+  // Cargar tickers de la watchlist
+  const { data: wlItems } = await supa
+    .from('watchlist')
+    .select('*')
+    .eq('user_id', currentUser.id)
+    .order('created_at', { ascending: false });
+
+  const tickers = (wlItems||[]).map(x=>x.ticker);
+  const datos   = window._datos || {};
+
+  let h = `<div class="wl-wrap">
+    <div class="wl-header">
+      <div class="wl-add-form">
+        <input class="wl-add-input" id="wlInput" type="text" placeholder="Agregar ticker... ej: AAPL"
+          onkeydown="if(event.key==='Enter') addToWatchlist()">
+        <button class="wl-add-btn" onclick="addToWatchlist()">+ AGREGAR</button>
+      </div>
+      <span style="font-size:10px;color:#3a3a5e">${tickers.length} ticker${tickers.length!==1?'s':''}</span>
+    </div>`;
+
+  if(!tickers.length){
+    h+=`<div class="wl-empty">Tu watchlist está vacía. Agregá tickers arriba para hacer seguimiento.</div>`;
+  } else {
+    // Tabla con todos los datos
+    const thWl = `<th>Ticker</th><th>%Día</th><th>RSI</th><th>KONC</th><th>RSI 1H</th><th>Señal</th><th></th>`;
+    h+=`<table style="width:100%;border-collapse:collapse">
+      <thead><tr style="background:#0a0a14">${thWl}</tr></thead><tbody>`;
+
+    for(const item of wlItems||[]){
+      const t = item.ticker;
+      const d = datos[t];
+      const g = (typeof GLOSARIO!=='undefined') ? GLOSARIO[t] : null;
+
+      // Señal
+      let senal = '', senalCls = '';
+      if(d){
+        const isBuy  = d.rsi_1d!==null&&d.rsi_1d<=30 && d.marron!==null&&d.marron<10;
+        const isSell = d.rsi_1d!==null&&d.rsi_1d>=70 && d.marron!==null&&d.marron>95;
+        if(isBuy) { senal='🟢 OPORTUNIDAD'; senalCls='color:#00ff88;font-weight:700'; }
+        else if(isSell){ senal='🔴 SOBRECOMPRA'; senalCls='color:#ff1744;font-weight:700'; }
+        else { senal='—'; senalCls='color:#1a1a30'; }
+      }
+
+      const rowCls = d ? (
+        (d.rsi_1d<=30&&d.marron<10) ? 'row-buy' :
+        (d.rsi_1d>=70&&d.marron>95) ? 'row-sell' : ''
+      ) : '';
+
+      h+=`<tr class="${rowCls}" style="border-bottom:1px solid rgba(15,15,30,.8)">
+        <td style="padding:6px 12px">
+          <div style="display:flex;align-items:center;gap:6px">
+            ${logoImg(t)}
+            <div>
+              <div style="color:#c8ccd8;font-weight:700;font-size:12px">${t}</div>
+              ${g?`<div style="color:#2a2a4a;font-size:9px">${g.nombre}</div>`:''}
+            </div>
+          </div>
+        </td>
+        <td style="text-align:right;padding:6px 12px">
+          ${d?`<span class="chg ${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span>`:'<span style="color:#1a1a30">—</span>'}
+        </td>
+        <td style="text-align:right;padding:6px 12px">
+          ${d?`<span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span>`:'<span style="color:#1a1a30">—</span>'}
+        </td>
+        <td style="text-align:right;padding:6px 12px">
+          ${d?`<span class="${clsMrn(d.marron)}">${fv(d.marron,1)}</span>`:'<span style="color:#1a1a30">—</span>'}
+        </td>
+        <td style="text-align:right;padding:6px 12px">
+          ${d?.rsi_1h?`<span class="rsi ${clsRsi(d.rsi_1h)}">${fv(d.rsi_1h,1)}</span>`:'<span style="color:#1a1a30">—</span>'}
+        </td>
+        <td style="text-align:center;padding:6px 12px">
+          <span style="${senalCls};font-size:11px">${senal}</span>
+        </td>
+        <td style="text-align:right;padding:6px 8px">
+          <button onclick="removeFromWatchlist('${t}')"
+            style="background:none;border:1px solid #1a1a2e;border-radius:2px;color:#3a3a5e;
+                   font-family:var(--mono);font-size:9px;padding:2px 6px;cursor:pointer"
+            onmouseover="this.style.color='#ff5252';this.style.borderColor='#ff5252'"
+            onmouseout="this.style.color='#3a3a5e';this.style.borderColor='#1a1a2e'">✕</button>
+        </td>
+      </tr>`;
+    }
+    h+=`</tbody></table>`;
+  }
+
+  h+=`</div>`;
+  container.innerHTML = h;
+}
+
+async function addToWatchlist(){
+  if(!currentUser){ showAuthOverlay(); return; }
+  const input  = document.getElementById('wlInput');
+  const ticker = input.value.trim().toUpperCase();
+  if(!ticker){ return; }
+
+  const { error } = await supa.from('watchlist').insert({
+    user_id: currentUser.id,
+    ticker:  ticker
+  });
+
+  if(!error){
+    input.value = '';
+    renderWatchlist();
+  } else if(error.code === '23505'){
+    // Ya existe
+    input.style.borderColor='#ffab00';
+    setTimeout(()=>input.style.borderColor='#1a1a2e', 1500);
+  }
+}
+
+async function removeFromWatchlist(ticker){
+  if(!currentUser) return;
+  await supa.from('watchlist')
+    .delete()
+    .eq('user_id', currentUser.id)
+    .eq('ticker', ticker);
+  renderWatchlist();
+}
+
+// Activar watchlist al entrar a la pestaña
 
 // ── OPCIONES ─────────────────────────────────────────────
 const OPC_URL = 'https://juancg00ginversiones.github.io/JCGdashboard/opciones_data.json';
@@ -1429,6 +1795,7 @@ function sw(id,btn){
   window._activeTab=id;
   if(id==='glos' && document.getElementById('glos').innerHTML==='') renderGlosario();
   if(id==='opc') loadOpciones();
+  if(id==='wl') renderWatchlist();
   const q=document.getElementById('searchBox').value;
   if(q && id!=='glos') filterTickers(q);
 }
