@@ -8,7 +8,56 @@
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--bg:#050508;--bg2:#08080f;--bg3:#0d0d18;--border:#0f0f1e;--border2:#1a1a2e;--accent:#4f8ef7;--mono:'Share Tech Mono',monospace;--sans:'Rajdhani',sans-serif}
+:root{
+  --bg:#050508;--bg2:#08080f;--bg3:#0d0d18;
+  --border:#0f0f1e;--border2:#1a1a2e;
+  --accent:#4f8ef7;
+  --mono:'Share Tech Mono',monospace;
+  --sans:'Rajdhani',sans-serif;
+  --fs:11px;--fs-tk:11px;--fs-rsi:11px;
+}
+/* MODO DÍA */
+body.day-mode{
+  --bg:#f0f2f5;--bg2:#ffffff;--bg3:#e8eaed;
+  --border:#d0d4dc;--border2:#c0c4cc;
+  color:#1a1a2a;
+}
+body.day-mode .topbar{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .tabs{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .tab{color:#6a6a8a}
+body.day-mode .tab.active{color:#2a5ef7}
+body.day-mode .sector-wrap{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .sector-header{background:#f5f6f8}
+body.day-mode .sector-name{color:#4a4a7a}
+body.day-mode td{border-color:rgba(0,0,0,.06)}
+body.day-mode .tk{color:#2a2a5a}
+body.day-mode .tk-double-green{color:#006d32}
+body.day-mode .tk-double-red{color:#9b1c1c}
+body.day-mode .r-neu{color:#9a9aaa}
+body.day-mode .m-neu{color:#9a9aaa}
+body.day-mode .mne{color:#9a9aaa}
+body.day-mode .d-neu{color:#9a9aaa}
+body.day-mode .no-sig{color:#9a9aaa}
+body.day-mode .search-input{background:#f5f6f8;border-color:#c0c4cc;color:#1a1a2a}
+body.day-mode .filter-bar{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .sig-section-title{color:#4a4a7a;border-color:#d0d4dc}
+body.day-mode .opc-card{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .opc-card-header{background:#f5f6f8}
+body.day-mode table{color:#1a1a2a}
+body.day-mode th{color:#6a6a8a;border-color:#d0d4dc}
+body.day-mode .top-banner{background:#e8eaed;border-color:#d0d4dc}
+body.day-mode .banner-left{color:#6a6a8a}
+body.day-mode .loading{color:#9a9aaa}
+body.day-mode .region{opacity:1}
+body.day-mode .auth-box{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .auth-input{background:#f5f6f8;border-color:#c0c4cc;color:#1a1a2a}
+body.day-mode .auth-btn.secondary{background:#f5f6f8;border-color:#c0c4cc;color:#4a4a7a}
+body.day-mode .user-bar{background:#f5f6f8;border-color:#d0d4dc}
+
+/* FONT SIZE VARS */
+body.fs-lg { --fs:13px; --fs-tk:13px; --fs-rsi:13px; }
+body.fs-xl { --fs:15px; --fs-tk:15px; --fs-rsi:15px; }
+body { font-size: var(--fs); }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:#c8ccd8;font-family:var(--mono);font-size:11px;min-height:100vh}
 
@@ -91,14 +140,14 @@ tr.search-match td{background:rgba(79,142,247,.08)!important}
 table{width:100%;border-collapse:collapse}
 th{font-size:9px;letter-spacing:1px;color:#3a3a5e;padding:4px 10px;text-align:right;border-bottom:1px solid var(--border2);font-weight:700}
 th:first-child{text-align:left}
-td{padding:5px 10px;text-align:right;border-bottom:1px solid rgba(15,15,30,.8);font-size:11px}
+td{padding:5px 10px;text-align:right;border-bottom:1px solid rgba(15,15,30,.8);font-size:var(--fs)}
 td:first-child{text-align:left}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(79,142,247,.03)}
 tr.hidden-row{display:none}
-.tk{color:#7a7ab0;font-weight:700;font-size:11px;display:flex;align-items:center;gap:5px}
-.tk-double-green{color:#00ff88;font-weight:700;font-size:11px;display:flex;align-items:center;gap:5px;text-shadow:0 0 10px rgba(0,255,136,.8);animation:pulse-green 1.5s infinite}
-.tk-double-red{color:#ff1744;font-weight:700;font-size:11px;display:flex;align-items:center;gap:5px;text-shadow:0 0 10px rgba(255,23,68,.8);animation:pulse-red 1.5s infinite}
+.tk{color:#c8ccd8;font-weight:700;font-size:var(--fs-tk);display:flex;align-items:center;gap:5px}
+.tk-double-green{color:#00ff88;font-weight:700;font-size:var(--fs-tk);display:flex;align-items:center;gap:5px;text-shadow:0 0 10px rgba(0,255,136,.8);animation:pulse-green 1.5s infinite}
+.tk-double-red{color:#ff1744;font-weight:700;font-size:var(--fs-tk);display:flex;align-items:center;gap:5px;text-shadow:0 0 10px rgba(255,23,68,.8);animation:pulse-red 1.5s infinite}
 .tk-logo{width:14px;height:14px;border-radius:2px;object-fit:contain;background:#0d0d18;flex-shrink:0;vertical-align:middle}
 tr.row-buy td{background:rgba(0,255,136,.10)!important;border-bottom:1px solid rgba(0,255,136,.2)!important;border-top:1px solid rgba(0,255,136,.08)!important}
 tr.row-sell td{background:rgba(255,23,68,.10)!important;border-bottom:1px solid rgba(255,23,68,.2)!important;border-top:1px solid rgba(255,23,68,.08)!important}
@@ -116,7 +165,7 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 .cnn{color:#ff1744;font-weight:700;background:#330010;box-shadow:0 0 8px rgba(255,23,68,.3)}
 
 /* RSI */
-.rsi{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:700;min-width:38px;text-align:center}
+.rsi{display:inline-block;padding:2px 8px;border-radius:2px;font-size:var(--fs-rsi);font-weight:700;min-width:38px;text-align:center}
 .r-sbv2{background:#004d1f;color:#00ff88;box-shadow:0 0 12px rgba(0,255,136,.55);border:1px solid rgba(0,255,136,.2)}
 .r-sbv1{color:#00c853;font-weight:600}
 .r-neu {color:#252540;font-weight:400}
@@ -243,6 +292,17 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 .opc-level-value{font-size:13px;font-weight:700;font-family:var(--sans)}
 .opc-explain{padding:10px 14px;font-size:10px;color:#3a3a5e;line-height:1.8;border-top:1px solid #0f0f1e}
 
+/* BANNER SUPERIOR */
+.top-banner{display:flex;align-items:center;justify-content:space-between;padding:6px 20px;background:#030306;border-bottom:1px solid #0f0f1e;font-size:11px}
+.banner-left{color:#2a2a4a;font-size:10px;letter-spacing:1px}
+.banner-right{display:flex;align-items:center;gap:10px}
+.banner-btn{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:3px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1px;text-decoration:none;border:none;cursor:pointer;transition:all .15s}
+.btn-wpp{background:#003319;color:#00e676;border:1px solid rgba(0,230,118,.25)}
+.btn-wpp:hover{background:#004d1f;box-shadow:0 0 8px rgba(0,230,118,.2)}
+.btn-ingecap{background:#0a0a1e;color:#4f8ef7;border:1px solid rgba(79,142,247,.25)}
+.btn-ingecap:hover{background:#0f0f2e;box-shadow:0 0 8px rgba(79,142,247,.2)}
+.wpp-icon{width:14px;height:14px;fill:#00e676}
+
 /* AUTH */
 .auth-overlay{display:none;position:fixed;inset:0;background:rgba(5,5,8,.95);z-index:1000;align-items:center;justify-content:center}
 .auth-overlay.visible{display:flex}
@@ -290,6 +350,42 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 </head>
 <body>
 
+<!-- BANNER SUPERIOR -->
+<div class="top-banner">
+  <div class="banner-left">◈ JCG INVERSIONES — DASHBOARD DE ANÁLISIS</div>
+  <div class="banner-right">
+    <div style="display:flex;align-items:center;gap:4px;margin-right:8px;border-right:1px solid #1a1a2e;padding-right:10px">
+      <button onclick="setFontSize('normal')" title="Letra normal"
+        style="background:none;border:1px solid #1a1a2e;border-radius:2px;color:#3a3a5e;
+               font-family:var(--mono);font-size:10px;padding:3px 7px;cursor:pointer"
+        onmouseover="this.style.color='#c8ccd8'" onmouseout="this.style.color='#3a3a5e'">A</button>
+      <button onclick="setFontSize('lg')" title="Letra grande"
+        style="background:none;border:1px solid #1a1a2e;border-radius:2px;color:#3a3a5e;
+               font-family:var(--mono);font-size:12px;padding:3px 7px;cursor:pointer"
+        onmouseover="this.style.color='#c8ccd8'" onmouseout="this.style.color='#3a3a5e'">A+</button>
+      <button onclick="setFontSize('xl')" title="Letra muy grande"
+        style="background:none;border:1px solid #1a1a2e;border-radius:2px;color:#3a3a5e;
+               font-family:var(--mono);font-size:14px;padding:3px 7px;cursor:pointer"
+        onmouseover="this.style.color='#c8ccd8'" onmouseout="this.style.color='#3a3a5e'">A++</button>
+    </div>
+    <button onclick="toggleDayMode()" id="dayModeBtn" title="Modo día/noche"
+      style="background:#0a0a1e;border:1px solid rgba(255,200,0,.25);border-radius:3px;
+             color:#ffd600;font-family:var(--mono);font-size:10px;font-weight:700;
+             padding:5px 12px;cursor:pointer;letter-spacing:1px">
+      ☀ DÍA
+    </button>
+    <a class="banner-btn btn-wpp" href="https://wa.me/5491169787999" target="_blank">
+      <svg class="wpp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      WHATSAPP
+    </a>
+    <a class="banner-btn btn-ingecap" href="https://plataformaingecapital.com/" target="_blank">
+      🌐 IR A INGECAPITAL
+    </a>
+  </div>
+</div>
+
 <!-- AUTH OVERLAY -->
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-box">
@@ -307,18 +403,30 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
       <button class="auth-btn" onclick="doLogin()">INGRESAR</button>
       <div class="auth-sep">— o —</div>
       <button class="auth-btn secondary" onclick="showRegister()">PRIMERA VEZ — CREAR CONTRASEÑA</button>
+      <button class="auth-btn secondary" onclick="showForgot()" style="margin-top:4px">¿OLVIDASTE TU CONTRASEÑA?</button>
       <div class="auth-err" id="authErr"></div>
     </div>
     <div id="registerForm" style="display:none">
       <div class="auth-title">CREAR CONTRASEÑA</div>
       <input class="auth-input" id="regEmail" type="email" placeholder="Email">
       <input class="auth-input" id="regComitente" type="text" placeholder="Número de comitente">
-      <input class="auth-input" id="regPass1" type="password" placeholder="Contraseña">
+      <input class="auth-input" id="regPass1" type="password" placeholder="Contraseña (mín. 6 caracteres)">
       <input class="auth-input" id="regPass2" type="password" placeholder="Repetir contraseña">
       <button class="auth-btn" onclick="doRegister()">CREAR CUENTA</button>
       <button class="auth-btn secondary" onclick="showLogin()">← VOLVER</button>
       <div class="auth-err" id="regErr"></div>
       <div class="auth-ok" id="regOk"></div>
+    </div>
+    <div id="forgotForm" style="display:none">
+      <div class="auth-title">RECUPERAR CONTRASEÑA</div>
+      <p style="font-size:11px;color:#4a4a7a;text-align:center;margin-bottom:14px">
+        Ingresá tu email y te enviamos un link para resetear tu contraseña.
+      </p>
+      <input class="auth-input" id="forgotEmail" type="email" placeholder="Email">
+      <button class="auth-btn" onclick="doForgot()">ENVIAR LINK</button>
+      <button class="auth-btn secondary" onclick="showLogin()">← VOLVER</button>
+      <div class="auth-err" id="forgotErr"></div>
+      <div class="auth-ok" id="forgotOk"></div>
     </div>
   </div>
 </div>
@@ -1148,6 +1256,38 @@ function sw(id,btn){
 loadData();
 setInterval(loadData,60*60*1000);
 
+// ── MODO DÍA/NOCHE ───────────────────────────────────────
+function toggleDayMode(){
+  const body = document.body;
+  const btn  = document.getElementById('dayModeBtn');
+  const isDay = body.classList.toggle('day-mode');
+  btn.textContent = isDay ? '🌙 NOCHE' : '☀ DÍA';
+  btn.style.borderColor = isDay ? 'rgba(79,142,247,.3)' : 'rgba(255,200,0,.25)';
+  btn.style.color = isDay ? '#4f8ef7' : '#ffd600';
+  localStorage.setItem('jcg-daymode', isDay ? '1' : '0');
+}
+
+// ── TAMAÑO DE LETRA ──────────────────────────────────────
+function setFontSize(size){
+  document.body.classList.remove('fs-lg','fs-xl');
+  if(size === 'lg') document.body.classList.add('fs-lg');
+  if(size === 'xl') document.body.classList.add('fs-xl');
+  localStorage.setItem('jcg-fontsize', size);
+}
+
+// Restaurar preferencias guardadas
+(function(){
+  const day  = localStorage.getItem('jcg-daymode');
+  const fs   = localStorage.getItem('jcg-fontsize');
+  if(day === '1'){
+    document.body.classList.add('day-mode');
+    const btn = document.getElementById('dayModeBtn');
+    if(btn){ btn.textContent='🌙 NOCHE'; btn.style.color='#4f8ef7'; btn.style.borderColor='rgba(79,142,247,.3)'; }
+  }
+  if(fs === 'lg') document.body.classList.add('fs-lg');
+  if(fs === 'xl') document.body.classList.add('fs-xl');
+})();
+
 // Esperar a que la lib de Supabase cargue antes de inicializar auth
 window.addEventListener('load', function(){
   if(typeof supabase !== 'undefined'){
@@ -1193,6 +1333,11 @@ function hideAuthOverlay(){
   document.getElementById('authOverlay').classList.remove('visible');
 }
 
+function showForgot(){
+  document.getElementById('authForm').style.display='none';
+  document.getElementById('registerForm').style.display='none';
+  document.getElementById('forgotForm').style.display='block';
+}
 function showRegister(){
   document.getElementById('authForm').style.display='none';
   document.getElementById('registerForm').style.display='block';
@@ -1200,6 +1345,7 @@ function showRegister(){
 function showLogin(){
   document.getElementById('authForm').style.display='block';
   document.getElementById('registerForm').style.display='none';
+  document.getElementById('forgotForm').style.display='none';
 }
 
 // ── LOGIN ────────────────────────────────────────────────
@@ -1284,6 +1430,22 @@ async function doRegister(){
 
   okEl.textContent='✅ Cuenta creada. Ya podés ingresar con tu contraseña.';
   setTimeout(()=>showLogin(), 2000);
+}
+
+// ── RECUPERAR CONTRASEÑA ────────────────────────────────
+async function doForgot(){
+  const email  = document.getElementById('forgotEmail').value.trim().toLowerCase();
+  const errEl  = document.getElementById('forgotErr');
+  const okEl   = document.getElementById('forgotOk');
+  errEl.textContent=''; okEl.textContent='';
+  if(!email){ errEl.textContent='Ingresá tu email'; return; }
+
+  const { error } = await supa.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://juancg00ginversiones.github.io/JCGdashboard/'
+  });
+
+  if(error){ errEl.textContent = error.message; }
+  else { okEl.textContent='✅ Te enviamos un link para resetear tu contraseña. Revisá tu email.'; }
 }
 
 // ── LOGOUT ───────────────────────────────────────────────
