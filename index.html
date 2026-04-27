@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -292,6 +292,17 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 .opc-level-value{font-size:13px;font-weight:700;font-family:var(--sans)}
 .opc-explain{padding:10px 14px;font-size:10px;color:#3a3a5e;line-height:1.8;border-top:1px solid #0f0f1e}
 
+/* BANNER VENCIMIENTO */
+.expiry-banner{display:none;align-items:center;justify-content:space-between;
+  padding:8px 20px;font-size:11px;border-bottom:1px solid}
+.expiry-banner.warn{background:#1a1200;border-color:#ffab00;color:#ffd600}
+.expiry-banner.danger{background:#1a0000;border-color:#ff1744;color:#ff5252}
+.expiry-banner.visible{display:flex}
+.expiry-wpp{color:inherit;font-weight:700;text-decoration:none;
+  padding:3px 10px;border:1px solid currentColor;border-radius:2px;
+  font-family:var(--mono);font-size:10px;margin-left:12px}
+.expiry-wpp:hover{opacity:.8}
+
 /* BANNER SUPERIOR */
 .top-banner{display:flex;align-items:center;justify-content:space-between;padding:6px 20px;background:#030306;border-bottom:1px solid #0f0f1e;font-size:11px}
 .banner-left{color:#2a2a4a;font-size:10px;letter-spacing:1px}
@@ -382,6 +393,16 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
     </a>
     <a class="banner-btn btn-ingecap" href="https://plataformaingecapital.com/" target="_blank">
       🌐 IR A INGECAPITAL
+    </a>
+  </div>
+</div>
+
+<!-- BANNER VENCIMIENTO -->
+<div class="expiry-banner" id="expiryBanner">
+  <span id="expiryMsg"></span>
+  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+    <a class="expiry-wpp" href="https://wa.me/5491169787999" target="_blank">
+      📱 CONTACTAR PARA RENOVAR
     </a>
   </div>
 </div>
@@ -1459,9 +1480,49 @@ async function onLogin(user){
   hideAuthOverlay();
   document.getElementById('userBar').classList.add('visible');
   document.getElementById('userEmail').textContent = user.email;
+
+  // Verificar vencimiento
+  await checkExpiry(user);
+
   if(document.getElementById('wl').classList.contains('active')){
     renderWatchlist();
   }
+}
+
+async function checkExpiry(user){
+  try {
+    const { data } = await supa
+      .from('usuarios_dashboard')
+      .select('fecha_vencimiento')
+      .eq('auth_user_id', user.id)
+      .maybeSingle();
+
+    if(!data || !data.fecha_vencimiento) return;
+
+    const vence    = new Date(data.fecha_vencimiento);
+    const hoy      = new Date();
+    const diffMs   = vence - hoy;
+    const diffDias = Math.ceil(diffMs / (1000*60*60*24));
+    const banner   = document.getElementById('expiryBanner');
+    const msg      = document.getElementById('expiryMsg');
+
+    if(diffDias <= 0){
+      // Vencida
+      banner.className = 'expiry-banner danger visible';
+      msg.innerHTML = '⚠ Tu suscripción <b>venció</b> el ' + 
+        vence.toLocaleDateString('es-AR') + 
+        '. Contactá a JCG Inversiones para renovar el acceso.';
+    } else if(diffDias <= 7){
+      // Por vencer
+      banner.className = 'expiry-banner warn visible';
+      msg.innerHTML = '⏰ Tu suscripción vence en <b>' + diffDias + 
+        ' día' + (diffDias===1?'':'s') + '</b> (' + 
+        vence.toLocaleDateString('es-AR') + 
+        '). Contactá a JCG para renovar.';
+    } else {
+      banner.className = 'expiry-banner';
+    }
+  } catch(e){ console.log('expiry check:', e); }
 }
 
 function onLogout(){
