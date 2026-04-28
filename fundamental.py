@@ -11,16 +11,16 @@ warnings.filterwarnings("ignore")
 # ══════════════════════════════════════════════════════════
 FUNDAMENTAL_TICKERS = {
     "Top 20 Cap":        ["AAPL","MSFT","NVDA","AMZN","GOOGL","META","TSLA","AVGO","JPM","LLY","V","UNH","XOM","MA","COST","HD","NFLX","AMD","ORCL","BRK-B"],
-    "Energy":            ["CVX","SLB"],
-    "Industrials":       ["CAT","GE","RTX"],
-    "HealthCare":        ["ABBV","JNJ","MDT"],
-    "Financials":        ["GS","BAC"],
-    "Consumer Def.":     ["PG","KO","WMT"],
-    "Materials":         ["LIN","NUE"],
-    "Utilities":         ["NEE"],
+    "Energy":            ["CVX","SLB","XOM","OXY","PSX"],
+    "Industrials":       ["CAT","GE","RTX","HON","DE","FDX","UNP","ADP","MMM"],
+    "HealthCare":        ["ABBV","JNJ","MDT","ABT","AMGN","BMY","GILD","ISRG","PFE","VRTX","DHR","CVS","BIIB"],
+    "Financials":        ["GS","BAC","JPM","C","USB","BX","BK","AXP","SCHW","SPGI","MMC"],
+    "Consumer Def.":     ["PG","KO","WMT","CL","KMB","PEP","HSY","MO","PM","TGT"],
+    "Materials":         ["LIN","NUE","ECL","DOW","DD","FCX","NEM"],
+    "Utilities":         ["NEE","CEG","VST"],
     "Real Estate":       ["PLD"],
-    "Comm. Services":    ["DIS","T"],
-    "Consumer Cyc.":     ["NKE","MCD","SBUX"],
+    "Comm. Services":    ["DIS","T","VZ"],
+    "Consumer Cyc.":     ["NKE","MCD","SBUX","BKNG","TJX","ROST"],
 }
 
 def r(v, d=2):
