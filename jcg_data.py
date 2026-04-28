@@ -10,20 +10,25 @@ warnings.filterwarnings("ignore")
 # SECTORES
 # ══════════════════════════════════════════════════════════
 SECTORES_USA = {
-    "ETFs":               ["SPY","QQQ","DIA","IWM","IBIT","EWZ","FXI","MAGS","RSP","VIX"],
-    "ETF Sectores USA":   ["XLK","XLF","XLV","XLE","XLI","XLY","XLP","XLB","XLRE","XLU","XLC","IBB","SMH"],
+    "ETFs":               ["SPY","QQQ","DIA","IWM","IBIT","EWZ","FXI","MAGS","RSP","VIX","IVV","ARKK"],
+    "ETF Sectores USA":   ["XLK","XLF","XLV","XLE","XLI","XLY","XLP","XLB","XLRE","XLU","XLC","IBB","SMH","COPX","ILF"],
     "Commodities":        ["GLD","SLV","URA","USO","GDX"],
     "Magnificas":         ["AAPL","MSFT","NVDA","AMZN","GOOGL","META","TSLA","AVGO"],
-    "Technology":         ["ADBE","AMAT","AMD","ASTS","CSCO","FSLR","IBM","INTC","LRCX","MU","ORCL","PANW","QCOM","RGTI","RKLB","SNOW","TXN","UBER"],
-    "Financial":          ["AIG","AXP","BAC","C","COIN","HOOD","HUT","IREN","JPM","MA","PYPL","RIOT","SCHW","USB","V","WFC"],
-    "Consumer Cyclical":  ["AMZN","ARCO","BKNG","EBAY","ETSY","F","GM","HD","LVS","MCD","NKE","SBUX","TSLA"],
-    "Industrials":        ["AAL","ADP","BA","CAAP","DAL","DE","FDX","GE","HWM","LMT","MMM","RTX","UAL","UNP"],
-    "Energy":             ["BKR","CVX","HAL","OXY","PSX","SLB","XOM"],
-    "Basic Materials":    ["CDE","DD","DOW","ECL","FCX","HL","MOS","NEM","NUE","SCCO"],
-    "Comm. Services":     ["DIS","GOOGL","META","NFLX","RBLX","ROKU","T","VZ","ZM"],
-    "Consumer Defensive": ["BG","CL","COST","HSY","KO","MDLZ","PEP","PG","TGT","WMT"],
-    "HealthCare":         ["ABBV","ABT","AMGN","BMY","DHR","GILD","ISRG","LLY","MDT","MRK","MRNA","PFE","TMO","UNH","VRTX"],
+    "Technology":         ["ADBE","AMAT","AMD","ASTS","CSCO","FSLR","IBM","INTC","LRCX","MU","ORCL","PANW","QCOM","RGTI","RKLB","SNOW","TXN","UBER",
+                           "CRWV","ALAB","PLTR","CRM","NOW","MRVL","MSTR","TEAM","SWKS","MSI","DOCU","SNAP","AI","PATH","TEM"],
+    "Financial":          ["AIG","AXP","BAC","C","COIN","HOOD","HUT","IREN","JPM","MA","PYPL","RIOT","SCHW","USB","V","WFC",
+                           "BX","GS","MMC","SPGI","EFX"],
+    "Consumer Cyclical":  ["AMZN","ARCO","BKNG","EBAY","ETSY","F","GM","HD","LVS","MCD","NKE","SBUX","TSLA",
+                           "ABNB","ROST","TJX","CCL","RACE","DECK","PINS","EA","TTM"],
+    "Industrials":        ["AAL","ADP","BA","CAAP","DAL","DE","FDX","GE","HWM","LMT","MMM","RTX","UAL","UNP",
+                           "HON","HPQ","MSI","SYY","ORLY","GLW"],
+    "Energy":             ["BKR","CVX","HAL","OXY","PSX","SLB","XOM","VIST"],
+    "Basic Materials":    ["CDE","DD","DOW","ECL","FCX","HL","MOS","NEM","NUE","SCCO","AEM","KGC"],
+    "Comm. Services":     ["DIS","GOOGL","META","NFLX","RBLX","ROKU","T","VZ","ZM","SNAP","SPOT","TMUS","PM"],
+    "Consumer Defensive": ["BG","CL","COST","HSY","KO","MDLZ","PEP","PG","TGT","WMT","CVS"],
+    "HealthCare":         ["ABBV","ABT","AMGN","BMY","DHR","GILD","ISRG","LLY","MDT","MRK","MRNA","PFE","TMO","UNH","VRTX","BIIB"],
     "Utilities":          ["CEG","OKLO","VST"],
+    "Latam / Otros":      ["GLOB","STNE","PKS"],
 }
 SECTORES_WORLD = {
     "China":       ["BABA","BIDU","JD","NIO","NTES","PDD","XPEV"],
@@ -433,7 +438,7 @@ def main():
     ]
 
     output = {
-        "actualizado":    datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "actualizado":    (datetime.utcnow() - __import__("datetime").timedelta(hours=3)).strftime("%Y-%m-%d %H:%M"),
         "sectores_usa":   SECTORES_USA,
         "sectores_world": SECTORES_WORLD,
         "datos":          {d["ticker"]: d for d in resultados},
