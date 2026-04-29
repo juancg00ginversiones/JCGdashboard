@@ -407,6 +407,143 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
   </div>
 </div>
 
+<!-- LANDING PAGE -->
+<div id="landingPage" style="display:none;position:fixed;inset:0;background:#06010a;z-index:999;overflow-y:auto">
+  <style>
+    .land-wrap{max-width:960px;margin:0 auto;padding:40px 24px 60px}
+    @media(max-width:700px){
+      .land-wrap>div:first-child{grid-template-columns:1fr!important}
+    }
+    .land-badge{display:inline-block;background:#e53935;color:#fff;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:20px}
+    .land-h1{font-family:var(--sans);font-size:clamp(28px,5vw,48px);font-weight:700;color:#fff;margin:0 0 12px;line-height:1.15}
+    .land-h1 span{color:#e53935}
+    .land-sub{color:#7a7ab0;font-size:15px;margin-bottom:36px;line-height:1.6}
+    .land-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:32px}
+    .land-feat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:14px 16px;display:flex;align-items:flex-start;gap:10px}
+    .land-feat-icon{color:#e53935;font-size:18px;flex-shrink:0;margin-top:1px}
+    .land-feat-text{font-size:13px;color:#c8ccd8;line-height:1.5}
+    .land-feat-text b{color:#fff}
+    .land-live{background:rgba(229,57,53,.08);border:1px solid rgba(229,57,53,.2);border-radius:8px;padding:14px 20px;display:flex;align-items:center;gap:12px;margin-bottom:36px}
+    .land-live-dot{width:10px;height:10px;background:#e53935;border-radius:50%;box-shadow:0 0 8px rgba(229,57,53,.8);animation:pulse-red 1.5s infinite;flex-shrink:0}
+    .land-live-txt{font-size:13px;color:#c8ccd8}
+    .land-live-txt b{color:#fff}
+    .land-plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:36px}
+    .land-plan{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:24px;text-align:center;position:relative;transition:border-color .2s}
+    .land-plan:hover{border-color:rgba(229,57,53,.4)}
+    .land-plan.featured{border-color:#e53935;background:rgba(229,57,53,.06)}
+    .land-plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#e53935;color:#fff;font-size:10px;font-weight:700;letter-spacing:1px;padding:3px 12px;border-radius:20px;white-space:nowrap;font-family:var(--mono)}
+    .land-plan-name{font-family:var(--sans);font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:1px}
+    .land-plan-price{font-family:var(--sans);font-size:38px;font-weight:700;color:#e53935;margin-bottom:4px}
+    .land-plan-price span{font-size:18px;color:#7a7ab0}
+    .land-plan-desc{font-size:12px;color:#4a4a7a;margin-bottom:16px}
+    .land-plan-saving{font-size:11px;color:#00c853;font-weight:700;margin-bottom:16px}
+    .land-cta-wpp{display:inline-flex;align-items:center;gap:8px;background:#e53935;color:#fff;padding:14px 32px;border-radius:6px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:2px;text-decoration:none;border:none;cursor:pointer;transition:all .15s;width:100%;justify-content:center;box-sizing:border-box}
+    .land-cta-wpp:hover{background:#c62828;box-shadow:0 0 20px rgba(229,57,53,.4)}
+    .land-login-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:#4a4a7a;padding:12px 32px;border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:2px;text-decoration:none;border:1px solid #1a1a2e;cursor:pointer;width:100%;box-sizing:border-box;margin-top:10px;transition:all .15s}
+    .land-login-btn:hover{color:#c8ccd8;border-color:#2a2a4a}
+    .land-divider{border:none;border-top:1px solid #0f0f1e;margin:32px 0}
+    .land-footer{text-align:center;color:#2a2a4a;font-size:10px;letter-spacing:1px}
+    @media(max-width:600px){.land-h1{font-size:28px}.land-plan-price{font-size:30px}}
+  </style>
+
+  <div class="land-wrap">
+
+    <!-- HEADER + LOGIN ARRIBA -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;margin-bottom:48px">
+      
+      <!-- Izquierda: presentación -->
+      <div>
+        <img src="https://raw.githubusercontent.com/juancg00ginversiones/JCGdashboard/main/logoJCG.png"
+             style="width:64px;height:64px;border-radius:8px;object-fit:cover;margin-bottom:16px"
+             onerror="this.style.display='none'">
+        <span class="land-badge">TU HERRAMIENTA PARA EL ANÁLISIS DEL MERCADO</span>
+        <h1 class="land-h1" style="margin-top:14px">Dashboard <span>JCG</span> Inversiones</h1>
+        <p class="land-sub" style="margin-bottom:0">La plataforma profesional de análisis de mercado.<br>Más de 200 instrumentos. Indicadores técnicos. Señales automáticas.</p>
+      </div>
+
+      <!-- Derecha: LOGIN destacado -->
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(229,57,53,.25);border-radius:12px;padding:28px">
+        <p style="font-family:var(--sans);font-size:18px;font-weight:700;color:#fff;margin:0 0 6px;letter-spacing:1px">🔐 ACCESO AL DASHBOARD</p>
+        <p style="color:#4a4a7a;font-size:12px;margin:0 0 20px">Ingresá con tu cuenta JCG Inversiones</p>
+        <input class="auth-input" id="landEmail" type="email" placeholder="Email" style="margin-bottom:10px">
+        <input class="auth-input" id="landComitente" type="text" placeholder="Número de comitente" style="margin-bottom:10px">
+        <input class="auth-input" id="landPassword" type="password" placeholder="Contraseña" style="margin-bottom:14px">
+        <button onclick="doLoginFromLanding()" style="width:100%;padding:12px;background:#e53935;border:none;border-radius:6px;color:#fff;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all .15s" onmouseover="this.style.background='#c62828'" onmouseout="this.style.background='#e53935'">INGRESAR</button>
+        <div id="landErr" style="color:#ff5252;font-size:11px;text-align:center;margin-top:8px;min-height:16px"></div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button onclick="showRegisterFromLanding()" style="flex:1;padding:8px;background:transparent;border:1px solid #1a1a2e;border-radius:4px;color:#4a4a7a;font-family:var(--mono);font-size:10px;cursor:pointer;letter-spacing:1px" onmouseover="this.style.color='#c8ccd8'" onmouseout="this.style.color='#4a4a7a'">PRIMERA VEZ</button>
+          <button onclick="showForgotFromLanding()" style="flex:1;padding:8px;background:transparent;border:1px solid #1a1a2e;border-radius:4px;color:#4a4a7a;font-family:var(--mono);font-size:10px;cursor:pointer;letter-spacing:1px" onmouseover="this.style.color='#c8ccd8'" onmouseout="this.style.color='#4a4a7a'">OLVIDÉ CONTRASEÑA</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE badge -->
+    <div class="land-live" style="margin-bottom:32px">
+      <div class="land-live-dot"></div>
+      <div class="land-live-txt"><b>LIVE</b> — Datos actualizados desde mercados globales durante la rueda</div>
+    </div>
+
+    <!-- Features -->
+    <div class="land-features" style="margin-bottom:36px">
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>Indicadores técnicos:</b> RSI, KONCORD, WaveTrend y señales de compra/venta automáticas</div></div>
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>Análisis fundamental:</b> P/E, ROE, márgenes, dividendos y scoring de 85+ empresas con CEDEAR</div></div>
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>Niveles de opciones:</b> Call/Put Wall y Gamma Flip para SPY, QQQ e IWM</div></div>
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>Vista semanal:</b> RSI y KONCORD en temporalidad semanal para decisiones de mediano plazo</div></div>
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>Mi Watchlist:</b> Seguí tus activos favoritos con alertas personalizadas desde cualquier dispositivo</div></div>
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>200+ instrumentos:</b> Acciones USA, CEDEARs, ETFs, commodities y activos argentinos</div></div>
+    </div>
+
+    <!-- Planes -->
+    <!-- Banner reunión asesor -->
+    <div style="background:linear-gradient(135deg,rgba(229,57,53,.12),rgba(229,57,53,.04));border:1px solid rgba(229,57,53,.35);border-radius:10px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;gap:16px">
+      <div style="font-size:28px;flex-shrink:0">🎯</div>
+      <div>
+        <div style="font-family:var(--sans);font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:1px">
+          INCLUYE REUNIÓN MENSUAL CON ASESOR
+          <span style="background:#e53935;color:#fff;font-size:10px;font-family:var(--mono);padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:middle;letter-spacing:1px">INCLUIDO</span>
+        </div>
+        <div style="color:#7a7ab0;font-size:13px;line-height:1.6">
+          Cada mes recibís una <b style="color:#c8ccd8">reunión de 30 minutos</b> con tu asesor para revisar tu cartera, interpretar los indicadores del dashboard y definir tu estrategia. También incluye <b style="color:#c8ccd8">explicación personalizada</b> de la plataforma para sacarle el máximo provecho.
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-bottom:20px">
+      <p style="font-family:var(--sans);font-size:22px;font-weight:700;color:#fff;margin:0 0 4px">Planes de acceso</p>
+      <p style="color:#4a4a7a;font-size:13px;margin:0">Contactanos por WhatsApp para activar tu acceso</p>
+    </div>
+    <div class="land-plans" style="margin-bottom:36px">
+      <div class="land-plan">
+        <div class="land-plan-name">MENSUAL</div>
+        <div class="land-plan-price">$10<span>/mes</span></div>
+        <div class="land-plan-desc">Acceso completo · Renovación mensual</div>
+        <a class="land-cta-wpp" href="https://wa.me/5491169787999?text=Hola!%20Me%20interesa%20el%20plan%20mensual%20del%20Dashboard%20JCG%20Inversiones" target="_blank">
+          <svg style="width:14px;height:14px;fill:#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          CONTRATAR VÍA WHATSAPP
+        </a>
+      </div>
+      <div class="land-plan featured">
+        <div class="land-plan-badge">⭐ MÁS ELEGIDO</div>
+        <div class="land-plan-name">ANUAL</div>
+        <div class="land-plan-price">$100<span>/año</span></div>
+        <div class="land-plan-desc">Acceso completo · Pago único anual</div>
+        <div class="land-plan-saving">🎁 2 meses GRATIS vs mensual</div>
+        <a class="land-cta-wpp" href="https://wa.me/5491169787999?text=Hola!%20Me%20interesa%20el%20plan%20anual%20del%20Dashboard%20JCG%20Inversiones" target="_blank">
+          <svg style="width:14px;height:14px;fill:#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          CONTRATAR VÍA WHATSAPP
+        </a>
+      </div>
+    </div>
+
+    <hr class="land-divider">
+    <div class="land-footer">
+      JCG INVERSIONES ·
+      <a href="https://plataformaingecapital.com/" target="_blank" style="color:#3a3a5e;text-decoration:none">INGECAPITAL</a> ·
+      <a href="https://wa.me/5491169787999" target="_blank" style="color:#3a3a5e;text-decoration:none">WHATSAPP</a>
+    </div>
+  </div>
+</div>
+
 <!-- AUTH OVERLAY -->
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-box">
@@ -1331,6 +1468,41 @@ let supa = null;
 let currentUser = null;
 
 // ── Inicializar auth ─────────────────────────────────────
+// Login directo desde la landing
+async function doLoginFromLanding(){
+  const email     = document.getElementById('landEmail').value.trim().toLowerCase();
+  const comitente = document.getElementById('landComitente').value.trim();
+  const password  = document.getElementById('landPassword').value;
+  const errEl     = document.getElementById('landErr');
+  errEl.textContent = '';
+  if(!email||!comitente||!password){ errEl.textContent='Completá todos los campos'; return; }
+
+  const { data: usuario } = await supa.from('usuarios_dashboard').select('id,activo')
+    .eq('usuario', email).eq('cuenta_comitente', comitente).maybeSingle();
+  if(!usuario){ errEl.textContent='Email o comitente no autorizado'; return; }
+  if(!usuario.activo){ errEl.textContent='Cuenta suspendida. Contactá a JCG'; return; }
+
+  const { error } = await supa.auth.signInWithPassword({ email, password });
+  if(error) errEl.textContent = error.message.includes('Invalid') ? 'Contraseña incorrecta' : error.message;
+}
+
+function showRegisterFromLanding(){
+  document.getElementById('landingPage').style.display = 'none';
+  showAuthOverlay();
+  showRegister();
+}
+
+function showForgotFromLanding(){
+  document.getElementById('landingPage').style.display = 'none';
+  showAuthOverlay();
+  showForgot();
+}
+
+function showLoginFromLanding(){
+  document.getElementById('landingPage').style.display = 'none';
+  showAuthOverlay();
+}
+
 async function initAuth(){
   // Inicializar cliente Supabase aquí para asegurar que la lib ya cargó
   supa = supabase.createClient(SUPA_URL, SUPA_KEY);
@@ -1338,7 +1510,8 @@ async function initAuth(){
   if(session?.user){
     await onLogin(session.user);
   } else {
-    showAuthOverlay();
+    // Mostrar landing page primero
+    document.getElementById('landingPage').style.display = 'block';
   }
   supa.auth.onAuthStateChange(async (event, session) => {
     if(event === 'SIGNED_IN' && session?.user){
@@ -1354,6 +1527,7 @@ function showAuthOverlay(){
 }
 function hideAuthOverlay(){
   document.getElementById('authOverlay').classList.remove('visible');
+  document.getElementById('landingPage').style.display = 'none';
 }
 
 function showForgot(){
