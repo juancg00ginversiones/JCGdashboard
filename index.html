@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -685,8 +685,8 @@ function clsTicker(d){
 }
 function rowSignalCls(d){
   const rsi=d.rsi_1d,mrn=d.marron;
-  if((rsi!==null&&rsi<=30)&&(mrn!==null&&mrn<10)) return 'row-buy';
-  if((rsi!==null&&rsi>=70)&&(mrn!==null&&mrn>95)) return 'row-sell';
+  if((rsi!==null&&rsi<=30)||(mrn!==null&&mrn<0)) return 'row-buy';
+  if((rsi!==null&&rsi>=70)||(mrn!==null&&mrn>105)) return 'row-sell';
   return '';
 }
 const rowInd=(t,d)=>`<tr data-ticker="${t}" class="${rowSignalCls(d)}">
@@ -793,10 +793,12 @@ const rowSem=(t,d)=>`<tr data-ticker="${t}" class="${rowSignalCls(d)}">
 </tr>`;
 
 function isBuySignalW(d){
-  return (d.rsi_1w!==null&&d.rsi_1w<=30)&&(d.marron_1w!==null&&d.marron_1w<10);
+  // Semanal: RSI <= 30 O KONCORD < 0
+  return (d.rsi_1w!==null&&d.rsi_1w<=30)||(d.marron_1w!==null&&d.marron_1w<0);
 }
 function isSellSignalW(d){
-  return (d.rsi_1w!==null&&d.rsi_1w>=70)&&(d.marron_1w!==null&&d.marron_1w>95);
+  // Semanal: RSI >= 70 O KONCORD > 105
+  return (d.rsi_1w!==null&&d.rsi_1w>=70)||(d.marron_1w!==null&&d.marron_1w>105);
 }
 
 function renderSemanal(sec,dat,lbl){
@@ -990,14 +992,14 @@ function setFilter(type, btn){
 }
 
 function isBuySignal(d){
-  // Oportunidad CLARA: RSI <= 30 Y KONCORD < 10
+  // Oportunidad: RSI <= 30 O KONCORD < 0
   const rsi=d.rsi_1d, mrn=d.marron;
-  return (rsi!==null && rsi<=30) && (mrn!==null && mrn<10);
+  return (rsi!==null && rsi<=30) || (mrn!==null && mrn<0);
 }
 function isSellSignal(d){
-  // Sobrecompra CLARA: RSI >= 70 Y KONCORD > 95
+  // Sobrecompra: RSI >= 70 O KONCORD > 105
   const rsi=d.rsi_1d, mrn=d.marron;
-  return (rsi!==null && rsi>=70) && (mrn!==null && mrn>95);
+  return (rsi!==null && rsi>=70) || (mrn!==null && mrn>105);
 }
 
 function applyFilter(){
