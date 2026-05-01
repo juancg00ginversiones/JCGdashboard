@@ -171,18 +171,22 @@ def calcular_semanal(ticker):
         rsi_alerta_1w    = None
         marron_alerta_1w = None
         try:
-            rsi_w_series = rsi_wilder(c).dropna()  # historial completo
+            # TOP 3 histórico semanal
+            rsi_w_series = rsi_wilder(c).dropna()
             if len(rsi_w_series) >= 30 and rsi_val is not None:
-                pct_rw = float((rsi_w_series < rsi_val).sum() / len(rsi_w_series) * 100)
-                rsi_pct_1w = round(pct_rw, 1)
-                if pct_rw <= 5:   rsi_alerta_1w = "minimo"
-                elif pct_rw >= 95: rsi_alerta_1w = "maximo"
-            marron_w_series = marron_w.dropna()  # historial completo
+                top3_max_w  = rsi_w_series.nlargest(3).min()
+                top3_min_w  = rsi_w_series.nsmallest(3).max()
+                rsi_pct_1w  = round(float(rsi_val), 1)
+                if rsi_val <= top3_min_w:   rsi_alerta_1w = "minimo"
+                elif rsi_val >= top3_max_w: rsi_alerta_1w = "maximo"
+            marron_w_series = marron_w.dropna()
             if len(marron_w_series) >= 30 and not pd.isna(marron_w.iloc[-1]):
-                pct_mw = float((marron_w_series < float(marron_w.iloc[-1])).sum() / len(marron_w_series) * 100)
-                marron_pct_1w = round(pct_mw, 1)
-                if pct_mw <= 5:   marron_alerta_1w = "minimo"
-                elif pct_mw >= 95: marron_alerta_1w = "maximo"
+                mv_w = float(marron_w.iloc[-1])
+                top3_max_mw  = marron_w_series.nlargest(3).min()
+                top3_min_mw  = marron_w_series.nsmallest(3).max()
+                marron_pct_1w = round(mv_w, 1)
+                if mv_w <= top3_min_mw:   marron_alerta_1w = "minimo"
+                elif mv_w >= top3_max_mw: marron_alerta_1w = "maximo"
         except:
             pass
 
@@ -390,25 +394,29 @@ def procesar_ticker(ticker):
             elif rsi_val >= 68:
                 hist_rsi = analizar_rsi_historico(ticker, 70, c)
 
-        # PERCENTIL HISTÓRICO — RSI y KONCORD diario (historial completo 10 años)
+        # TOP 3 HISTÓRICO — RSI y KONCORD diario (últimos 10 años)
+        # Si el valor actual está entre los 3 máximos o 3 mínimos históricos → alerta
         rsi_pct_hist    = None
         marron_pct_hist = None
         rsi_alerta      = None
         marron_alerta   = None
         try:
-            rsi_full = rsi_c.dropna()  # todos los datos disponibles ~10 años
+            rsi_full = rsi_c.dropna()
             if len(rsi_full) >= 100 and rsi_val is not None:
-                pct = float((rsi_full < rsi_val).sum() / len(rsi_full) * 100)
-                rsi_pct_hist = round(pct, 1)
-                if pct <= 5:    rsi_alerta = "minimo"
-                elif pct >= 95: rsi_alerta = "maximo"
+                top3_max = rsi_full.nlargest(3).min()   # el menor de los 3 máximos
+                top3_min = rsi_full.nsmallest(3).max()  # el mayor de los 3 mínimos
+                rsi_pct_hist = round(float(rsi_val), 1)
+                if rsi_val <= top3_min:  rsi_alerta = "minimo"  # está en top3 mínimos
+                elif rsi_val >= top3_max: rsi_alerta = "maximo" # está en top3 máximos
 
-            marron_full = marron.dropna()  # todos los datos disponibles ~10 años
+            marron_full = marron.dropna()
             if len(marron_full) >= 100 and not pd.isna(marron_v):
-                pct_m = float((marron_full < float(marron_v)).sum() / len(marron_full) * 100)
-                marron_pct_hist = round(pct_m, 1)
-                if pct_m <= 5:    marron_alerta = "minimo"
-                elif pct_m >= 95: marron_alerta = "maximo"
+                mv = float(marron_v)
+                top3_max_m = marron_full.nlargest(3).min()
+                top3_min_m = marron_full.nsmallest(3).max()
+                marron_pct_hist = round(mv, 1)
+                if mv <= top3_min_m:  marron_alerta = "minimo"
+                elif mv >= top3_max_m: marron_alerta = "maximo"
         except:
             pass
 
