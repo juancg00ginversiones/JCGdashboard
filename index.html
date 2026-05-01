@@ -1,507 +1,2246 @@
-import yfinance as yf
-import pandas as pd
-import numpy as np
-import json
-from datetime import datetime
-import warnings
-warnings.filterwarnings("ignore")
-
-# ══════════════════════════════════════════════════════════
-# SECTORES
-# ══════════════════════════════════════════════════════════
-SECTORES_USA = {
-    "ETFs":               ["SPY","QQQ","DIA","IWM","IBIT","EWZ","FXI","MAGS","RSP","VIX","IVV","ARKK"],
-    "ETF Sectores USA":   ["XLK","XLF","XLV","XLE","XLI","XLY","XLP","XLB","XLRE","XLU","XLC","IBB","SMH","COPX","ILF"],
-    "Commodities":        ["GLD","SLV","URA","USO","GDX"],
-    "Magnificas":         ["AAPL","MSFT","NVDA","AMZN","GOOGL","META","TSLA","AVGO"],
-    "Technology":         ["ADBE","AMAT","AMD","ASTS","CSCO","FSLR","IBM","INTC","LRCX","MU","ORCL","PANW","QCOM","RGTI","RKLB","SNOW","TXN","UBER",
-                           "CRWV","ALAB","PLTR","CRM","NOW","MRVL","MSTR","TEAM","SWKS","MSI","DOCU","SNAP","AI","PATH","TEM"],
-    "Financial":          ["AIG","AXP","BAC","C","COIN","HOOD","HUT","IREN","JPM","MA","PYPL","RIOT","SCHW","USB","V","WFC",
-                           "BX","GS","MMC","SPGI","EFX"],
-    "Consumer Cyclical":  ["AMZN","ARCO","BKNG","EBAY","ETSY","F","GM","HD","LVS","MCD","NKE","SBUX","TSLA",
-                           "ABNB","ROST","TJX","CCL","RACE","DECK","PINS","EA","TTM"],
-    "Industrials":        ["AAL","ADP","BA","CAAP","DAL","DE","FDX","GE","HWM","LMT","MMM","RTX","UAL","UNP",
-                           "HON","HPQ","MSI","SYY","ORLY","GLW"],
-    "Energy":             ["BKR","CVX","HAL","OXY","PSX","SLB","XOM","VIST"],
-    "Basic Materials":    ["CDE","DD","DOW","ECL","FCX","HL","MOS","NEM","NUE","SCCO","AEM","KGC"],
-    "Comm. Services":     ["DIS","GOOGL","META","NFLX","RBLX","ROKU","T","VZ","ZM","SNAP","SPOT","TMUS","PM"],
-    "Consumer Defensive": ["BG","CL","COST","HSY","KO","MDLZ","PEP","PG","TGT","WMT","CVS"],
-    "HealthCare":         ["ABBV","ABT","AMGN","BMY","DHR","GILD","ISRG","LLY","MDT","MRK","MRNA","PFE","TMO","UNH","VRTX","BIIB"],
-    "Utilities":          ["CEG","OKLO","VST"],
-    "Latam / Otros":      ["GLOB","STNE","PKS"],
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='10' y='40' width='18' height='45' rx='3' fill='%2300ff88'/><rect x='16' y='25' width='6' height='18' rx='1' fill='%2300ff88'/><rect x='16' y='83' width='6' height='12' rx='1' fill='%2300ff88'/><rect x='41' y='20' width='18' height='65' rx='3' fill='%23ff1744'/><rect x='47' y='8' width='6' height='15' rx='1' fill='%23ff1744'/><rect x='47' y='83' width='6' height='12' rx='1' fill='%23ff1744'/><rect x='72' y='30' width='18' height='50' rx='3' fill='%2300ff88'/><rect x='78' y='18' width='6' height='15' rx='1' fill='%2300ff88'/><rect x='78' y='78' width='6' height='12' rx='1' fill='%2300ff88'/></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JCG Inversiones — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --bg:#050508;--bg2:#08080f;--bg3:#0d0d18;
+  --border:#0f0f1e;--border2:#1a1a2e;
+  --accent:#4f8ef7;
+  --mono:'Share Tech Mono',monospace;
+  --sans:'Rajdhani',sans-serif;
+  --fs:11px;--fs-tk:11px;--fs-rsi:11px;
 }
-SECTORES_WORLD = {
-    "China":       ["BABA","BIDU","JD","NIO","NTES","PDD","XPEV"],
-    "Mexico":      ["AMX","ASR","CX","KOF","PAC"],
-    "Africa":      ["GFI","HMY","JMIA"],
-    "Canada":      ["ALM","CLS","LAC","MUX","NG","NXE","PAAS","SHOP"],
-    "Brasil":      ["ABEV","BAK","BBD","GGB","NU","PAGS","PBR","SUZ","VALE","XP"],
-    "Reino Unido": ["ARM","AZN","BCS","BP","DEO","GSK","HSBC","LYG","NGG","RIO","VOD"],
-    "Europa":      ["ACN","ASML","BBVA","EQNR","GRMN","ING","NVS","SAP","SHEL","TTE"],
-    "Asia":        ["BHP","HDB","HMC","INFY","PKX","SE","SONY","TM","TSM"],
-    "Argentina":   ["BMA","CEPU","EDN","GGAL","LOMA","MELI","PAM","SUPV","YPF"],
+/* MODO DÍA */
+body.day-mode{
+  --bg:#f0f2f5;--bg2:#ffffff;--bg3:#e8eaed;
+  --border:#d0d4dc;--border2:#c0c4cc;
+  color:#1a1a2a;
+}
+body.day-mode .topbar{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .tabs{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .tab{color:#6a6a8a}
+body.day-mode .tab.active{color:#2a5ef7}
+body.day-mode .sector-wrap{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .sector-header{background:#f5f6f8}
+body.day-mode .sector-name{color:#4a4a7a}
+body.day-mode td{border-color:rgba(0,0,0,.06)}
+body.day-mode .tk{color:#2a2a5a}
+body.day-mode .tk-double-green{color:#006d32}
+body.day-mode .tk-double-red{color:#9b1c1c}
+body.day-mode .r-neu{color:#9a9aaa}
+body.day-mode .m-neu{color:#9a9aaa}
+body.day-mode .mne{color:#9a9aaa}
+body.day-mode .d-neu{color:#9a9aaa}
+body.day-mode .no-sig{color:#9a9aaa}
+body.day-mode .search-input{background:#f5f6f8;border-color:#c0c4cc;color:#1a1a2a}
+body.day-mode .filter-bar{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .sig-section-title{color:#4a4a7a;border-color:#d0d4dc}
+body.day-mode .opc-card{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .opc-card-header{background:#f5f6f8}
+body.day-mode table{color:#1a1a2a}
+body.day-mode th{color:#6a6a8a;border-color:#d0d4dc}
+body.day-mode .top-banner{background:#e8eaed;border-color:#d0d4dc}
+body.day-mode .banner-left{color:#6a6a8a}
+body.day-mode .loading{color:#9a9aaa}
+body.day-mode .region{opacity:1}
+body.day-mode .auth-box{background:#ffffff;border-color:#d0d4dc}
+body.day-mode .auth-input{background:#f5f6f8;border-color:#c0c4cc;color:#1a1a2a}
+body.day-mode .auth-btn.secondary{background:#f5f6f8;border-color:#c0c4cc;color:#4a4a7a}
+body.day-mode .user-bar{background:#f5f6f8;border-color:#d0d4dc}
+
+/* FONT SIZE VARS */
+body.fs-lg { --fs:13px; --fs-tk:13px; --fs-rsi:13px; }
+body.fs-xl { --fs:15px; --fs-tk:15px; --fs-rsi:15px; }
+body { font-size: var(--fs); }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:#c8ccd8;font-family:var(--mono);font-size:11px;min-height:100vh}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:6px 20px;background:var(--bg2);border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:100;gap:12px}
+.topbar-left{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.logo-img{width:36px;height:36px;border-radius:4px;object-fit:cover}
+.logo-text{display:flex;flex-direction:column;line-height:1.1}
+.logo-main{font-family:var(--sans);font-size:18px;font-weight:700;color:#fff;letter-spacing:2px}
+.logo-sub{font-family:var(--sans);font-size:11px;font-weight:600;color:#e53935;letter-spacing:3px}
+
+/* BUSCADOR */
+.search-wrap{flex:1;max-width:280px}
+.search-input{width:100%;background:#0d0d18;border:1px solid #2a2a4a;border-radius:3px;padding:7px 14px;font-family:var(--mono);font-size:12px;color:#c8ccd8;outline:none;letter-spacing:1px}
+.search-input::placeholder{color:#3a3a6a}
+.search-input:focus{border-color:#4f8ef7;box-shadow:0 0 10px rgba(79,142,247,.25);background:#0f0f1e}
+.search-active-banner{display:none;background:#0d0d18;border-bottom:1px solid #1a1a2e;padding:6px 20px;font-size:10px;color:#4f8ef7}
+.search-active-banner.visible{display:flex;align-items:center;gap:12px}
+tr.search-match td{background:rgba(79,142,247,.08)!important}
+/* MOBILE */
+@media(max-width:768px){
+  .topbar{flex-wrap:wrap;gap:8px;padding:8px 12px}
+  .topbar-left .logo-main{font-size:14px}
+  .topbar-left .logo-sub{font-size:9px}
+  .logo-img{width:28px;height:28px}
+  .search-wrap{max-width:100%;order:3;flex:0 0 100%}
+  .search-input{width:100%;font-size:13px;padding:8px 12px}
+  .tabs{overflow-x:auto;padding:0 8px;-webkit-overflow-scrolling:touch}
+  .tab{padding:8px 12px;font-size:9px;letter-spacing:1px;white-space:nowrap}
+  .tab-content{padding:8px 10px}
+  .sectors-grid{grid-template-columns:1fr!important}
+  table{font-size:12px}
+  td,th{padding:5px 8px!important}
+  .tk{font-size:12px!important}
+  .rsi{font-size:12px!important;padding:3px 8px!important}
+  .chg{font-size:12px!important}
+  .logo-img-tk{width:16px!important;height:16px!important}
+  .filter-bar{padding:8px 12px;flex-wrap:wrap;gap:6px}
+  .filter-btn{font-size:10px;padding:6px 12px}
+  .cell1h{min-width:60px}
+  .grid1h{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))!important}
+  .sector-name{font-size:12px}
+  .sector-avg{font-size:11px}
 }
 
-def get_all_tickers():
-    seen, all_t = {}, []
-    for tickers in {**SECTORES_USA, **SECTORES_WORLD}.values():
-        for t in tickers:
-            if t not in seen:
-                seen[t] = 1
-                all_t.append(t)
-    return all_t
+.topbar-right{display:flex;gap:16px;align-items:center;font-size:11px;flex-shrink:0}
+#upd-time{color:#00c853;font-weight:700;font-size:11px}
+#tcnt{color:#4a4a7a;font-size:10px}
+#next-upd{color:#3a3a6a;font-size:10px}
 
-# ══════════════════════════════════════════════════════════
-# INDICADORES BASE
-# ══════════════════════════════════════════════════════════
-def rsi_wilder(serie, period=14):
-    delta    = serie.diff()
-    gain     = delta.where(delta > 0, 0)
-    loss     = -delta.where(delta < 0, 0)
-    avg_gain = gain.ewm(alpha=1/period, min_periods=period, adjust=False).mean()
-    avg_loss = loss.ewm(alpha=1/period, min_periods=period, adjust=False).mean()
-    rs = avg_gain / avg_loss.replace(0, np.nan)
-    return 100 - (100 / (1 + rs))
+/* TABS */
+.tabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--border2);padding:0 20px}
+.tab{padding:10px 18px;font-size:11px;letter-spacing:2px;color:#4a4a7a;border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;font-family:var(--mono);transition:color .15s}
+.tab:hover{color:#8a8ab8}
+.tab.active{color:#7ab4ff;border-bottom-color:#7ab4ff;text-shadow:0 0 8px rgba(122,180,255,.4)}
+.tab-content{display:none;padding:12px 20px}
+.tab-content.active{display:block}
 
-def calcular_marron_tv(o, h, l, c, v):
-    """
-    Koncord Marron exacto de TradingView:
-    marron = (RSI(ohlc4,14) + MFI(14) + BollOsc + Stoch(21,3)/3) / 2
-    media  = EMA(marron, 21)
+/* SEARCH BANNER */
+.search-banner{display:none;background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;padding:8px 14px;margin-bottom:10px;font-size:11px;color:#5a5a9a}
+.search-banner.visible{display:block}
+.search-result-count{color:var(--accent)}
 
-    MFI en TV = rsi(sum(vol*hlc3 si sube, 14), sum(vol*hlc3 si baja, 14))
-    Es decir: RSI Wilder aplicado sobre flujos positivos/negativos acumulados
-    Rango resultante de Marron: aprox -50 a +100
-    Nivel 0 = "debajo del mar" = zona de oportunidad
-    """
-    ohlc4 = (o + h + l + c) / 4
-    hlc3  = (h + l + c) / 3
+.region{font-size:10px;letter-spacing:3px;color:var(--accent);margin:10px 0 6px;font-weight:700;opacity:.8}
 
-    # RSI sobre ohlc4
-    xrsi = rsi_wilder(ohlc4)
+/* SECTOR GRID */
+.sectors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:7px}
+.sector-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.sector-header{display:flex;align-items:center;justify-content:space-between;padding:6px 12px;background:var(--bg3);cursor:pointer;user-select:none}
+.sector-header:hover{background:#111120}
+.sector-name{font-family:var(--sans);font-size:13px;font-weight:700;color:#8888c0;letter-spacing:1.5px}
+.sector-right{display:flex;align-items:center;gap:8px}
+.sector-avg{font-size:11px;font-weight:700;padding:2px 8px;border-radius:2px;min-width:60px;text-align:center}
+.arrow{font-size:9px;color:#252540;transition:transform .2s}
+.arrow.open{transform:rotate(90deg)}
+.sector-body{display:none}
+.sector-body.open{display:block}
 
-    # MFI exacto TV: rsi(sum_pos, sum_neg) donde sum usa RSI Wilder interno
-    chg_hlc3 = hlc3.diff()
-    # flujo positivo cuando hlc3 sube, negativo cuando baja
-    pos_flow = (v * hlc3.where(chg_hlc3 > 0, 0.0)).rolling(14).sum()
-    neg_flow = (v * hlc3.where(chg_hlc3 < 0, 0.0)).abs().rolling(14).sum()
-    # aplicar RSI Wilder sobre los flujos acumulados
-    xmf = rsi_wilder(pos_flow - neg_flow)
+/* TABLE */
+table{width:100%;border-collapse:collapse}
+th{font-size:9px;letter-spacing:1px;color:#3a3a5e;padding:4px 10px;text-align:right;border-bottom:1px solid var(--border2);font-weight:700}
+th:first-child{text-align:left}
+td{padding:5px 10px;text-align:right;border-bottom:1px solid rgba(15,15,30,.8);font-size:var(--fs)}
+td:first-child{text-align:left}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(79,142,247,.03)}
+tr.hidden-row{display:none}
+.tk{color:#c8ccd8;font-weight:700;font-size:var(--fs-tk);display:flex;align-items:center;gap:5px}
+.tk-double-green{color:#00ff88;font-weight:700;font-size:var(--fs-tk);display:flex;align-items:center;gap:5px;text-shadow:0 0 10px rgba(0,255,136,.8);animation:pulse-green 1.5s infinite}
+.tk-double-red{color:#ff1744;font-weight:700;font-size:var(--fs-tk);display:flex;align-items:center;gap:5px;text-shadow:0 0 10px rgba(255,23,68,.8);animation:pulse-red 1.5s infinite}
+.tk-logo{width:14px;height:14px;border-radius:2px;object-fit:contain;background:#0d0d18;flex-shrink:0;vertical-align:middle}
+tr.row-buy td{background:rgba(0,255,136,.10)!important;border-bottom:1px solid rgba(0,255,136,.2)!important;border-top:1px solid rgba(0,255,136,.08)!important}
+tr.row-sell td{background:rgba(255,23,68,.10)!important;border-bottom:1px solid rgba(255,23,68,.2)!important;border-top:1px solid rgba(255,23,68,.08)!important}
+tr.row-buy:hover td{background:rgba(0,255,136,.16)!important}
+tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
+@keyframes pulse-green{0%,100%{text-shadow:0 0 6px rgba(0,255,136,.6)}50%{text-shadow:0 0 16px rgba(0,255,136,1)}}
+@keyframes pulse-red{0%,100%{text-shadow:0 0 6px rgba(255,23,68,.6)}50%{text-shadow:0 0 16px rgba(255,23,68,1)}}
 
-    # Bollinger Oscillator sobre ohlc4
-    basis = ohlc4.rolling(25).mean()
-    dev   = 2.0 * ohlc4.rolling(25).std(ddof=0)
-    upper = basis + dev
-    lower = basis - dev
-    ob1   = (upper + lower) / 2.0
-    ob2   = (upper - lower).replace(0, np.nan)
-    boll  = ((ohlc4 - ob1) / ob2) * 100
+/* %DÍA */
+.chg{font-size:11px;font-weight:600;display:inline-block;padding:1px 5px;border-radius:2px}
+.cpp{color:#00ff88;font-weight:700;background:#003319;box-shadow:0 0 8px rgba(0,255,136,.3)}
+.cp {color:#00c853;background:#001a0d}
+.cz {color:#1a1a30;background:transparent;font-weight:400}
+.cn {color:#ff5252;background:#160008}
+.cnn{color:#ff1744;font-weight:700;background:#330010;box-shadow:0 0 8px rgba(255,23,68,.3)}
 
-    # Stochastic(21,3) sobre ohlc4 como source (igual que TV)
-    low21 = l.rolling(21).min()
-    hi21  = h.rolling(21).max()
-    rango = (hi21 - low21).replace(0, np.nan)
-    stoc  = ((ohlc4 - low21) / rango * 100).rolling(3).mean()
+/* RSI */
+.rsi{display:inline-block;padding:2px 8px;border-radius:2px;font-size:var(--fs-rsi);font-weight:700;min-width:38px;text-align:center}
+.r-sbv3{background:#006622;color:#00ff88;box-shadow:0 0 18px rgba(0,255,136,.9),0 0 6px rgba(0,255,136,.6);border:1px solid rgba(0,255,136,.4);animation:pulse-green 1s infinite}
+.r-sbv2{background:#004d1f;color:#00ff88;box-shadow:0 0 12px rgba(0,255,136,.55);border:1px solid rgba(0,255,136,.2)}
+.r-sbv1{color:#00c853;font-weight:600}
+.r-neu {color:#252540;font-weight:400}
+.r-hi1 {color:#ff7043;font-weight:600}
+.r-hi2 {background:#4d0010;color:#ff1744;box-shadow:0 0 12px rgba(255,23,68,.55);border:1px solid rgba(255,23,68,.2)}
+.r-hi3 {background:#660008;color:#ff1744;box-shadow:0 0 18px rgba(255,23,68,.9),0 0 6px rgba(255,23,68,.6);border:1px solid rgba(255,23,68,.4);animation:pulse-red 1s infinite}
 
-    # Marron y MediaK
-    marron  = (xrsi + xmf + boll + (stoc / 3)) / 2
-    media_k = marron.ewm(span=21, adjust=False).mean()
-    return marron, media_k
+/* MEDIAS SEMANALES — colores suaves, solo SMA200 intensa */
+.dw-up   { color:#4a7a5a }           /* suave arriba */
+.dw-dn   { color:#6a3a3a }           /* suave abajo */
+.dw-neu  { color:#1a1a30 }           /* neutral */
+.dw-s200u{ color:#00c853 }           /* arriba SMA200 — verde moderado */
+.dw-s200d{ color:#ff5252;font-weight:700 }  /* abajo SMA200 — rojo visible */
 
-def calcular_macd_tv(close):
-    e12  = close.ewm(span=12, adjust=False).mean()
-    e26  = close.ewm(span=26, adjust=False).mean()
-    macd = (e12 - e26) / e26.replace(0, np.nan) * 1000 * 5
-    sig  = macd.ewm(span=9, adjust=False).mean()
-    return macd - sig
+/* KONC */
+.m-mar{color:#00ff88;font-weight:700;text-shadow:0 0 10px rgba(0,255,136,.7)}.m-lo{color:#00c853;font-weight:600}.m-neu{color:#1a1a30}.m-hi1{color:#ff7043;font-weight:600}.m-hi2{color:#ff1744;font-weight:700;text-shadow:0 0 10px rgba(255,23,68,.7)}
+.mhi{color:#ff1744;font-weight:700}.mlo{color:#00e676;font-weight:700}.mne{color:#1a1a30}
 
-def calcular_medias(close):
-    ema21  = close.ewm(span=21,  adjust=False).mean()
-    sma30  = close.rolling(30).mean()
-    ema150 = close.ewm(span=150, adjust=False).mean()
-    ema200 = close.ewm(span=200, adjust=False).mean()
-    return ema21, sma30, ema150, ema200
+/* MEDIAS */
+.d-faru{color:#00ff88;font-weight:700}.d-nearu{color:#ffd600}
+.d-neu{color:#1a1a30}.d-neard{color:#ff6d00}
+.d-fard{color:#ff1744;font-weight:700}
 
-def calcular_semanal(ticker):
-    """Calcula RSI, KONCORD y SMA200 en velas semanales"""
-    try:
-        df = yf.download(ticker, period="10y", interval="1wk",
-                         auto_adjust=True, progress=False)
-        if df is None or len(df) < 30: return None
-        o = df["Open"].squeeze().dropna()
-        h = df["High"].squeeze().dropna()
-        l = df["Low"].squeeze().dropna()
-        c = df["Close"].squeeze().dropna()
-        v = df["Volume"].squeeze().dropna()
-        idx = c.index
-        o,h,l,v = o.reindex(idx),h.reindex(idx),l.reindex(idx),v.reindex(idx)
-        if len(c) < 30: return None
+/* RSI 1H */
+.grid1h{display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:4px;padding:8px 10px}
+.cell1h{padding:6px 3px;border-radius:3px;text-align:center;font-size:11px;font-weight:700}
+.c-over-ex{background:#660008;color:#ff1744;box-shadow:0 0 14px rgba(255,23,68,.9);animation:pulse-red 1s infinite}
+.c-over   {background:#4d0010;color:#ff1744;box-shadow:0 0 8px rgba(255,23,68,.45)}
+.c-sbv-ex {background:#006622;color:#00ff88;box-shadow:0 0 14px rgba(0,255,136,.9);animation:pulse-green 1s infinite}
+.c-sbv    {background:#004d1f;color:#00ff88;box-shadow:0 0 8px rgba(0,255,136,.45)}
+.c-neu    {background:#0a0a18;color:#1a1a30;font-weight:400}
+.val1h{font-size:9px;margin-top:2px;opacity:.6}
 
-        precio = float(c.iloc[-1])
+/* SEÑALES — chips más anchos */
+.sig-section-title{font-size:12px;letter-spacing:2px;color:#8888c0;font-weight:700;margin:14px 0 8px;padding-bottom:6px;border-bottom:1px solid #2a2a4a}
+.sig-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px;margin-bottom:12px}
+.sig-chip{border-radius:4px;overflow:hidden;cursor:pointer;border:1px solid transparent}
+.sig-chip-head{padding:10px 12px;font-size:13px;font-weight:700;user-select:none;font-family:var(--sans)}
+.sig-chip-head .chip-ticker{font-size:15px;letter-spacing:1px}
+.sig-chip-head .chip-sub{font-size:10px;font-weight:600;margin-top:2px;font-family:var(--mono);opacity:.85}
+.sig-chip-body{display:none;background:#0a0a18;border-top:1px solid var(--border2);padding:10px 12px;font-size:11px;line-height:1.9}
+.sig-chip-body.open{display:block}
+.sig-chip-body .chip-meta{color:#4a4a7a;margin-bottom:6px}
+.sig-chip-body table{width:100%;border-collapse:collapse}
+.sig-chip-body th{font-size:9px;color:#3a3a5e;padding:3px 8px;text-align:right;border-bottom:1px solid var(--border2);letter-spacing:1px}
+.sig-chip-body th:first-child{text-align:left}
+.sig-chip-body td{font-size:11px;padding:3px 8px;text-align:right;border-bottom:1px solid rgba(15,15,30,.6)}
+.sig-chip-body td:first-child{text-align:left;color:#4a4a7a}
+.sig-chip-body tr:last-child td{border-bottom:none}
 
-        # RSI Wilder semanal
-        rsi_w = rsi_wilder(c)
-        rsi_val = r(rsi_w.iloc[-1], 1)
+.sig-chip.wt-fuerte{border-color:rgba(0,255,136,.2)}
+.sig-chip.wt-fuerte .sig-chip-head{background:#004d1f;color:#00ff88}
+.sig-chip.wt-normal .sig-chip-head{background:#001a0d;color:#00c853}
+.sig-chip.rsi-over{border-color:rgba(255,23,68,.2)}
+.sig-chip.rsi-over .sig-chip-head{background:#4d0010;color:#ff1744}
+.sig-chip.rsi-sbv{border-color:rgba(0,255,136,.2)}
+.sig-chip.rsi-sbv .sig-chip-head{background:#004d1f;color:#00ff88}
 
-        # KONCORD semanal
-        marron_w, media_k_w = calcular_marron_tv(o,h,l,c,v)
-        marron_v  = r(marron_w.iloc[-1], 2)
-        media_k_v = r(media_k_w.iloc[-1], 2)
-        konc_dir  = "up" if (marron_v and media_k_v and marron_v > media_k_v) else "dn"
+.ret-pos{color:#00c853}.ret-neg{color:#ff5252}.ret-neu{color:#252540}
+.no-sig{color:#252540;font-size:11px;padding:12px 0}
 
-        # Medias semanales
-        wma10_w  = c.rolling(10).apply(lambda x: np.dot(x, np.arange(1,11))/np.arange(1,11).sum(), raw=True)
-        ema30_w  = c.ewm(span=30,  adjust=False).mean()
-        ema50_w  = c.ewm(span=50,  adjust=False).mean()
-        sma200_w = c.rolling(200).mean()
+/* FILTER BUTTONS */
+.filter-bar{display:flex;gap:8px;margin-bottom:10px;align-items:center}
+.filter-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:3px;border:none;cursor:pointer;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1px;transition:all .15s}
+.filter-btn .dot{width:8px;height:8px;border-radius:50%}
+.btn-buy{background:#003319;color:#00ff88;border:1px solid rgba(0,255,136,.25)}
+.btn-buy:hover,.btn-buy.active{background:#004d1f;box-shadow:0 0 10px rgba(0,255,136,.3)}
+.btn-sell{background:#330010;color:#ff1744;border:1px solid rgba(255,23,68,.25)}
+.btn-sell:hover,.btn-sell.active{background:#4d0010;box-shadow:0 0 10px rgba(255,23,68,.3)}
+.btn-clear{background:#0d0d18;color:#3a3a5e;border:1px solid #1a1a2e}
+.btn-clear:hover{color:#6a6a9a}
+.filter-count{font-size:10px;color:#3a3a5e;margin-left:4px}
 
-        def rv(s): return float(s.iloc[-1]) if not pd.isna(s.iloc[-1]) else None
-        wma10_v  = rv(wma10_w)
-        ema30_v  = rv(ema30_w)
-        ema50_v  = rv(ema50_w)
-        sma200_v = rv(sma200_w)
+/* MOBILE */
+@media (max-width: 768px) {
+  .topbar{flex-wrap:wrap;gap:6px;padding:6px 12px}
+  .topbar-left{flex:1}
+  .logo-main{font-size:15px}
+  .logo-sub{font-size:9px}
+  .search-wrap{order:3;width:100%;max-width:100%}
+  .search-input{width:100%;font-size:13px;padding:8px 12px}
+  .topbar-right{font-size:9px;gap:8px}
+  .tabs{overflow-x:auto;padding:0 8px;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{padding:8px 12px;font-size:10px;white-space:nowrap;letter-spacing:1px}
+  .tab-content{padding:8px 10px}
+  .sectors-grid{grid-template-columns:1fr!important}
+  .sector-name{font-size:12px}
+  th{font-size:9px;padding:4px 8px;letter-spacing:0}
+  td{font-size:11px;padding:4px 8px}
+  .tk{font-size:11px}
+  .tk-logo{width:13px;height:13px}
+  .rsi{font-size:10px;padding:2px 6px;min-width:32px}
+  .chg{font-size:11px;padding:1px 4px}
+  .filter-bar{padding:6px 10px;gap:6px;flex-wrap:wrap}
+  .filter-btn{font-size:10px;padding:5px 10px}
+  .grid1h{grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:3px;padding:6px 8px}
+  .cell1h{padding:5px 2px;font-size:10px}
+}
 
-        # % cambio semanal
-        precio_sem_prev = float(c.iloc[-2]) if len(c) >= 2 else precio
-        pct_semana = round(((precio - precio_sem_prev) / precio_sem_prev) * 100, 2)
+/* SEARCH RESULT HIGHLIGHT */
+.search-match td{background:rgba(79,142,247,.08)!important}
+.search-match .tk, .search-match .tk-double-green, .search-match .tk-double-red{
+  font-size:13px!important;
+}
+.search-result-banner{
+  background:#0d0d18;border:1px solid #4f8ef7;border-radius:3px;
+  padding:8px 14px;margin-bottom:10px;font-size:11px;color:#4f8ef7;
+  display:none;
+}
 
-        # Percentil histórico semanal
-        rsi_pct_1w    = None
-        marron_pct_1w = None
-        rsi_alerta_1w    = None
-        marron_alerta_1w = None
-        try:
-            rsi_w_series = rsi_wilder(c).dropna()  # historial completo
-            if len(rsi_w_series) >= 30 and rsi_val is not None:
-                pct_rw = float((rsi_w_series < rsi_val).sum() / len(rsi_w_series) * 100)
-                rsi_pct_1w = round(pct_rw, 1)
-                if pct_rw <= 5:   rsi_alerta_1w = "minimo"
-                elif pct_rw >= 95: rsi_alerta_1w = "maximo"
-            marron_w_series = marron_w.dropna()  # historial completo
-            if len(marron_w_series) >= 30 and not pd.isna(marron_w.iloc[-1]):
-                pct_mw = float((marron_w_series < float(marron_w.iloc[-1])).sum() / len(marron_w_series) * 100)
-                marron_pct_1w = round(pct_mw, 1)
-                if pct_mw <= 5:   marron_alerta_1w = "minimo"
-                elif pct_mw >= 95: marron_alerta_1w = "maximo"
-        except:
-            pass
+/* OPCIONES */
+.opc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:16px;margin-top:12px}
+.opc-card{background:#0a0a14;border:1px solid #111128;border-radius:4px;overflow:hidden}
+.opc-card-header{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;background:#0d0d18;border-bottom:1px solid #111128}
+.opc-symbol{font-family:var(--sans);font-size:16px;font-weight:700;letter-spacing:1px}
+.opc-spot{font-size:12px;color:#7a7ab0}
+.opc-regime-pos{color:#00ff88;font-size:10px;font-weight:700;padding:2px 8px;background:#003319;border-radius:2px}
+.opc-regime-neg{color:#ff1744;font-size:10px;font-weight:700;padding:2px 8px;background:#330010;border-radius:2px}
+.opc-tabs{display:flex;border-bottom:1px solid #111128}
+.opc-tab{padding:5px 14px;font-size:10px;color:#2a2a4a;cursor:pointer;background:none;border:none;font-family:var(--mono);border-bottom:2px solid transparent}
+.opc-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.opc-chart-wrap{padding:10px 14px 6px;height:300px;position:relative}
+.opc-levels{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px 14px}
+.opc-level{text-align:center;padding:6px 4px;border-radius:3px;background:#0d0d18}
+.opc-level-label{font-size:9px;letter-spacing:1px;margin-bottom:3px}
+.opc-level-value{font-size:13px;font-weight:700;font-family:var(--sans)}
+.opc-explain{padding:10px 14px;font-size:10px;color:#3a3a5e;line-height:1.8;border-top:1px solid #0f0f1e}
 
-        return {
-            "rsi_1w":          rsi_val,
-            "marron_1w":       marron_v,
-            "media_k_1w":      media_k_v,
-            "konc_dir_1w":     konc_dir,
-            "pct_semana":      pct_semana,
-            "dist_wma10_1w":   dist_pct(precio, wma10_v),
-            "dist_ema30_1w":   dist_pct(precio, ema30_v),
-            "dist_ema50_1w":   dist_pct(precio, ema50_v),
-            "dist_sma200_1w":  dist_pct(precio, sma200_v),
-        }
-    except Exception as e:
-        return None
+/* BANNER VENCIMIENTO */
+.expiry-banner{display:none;align-items:center;justify-content:space-between;
+  padding:8px 20px;font-size:11px;border-bottom:1px solid}
+.expiry-banner.warn{background:#1a1200;border-color:#ffab00;color:#ffd600}
+.expiry-banner.danger{background:#1a0000;border-color:#ff1744;color:#ff5252}
+.expiry-banner.visible{display:flex}
+.expiry-wpp{color:inherit;font-weight:700;text-decoration:none;
+  padding:3px 10px;border:1px solid currentColor;border-radius:2px;
+  font-family:var(--mono);font-size:10px;margin-left:12px}
+.expiry-wpp:hover{opacity:.8}
 
-def dist_pct(precio, media):
-    if pd.isna(media) or media == 0: return None
-    return round(((precio - media) / media) * 100, 2)
+/* BANNER SUPERIOR */
+.top-banner{display:flex;align-items:center;justify-content:space-between;padding:6px 20px;background:#030306;border-bottom:1px solid #0f0f1e;font-size:11px}
+.banner-left{color:#2a2a4a;font-size:10px;letter-spacing:1px}
+.banner-right{display:flex;align-items:center;gap:10px}
+.banner-btn{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:3px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1px;text-decoration:none;border:none;cursor:pointer;transition:all .15s}
+.btn-wpp{background:#003319;color:#00e676;border:1px solid rgba(0,230,118,.25)}
+.btn-wpp:hover{background:#004d1f;box-shadow:0 0 8px rgba(0,230,118,.2)}
+.btn-ingecap{background:#0a0a1e;color:#4f8ef7;border:1px solid rgba(79,142,247,.25)}
+.btn-ingecap:hover{background:#0f0f2e;box-shadow:0 0 8px rgba(79,142,247,.2)}
+.wpp-icon{width:14px;height:14px;fill:#00e676}
 
-def r(v, d=2):
-    return round(float(v), d) if (v is not None and not pd.isna(v)) else None
+/* AUTH */
+.auth-overlay{display:none;position:fixed;inset:0;background:rgba(5,5,8,.95);z-index:1000;align-items:center;justify-content:center}
+.auth-overlay.visible{display:flex}
+.auth-box{background:#0a0a14;border:1px solid #1a1a2e;border-radius:6px;padding:32px;width:100%;max-width:380px}
+.auth-logo{text-align:center;margin-bottom:24px}
+.auth-logo .logo-main{font-family:var(--sans);font-size:22px;font-weight:700;color:#fff;letter-spacing:2px}
+.auth-logo .logo-sub{font-family:var(--sans);font-size:12px;color:#e53935;letter-spacing:3px}
+.auth-title{font-size:13px;color:#4a4a7a;text-align:center;margin-bottom:20px;letter-spacing:1px}
+.auth-input{width:100%;background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;padding:10px 14px;font-family:var(--mono);font-size:12px;color:#c8ccd8;outline:none;margin-bottom:10px;box-sizing:border-box}
+.auth-input:focus{border-color:#4f8ef7}
+.auth-btn{width:100%;padding:10px;background:#4f8ef7;border:none;border-radius:3px;color:#fff;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:6px}
+.auth-btn:hover{background:#3a7ae8}
+.auth-btn.secondary{background:#0d0d18;border:1px solid #1a1a2e;color:#4a4a7a;margin-top:8px}
+.auth-btn.secondary:hover{color:#7a7ab0;border-color:#2a2a4a}
+.auth-err{color:#ff1744;font-size:11px;text-align:center;margin-top:8px;min-height:16px}
+.auth-ok{color:#00c853;font-size:11px;text-align:center;margin-top:8px}
+.auth-link{color:#4f8ef7;font-size:11px;text-align:center;cursor:pointer;margin-top:12px}
+.auth-link:hover{color:#7ab4ff}
+.auth-sep{color:#1a1a2e;text-align:center;font-size:11px;margin:10px 0}
+.user-bar{display:none;align-items:center;gap:10px;padding:5px 12px;background:#0a0a14;border:1px solid #111128;border-radius:3px;font-size:10px;color:#4a4a7a}
+.user-bar.visible{display:flex}
+.user-email{color:#7a7ab0;font-size:11px}
+.logout-btn{background:none;border:1px solid #1a1a2e;border-radius:2px;color:#3a3a5e;font-family:var(--mono);font-size:9px;padding:2px 8px;cursor:pointer}
+.logout-btn:hover{color:#ff5252;border-color:#ff5252}
 
-# ══════════════════════════════════════════════════════════
-# ANÁLISIS HISTÓRICO RSI
-# ══════════════════════════════════════════════════════════
-HORIZONTES = {"1d":1, "2d":2, "5d":5, "1m":21}
+/* WATCHLIST */
+.wl-wrap{padding:16px 0}
+.wl-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.wl-add-form{display:flex;gap:8px;flex:1}
+.wl-add-input{background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;padding:7px 12px;font-family:var(--mono);font-size:12px;color:#c8ccd8;outline:none;width:160px;text-transform:uppercase}
+.wl-add-input:focus{border-color:#4f8ef7}
+.wl-add-btn{background:#003319;border:1px solid rgba(0,255,136,.2);border-radius:3px;color:#00ff88;font-family:var(--mono);font-size:11px;padding:7px 14px;cursor:pointer;font-weight:700}
+.wl-add-btn:hover{background:#004d1f}
+.wl-empty{color:#252540;font-size:12px;padding:40px;text-align:center}
+.wl-locked{text-align:center;padding:60px;color:#252540}
+.wl-locked-icon{font-size:32px;margin-bottom:12px}
+.wl-locked-msg{font-size:13px;color:#3a3a5e;margin-bottom:16px}
+.wl-login-cta{background:#4f8ef7;border:none;border-radius:3px;color:#fff;font-family:var(--mono);font-size:11px;padding:8px 20px;cursor:pointer;font-weight:700}
 
-def analizar_rsi_historico(ticker, nivel_rsi, close):
-    """Analiza qué pasó históricamente cuando RSI tocó el nivel dado"""
-    try:
-        rsi = rsi_wilder(close)
-        eventos = []
-        n = len(close)
-        for i in range(1, n):
-            rp, rc = rsi.iloc[i-1], rsi.iloc[i]
-            if pd.isna(rp) or pd.isna(rc): continue
-            sube = rp < nivel_rsi and rc >= nivel_rsi
-            baja = rp > nivel_rsi and rc <= nivel_rsi
-            if sube or baja:
-                precio_base = float(close.iloc[i])
-                fila = {"dir": "↑" if sube else "↓", "rsi": round(float(rc),1)}
-                for label, dias in HORIZONTES.items():
-                    j = i + dias
-                    fila[f"ret_{label}"] = round((float(close.iloc[j])/precio_base-1)*100,2) if j < n else None
-                eventos.append(fila)
-        if not eventos:
-            return None
-        # Resumen estadístico
-        resumen = []
-        for label in HORIZONTES:
-            vals = [e[f"ret_{label}"] for e in eventos if e[f"ret_{label}"] is not None]
-            if vals:
-                resumen.append({
-                    "tramo": label,
-                    "avg": round(sum(vals)/len(vals), 2),
-                    "pos": sum(1 for v in vals if v > 0),
-                    "total": len(vals),
-                    "prob": round(sum(1 for v in vals if v > 0)/len(vals)*100, 1)
-                })
-        # Últimos 5 eventos
-        ultimos = eventos[-5:]
-        return {"nivel": nivel_rsi, "total_eventos": len(eventos), "resumen": resumen, "ultimos": ultimos}
-    except Exception as e:
-        return None
+.loading{text-align:center;padding:60px;color:#252540}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{color:#ff1744;padding:20px;font-size:11px;line-height:2}
+</style>
+</head>
+<body>
 
-# ══════════════════════════════════════════════════════════
-# VMC WAVETREND (solo 1D)
-# ══════════════════════════════════════════════════════════
-WT_CHAN = 9
-WT_AVG  = 12
-WT_MA   = 3
-WT_OS_EXTREMO = -53
-WT_OS_NORMAL  = -30
+<!-- BANNER SUPERIOR -->
+<div class="top-banner">
+  <div class="banner-left">◈ JCG INVERSIONES — DASHBOARD DE ANÁLISIS</div>
+  <div class="banner-right">
+    <div style="display:flex;align-items:center;gap:4px;margin-right:8px;border-right:1px solid #1a1a2e;padding-right:10px">
+      <button onclick="setFontSize('normal')" title="Letra normal"
+        style="background:none;border:1px solid #1a1a2e;border-radius:2px;color:#3a3a5e;
+               font-family:var(--mono);font-size:10px;padding:3px 7px;cursor:pointer"
+        onmouseover="this.style.color='#c8ccd8'" onmouseout="this.style.color='#3a3a5e'">A</button>
+      <button onclick="setFontSize('lg')" title="Letra grande"
+        style="background:none;border:1px solid #1a1a2e;border-radius:2px;color:#3a3a5e;
+               font-family:var(--mono);font-size:12px;padding:3px 7px;cursor:pointer"
+        onmouseover="this.style.color='#c8ccd8'" onmouseout="this.style.color='#3a3a5e'">A+</button>
+      <button onclick="setFontSize('xl')" title="Letra muy grande"
+        style="background:none;border:1px solid #1a1a2e;border-radius:2px;color:#3a3a5e;
+               font-family:var(--mono);font-size:14px;padding:3px 7px;cursor:pointer"
+        onmouseover="this.style.color='#c8ccd8'" onmouseout="this.style.color='#3a3a5e'">A++</button>
+    </div>
+    <button onclick="toggleDayMode()" id="dayModeBtn" title="Modo día/noche"
+      style="background:#0a0a1e;border:1px solid rgba(255,200,0,.25);border-radius:3px;
+             color:#ffd600;font-family:var(--mono);font-size:10px;font-weight:700;
+             padding:5px 12px;cursor:pointer;letter-spacing:1px">
+      ☀ DÍA
+    </button>
+    <a class="banner-btn btn-wpp" href="https://wa.me/5491169787999" target="_blank">
+      <svg class="wpp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      WHATSAPP
+    </a>
+    <a class="banner-btn btn-ingecap" href="https://plataformaingecapital.com/" target="_blank">
+      🌐 IR A INGECAPITAL
+    </a>
+  </div>
+</div>
 
-def calcular_wt(df):
-    try:
-        if df is None or len(df) < 40: return None
-        h = df["High"].squeeze()
-        l = df["Low"].squeeze()
-        c = df["Close"].squeeze()
-        hlc3 = (h + l + c) / 3
-        esa  = hlc3.ewm(span=WT_CHAN, adjust=False).mean()
-        de   = (hlc3 - esa).abs().ewm(span=WT_CHAN, adjust=False).mean()
-        ci   = (hlc3 - esa) / (0.015 * de.replace(0, np.nan))
-        wt1  = ci.ewm(span=WT_AVG, adjust=False).mean()
-        wt2  = wt1.rolling(WT_MA).mean()
-        return wt1, wt2
-    except:
-        return None
+<!-- BANNER VENCIMIENTO -->
+<div class="expiry-banner" id="expiryBanner">
+  <span id="expiryMsg"></span>
+  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+    <a class="expiry-wpp" href="https://wa.me/5491169787999" target="_blank">
+      📱 CONTACTAR PARA RENOVAR
+    </a>
+  </div>
+</div>
 
-def get_wt_signal(wt1, wt2):
-    if wt1 is None: return None
-    v0_wt1, v0_wt2 = float(wt1.iloc[-1]), float(wt2.iloc[-1])
-    v1_wt1, v1_wt2 = float(wt1.iloc[-2]), float(wt2.iloc[-2])
-    v2_wt1, v2_wt2 = float(wt1.iloc[-3]), float(wt2.iloc[-3])
-    cruce_hoy  = v1_wt1 <= v1_wt2 and v0_wt1 > v0_wt2
-    cruce_ayer = v2_wt1 <= v2_wt2 and v1_wt1 > v1_wt2
-    if not cruce_hoy and not cruce_ayer: return None
-    val_cruce = v0_wt2 if cruce_hoy else v1_wt2
-    momento   = "HOY" if cruce_hoy else "AYER"
-    if val_cruce <= WT_OS_EXTREMO:
-        return {"tipo": "FUERTE", "momento": momento, "wt2": round(val_cruce,1)}
-    elif val_cruce <= WT_OS_NORMAL:
-        return {"tipo": "NORMAL", "momento": momento, "wt2": round(val_cruce,1)}
-    return None
-
-# ══════════════════════════════════════════════════════════
-# RSI 1H BATCH
-# ══════════════════════════════════════════════════════════
-def obtener_rsi_horario(all_tickers):
-    print("📡 RSI 1H...")
-    rsi_1h = {}
-    try:
-        data = yf.download(
-            tickers=" ".join(all_tickers),
-            period="10d", interval="1h",
-            auto_adjust=True, group_by="ticker",
-            threads=True, progress=False
-        )
-        if data is None or data.shape[0] == 0: return rsi_1h
-        for ticker in all_tickers:
-            try:
-                if ticker not in data.columns.get_level_values(0): continue
-                close = data[ticker]["Close"].dropna()
-                if len(close) < 16: continue
-                val = rsi_wilder(close).iloc[-1]
-                if not pd.isna(val):
-                    rsi_1h[ticker] = round(float(val), 1)
-            except: continue
-        print(f"✅ RSI 1H: {len(rsi_1h)} tickers")
-    except Exception as e:
-        print(f"⚠ 1H: {e}")
-    return rsi_1h
-
-# ══════════════════════════════════════════════════════════
-# PROCESAR TICKER
-# ══════════════════════════════════════════════════════════
-def procesar_ticker(ticker):
-    try:
-        df = yf.download(ticker, period="10y", interval="1d",
-                         auto_adjust=True, progress=False)
-        if df is None or len(df) < 30: return None
-        o = df["Open"].squeeze().dropna()
-        h = df["High"].squeeze().dropna()
-        l = df["Low"].squeeze().dropna()
-        c = df["Close"].squeeze().dropna()
-        v = df["Volume"].squeeze().dropna()
-        idx = c.index
-        o,h,l,v = o.reindex(idx),h.reindex(idx),l.reindex(idx),v.reindex(idx)
-        if len(c) < 30: return None
-
-        precio      = float(c.iloc[-1])
-        precio_prev = float(c.iloc[-2])
-        pct_dia     = round(((precio-precio_prev)/precio_prev)*100, 2)
-
-        rsi_c   = rsi_wilder(c)
-        rsi_val = r(rsi_c.iloc[-1], 1)
-
-        # RSI WMA21 (igual que en el script de TradingView)
-        weights = np.arange(1, 22)
-        rsi_wma21 = rsi_c.rolling(21).apply(
-            lambda x: np.dot(x, weights) / weights.sum(), raw=True
-        )
-        # Señal alcista del RSI — dos casos válidos:
-        # CASO 1: Cruce fresco al alza (ayer RSI <= WMA21, hoy RSI > WMA21) Y RSI sube Y precio sube
-        # CASO 2: RSI ya arriba de WMA21 Y ambos subiendo Y precio sube
-        rsi_cruza_alza = False
-        if len(rsi_c) >= 2 and not pd.isna(rsi_wma21.iloc[-1]) and not pd.isna(rsi_wma21.iloc[-2]):
-            rsi_hoy     = float(rsi_c.iloc[-1])
-            rsi_ayer    = float(rsi_c.iloc[-2])
-            wma_hoy     = float(rsi_wma21.iloc[-1])
-            wma_ayer    = float(rsi_wma21.iloc[-2])
-            rsi_sube    = rsi_hoy > rsi_ayer
-            wma_sube    = wma_hoy > wma_ayer
-            precio_sube = pct_dia > 0
-
-            # Caso 1: cruce fresco al alza
-            cruce_fresco = (rsi_ayer <= wma_ayer) and (rsi_hoy > wma_hoy) and rsi_sube and precio_sube
-
-            # Caso 2: RSI ya arriba, ambos subiendo
-            ambos_suben = (rsi_hoy > wma_hoy) and rsi_sube and wma_sube and precio_sube
-
-            rsi_cruza_alza = cruce_fresco or ambos_suben
-
-        marron, media_k = calcular_marron_tv(o,h,l,c,v)
-        macd_h  = calcular_macd_tv(c)
-        ema21,sma30,ema150,ema200 = calcular_medias(c)
-
-        marron_v  = marron.iloc[-1]
-        media_k_v = media_k.iloc[-1]
-
-        # WaveTrend
-        wt_result = calcular_wt(df)
-        wt_signal = None
-        if wt_result:
-            wt_signal = get_wt_signal(wt_result[0], wt_result[1])
-
-        # Análisis histórico RSI (solo si está en zona extrema)
-        hist_rsi = None
-        if rsi_val is not None:
-            if rsi_val <= 32:
-                hist_rsi = analizar_rsi_historico(ticker, 30, c)
-            elif rsi_val >= 68:
-                hist_rsi = analizar_rsi_historico(ticker, 70, c)
-
-        # PERCENTIL HISTÓRICO — RSI y KONCORD diario (historial completo 10 años)
-        rsi_pct_hist    = None
-        marron_pct_hist = None
-        rsi_alerta      = None
-        marron_alerta   = None
-        try:
-            rsi_full = rsi_c.dropna()  # todos los datos disponibles ~10 años
-            if len(rsi_full) >= 100 and rsi_val is not None:
-                pct = float((rsi_full < rsi_val).sum() / len(rsi_full) * 100)
-                rsi_pct_hist = round(pct, 1)
-                if pct <= 5:    rsi_alerta = "minimo"
-                elif pct >= 95: rsi_alerta = "maximo"
-
-            marron_full = marron.dropna()  # todos los datos disponibles ~10 años
-            if len(marron_full) >= 100 and not pd.isna(marron_v):
-                pct_m = float((marron_full < float(marron_v)).sum() / len(marron_full) * 100)
-                marron_pct_hist = round(pct_m, 1)
-                if pct_m <= 5:    marron_alerta = "minimo"
-                elif pct_m >= 95: marron_alerta = "maximo"
-        except:
-            pass
-
-        # Datos semanales
-        semanal = calcular_semanal(ticker)
-
-        return {
-            "ticker":      ticker,
-            "pct_dia":     pct_dia,
-            "rsi_1d":      rsi_val,
-            "rsi_cruza_alza": rsi_cruza_alza,
-            "rsi_1h":      None,
-            "rsi_1w":          semanal["rsi_1w"]          if semanal else None,
-            "rsi_pct_1w":      semanal.get("rsi_pct_1w")    if semanal else None,
-            "marron_pct_1w":   semanal.get("marron_pct_1w") if semanal else None,
-            "rsi_alerta_1w":   semanal.get("rsi_alerta_1w") if semanal else None,
-            "marron_alerta_1w":semanal.get("marron_alerta_1w") if semanal else None,
-            "marron_1w":       semanal["marron_1w"]       if semanal else None,
-            "media_k_1w":      semanal["media_k_1w"]      if semanal else None,
-            "konc_dir_1w":     semanal["konc_dir_1w"]     if semanal else None,
-            "pct_semana":      semanal["pct_semana"]       if semanal else None,
-            "dist_wma10_1w":   semanal["dist_wma10_1w"]   if semanal else None,
-            "dist_ema30_1w":   semanal["dist_ema30_1w"]   if semanal else None,
-            "dist_ema50_1w":   semanal["dist_ema50_1w"]   if semanal else None,
-            "dist_sma200_1w":  semanal["dist_sma200_1w"]  if semanal else None,
-            "macd_h":      r(macd_h.iloc[-1], 2),
-            "marron":      r(marron_v, 2),
-            "media_k":     r(media_k_v, 2),
-            "konc_dir":    "up" if (not pd.isna(marron_v) and not pd.isna(media_k_v) and marron_v > media_k_v) else "dn",
-            "dist_ema21":  dist_pct(precio, float(ema21.iloc[-1])),
-            "dist_sma30":  dist_pct(precio, float(sma30.iloc[-1])),
-            "dist_ema150": dist_pct(precio, float(ema150.iloc[-1])),
-            "dist_ema200": dist_pct(precio, float(ema200.iloc[-1])),
-            "wt_signal":   wt_signal,
-            "hist_rsi":    hist_rsi,
-            "rsi_pct_hist":    rsi_pct_hist,
-            "marron_pct_hist": marron_pct_hist,
-            "rsi_alerta":      rsi_alerta,
-            "marron_alerta":   marron_alerta,
-        }
-    except Exception as e:
-        print(f"  ⚠ {ticker}: {e}")
-        return None
-
-# ══════════════════════════════════════════════════════════
-# MAIN
-# ══════════════════════════════════════════════════════════
-def main():
-    all_t = get_all_tickers()
-    rsi_1h_map = obtener_rsi_horario(all_t)
-
-    print("📡 Procesando datos diarios (10 años para análisis histórico)...")
-    resultados = []
-    todos = {**SECTORES_USA, **SECTORES_WORLD}
-
-    for sector, tickers in todos.items():
-        for ticker in tickers:
-            print(f"  → {ticker}")
-            d = procesar_ticker(ticker)
-            if d:
-                d["rsi_1h"] = rsi_1h_map.get(ticker)
-                d["sector"] = sector
-                resultados.append(d)
-
-    # Señales WaveTrend
-    senales_wt = [
-        {"ticker": d["ticker"], "sector": d["sector"],
-         "rsi_1d": d["rsi_1d"], "signal": d["wt_signal"]}
-        for d in resultados if d.get("wt_signal")
-    ]
-
-    # Señales RSI extremo
-    senales_rsi = [
-        {"ticker": d["ticker"], "sector": d["sector"],
-         "rsi_1d": d["rsi_1d"], "pct_dia": d["pct_dia"],
-         "hist": d["hist_rsi"]}
-        for d in resultados if d.get("hist_rsi")
-    ]
-
-    output = {
-        "actualizado":    (datetime.utcnow() - __import__("datetime").timedelta(hours=3)).strftime("%Y-%m-%d %H:%M"),
-        "sectores_usa":   SECTORES_USA,
-        "sectores_world": SECTORES_WORLD,
-        "datos":          {d["ticker"]: d for d in resultados},
-        "senales_wt":     senales_wt,
-        "senales_rsi":    senales_rsi,
+<!-- LANDING PAGE -->
+<div id="landingPage" style="display:none;position:fixed;inset:0;background:#06010a;z-index:999;overflow-y:auto">
+  <style>
+    .land-wrap{max-width:960px;margin:0 auto;padding:40px 24px 60px}
+    @media(max-width:700px){
+      .land-wrap>div:first-child{grid-template-columns:1fr!important}
     }
+    .land-badge{display:inline-block;background:#e53935;color:#fff;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:20px}
+    .land-h1{font-family:var(--sans);font-size:clamp(28px,5vw,48px);font-weight:700;color:#fff;margin:0 0 12px;line-height:1.15}
+    .land-h1 span{color:#e53935}
+    .land-sub{color:#7a7ab0;font-size:15px;margin-bottom:36px;line-height:1.6}
+    .land-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:32px}
+    .land-feat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:14px 16px;display:flex;align-items:flex-start;gap:10px}
+    .land-feat-icon{color:#e53935;font-size:18px;flex-shrink:0;margin-top:1px}
+    .land-feat-text{font-size:13px;color:#c8ccd8;line-height:1.5}
+    .land-feat-text b{color:#fff}
+    .land-live{background:rgba(229,57,53,.08);border:1px solid rgba(229,57,53,.2);border-radius:8px;padding:14px 20px;display:flex;align-items:center;gap:12px;margin-bottom:36px}
+    .land-live-dot{width:10px;height:10px;background:#e53935;border-radius:50%;box-shadow:0 0 8px rgba(229,57,53,.8);animation:pulse-red 1.5s infinite;flex-shrink:0}
+    .land-live-txt{font-size:13px;color:#c8ccd8}
+    .land-live-txt b{color:#fff}
+    .land-plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:36px}
+    .land-plan{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:24px;text-align:center;position:relative;transition:border-color .2s}
+    .land-plan:hover{border-color:rgba(229,57,53,.4)}
+    .land-plan.featured{border-color:#e53935;background:rgba(229,57,53,.06)}
+    .land-plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#e53935;color:#fff;font-size:10px;font-weight:700;letter-spacing:1px;padding:3px 12px;border-radius:20px;white-space:nowrap;font-family:var(--mono)}
+    .land-plan-name{font-family:var(--sans);font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:1px}
+    .land-plan-price{font-family:var(--sans);font-size:38px;font-weight:700;color:#e53935;margin-bottom:4px}
+    .land-plan-price span{font-size:18px;color:#7a7ab0}
+    .land-plan-desc{font-size:12px;color:#4a4a7a;margin-bottom:16px}
+    .land-plan-saving{font-size:11px;color:#00c853;font-weight:700;margin-bottom:16px}
+    .land-cta-wpp{display:inline-flex;align-items:center;gap:8px;background:#e53935;color:#fff;padding:14px 32px;border-radius:6px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:2px;text-decoration:none;border:none;cursor:pointer;transition:all .15s;width:100%;justify-content:center;box-sizing:border-box}
+    .land-cta-wpp:hover{background:#c62828;box-shadow:0 0 20px rgba(229,57,53,.4)}
+    .land-login-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:#4a4a7a;padding:12px 32px;border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:2px;text-decoration:none;border:1px solid #1a1a2e;cursor:pointer;width:100%;box-sizing:border-box;margin-top:10px;transition:all .15s}
+    .land-login-btn:hover{color:#c8ccd8;border-color:#2a2a4a}
+    .land-divider{border:none;border-top:1px solid #0f0f1e;margin:32px 0}
+    .land-footer{text-align:center;color:#2a2a4a;font-size:10px;letter-spacing:1px}
+    @media(max-width:600px){.land-h1{font-size:28px}.land-plan-price{font-size:30px}}
+  </style>
 
-    with open("jcg_data.json","w",encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, indent=2)
+  <div class="land-wrap">
 
-    print(f"\n✅ {len(resultados)} tickers — {len(senales_wt)} señales WT — {len(senales_rsi)} en zona RSI extrema")
-    print(f"   Actualizado: {output['actualizado']}")
+    <!-- HEADER + LOGIN ARRIBA -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;margin-bottom:48px">
+      
+      <!-- Izquierda: presentación -->
+      <div>
+        <img src="https://raw.githubusercontent.com/juancg00ginversiones/JCGdashboard/main/logoJCG.png"
+             style="width:64px;height:64px;border-radius:8px;object-fit:cover;margin-bottom:16px"
+             onerror="this.style.display='none'">
+        <span class="land-badge">TU HERRAMIENTA PARA EL ANÁLISIS DEL MERCADO</span>
+        <h1 class="land-h1" style="margin-top:14px">Dashboard <span>JCG</span> Inversiones</h1>
+        <p class="land-sub" style="margin-bottom:0">La plataforma profesional de análisis de mercado.<br>Más de 200 instrumentos. Indicadores técnicos. Señales automáticas.</p>
+      </div>
 
-if __name__ == "__main__":
-    main()
+      <!-- Derecha: LOGIN destacado -->
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(229,57,53,.25);border-radius:12px;padding:28px">
+        <p style="font-family:var(--sans);font-size:18px;font-weight:700;color:#fff;margin:0 0 6px;letter-spacing:1px">🔐 ACCESO AL DASHBOARD</p>
+        <p style="color:#4a4a7a;font-size:12px;margin:0 0 20px">Ingresá con tu cuenta JCG Inversiones</p>
+        <input class="auth-input" id="landEmail" type="email" placeholder="Email" style="margin-bottom:10px">
+        <input class="auth-input" id="landComitente" type="text" placeholder="Número de comitente" style="margin-bottom:10px">
+        <input class="auth-input" id="landPassword" type="password" placeholder="Contraseña" style="margin-bottom:14px">
+        <button onclick="doLoginFromLanding()" style="width:100%;padding:12px;background:#e53935;border:none;border-radius:6px;color:#fff;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all .15s" onmouseover="this.style.background='#c62828'" onmouseout="this.style.background='#e53935'">INGRESAR</button>
+        <div id="landErr" style="color:#ff5252;font-size:11px;text-align:center;margin-top:8px;min-height:16px"></div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button onclick="showRegisterFromLanding()" style="flex:1;padding:8px;background:transparent;border:1px solid #1a1a2e;border-radius:4px;color:#4a4a7a;font-family:var(--mono);font-size:10px;cursor:pointer;letter-spacing:1px" onmouseover="this.style.color='#c8ccd8'" onmouseout="this.style.color='#4a4a7a'">PRIMERA VEZ</button>
+          <button onclick="showForgotFromLanding()" style="flex:1;padding:8px;background:transparent;border:1px solid #1a1a2e;border-radius:4px;color:#4a4a7a;font-family:var(--mono);font-size:10px;cursor:pointer;letter-spacing:1px" onmouseover="this.style.color='#c8ccd8'" onmouseout="this.style.color='#4a4a7a'">OLVIDÉ CONTRASEÑA</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE badge -->
+    <div class="land-live" style="margin-bottom:32px">
+      <div class="land-live-dot"></div>
+      <div class="land-live-txt"><b>LIVE</b> — Datos actualizados desde mercados globales durante la rueda</div>
+    </div>
+
+    <!-- Features -->
+    <div class="land-features" style="margin-bottom:36px">
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>Indicadores técnicos:</b> RSI, KONCORD, WaveTrend y señales de compra/venta automáticas</div></div>
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>Análisis fundamental:</b> P/E, ROE, márgenes, dividendos y scoring de 85+ empresas con CEDEAR</div></div>
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>Niveles de opciones:</b> Call/Put Wall y Gamma Flip para SPY, QQQ e IWM</div></div>
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>Vista semanal:</b> RSI y KONCORD en temporalidad semanal para decisiones de mediano plazo</div></div>
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>Mi Watchlist:</b> Seguí tus activos favoritos con alertas personalizadas desde cualquier dispositivo</div></div>
+      <div class="land-feat"><span class="land-feat-icon">✅</span><div class="land-feat-text"><b>200+ instrumentos:</b> Acciones USA, CEDEARs, ETFs, commodities y activos argentinos</div></div>
+    </div>
+
+    <!-- Planes -->
+    <!-- Banner reunión asesor -->
+    <div style="background:linear-gradient(135deg,rgba(229,57,53,.12),rgba(229,57,53,.04));border:1px solid rgba(229,57,53,.35);border-radius:10px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;gap:16px">
+      <div style="font-size:28px;flex-shrink:0">🎯</div>
+      <div>
+        <div style="font-family:var(--sans);font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:1px">
+          INCLUYE REUNIÓN MENSUAL CON ASESOR
+          <span style="background:#e53935;color:#fff;font-size:10px;font-family:var(--mono);padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:middle;letter-spacing:1px">INCLUIDO</span>
+        </div>
+        <div style="color:#7a7ab0;font-size:13px;line-height:1.6">
+          Cada mes recibís una <b style="color:#c8ccd8">reunión de 30 minutos</b> con tu asesor para revisar tu cartera, interpretar los indicadores del dashboard y definir tu estrategia. También incluye <b style="color:#c8ccd8">explicación personalizada</b> de la plataforma para sacarle el máximo provecho.
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-bottom:20px">
+      <p style="font-family:var(--sans);font-size:22px;font-weight:700;color:#fff;margin:0 0 4px">Planes de acceso</p>
+      <p style="color:#4a4a7a;font-size:13px;margin:0">Contactanos por WhatsApp para activar tu acceso</p>
+    </div>
+    <div class="land-plans" style="margin-bottom:36px">
+      <div class="land-plan">
+        <div class="land-plan-name">MENSUAL</div>
+        <div class="land-plan-price">$10<span>/mes</span></div>
+        <div class="land-plan-desc">Acceso completo · Renovación mensual</div>
+        <a class="land-cta-wpp" href="https://wa.me/5491169787999?text=Hola!%20Me%20interesa%20el%20plan%20mensual%20del%20Dashboard%20JCG%20Inversiones" target="_blank">
+          <svg style="width:14px;height:14px;fill:#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          CONTRATAR VÍA WHATSAPP
+        </a>
+      </div>
+      <div class="land-plan featured">
+        <div class="land-plan-badge">⭐ MÁS ELEGIDO</div>
+        <div class="land-plan-name">ANUAL</div>
+        <div class="land-plan-price">$100<span>/año</span></div>
+        <div class="land-plan-desc">Acceso completo · Pago único anual</div>
+        <div class="land-plan-saving">🎁 2 meses GRATIS vs mensual</div>
+        <a class="land-cta-wpp" href="https://wa.me/5491169787999?text=Hola!%20Me%20interesa%20el%20plan%20anual%20del%20Dashboard%20JCG%20Inversiones" target="_blank">
+          <svg style="width:14px;height:14px;fill:#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          CONTRATAR VÍA WHATSAPP
+        </a>
+      </div>
+    </div>
+
+    <hr class="land-divider">
+    <div class="land-footer">
+      JCG INVERSIONES ·
+      <a href="https://plataformaingecapital.com/" target="_blank" style="color:#3a3a5e;text-decoration:none">INGECAPITAL</a> ·
+      <a href="https://wa.me/5491169787999" target="_blank" style="color:#3a3a5e;text-decoration:none">WHATSAPP</a>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH OVERLAY -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <img src="https://raw.githubusercontent.com/juancg00ginversiones/JCGdashboard/main/logoJCG.png"
+           style="width:48px;height:48px;border-radius:4px;object-fit:cover;margin-bottom:8px" onerror="this.style.display='none'">
+      <div class="logo-main">JCG</div>
+      <div class="logo-sub">Inversiones</div>
+    </div>
+    <div id="authForm">
+      <div class="auth-title" id="authTitle">ACCESO AL DASHBOARD</div>
+      <input class="auth-input" id="authEmail" type="email" placeholder="Email">
+      <input class="auth-input" id="authComitente" type="text" placeholder="Número de comitente">
+      <input class="auth-input" id="authPassword" type="password" placeholder="Contraseña">
+      <button class="auth-btn" onclick="doLogin()">INGRESAR</button>
+      <div class="auth-sep">— o —</div>
+      <button class="auth-btn secondary" onclick="showRegister()">PRIMERA VEZ — CREAR CONTRASEÑA</button>
+      <button class="auth-btn secondary" onclick="showForgot()" style="margin-top:4px">¿OLVIDASTE TU CONTRASEÑA?</button>
+      <div class="auth-err" id="authErr"></div>
+    </div>
+    <div id="registerForm" style="display:none">
+      <div class="auth-title">CREAR CONTRASEÑA</div>
+      <input class="auth-input" id="regEmail" type="email" placeholder="Email">
+      <input class="auth-input" id="regComitente" type="text" placeholder="Número de comitente">
+      <input class="auth-input" id="regPass1" type="password" placeholder="Contraseña (mín. 6 caracteres)">
+      <input class="auth-input" id="regPass2" type="password" placeholder="Repetir contraseña">
+      <button class="auth-btn" onclick="doRegister()">CREAR CUENTA</button>
+      <button class="auth-btn secondary" onclick="showLogin()">← VOLVER</button>
+      <div class="auth-err" id="regErr"></div>
+      <div class="auth-ok" id="regOk"></div>
+    </div>
+    <div id="forgotForm" style="display:none">
+      <div class="auth-title">RECUPERAR CONTRASEÑA</div>
+      <p style="font-size:11px;color:#4a4a7a;text-align:center;margin-bottom:14px">
+        Ingresá tu email y te enviamos un link para resetear tu contraseña.
+      </p>
+      <input class="auth-input" id="forgotEmail" type="email" placeholder="Email">
+      <button class="auth-btn" onclick="doForgot()">ENVIAR LINK</button>
+      <button class="auth-btn secondary" onclick="showLogin()">← VOLVER</button>
+      <div class="auth-err" id="forgotErr"></div>
+      <div class="auth-ok" id="forgotOk"></div>
+    </div>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <img class="logo-img" src="https://raw.githubusercontent.com/juancg00ginversiones/JCGdashboard/main/logoJCG.png" alt="JCG" onerror="this.style.display='none'">
+    <div class="logo-text">
+      <span class="logo-main">JCG</span>
+      <span class="logo-sub">Inversiones</span>
+    </div>
+  </div>
+
+  <div class="search-wrap">
+    <input class="search-input" id="searchBox" type="text" placeholder="Buscar ticker... ej: SPY" oninput="filterTickers(this.value)">
+  </div>
+
+  <div class="topbar-right">
+    <div class="user-bar" id="userBar">
+      <span class="user-email" id="userEmail"></span>
+      <button class="logout-btn" onclick="doLogout()">SALIR</button>
+    </div>
+    <span id="upd-time">—</span>
+    <span id="tcnt">—</span>
+    <span id="next-upd">—</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="sw('ind',this)">INDICADORES</button>
+  <button class="tab" onclick="sw('med',this)">MEDIAS</button>
+  <button class="tab" onclick="sw('h1',this)">RSI 1H</button>
+  <button class="tab" onclick="sw('sig',this)">SEÑALES</button>
+  <button class="tab" onclick="sw('sem',this)">SEMANAL</button>
+  <button class="tab" onclick="sw('fun',this)">ANÁLISIS FUND.</button>
+  <button class="tab" onclick="sw('glos',this)">GLOSARIO</button>
+  <button class="tab" onclick="sw('opc',this)">OPCIONES</button>
+  <button class="tab" onclick="sw('wl',this)">MI WATCHLIST</button>
+</div>
+
+<div class="filter-bar" id="filterBar" style="display:none;padding:8px 20px;background:var(--bg2);border-bottom:1px solid var(--border2)">
+    <button class="filter-btn btn-buy" onclick="setFilter('buy',this)">
+      <span class="dot" style="background:#00ff88;box-shadow:0 0 6px rgba(0,255,136,.6)"></span>
+      OPORTUNIDADES
+      <span class="filter-count" id="cnt-buy"></span>
+    </button>
+    <button class="filter-btn btn-sell" onclick="setFilter('sell',this)">
+      <span class="dot" style="background:#ff1744;box-shadow:0 0 6px rgba(255,23,68,.6)"></span>
+      SOBRECOMPRA
+      <span class="filter-count" id="cnt-sell"></span>
+    </button>
+    <button class="filter-btn btn-clear" onclick="setFilter(null,this)">✕ VER TODO</button>
+</div>
+
+<div class="search-result-banner" id="searchBanner"></div>
+<div class="search-active-banner" id="searchBanner">
+  <div id="searchBannerContent" style="flex:1"></div>
+  <button onclick="clearSearch()" style="background:#1a1a2e;border:none;color:#4a4a7a;cursor:pointer;font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:2px;flex-shrink:0">✕ limpiar</button>
+</div>
+<div class="tab-content active" id="ind"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="med"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="h1"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="sig"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="sem"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="fun"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="glos"></div>
+<div class="tab-content" id="wl"><div class="loading"><span class="spin"></span>Cargando...</div></div>
+<div class="tab-content" id="opc"><div class="loading"><span class="spin"></span>Cargando opciones...</div></div>
+
+<script>
+const JSON_URL='https://juancg00ginversiones.github.io/JCGdashboard/jcg_data.json';
+
+function clsChg(v){if(v===null)return'cz';if(v>5)return'cpp';if(v>0)return'cp';if(v<-5)return'cnn';if(v<0)return'cn';return'cz'}
+function clsRsi(v){
+  if(v===null) return 'r-neu';
+  if(v<=20)  return 'r-sbv3';  // ≤20 verde EXTREMO pulsante
+  if(v<=30)  return 'r-sbv2';  // ≤30 verde fuerte
+  if(v<=45)  return 'r-sbv1';  // 30-45 verde suave
+  if(v>=78)  return 'r-hi3';   // ≥78 rojo EXTREMO pulsante
+  if(v>=70)  return 'r-hi2';   // 70-78 rojo fuerte
+  if(v>=65)  return 'r-hi1';   // 65-70 naranja
+  return 'r-neu';
+}
+function clsMrn(v){if(v===null)return'm-neu';if(v<0)return'm-mar';if(v<20)return'm-lo';if(v<85)return'm-neu';if(v<=105)return'm-hi1';return'm-hi2'}
+function clsMcd(v){if(v===null)return'mne';if(v>30)return'mhi';if(v<-30)return'mlo';return'mne'}
+function clsDist(v){if(v===null)return'd-neu';if(v>5)return'd-faru';if(v>1)return'd-nearu';if(v<-5)return'd-fard';if(v<-1)return'd-neard';return'd-neu'}
+function cls1h(v){
+  if(v===null||v===undefined) return 'c-neu';
+  if(v>=78) return 'c-over-ex';  // extremo
+  if(v>=70) return 'c-over';
+  if(v<=20) return 'c-sbv-ex';   // extremo
+  if(v<=30) return 'c-sbv';
+  return 'c-neu';
+}
+function fv(v,d){if(v===null||v===undefined)return'--';return parseFloat(v).toFixed(d!==undefined?d:1)}
+function fc(v){if(v===null)return'--';return(v>=0?'+':'')+parseFloat(v).toFixed(2)+'%'}
+function fd(v){if(v===null)return'--';return(v>=0?'▲':'▼')+Math.abs(parseFloat(v)).toFixed(1)+'%'}
+function clsRet(v){if(v===null)return'ret-neu';return v>0?'ret-pos':'ret-neg'}
+
+function avgHtml(ts,dat){
+  const vals=ts.filter(t=>dat[t]&&dat[t].pct_dia!==null).map(t=>dat[t].pct_dia);
+  if(!vals.length)return'';
+  const avg=vals.reduce((a,b)=>a+b,0)/vals.length;
+  let c,bg,sh;
+  if(avg>2){c='#00ff88';bg='#003319';sh='0 0 6px rgba(0,255,136,.3)'}
+  else if(avg>0){c='#00c853';bg='#001a0d';sh='none'}
+  else if(avg<-2){c='#ff1744';bg='#330010';sh='0 0 6px rgba(255,23,68,.3)'}
+  else{c='#ff5252';bg='#160008';sh='none'}
+  return `<span class="sector-avg" style="color:${c};background:${bg};box-shadow:${sh}">${avg>=0?'+':''}${avg.toFixed(2)}%</span>`;
+}
+
+function toggle(el){
+  const b=el.nextElementSibling;
+  const a=el.querySelector('.arrow');
+  b.classList.toggle('open');
+  a.classList.toggle('open');
+}
+function toggleChip(el){
+  el.querySelector('.sig-chip-body').classList.toggle('open');
+}
+
+// ── BUSCADOR — solo ticker exacto ────────────────────────
+function filterTickers(query){
+  const q      = query.trim().toUpperCase();
+  const banner = document.getElementById('searchBanner');
+  let   found  = null;  // primer row exacto encontrado
+
+  // Reset todo si vacío
+  if(!q){
+    document.querySelectorAll('tbody tr').forEach(r=>{
+      r.classList.remove('hidden-row','search-match');
+      r.style.display='';
+    });
+    document.querySelectorAll('.cell1h').forEach(c=>{
+      c.style.display=''; c.style.outline='';
+    });
+    document.querySelectorAll('.sector-wrap').forEach(s=>s.style.display='');
+    if(banner) banner.classList.remove('visible');
+    return;
+  }
+
+  // Filas de tablas — mostrar SOLO el ticker exacto
+  document.querySelectorAll('tbody tr').forEach(row=>{
+    const tkEl = row.querySelector('[class*="tk"]');
+    if(!tkEl){ row.style.display='none'; return; }
+    // Extraer solo el texto del ticker (ignorar img y texto del logo)
+    const spans = tkEl.querySelectorAll('div,span');
+    let tickerText = '';
+    if(spans.length){
+      spans.forEach(s=>{ if(!s.querySelector('img') && s.textContent.trim()) tickerText = s.textContent.trim(); });
+    }
+    if(!tickerText) tickerText = tkEl.textContent.replace(/[^A-Z0-9\-]/g,'').trim();
+    tickerText = tickerText.toUpperCase();
+
+    if(tickerText === q){
+      row.style.display = '';
+      row.classList.add('search-match');
+      if(!found) found = {ticker: q, row};
+    } else {
+      row.style.display = 'none';
+      row.classList.remove('search-match');
+    }
+  });
+
+  // Chips 1H — solo exacto
+  document.querySelectorAll('.cell1h').forEach(cell=>{
+    const t = (cell.querySelector('div')?.textContent||'').trim().toUpperCase();
+    if(t === q){
+      cell.style.display='';
+      cell.style.outline='2px solid #4f8ef7';
+    } else {
+      cell.style.display='none';
+      cell.style.outline='';
+    }
+  });
+
+  // Sectores — mostrar solo el que tiene el ticker, abrir automático
+  document.querySelectorAll('.sector-wrap').forEach(sw=>{
+    const hasTbl  = sw.querySelector('tbody');
+    const hasGrid = sw.querySelector('.grid1h');
+    let hasMatch  = false;
+    if(hasTbl)  hasMatch = [...sw.querySelectorAll('tbody tr')].some(r=>r.style.display!=='none');
+    if(hasGrid) hasMatch = [...sw.querySelectorAll('.cell1h')].some(c=>c.style.display!=='none');
+    sw.style.display = hasMatch ? '' : 'none';
+    if(hasMatch){
+      sw.querySelector('.sector-body')?.classList.add('open');
+      sw.querySelector('.arrow')?.classList.add('open');
+    }
+  });
+
+  // Banner info ticker
+  if(!banner) return;
+  if(!found){ banner.classList.remove('visible'); return; }
+
+  const d  = window._datos?.[q];
+  const g  = (typeof GLOSARIO !== 'undefined') ? GLOSARIO[q] : null;
+  const rc = g ? riesgoColor(g.riesgo) : '#4a4a7a';
+
+  banner.classList.add('visible');
+  const bc = document.getElementById('searchBannerContent');
+  if(bc) bc.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:${g?.desc?'4px':'0'}">
+      ${logoImg(q)}
+      <span style="color:#fff;font-size:15px;font-weight:700">${q}</span>
+      ${g ? `<span style="color:#7a7aaa;font-size:11px">${g.nombre}</span>` : ''}
+      ${g ? `<span style="color:${rc};font-size:10px;font-weight:700">● ${g.riesgo.toUpperCase()}</span>` : ''}
+      ${d ? `<span class="chg ${clsChg(d?.pct_dia)}">${fc(d?.pct_dia)}</span>` : ''}
+      ${d ? `<span class="rsi ${clsRsi(d?.rsi_1d)}">RSI ${fv(d?.rsi_1d,1)}</span>` : ''}
+      ${d?.rsi_1h ? `<span style="color:#4a4a7a;font-size:10px">1H: ${fv(d.rsi_1h,1)}</span>` : ''}
+      ${g?.pais ? `<span style="color:#3a3a5e;font-size:10px">${g.pais}</span>` : ''}
+    </div>
+    ${g?.desc ? `<div style="color:#6a6a9a;font-size:11px;line-height:1.5">${g.desc}</div>` : ''}`;
+
+  // Scroll al ticker encontrado
+  found.row.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function clearSearch(){
+  const box = document.getElementById('searchBox');
+  if(box){ box.value=''; filterTickers(''); }
+}
+
+function sectorCard(s,ts,dat,thHtml,rowFn){
+  const vt=ts.filter(t=>dat[t]);
+  if(!vt.length)return'';
+  return `<div class="sector-wrap">
+    <div class="sector-header" onclick="toggle(this)">
+      <span class="sector-name">${s}</span>
+      <span class="sector-right">${avgHtml(vt,dat)}<span class="arrow open">▶</span></span>
+    </div>
+    <div class="sector-body open">
+      <table><thead><tr>${thHtml}</tr></thead><tbody>
+        ${vt.map(t=>rowFn(t,dat[t])).join('')}
+      </tbody></table>
+    </div>
+  </div>`;
+}
+
+const thInd=`<th>Ticker</th><th>%Día</th><th>RSI</th><th>KONC</th>`;
+const REPO_RAW = 'https://raw.githubusercontent.com/juancg00ginversiones/JCGdashboard/main/';
+function logoImg(ticker){
+  return `<img class="tk-logo" src="${REPO_RAW}logos/${ticker}.png" onerror="this.src='${REPO_RAW}${ticker}.png';this.onerror=function(){this.style.display='none'}">`;
+}
+// Carteles de alerta histórica
+function alertaHistorica(rsiAlerta, marronAlerta){
+  let badges = '';
+  if(rsiAlerta === 'minimo')
+    badges += '<span style="background:#003319;color:#00ff88;font-size:8px;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;letter-spacing:.5px;vertical-align:middle;animation:pulse-green 1.5s infinite">RSI MÍN.HIST</span>';
+  if(rsiAlerta === 'maximo')
+    badges += '<span style="background:#330010;color:#ff1744;font-size:8px;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;letter-spacing:.5px;vertical-align:middle;animation:pulse-red 1.5s infinite">RSI MÁX.HIST</span>';
+  if(marronAlerta === 'minimo')
+    badges += '<span style="background:#003319;color:#00e676;font-size:8px;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;letter-spacing:.5px;vertical-align:middle">KNC MÍN.HIST</span>';
+  if(marronAlerta === 'maximo')
+    badges += '<span style="background:#330010;color:#ff6d00;font-size:8px;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;letter-spacing:.5px;vertical-align:middle">KNC MÁX.HIST</span>';
+  return badges;
+}
+
+function clsTicker(d){
+  const rsi=d.rsi_1d,mrn=d.marron;
+  const rg=rsi!==null&&rsi<=30, rr=rsi!==null&&rsi>=70;
+  const mg=mrn!==null&&mrn<0,   mr=mrn!==null&&mrn>105;
+  if(rg&&mg)return'tk-double-green';
+  if(rr&&mr)return'tk-double-red';
+  return'tk';
+}
+function rowSignalCls(d){
+  const rsi=d.rsi_1d,mrn=d.marron;
+  if((rsi!==null&&rsi<=30)||(mrn!==null&&mrn<0)) return 'row-buy';
+  if((rsi!==null&&rsi>=70)||(mrn!==null&&mrn>105)) return 'row-sell';
+  return '';
+}
+const rowInd=(t,d)=>`<tr data-ticker="${t}" class="${rowSignalCls(d)}">
+  <td class="${clsTicker(d)}" style="white-space:nowrap">${logoImg(t)}${t}${alertaHistorica(d.rsi_alerta,d.marron_alerta)}</td>
+  <td><span class="chg ${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td>
+  <td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td>
+  <td><span class="${clsMrn(d.marron)}">${fv(d.marron,1)}</span></td>
+</tr>`;
+
+const thMed=`<th>Ticker</th><th>%Día</th><th>RSI</th><th>EMA21</th><th>SMA30</th><th>EMA150</th><th>EMA200</th>`;
+const rowMed=(t,d)=>`<tr data-ticker="${t}" class="${rowSignalCls(d)}">
+  <td class="tk">${logoImg(t)}${t}</td>
+  <td><span class="chg ${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span></td>
+  <td><span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span></td>
+  <td><span class="${clsDist(d.dist_ema21)}">${fd(d.dist_ema21)}</span></td>
+  <td><span class="${clsDist(d.dist_sma30)}">${fd(d.dist_sma30)}</span></td>
+  <td><span class="${clsDist(d.dist_ema150)}">${fd(d.dist_ema150)}</span></td>
+  <td><span class="${clsDist(d.dist_ema200)}">${fd(d.dist_ema200)}</span></td>
+</tr>`;
+
+function renderGrid(sec,dat,thHtml,rowFn,lbl,isH1=false){
+  let h=`<div class="region">▸ ${lbl}</div><div class="sectors-grid">`;
+  for(const [s,ts] of Object.entries(sec)){
+    const vt=ts.filter(t=>dat[t]);
+    if(!vt.length)continue;
+    if(isH1){
+      h+=`<div class="sector-wrap">
+        <div class="sector-header" onclick="toggle(this)">
+          <span class="sector-name">${s}</span>
+          <span class="sector-right">${avgHtml(vt,dat)}<span class="arrow open">▶</span></span>
+        </div>
+        <div class="sector-body open"><div class="grid1h">${vt.map(t=>{
+          const d=dat[t];const v=d.rsi_1h;
+          return `<div class="cell1h ${cls1h(v)}" data-ticker="${t}"><div>${t}</div><div class="val1h">${v!=null?fv(v,1):'--'}</div></div>`;
+        }).join('')}</div></div>
+      </div>`;
+    } else {
+      h+=sectorCard(s,ts,dat,thHtml,rowFn);
+    }
+  }
+  return h+'</div>';
+}
+
+function histTable(hist){
+  if(!hist||!hist.resumen)return'';
+  let h=`<table><thead><tr><th>Tramo</th><th>Prom%</th><th>Prob%</th><th>N</th></tr></thead><tbody>`;
+  for(const r of hist.resumen){
+    h+=`<tr>
+      <td>${r.tramo}</td>
+      <td class="${clsRet(r.avg)}">${r.avg>=0?'+':''}${r.avg}%</td>
+      <td class="${r.prob>=55?'ret-pos':r.prob<=45?'ret-neg':'ret-neu'}">${r.prob}%</td>
+      <td style="color:#3a3a5e">${r.total}</td>
+    </tr>`;
+  }
+  return h+'</tbody></table>';
+}
+
+// ── SEMANAL ──────────────────────────────────────────────
+function clsRsiW(v){
+  if(v===null) return 'r-neu';
+  if(v<=20)  return 'r-sbv3';
+  if(v<=30)  return 'r-sbv2';
+  if(v<=45)  return 'r-sbv1';
+  if(v>=78)  return 'r-hi3';
+  if(v>=70)  return 'r-hi2';
+  if(v>=65)  return 'r-hi1';
+  return 'r-neu';
+}
+function clsMrnW(v){
+  if(v===null)return'm-neu';
+  if(v<0)return'm-mar';if(v<20)return'm-lo';
+  if(v<85)return'm-neu';if(v<=105)return'm-hi1';
+  return'm-hi2';
+}
+function clsDistW(v){
+  // Medias WMA10/EMA30/EMA50 — colores muy suaves
+  if(v===null)return'dw-neu';
+  if(v>0) return'dw-up';
+  if(v<0) return'dw-dn';
+  return'dw-neu';
+}
+function clsDistSMA200W(v){
+  // SMA200 semanal — más relevante
+  if(v===null)return'dw-neu';
+  if(v>0) return'dw-s200u';
+  if(v<0) return'dw-s200d';
+  return'dw-neu';
+}
+function clsTickerW(d){
+  const rsi=d.rsi_1w, mrn=d.marron_1w;
+  const rg=rsi!==null&&rsi<=30, rr=rsi!==null&&rsi>=70;
+  const mg=mrn!==null&&mrn<10,  mr=mrn!==null&&mrn>95;
+  if(rg&&mg)return'tk-double-green';
+  if(rr&&mr)return'tk-double-red';
+  return'tk';
+}
+
+const thSem=`<th>Ticker</th><th>%Sem</th><th>RSI W</th><th>KONC W</th><th>WMA10</th><th>EMA30</th><th>EMA50</th><th>SMA200</th>`;
+const rowSem=(t,d)=>`<tr data-ticker="${t}" class="${rowSignalCls(d)}">
+  <td class="${clsTickerW(d)}" style="white-space:nowrap">${logoImg(t)}${t}${alertaHistorica(d.rsi_alerta_1w,d.marron_alerta_1w)}</td>
+  <td><span class="chg ${clsChg(d.pct_semana)}">${fc(d.pct_semana)}</span></td>
+  <td><span class="rsi ${clsRsiW(d.rsi_1w)}">${fv(d.rsi_1w,1)}</span></td>
+  <td><span class="${clsMrnW(d.marron_1w)}">${fv(d.marron_1w,1)}</span></td>
+  <td><span class="${clsDistW(d.dist_wma10_1w)}">${fd(d.dist_wma10_1w)}</span></td>
+  <td><span class="${clsDistW(d.dist_ema30_1w)}">${fd(d.dist_ema30_1w)}</span></td>
+  <td><span class="${clsDistW(d.dist_ema50_1w)}">${fd(d.dist_ema50_1w)}</span></td>
+  <td><span class="${clsDistSMA200W(d.dist_sma200_1w)}">${fd(d.dist_sma200_1w)}</span></td>
+</tr>`;
+
+function isBuySignalW(d){
+  // Semanal: RSI <= 30 O KONCORD < 0
+  return (d.rsi_1w!==null&&d.rsi_1w<=30)||(d.marron_1w!==null&&d.marron_1w<0);
+}
+function isSellSignalW(d){
+  // Semanal: RSI >= 70 O KONCORD > 105
+  return (d.rsi_1w!==null&&d.rsi_1w>=70)||(d.marron_1w!==null&&d.marron_1w>105);
+}
+
+function renderSemanal(sec,dat,lbl){
+  let h=`<div class="region">▸ ${lbl}</div><div class="sectors-grid">`;
+  for(const [s,ts] of Object.entries(sec)){
+    const vt=ts.filter(t=>dat[t]&&dat[t].rsi_1w!==null);
+    if(!vt.length)continue;
+    h+=sectorCard(s,vt,dat,thSem,rowSem);
+  }
+  return h+'</div>';
+}
+
+function metodoDiario(d){
+  // Necesita datos de medias
+  if(d.rsi_1d===null||d.marron===null) return false;
+  // RSI debe estar cruzando al alza su WMA21 — entrada fresca
+  if(!d.rsi_cruza_alza) return false;
+  // Anuladores
+  if(d.rsi_1d >= 65)   return false;  // RSI saturado
+  if(d.marron >= 100)  return false;  // KONCORD saturado
+
+  const dists = [
+    {n:'EMA21',  v: d.dist_ema21},
+    {n:'SMA30',  v: d.dist_sma30},
+    {n:'EMA150', v: d.dist_ema150},
+    {n:'EMA200', v: d.dist_ema200},
+  ].filter(x => x.v !== null);
+
+  if(!dists.length) return false;
+
+  // Precio debe estar arriba de al menos una media
+  const superaAlguna = dists.some(x => x.v > 0);
+  if(!superaAlguna) return false;
+
+  // No debe haber ninguna media por encima a menos de 5%
+  const mediaArriba = dists.some(x => x.v < 0 && x.v > -5);
+  if(mediaArriba) return false;
+
+  return true;
+}
+
+function renderSenales(data){
+  const {senales_wt=[],senales_rsi=[],datos={}}=data;
+  let h='';
+  h+=`<div class="sig-section-title">◈ WAVETREND — CRUCES ALCISTAS 1D</div>`;
+  if(!senales_wt.length){
+    h+=`<div class="no-sig">Sin cruces alcistas detectados</div>`;
+  } else {
+    h+=`<div class="sig-grid">`;
+    for(const s of senales_wt){
+      const cls=s.signal.tipo==='FUERTE'?'wt-fuerte':'wt-normal';
+      h+=`<div class="sig-chip ${cls}" onclick="toggleChip(this)">
+        <div class="sig-chip-head">
+          <div class="chip-ticker">${s.ticker}</div>
+          <div class="chip-sub">WT ${s.signal.tipo} · ${s.signal.momento}</div>
+        </div>
+        <div class="sig-chip-body">
+          <div class="chip-meta">RSI: ${fv(s.rsi_1d,1)} · WT2: ${s.signal.wt2} · ${s.sector}</div>
+        </div>
+      </div>`;
+    }
+    h+=`</div>`;
+  }
+
+  // ── Método Diario ──────────────────────────────────────
+  h+=`<div class="sig-section-title" style="margin-top:18px">◈ MÉTODO DIARIO — SEÑALES DE COMPRA</div>`;
+  const metodoBuy=Object.entries(datos||{}).filter(([t,d])=>metodoDiario(d));
+  if(!metodoBuy.length){
+    h+=`<div class="no-sig">Sin señales de método diario en este momento</div>`;
+  } else {
+    h+=`<div class="sig-grid">`;
+    for(const [t,d] of metodoBuy){
+      const mediasOk=[
+        d.dist_ema21 >0?'EMA21' :null,
+        d.dist_sma30 >0?'SMA30' :null,
+        d.dist_ema150>0?'EMA150':null,
+        d.dist_ema200>0?'EMA200':null,
+      ].filter(Boolean).join(' · ');
+      h+=`<div class="sig-chip rsi-sbv" onclick="toggleChip(this)">
+        <div class="sig-chip-head">
+          <div class="chip-ticker">${logoImg(t)}${t}</div>
+          <div class="chip-sub">RSI ✕ WMA21 ↑</div>
+        </div>
+        <div class="sig-chip-body">
+          <div class="chip-meta">RSI: ${fv(d.rsi_1d,1)} · KONC: ${fv(d.marron,1)} · ${d.sector||''}</div>
+          <div class="chip-meta" style="color:#00c853;margin-top:4px">Sobre: ${mediasOk}</div>
+          <div class="chip-meta" style="color:#3a3a5e;margin-top:2px">${fc(d.pct_dia)}</div>
+        </div>
+      </div>`;
+    }
+    h+=`</div>`;
+  }
+
+  // ── RSI Extremo ─────────────────────────────────────────
+  h+=`<div class="sig-section-title" style="margin-top:18px">◈ RSI EN ZONA EXTREMA — ANÁLISIS HISTÓRICO</div>`;
+  h+=`<div style="font-size:10px;color:#3a3a5e;margin-bottom:10px;line-height:1.8">
+    Tickers cuyo RSI está en zona extrema (&lt;32 sobreventa / &gt;68 sobrecompra).
+    Muestra qué pasó históricamente <b style="color:#5a5a8a">los 10 últimos años</b> cada vez que el RSI tocó ese nivel.
+    <span style="margin-left:8px;color:#4a4a7a">
+      <b style="color:#5a5a8a">Prom%</b> = rendimiento promedio posterior ·
+      <b style="color:#5a5a8a">Prob%</b> = % de veces que el precio subió ·
+      <b style="color:#5a5a8a">N</b> = eventos históricos contabilizados
+    </span>
+  </div>`;
+  if(!senales_rsi.length){
+    h+=`<div class="no-sig">Sin tickers en zona extrema de RSI en este momento</div>`;
+  } else {
+    h+=`<div style="width:100%;overflow-x:auto"><table style="width:100%;border-collapse:collapse;min-width:800px">
+      <thead>
+        <tr style="background:#0a0a14;border-bottom:1px solid #1a1a2e">
+          <th style="text-align:left;padding:7px 14px;font-size:9px;color:#3a3a5e;letter-spacing:1px;min-width:130px">TICKER</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#3a3a5e;letter-spacing:1px">RSI</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#3a3a5e;letter-spacing:1px">ZONA</th>
+          <th style="text-align:right;padding:7px 10px;font-size:9px;color:#3a3a5e;letter-spacing:1px">%DÍA</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px;border-left:1px solid #1a1a2e">Al día sig.</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px">Prom% 1d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px">Prob% 1d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px;border-left:1px solid #1a1a2e">A 2 días</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px">Prom% 2d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px">Prob% 2d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px;border-left:1px solid #1a1a2e">A 5 días</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px">Prom% 5d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#4f8ef7;letter-spacing:1px">Prob% 5d</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px;border-left:1px solid #1a1a2e">Al mes</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px">Prom% 1m</th>
+          <th style="text-align:center;padding:7px 10px;font-size:9px;color:#7a7ab0;letter-spacing:1px">Prob% 1m</th>
+          <th style="text-align:right;padding:7px 10px;font-size:9px;color:#3a3a5e;letter-spacing:1px">Eventos</th>
+        </tr>
+      </thead><tbody>`;
+
+    for(const s of senales_rsi){
+      const esOver = s.rsi_1d >= 68;
+      const zonaColor = esOver ? '#ff1744' : '#00ff88';
+      const zonaLbl   = esOver ? '🔴 SOBRE' : '🟢 SUB';
+      const hist = s.hist;
+
+      function tramoCell(tramo, borderLeft){
+        const bl = borderLeft ? 'border-left:1px solid #111128;' : '';
+        if(!hist || !hist.resumen){ return `<td style="${bl}text-align:center;color:#1a1a2e;padding:5px 10px" colspan="3">—</td>`; }
+        const r = hist.resumen.find(x=>x.tramo===tramo);
+        if(!r){ return `<td style="${bl}text-align:center;color:#1a1a2e;padding:5px 10px" colspan="3">—</td>`; }
+        const pCls = r.avg>0 ? 'color:#00c853;font-weight:700' : 'color:#ff5252;font-weight:700';
+        const prCls = r.prob>=55 ? 'color:#00c853' : r.prob<=45 ? 'color:#ff5252' : 'color:#4a4a7a';
+        return `<td style="${bl}text-align:center;padding:5px 10px;font-size:11px">
+            <span style="${pCls}">${r.avg>=0?'+':''}${r.avg}%</span>
+          </td>
+          <td style="text-align:center;padding:5px 10px;font-size:11px">
+            <span style="${prCls}">${r.prob}%</span>
+          </td>
+          <td style="text-align:center;padding:5px 10px;color:#2a2a4a;font-size:10px">${r.total}</td>`;
+      }
+
+      h+=`<tr style="border-bottom:1px solid rgba(15,15,30,.8)">
+        <td style="padding:6px 14px;white-space:nowrap">
+          <div style="display:flex;align-items:center;gap:7px">
+            ${logoImg(s.ticker)}
+            <span style="color:#c8ccd8;font-weight:700;font-size:12px">${s.ticker}</span>
+            <span style="color:#2a2a4a;font-size:9px">${s.sector||''}</span>
+          </div>
+        </td>
+        <td style="text-align:center;padding:6px 10px">
+          <span class="rsi ${clsRsi(s.rsi_1d)}">${fv(s.rsi_1d,1)}</span>
+        </td>
+        <td style="text-align:center;padding:6px 10px">
+          <span style="color:${zonaColor};font-size:10px;font-weight:700">${zonaLbl}</span>
+        </td>
+        <td style="text-align:right;padding:6px 10px">
+          <span class="chg ${clsChg(s.pct_dia)}">${fc(s.pct_dia)}</span>
+        </td>
+        ${tramoCell('1d', true)}
+        ${tramoCell('2d', true)}
+        ${tramoCell('5d', true)}
+        ${tramoCell('1m', true)}
+        <td style="text-align:right;padding:6px 10px;color:#3a3a5e;font-size:10px">${hist?hist.total_eventos+' hist.':'—'}</td>
+      </tr>`;
+    }
+    h+=`</tbody></table></div>`;
+  }
+  return h;
+}
+
+// ── FILTRO COMPRA / VENTA ────────────────────────────────
+let activeFilter = null;
+window._activeTab = 'ind';
+
+function setFilter(type, btn){
+  activeFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn && type) btn.classList.add('active');
+  applyFilter();
+}
+
+function isBuySignal(d){
+  // Oportunidad: RSI <= 30 O KONCORD < 0
+  const rsi=d.rsi_1d, mrn=d.marron;
+  return (rsi!==null && rsi<=30) || (mrn!==null && mrn<0);
+}
+function isSellSignal(d){
+  // Sobrecompra: RSI >= 70 O KONCORD > 105
+  const rsi=d.rsi_1d, mrn=d.marron;
+  return (rsi!==null && rsi>=70) || (mrn!==null && mrn>105);
+}
+
+function applyFilter(){
+  const tab = window._activeTab || 'ind';
+  const prefix = tab==='h1' ? '' : '';
+
+  // Filas de tabla (ind y med)
+  if(tab==='ind'||tab==='med'){
+    document.querySelectorAll('#'+tab+' tbody tr').forEach(row=>{
+      if(row.classList.contains('hidden-row')) return;
+      const t=row.getAttribute('data-ticker');
+      if(!t||!window._datos||!window._datos[t]){row.style.display=activeFilter?'none':'';return;}
+      const d=window._datos[t];
+      if(!activeFilter){row.style.display='';return;}
+      const match = activeFilter==='buy' ? isBuySignal(d) : isSellSignal(d);
+      row.style.display = match ? '' : 'none';
+    });
+    document.querySelectorAll('#'+tab+' .sector-wrap').forEach(sw=>{
+      if(!sw.querySelector('tbody'))return;
+      const vis=[...sw.querySelectorAll('tbody tr')].filter(r=>r.style.display!=='none'&&!r.classList.contains('hidden-row'));
+      sw.style.display=vis.length===0&&activeFilter?'none':'';
+      if(vis.length>0&&activeFilter){
+        sw.querySelector('.sector-body').classList.add('open');
+        const arr=sw.querySelector('.arrow');if(arr)arr.classList.add('open');
+      }
+    });
+  }
+
+  // Chips 1H
+  if(tab==='sem'){
+    document.querySelectorAll('#sem tbody tr').forEach(row=>{
+      if(row.classList.contains('hidden-row'))return;
+      const t=row.getAttribute('data-ticker');
+      if(!t||!window._datos||!window._datos[t]){row.style.display=activeFilter?'none':'';return;}
+      const d=window._datos[t];
+      if(!activeFilter){row.style.display='';return;}
+      const match=activeFilter==='buy'?isBuySignalW(d):isSellSignalW(d);
+      row.style.display=match?'':'none';
+    });
+    document.querySelectorAll('#sem .sector-wrap').forEach(sw=>{
+      if(!sw.querySelector('tbody'))return;
+      const vis=[...sw.querySelectorAll('tbody tr')].filter(r=>r.style.display!=='none'&&!r.classList.contains('hidden-row'));
+      sw.style.display=vis.length===0&&activeFilter?'none':'';
+      if(vis.length>0&&activeFilter){
+        sw.querySelector('.sector-body').classList.add('open');
+        const arr=sw.querySelector('.arrow');if(arr)arr.classList.add('open');
+      }
+    });
+  }
+
+  if(tab==='h1'){
+    document.querySelectorAll('#h1 .cell1h').forEach(cell=>{
+      const t=cell.getAttribute('data-ticker');
+      if(!t||!window._datos||!window._datos[t]){cell.style.display=activeFilter?'none':'';return;}
+      const d=window._datos[t];
+      if(!activeFilter){cell.style.display='';return;}
+      // RSI 1H: usa SOLO el RSI horario, no el diario ni el KONCORD
+      const rsi1h=d.rsi_1h;
+      const buy1h  = rsi1h!==null && rsi1h<=30;
+      const sell1h = rsi1h!==null && rsi1h>=70;
+      const match  = activeFilter==='buy' ? buy1h : sell1h;
+      cell.style.display=match?'':'none';
+    });
+    // ocultar sectores sin chips visibles
+    document.querySelectorAll('#h1 .sector-wrap').forEach(sw=>{
+      const grid=sw.querySelector('.grid1h');if(!grid)return;
+      const vis=[...grid.querySelectorAll('.cell1h')].filter(c=>c.style.display!=='none');
+      sw.style.display=vis.length===0&&activeFilter?'none':'';
+      if(vis.length>0&&activeFilter){
+        sw.querySelector('.sector-body').classList.add('open');
+        const arr=sw.querySelector('.arrow');if(arr)arr.classList.add('open');
+      }
+    });
+  }
+}
+
+function updateFilterCounts(datos){
+  let buy=0, sell=0;
+  Object.values(datos).forEach(d=>{
+    if(isBuySignal(d))  buy++;
+    if(isSellSignal(d)) sell++;
+  });
+  document.getElementById('cnt-buy').textContent  = buy  ? '('+buy+')' : '';
+  document.getElementById('cnt-sell').textContent = sell ? '('+sell+')': '';
+}
+
+// ── FUNDAMENTAL ──────────────────────────────────────────
+const FUN_URL = 'https://juancg00ginversiones.github.io/JCGdashboard/fundamental_data.json';
+
+function scoreColor(s){
+  if(s===null||s===undefined) return '#2a2a4a';
+  if(s>=3)  return '#00ff88';
+  if(s>=2)  return '#00c853';
+  if(s>=1)  return '#69f0ae';
+  if(s===0) return '#4a4a7a';
+  if(s>=-1) return '#ff8a50';
+  if(s>=-2) return '#ff5252';
+  return '#ff1744';
+}
+function scoreBg(s){
+  if(s===null||s===undefined) return 'transparent';
+  if(s>=2)  return 'rgba(0,255,136,.08)';
+  if(s>=1)  return 'rgba(0,200,100,.05)';
+  if(s===0) return 'transparent';
+  if(s>=-1) return 'rgba(255,100,0,.06)';
+  return 'rgba(255,23,68,.08)';
+}
+function fmtFun(v, suffix){
+  if(v===null||v===undefined) return '<span style="color:#2a2a4a">—</span>';
+  return v + (suffix||'');
+}
+function scoreCell(v, s, suffix){
+  const c = scoreColor(s);
+  const bg = scoreBg(s);
+  const val = (v===null||v===undefined) ? '—' : v+(suffix||'');
+  return `<span style="color:${c};background:${bg};padding:1px 5px;border-radius:2px;font-size:11px">${val}</span>`;
+}
+function globalScoreHtml(s){
+  const c = scoreColor(s);
+  const label = s>=2?'FUERTE':s>=1?'BUENO':s===0?'NEUTRO':s>=-1?'DÉBIL':'NEGATIVO';
+  return `<span style="color:${c};font-weight:700;font-size:11px;padding:2px 8px;background:${scoreBg(s)};border-radius:2px">${s>0?'+':''}${s} ${label}</span>`;
+}
+
+function renderFundamental(funData){
+  if(!funData||!funData.datos) return '<div class="err">❌ No se encontró fundamental_data.json</div>';
+  const {sectores, datos, actualizado} = funData;
+
+  // ── Leyenda explicativa ──────────────────────────────────
+  const leyenda = `<div style="background:#0d0d18;border:1px solid #1a1a2e;border-radius:4px;padding:12px 16px;margin-bottom:14px;font-size:10px;line-height:2">
+    <div style="color:#7a7ab0;font-size:11px;font-weight:700;letter-spacing:2px;margin-bottom:8px">◈ GUÍA DE RATIOS — QUÉ SIGNIFICA CADA COLUMNA</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:6px 20px">
+      <div><span style="color:#4f8ef7;font-weight:700">P/E</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Precio ÷ Ganancia. Cuánto pagás por cada $ de ganancia. Menor = más barato.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">P/E fwd</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">P/E estimado con ganancias futuras. Si es menor al P/E actual, se espera que gane más.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">P/B</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Precio ÷ Valor libro. Cuánto pagás vs lo que vale contablemente. Menor = más barato.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">P/S</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Precio ÷ Ventas. Útil para empresas sin ganancias aún. Menor = más barato.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">ROE%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Retorno sobre capital propio. Qué tan bien usa el dinero de los accionistas. Mayor = mejor.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Margen%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">% de ganancia neta sobre ventas. Qué queda de cada $ vendido. Mayor = mejor negocio.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Deuda/Eq</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Deuda ÷ Capital propio. Cuánta deuda tiene vs su patrimonio. Menor = más sólida.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">EPS</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Ganancia por acción (últimos 12 meses). Más alto y creciendo = mejor.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">EPS fwd</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Ganancia por acción estimada próximo año. Si sube vs EPS actual, la empresa crece.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Rev.G%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Crecimiento de ventas año vs año. Positivo y alto = empresa en expansión.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Yield%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Dividendo anual ÷ Precio. Rentabilidad del dividendo. Mayor = más ingreso pasivo.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Yield10Y%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Yield promedio histórico 10 años. Si el actual es mayor, la acción está barata vs historia.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Payout%</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">% de ganancias que se pagan como dividendo. Muy alto (+80%) puede ser insostenible.</span></div>
+      <div><span style="color:#4f8ef7;font-weight:700">Score</span> <span style="color:#4a4a7a">·</span> <span style="color:#6a6a9a">Puntuación global del -4 al +4. Verde = buenos fundamentos. Rojo = cara o deteriorada.</span></div>
+    </div>
+    <div style="margin-top:8px;color:#3a3a5e">
+      Colores: 
+      <span style="color:#00ff88">+3/+4 excelente</span> · 
+      <span style="color:#00c853">+2 bueno</span> · 
+      <span style="color:#69f0ae">+1 ok</span> · 
+      <span style="color:#4a4a7a">0 neutro</span> · 
+      <span style="color:#ff8a50">-1 cuidado</span> · 
+      <span style="color:#ff1744">-2/-3 caro/malo</span>
+    </div>
+  </div>`;
+  let h = leyenda;
+  h += `<div style="font-size:10px;color:#2a2a4a;margin-bottom:10px">Act: ${actualizado} — Fuente: Yahoo Finance</div>`;
+
+  const thF = `<th style="text-align:left;min-width:110px">Ticker</th>
+    <th>P/E</th><th>P/E fwd</th><th>P/B</th><th>P/S</th>
+    <th>ROE%</th><th>Margen%</th><th>Deuda/Eq</th>
+    <th>EPS</th><th>EPS fwd</th><th>Rev.G%</th>
+    <th>Yield%</th><th>Yield 10Y%</th><th>Payout%</th>
+    <th>Score</th>`;
+
+  h += `<div style="width:100%;overflow-x:auto">`;
+  for(const [sector, tickers] of Object.entries(sectores)){
+    const vt = tickers.filter(t=>datos[t]);
+    if(!vt.length) continue;
+    h += `<div style="margin-bottom:20px">
+      <div style="font-family:var(--sans);font-size:14px;font-weight:700;
+                  color:#8888c0;letter-spacing:2px;padding:8px 14px;
+                  background:#0d0d18;border-left:3px solid #4f8ef7;margin-bottom:2px">
+        ${sector}
+      </div>
+      <table style="width:100%;border-collapse:collapse;min-width:900px">
+        <thead><tr style="background:#0a0a14">${thF}</tr></thead><tbody>`;
+    for(const t of vt){
+      const d = datos[t];
+      h += `<tr data-ticker="${t}" style="border-bottom:1px solid rgba(15,15,30,.8)">
+        <td style="text-align:left;padding:5px 12px;white-space:nowrap" class="tk">${logoImg(t)}${t}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.pe,d.score_pe)}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.pe_fwd)}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.pb,d.score_pb)}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.ps,d.score_ps)}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.roe,d.score_roe,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.margen,d.score_margen,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.deuda_eq,d.score_deuda)}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.eps)}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.eps_fwd)}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.revenue_g,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${scoreCell(d.div_yield,d.score_yield,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.avg_yield_10y,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${fmtFun(d.payout,'%')}</td>
+        <td style="text-align:right;padding:5px 12px">${globalScoreHtml(d.score_global)}</td>
+      </tr>`;
+    }
+    h += `</tbody></table></div>`;
+  }
+  h += `</div>`;
+
+  // Leyenda scores
+  h += `<div style="margin-top:14px;font-size:10px;color:#4a4a7a;padding:8px 0;border-top:1px solid #1a1a2e">
+    <span style="margin-right:16px">Score: </span>
+    ${[4,3,2,1,0,-1,-2,-3].map(s=>`<span style="color:${scoreColor(s)};margin-right:10px">${s>0?'+':''}${s}</span>`).join('')}
+    — cuanto más verde, mejor el ratio
+  </div>`;
+
+  return h;
+}
+
+function nextUpdate(){
+  const now=new Date(),next=new Date(now);
+  next.setMinutes(40,0,0);
+  if(next<=now)next.setHours(next.getHours()+1);
+  document.getElementById('next-upd').textContent='próx. ~'+Math.round((next-now)/60000)+'min';
+}
+
+async function loadData(){
+  try{
+    const resp=await fetch(JSON_URL+'?t='+Date.now());
+    if(!resp.ok)throw new Error('HTTP '+resp.status);
+    const data=await resp.json();
+    const{sectores_usa,sectores_world,datos,actualizado}=data;
+    if(!datos||!Object.keys(datos).length)throw new Error('Sin datos aún');
+    // Hora ya viene en AR desde el Python (UTC-3 aplicado al generar)
+    const parts = actualizado.split(' ');
+    const dispTime = parts.length===2
+      ? parts[0].split('-').slice(1).join('/') + ' ' + parts[1] + ' AR'
+      : actualizado;
+    document.getElementById('upd-time').textContent = '🕐 ' + dispTime;
+    window._datos = datos;
+    document.getElementById('filterBar').style.display='flex';
+    updateFilterCounts(datos);
+    document.getElementById('tcnt').textContent=Object.keys(datos).length+' tickers';
+    document.getElementById('ind').innerHTML=renderGrid(sectores_usa,datos,thInd,rowInd,'USA')+renderGrid(sectores_world,datos,thInd,rowInd,'MUNDIAL');
+    document.getElementById('med').innerHTML=renderGrid(sectores_usa,datos,thMed,rowMed,'USA')+renderGrid(sectores_world,datos,thMed,rowMed,'MUNDIAL');
+    document.getElementById('h1').innerHTML=renderGrid(sectores_usa,datos,null,null,'USA',true)+renderGrid(sectores_world,datos,null,null,'MUNDIAL',true);
+    document.getElementById('sig').innerHTML=renderSenales({...data, datos});
+    document.getElementById('sem').innerHTML=renderSemanal(sectores_usa,datos,'USA')+renderSemanal(sectores_world,datos,'MUNDIAL');
+    // re-aplicar filtro si había algo escrito
+    const q=document.getElementById('searchBox').value;
+    if(q)filterTickers(q);
+    if(activeFilter) applyFilter();
+    nextUpdate();
+
+    // Cargar fundamental por separado (archivo separado)
+    fetch(FUN_URL+'?t='+Date.now())
+      .then(r=>r.ok?r.json():null)
+      .then(funData=>{
+        document.getElementById('fun').innerHTML = funData
+          ? renderFundamental(funData)
+          : '<div class="err">❌ Corré fundamental.py y subí fundamental_data.json al repo</div>';
+      })
+      .catch(()=>{
+        document.getElementById('fun').innerHTML =
+          '<div class="err">❌ Corré fundamental.py y subí fundamental_data.json al repo</div>';
+      });
+  }catch(e){
+    ['ind','med','h1','sig'].forEach(id=>{
+      document.getElementById(id).innerHTML=`<div class="err">❌ ${e.message}</div>`;
+    });
+  }
+}
+
+function sw(id,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  // mostrar botones solo en INDICADORES
+  const fb=document.getElementById('filterBar');
+  if(fb) fb.style.display = (['ind','med','h1','sem'].includes(id) && window._datos) ? 'flex' : 'none';
+  window._activeTab = id;
+  // re-aplicar filtro al cambiar pestaña
+  const q=document.getElementById('searchBox').value;
+  if(q)filterTickers(q);
+}
+
+loadData();
+setInterval(loadData,60*60*1000);
+
+// ── MODO DÍA/NOCHE ───────────────────────────────────────
+function toggleDayMode(){
+  const body = document.body;
+  const btn  = document.getElementById('dayModeBtn');
+  const isDay = body.classList.toggle('day-mode');
+  btn.textContent = isDay ? '🌙 NOCHE' : '☀ DÍA';
+  btn.style.borderColor = isDay ? 'rgba(79,142,247,.3)' : 'rgba(255,200,0,.25)';
+  btn.style.color = isDay ? '#4f8ef7' : '#ffd600';
+  localStorage.setItem('jcg-daymode', isDay ? '1' : '0');
+}
+
+// ── TAMAÑO DE LETRA ──────────────────────────────────────
+function setFontSize(size){
+  document.body.classList.remove('fs-lg','fs-xl');
+  if(size === 'lg') document.body.classList.add('fs-lg');
+  if(size === 'xl') document.body.classList.add('fs-xl');
+  localStorage.setItem('jcg-fontsize', size);
+}
+
+// Restaurar preferencias guardadas
+(function(){
+  const day  = localStorage.getItem('jcg-daymode');
+  const fs   = localStorage.getItem('jcg-fontsize');
+  if(day === '1'){
+    document.body.classList.add('day-mode');
+    const btn = document.getElementById('dayModeBtn');
+    if(btn){ btn.textContent='🌙 NOCHE'; btn.style.color='#4f8ef7'; btn.style.borderColor='rgba(79,142,247,.3)'; }
+  }
+  if(fs === 'lg') document.body.classList.add('fs-lg');
+  if(fs === 'xl') document.body.classList.add('fs-xl');
+})();
+
+// Esperar a que la lib de Supabase cargue antes de inicializar auth
+window.addEventListener('load', function(){
+  if(typeof supabase !== 'undefined'){
+    initAuth();
+  } else {
+    // retry
+    setTimeout(initAuth, 1000);
+  }
+});
+
+// ══════════════════════════════════════════════════════════
+// SUPABASE — AUTH + WATCHLIST
+// ══════════════════════════════════════════════════════════
+const SUPA_URL = 'https://opolgengetoypyecfdos.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wb2xnZW5nZXRveXB5ZWNmZG9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczMDA5NzEsImV4cCI6MjA5Mjg3Njk3MX0.fzNu-b1Wuek1RKtEyZl7fZQxLkyY6xpuWmw_On2us7k';
+let supa = null;
+
+let currentUser = null;
+
+// ── Inicializar auth ─────────────────────────────────────
+// Login directo desde la landing
+async function doLoginFromLanding(){
+  const email     = document.getElementById('landEmail').value.trim().toLowerCase();
+  const comitente = document.getElementById('landComitente').value.trim();
+  const password  = document.getElementById('landPassword').value;
+  const errEl     = document.getElementById('landErr');
+  errEl.textContent = '';
+  if(!email||!comitente||!password){ errEl.textContent='Completá todos los campos'; return; }
+
+  const { data: usuario } = await supa.from('usuarios_dashboard').select('id,activo')
+    .eq('usuario', email).eq('cuenta_comitente', comitente).maybeSingle();
+  if(!usuario){ errEl.textContent='Email o comitente no autorizado'; return; }
+  if(!usuario.activo){ errEl.textContent='Cuenta suspendida. Contactá a JCG'; return; }
+
+  const { error } = await supa.auth.signInWithPassword({ email, password });
+  if(error) errEl.textContent = error.message.includes('Invalid') ? 'Contraseña incorrecta' : error.message;
+}
+
+function showRegisterFromLanding(){
+  document.getElementById('landingPage').style.display = 'none';
+  showAuthOverlay();
+  showRegister();
+}
+
+function showForgotFromLanding(){
+  document.getElementById('landingPage').style.display = 'none';
+  showAuthOverlay();
+  showForgot();
+}
+
+function showLoginFromLanding(){
+  document.getElementById('landingPage').style.display = 'none';
+  showAuthOverlay();
+}
+
+async function initAuth(){
+  // Inicializar cliente Supabase aquí para asegurar que la lib ya cargó
+  supa = supabase.createClient(SUPA_URL, SUPA_KEY);
+  const { data: { session } } = await supa.auth.getSession();
+  if(session?.user){
+    await onLogin(session.user);
+  } else {
+    // Mostrar landing page primero
+    document.getElementById('landingPage').style.display = 'block';
+  }
+  supa.auth.onAuthStateChange(async (event, session) => {
+    if(event === 'SIGNED_IN' && session?.user){
+      await onLogin(session.user);
+    } else if(event === 'SIGNED_OUT'){
+      onLogout();
+    }
+  });
+}
+
+function showAuthOverlay(){
+  document.getElementById('authOverlay').classList.add('visible');
+}
+function hideAuthOverlay(){
+  document.getElementById('authOverlay').classList.remove('visible');
+  document.getElementById('landingPage').style.display = 'none';
+}
+
+function showForgot(){
+  document.getElementById('authForm').style.display='none';
+  document.getElementById('registerForm').style.display='none';
+  document.getElementById('forgotForm').style.display='block';
+}
+function showRegister(){
+  document.getElementById('authForm').style.display='none';
+  document.getElementById('registerForm').style.display='block';
+}
+function showLogin(){
+  document.getElementById('authForm').style.display='block';
+  document.getElementById('registerForm').style.display='none';
+  document.getElementById('forgotForm').style.display='none';
+}
+
+// ── LOGIN ────────────────────────────────────────────────
+async function doLogin(){
+  const email    = document.getElementById('authEmail').value.trim().toLowerCase();
+  const comitente= document.getElementById('authComitente').value.trim();
+  const password = document.getElementById('authPassword').value;
+  const errEl    = document.getElementById('authErr');
+  errEl.textContent = '';
+
+  if(!email||!comitente||!password){
+    errEl.textContent='Completá todos los campos'; return;
+  }
+
+  // Verificar que el email + comitente existan en la tabla
+  const { data: usuario, error: err1 } = await supa
+    .from('usuarios_dashboard')
+    .select('id,activo')
+    .eq('usuario', email)
+    .eq('cuenta_comitente', comitente)
+    .maybeSingle();
+
+  if(err1||!usuario){
+    errEl.textContent='Email o número de comitente no autorizado'; return;
+  }
+  if(!usuario.activo){
+    errEl.textContent='Cuenta suspendida. Contactá al administrador'; return;
+  }
+
+  const { error: err2 } = await supa.auth.signInWithPassword({ email, password });
+  if(err2){
+    errEl.textContent = err2.message.includes('Invalid') ? 'Contraseña incorrecta' : err2.message;
+  }
+}
+
+// ── REGISTRO ─────────────────────────────────────────────
+async function doRegister(){
+  const email    = document.getElementById('regEmail').value.trim().toLowerCase();
+  const comitente= document.getElementById('regComitente').value.trim();
+  const pass1    = document.getElementById('regPass1').value;
+  const pass2    = document.getElementById('regPass2').value;
+  const errEl    = document.getElementById('regErr');
+  const okEl     = document.getElementById('regOk');
+  errEl.textContent=''; okEl.textContent='';
+
+  if(!email||!comitente||!pass1||!pass2){
+    errEl.textContent='Completá todos los campos'; return;
+  }
+  if(pass1 !== pass2){
+    errEl.textContent='Las contraseñas no coinciden'; return;
+  }
+  if(pass1.length < 6){
+    errEl.textContent='La contraseña debe tener al menos 6 caracteres'; return;
+  }
+
+  // Verificar autorización
+  const { data: usuario } = await supa
+    .from('usuarios_dashboard')
+    .select('id,activo')
+    .eq('usuario', email)
+    .eq('cuenta_comitente', comitente)
+    .maybeSingle();
+
+  if(!usuario){
+    errEl.textContent='Email o comitente no registrado. Contactá al administrador'; return;
+  }
+  if(!usuario.activo){
+    errEl.textContent='Cuenta suspendida. Contactá al administrador'; return;
+  }
+
+  const { data: authData, error: err } = await supa.auth.signUp({ email, password: pass1 });
+  if(err){
+    errEl.textContent = err.message; return;
+  }
+
+  // Vincular auth_user_id a la tabla
+  if(authData.user){
+    await supa.from('usuarios_dashboard')
+      .update({ auth_user_id: authData.user.id })
+      .eq('id', usuario.id);
+  }
+
+  okEl.textContent='✅ Cuenta creada. Ya podés ingresar con tu contraseña.';
+  setTimeout(()=>showLogin(), 2000);
+}
+
+// ── RECUPERAR CONTRASEÑA ────────────────────────────────
+async function doForgot(){
+  const email  = document.getElementById('forgotEmail').value.trim().toLowerCase();
+  const errEl  = document.getElementById('forgotErr');
+  const okEl   = document.getElementById('forgotOk');
+  errEl.textContent=''; okEl.textContent='';
+  if(!email){ errEl.textContent='Ingresá tu email'; return; }
+
+  const { error } = await supa.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://juancg00ginversiones.github.io/JCGdashboard/'
+  });
+
+  if(error){ errEl.textContent = error.message; }
+  else { okEl.textContent='✅ Te enviamos un link para resetear tu contraseña. Revisá tu email.'; }
+}
+
+// ── LOGOUT ───────────────────────────────────────────────
+async function doLogout(){
+  await supa.auth.signOut();
+}
+
+// ── ON LOGIN ─────────────────────────────────────────────
+async function onLogin(user){
+  currentUser = user;
+  hideAuthOverlay();
+  document.getElementById('userBar').classList.add('visible');
+  document.getElementById('userEmail').textContent = user.email;
+
+  // Verificar vencimiento
+  await checkExpiry(user);
+
+  if(document.getElementById('wl').classList.contains('active')){
+    renderWatchlist();
+  }
+}
+
+async function checkExpiry(user){
+  try {
+    const { data } = await supa
+      .from('usuarios_dashboard')
+      .select('fecha_vencimiento')
+      .eq('auth_user_id', user.id)
+      .maybeSingle();
+
+    if(!data || !data.fecha_vencimiento) return;
+
+    const vence    = new Date(data.fecha_vencimiento);
+    const hoy      = new Date();
+    const diffMs   = vence - hoy;
+    const diffDias = Math.ceil(diffMs / (1000*60*60*24));
+    const banner   = document.getElementById('expiryBanner');
+    const msg      = document.getElementById('expiryMsg');
+
+    if(diffDias <= 0){
+      // Vencida
+      banner.className = 'expiry-banner danger visible';
+      msg.innerHTML = '⚠ Tu suscripción <b>venció</b> el ' + 
+        vence.toLocaleDateString('es-AR') + 
+        '. Contactá a JCG Inversiones para renovar el acceso.';
+    } else if(diffDias <= 7){
+      // Por vencer
+      banner.className = 'expiry-banner warn visible';
+      msg.innerHTML = '⏰ Tu suscripción vence en <b>' + diffDias + 
+        ' día' + (diffDias===1?'':'s') + '</b> (' + 
+        vence.toLocaleDateString('es-AR') + 
+        '). Contactá a JCG para renovar.';
+    } else {
+      banner.className = 'expiry-banner';
+    }
+  } catch(e){ console.log('expiry check:', e); }
+}
+
+function onLogout(){
+  currentUser = null;
+  document.getElementById('userBar').classList.remove('visible');
+  showAuthOverlay();
+  document.getElementById('wl').innerHTML='<div class="loading"><span class="spin"></span>Cargando...</div>';
+}
+
+// ══════════════════════════════════════════════════════════
+// WATCHLIST
+// ══════════════════════════════════════════════════════════
+async function renderWatchlist(){
+  const container = document.getElementById('wl');
+  if(!currentUser){
+    container.innerHTML=`<div class="wl-locked">
+      <div class="wl-locked-icon">🔒</div>
+      <div class="wl-locked-msg">Iniciá sesión para ver tu watchlist personal</div>
+      <button class="wl-login-cta" onclick="showAuthOverlay()">INGRESAR</button>
+    </div>`;
+    return;
+  }
+
+  // Cargar tickers de la watchlist
+  const { data: wlItems } = await supa
+    .from('watchlist')
+    .select('*')
+    .eq('user_id', currentUser.id)
+    .order('created_at', { ascending: false });
+
+  const tickers = (wlItems||[]).map(x=>x.ticker);
+  const datos   = window._datos || {};
+
+  let h = `<div class="wl-wrap">
+    <div class="wl-header">
+      <div class="wl-add-form">
+        <input class="wl-add-input" id="wlInput" type="text" placeholder="Agregar ticker... ej: AAPL"
+          onkeydown="if(event.key==='Enter') addToWatchlist()">
+        <button class="wl-add-btn" onclick="addToWatchlist()">+ AGREGAR</button>
+      </div>
+      <span style="font-size:10px;color:#3a3a5e">${tickers.length} ticker${tickers.length!==1?'s':''}</span>
+    </div>`;
+
+  if(!tickers.length){
+    h+=`<div class="wl-empty">Tu watchlist está vacía. Agregá tickers arriba para hacer seguimiento.</div>`;
+  } else {
+    // Tabla con todos los datos
+    const thWl = `<th>Ticker</th><th>%Día</th><th>RSI</th><th>KONC</th><th>RSI 1H</th><th>Señal</th><th></th>`;
+    h+=`<table style="width:100%;border-collapse:collapse">
+      <thead><tr style="background:#0a0a14">${thWl}</tr></thead><tbody>`;
+
+    for(const item of wlItems||[]){
+      const t = item.ticker;
+      const d = datos[t];
+      const g = (typeof GLOSARIO!=='undefined') ? GLOSARIO[t] : null;
+
+      // Señal
+      let senal = '', senalCls = '';
+      if(d){
+        const isBuy  = d.rsi_1d!==null&&d.rsi_1d<=30 && d.marron!==null&&d.marron<10;
+        const isSell = d.rsi_1d!==null&&d.rsi_1d>=70 && d.marron!==null&&d.marron>95;
+        if(isBuy) { senal='🟢 OPORTUNIDAD'; senalCls='color:#00ff88;font-weight:700'; }
+        else if(isSell){ senal='🔴 SOBRECOMPRA'; senalCls='color:#ff1744;font-weight:700'; }
+        else { senal='—'; senalCls='color:#1a1a30'; }
+      }
+
+      const rowCls = d ? (
+        (d.rsi_1d<=30&&d.marron<10) ? 'row-buy' :
+        (d.rsi_1d>=70&&d.marron>95) ? 'row-sell' : ''
+      ) : '';
+
+      h+=`<tr class="${rowCls}" style="border-bottom:1px solid rgba(15,15,30,.8)">
+        <td style="padding:6px 12px">
+          <div style="display:flex;align-items:center;gap:6px">
+            ${logoImg(t)}
+            <div>
+              <div style="color:#c8ccd8;font-weight:700;font-size:12px">${t}</div>
+              ${g?`<div style="color:#2a2a4a;font-size:9px">${g.nombre}</div>`:''}
+            </div>
+          </div>
+        </td>
+        <td style="text-align:right;padding:6px 12px">
+          ${d?`<span class="chg ${clsChg(d.pct_dia)}">${fc(d.pct_dia)}</span>`:'<span style="color:#1a1a30">—</span>'}
+        </td>
+        <td style="text-align:right;padding:6px 12px">
+          ${d?`<span class="rsi ${clsRsi(d.rsi_1d)}">${fv(d.rsi_1d,1)}</span>`:'<span style="color:#1a1a30">—</span>'}
+        </td>
+        <td style="text-align:right;padding:6px 12px">
+          ${d?`<span class="${clsMrn(d.marron)}">${fv(d.marron,1)}</span>`:'<span style="color:#1a1a30">—</span>'}
+        </td>
+        <td style="text-align:right;padding:6px 12px">
+          ${d?.rsi_1h?`<span class="rsi ${clsRsi(d.rsi_1h)}">${fv(d.rsi_1h,1)}</span>`:'<span style="color:#1a1a30">—</span>'}
+        </td>
+        <td style="text-align:center;padding:6px 12px">
+          <span style="${senalCls};font-size:11px">${senal}</span>
+        </td>
+        <td style="text-align:right;padding:6px 8px">
+          <button onclick="removeFromWatchlist('${t}')"
+            style="background:none;border:1px solid #1a1a2e;border-radius:2px;color:#3a3a5e;
+                   font-family:var(--mono);font-size:9px;padding:2px 6px;cursor:pointer"
+            onmouseover="this.style.color='#ff5252';this.style.borderColor='#ff5252'"
+            onmouseout="this.style.color='#3a3a5e';this.style.borderColor='#1a1a2e'">✕</button>
+        </td>
+      </tr>`;
+    }
+    h+=`</tbody></table>`;
+  }
+
+  h+=`</div>`;
+  container.innerHTML = h;
+}
+
+async function addToWatchlist(){
+  if(!currentUser){ showAuthOverlay(); return; }
+  const input  = document.getElementById('wlInput');
+  const ticker = input.value.trim().toUpperCase();
+  if(!ticker){ return; }
+
+  const { error } = await supa.from('watchlist').insert({
+    user_id: currentUser.id,
+    ticker:  ticker
+  });
+
+  if(!error){
+    input.value = '';
+    renderWatchlist();
+  } else if(error.code === '23505'){
+    // Ya existe
+    input.style.borderColor='#ffab00';
+    setTimeout(()=>input.style.borderColor='#1a1a2e', 1500);
+  }
+}
+
+async function removeFromWatchlist(ticker){
+  if(!currentUser) return;
+  await supa.from('watchlist')
+    .delete()
+    .eq('user_id', currentUser.id)
+    .eq('ticker', ticker);
+  renderWatchlist();
+}
+
+// Activar watchlist al entrar a la pestaña
+
+// ── OPCIONES ─────────────────────────────────────────────
+const OPC_URL = 'https://juancg00ginversiones.github.io/JCGdashboard/opciones_data.json';
+
+const NIVEL_INFO = {
+  call_wall:  { label:'CALL WALL',  color:'#4f8ef7', desc:'Zona de mayor resistencia. Los dealers venden calls aquí, lo que frena el precio. Actúa como "techo" del mercado.' },
+  put_wall:   { label:'PUT WALL',   color:'#ff5252', desc:'Zona de mayor soporte. Los dealers compran puts aquí, lo que sostiene el precio. Actúa como "piso" del mercado.' },
+  gamma_flip: { label:'GAMMA FLIP', color:'#ffab00', desc:'El nivel más importante. Por encima: mercado estable (dealers compran caídas). Por debajo: mercado volátil (dealers venden caídas y amplifican los movimientos).' },
+  max_pain:   { label:'MAX PAIN',   color:'#ce93d8', desc:'El precio donde más opciones expiran sin valor. El mercado tiende a gravitar hacia aquí cerca del vencimiento.' },
+};
+
+function renderChart(canvasId, data, spot){
+  const canvas = document.getElementById(canvasId);
+  if(!canvas || typeof Chart === 'undefined') return;
+
+  // Destruir chart anterior si existe
+  const existing = Chart.getChart(canvas);
+  if(existing) existing.destroy();
+
+  const strikes  = data.strikes;
+  const gexNet   = data.gex_net;
+  const oisCall  = data.oi_calls;
+  const oisPut   = data.oi_puts.map(v => -v);
+
+  new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: strikes,
+      datasets: [
+        {
+          label: 'GEX Neto (M$)',
+          data: gexNet,
+          backgroundColor: gexNet.map(v => v >= 0 ? 'rgba(0,230,118,0.7)' : 'rgba(255,82,82,0.7)'),
+          borderColor:     gexNet.map(v => v >= 0 ? '#00e676' : '#ff5252'),
+          borderWidth: 1,
+          yAxisID: 'y1',
+          order: 1,
+        },
+        {
+          label: 'OI Calls (k)',
+          data: oisCall,
+          type: 'bar',
+          backgroundColor: 'rgba(79,142,247,0.35)',
+          borderColor: '#4f8ef7',
+          borderWidth: 1,
+          yAxisID: 'y2',
+          order: 2,
+        },
+        {
+          label: 'OI Puts (k)',
+          data: oisPut,
+          type: 'bar',
+          backgroundColor: 'rgba(255,82,82,0.25)',
+          borderColor: '#ff5252',
+          borderWidth: 1,
+          yAxisID: 'y2',
+          order: 2,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { labels: { color: '#4a4a7a', font: { size: 10 } } },
+        tooltip: {
+          backgroundColor: '#0d0d18',
+          borderColor: '#1a1a2e',
+          borderWidth: 1,
+          titleColor: '#c8ccd8',
+          bodyColor: '#7a7ab0',
+          callbacks: {
+            label: ctx => {
+              const v = ctx.parsed.y;
+              if(ctx.dataset.label.includes('GEX')) return ` GEX: ${v>=0?'+':''}${v.toFixed(2)}M$`;
+              if(ctx.dataset.label.includes('Call')) return ` Calls OI: ${Math.abs(v).toFixed(1)}k`;
+              return ` Puts OI: ${Math.abs(v).toFixed(1)}k`;
+            }
+          }
+        },
+        annotation: {
+          annotations: {
+            spot: { type:'line', scaleID:'x', value: spot, borderColor:'#ffffff', borderWidth:2, borderDash:[5,5],
+                    label:{display:true, content:'SPOT', color:'#fff', backgroundColor:'#1a1a2e', font:{size:9}} },
+            cw:   { type:'line', scaleID:'x', value: data.call_wall,  borderColor:'#4f8ef7', borderWidth:2,
+                    label:{display:true, content:'CW',  color:'#4f8ef7', backgroundColor:'#0a0a14', font:{size:9}} },
+            pw:   { type:'line', scaleID:'x', value: data.put_wall,   borderColor:'#ff5252', borderWidth:2,
+                    label:{display:true, content:'PW',  color:'#ff5252', backgroundColor:'#0a0a14', font:{size:9}} },
+            gf:   { type:'line', scaleID:'x', value: data.gamma_flip, borderColor:'#ffab00', borderWidth:2.5,
+                    label:{display:true, content:'GF',  color:'#ffab00', backgroundColor:'#0a0a14', font:{size:9}} },
+            mp:   { type:'line', scaleID:'x', value: data.max_pain,   borderColor:'#ce93d8', borderWidth:1.5, borderDash:[3,3],
+                    label:{display:true, content:'MP',  color:'#ce93d8', backgroundColor:'#0a0a14', font:{size:9}} },
+          }
+        }
+      },
+      scales: {
+        x: { ticks:{ color:'#3a3a5e', font:{size:9}, maxRotation:45 }, grid:{ color:'rgba(26,26,46,.5)' } },
+        y1:{ position:'left',  ticks:{ color:'#00e676', font:{size:9} }, grid:{ color:'rgba(26,26,46,.5)' },
+             title:{ display:true, text:'GEX Neto (M$)', color:'#00e676', font:{size:9} } },
+        y2:{ position:'right', ticks:{ color:'#4f8ef7',  font:{size:9} }, grid:{ display:false },
+             title:{ display:true, text:'Open Interest (k)', color:'#4f8ef7', font:{size:9} } },
+      }
+    }
+  });
+}
+
+function switchOpcTab(cardId, label){
+  const card = document.getElementById(cardId);
+  if(!card) return;
+  card.querySelectorAll('.opc-tab').forEach(t=>{
+    t.classList.toggle('active', t.textContent.trim()===label);
+  });
+  card.querySelectorAll('.opc-pane').forEach(p=>{
+    p.style.display = p.getAttribute('data-label')===label ? 'block' : 'none';
+  });
+  // Re-render chart del pane activo
+  const pane = card.querySelector('.opc-pane[data-label="'+label+'"]');
+  if(pane){
+    const canvas = pane.querySelector('canvas');
+    const dataStr = pane.getAttribute('data-exp');
+    const spotVal = parseFloat(card.getAttribute('data-spot'));
+    if(canvas && dataStr) renderChart(canvas.id, JSON.parse(dataStr), spotVal);
+  }
+}
+
+function renderOpciones(opcData){
+  if(!opcData||!opcData.indices){
+    document.getElementById('opc').innerHTML='<div class="err">❌ Corré opciones.py y subí opciones_data.json</div>';
+    return;
+  }
+
+  let h = `<div style="font-size:10px;color:#3a3a5e;margin-bottom:12px">
+    Act: ${opcData.actualizado} · Fuente: Yahoo Finance Options
+  </div>`;
+
+  // Leyenda global
+  h += `<div style="background:#0a0a14;border:1px solid #111128;border-radius:4px;padding:10px 14px;margin-bottom:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px">`;
+  for(const [key, info] of Object.entries(NIVEL_INFO)){
+    h += `<div style="display:flex;gap:8px;align-items:flex-start">
+      <span style="color:${info.color};font-weight:700;font-size:11px;white-space:nowrap;min-width:80px">${info.label}</span>
+      <span style="color:#4a4a7a;font-size:10px;line-height:1.5">${info.desc}</span>
+    </div>`;
+  }
+  h += `</div>`;
+
+  h += `<div class="opc-grid">`;
+
+  for(const [sym, idx] of Object.entries(opcData.indices)){
+    const expKeys = Object.keys(idx.expiries);
+    if(!expKeys.length) continue;
+    const cardId = 'opc-card-'+sym;
+    const firstLabel = expKeys[0];
+    const regCls = idx.expiries[firstLabel]?.regime==='POSITIVO' ? 'opc-regime-pos' : 'opc-regime-neg';
+    const regTxt = idx.expiries[firstLabel]?.regime==='POSITIVO' ? '✅ RÉGIMEN POSITIVO' : '⚠️ RÉGIMEN NEGATIVO';
+
+    h += `<div class="opc-card" id="${cardId}" data-spot="${idx.spot}">
+      <div class="opc-card-header">
+        <div>
+          <span class="opc-symbol" style="color:${idx.color}">${sym}</span>
+          <span class="opc-spot"> — ${idx.nombre} @ $${idx.spot}</span>
+        </div>
+        <span class="${regCls}">${regTxt}</span>
+      </div>
+
+      <div class="opc-tabs">`;
+    expKeys.forEach((label,i) => {
+      const exp = idx.expiries[label];
+      h += `<button class="opc-tab ${i===0?'active':''}" onclick="switchOpcTab('${cardId}','${label}')">${label} (${exp.dte}d)</button>`;
+    });
+    h += `</div>`;
+
+    // Panes
+    expKeys.forEach((label,i) => {
+      const exp = idx.expiries[label];
+      const canvasId = `chart-${sym}-${i}`;
+      const expJson = JSON.stringify(exp).replace(/'/g,"\'");
+      h += `<div class="opc-pane" data-label="${label}" data-exp='${JSON.stringify(exp)}' style="display:${i===0?'block':'none'}">
+        <div class="opc-chart-wrap">
+          <canvas id="${canvasId}"></canvas>
+        </div>
+        <div class="opc-levels">`;
+
+      for(const [key,info] of Object.entries(NIVEL_INFO)){
+        const val = exp[key];
+        const dist = val ? ((val - idx.spot)/idx.spot*100).toFixed(1) : null;
+        const distTxt = dist ? ` (${parseFloat(dist)>=0?'+':''}${dist}%)` : '';
+        h += `<div class="opc-level">
+          <div class="opc-level-label" style="color:${info.color}">${info.label}</div>
+          <div class="opc-level-value" style="color:${info.color}">$${val}</div>
+          <div style="font-size:9px;color:#3a3a5e">${distTxt}</div>
+        </div>`;
+      }
+
+      h += `</div></div>`;
+    });
+
+    h += `</div>`;
+  }
+  h += `</div>`;
+
+  document.getElementById('opc').innerHTML = h;
+
+  // Cargar Chart.js con annotation plugin y renderizar
+  if(typeof Chart === 'undefined'){
+    const s1 = document.createElement('script');
+    s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
+    s1.onload = () => {
+      const s2 = document.createElement('script');
+      s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js';
+      s2.onload = () => {
+        // Renderizar todos los primeros panes
+        for(const [sym, idx] of Object.entries(opcData.indices)){
+          const expKeys = Object.keys(idx.expiries);
+          if(!expKeys.length) continue;
+          const exp = idx.expiries[expKeys[0]];
+          renderChart('chart-'+sym+'-0', exp, idx.spot);
+        }
+      };
+      document.head.appendChild(s2);
+    };
+    document.head.appendChild(s1);
+  } else {
+    for(const [sym, idx] of Object.entries(opcData.indices)){
+      const expKeys = Object.keys(idx.expiries);
+      if(!expKeys.length) continue;
+      const exp = idx.expiries[expKeys[0]];
+      renderChart('chart-'+sym+'-0', exp, idx.spot);
+    }
+  }
+}
+
+// Cargar opciones al entrar a la pestaña
+window._opcLoaded = false;
+function loadOpciones(){
+  if(window._opcLoaded) return;
+  window._opcLoaded = true;
+  fetch(OPC_URL+'?t='+Date.now())
+    .then(r=>r.ok?r.json():null)
+    .then(data=>{
+      if(data) renderOpciones(data);
+      else document.getElementById('opc').innerHTML='<div class="err">❌ Corré opciones.py y subí opciones_data.json al repo</div>';
+    })
+    .catch(()=>{
+      document.getElementById('opc').innerHTML='<div class="err">❌ Corré opciones.py y subí opciones_data.json al repo</div>';
+    });
+}
+
+// ── GLOSARIO ─────────────────────────────────────────────
+function renderGlosario(){
+  if(typeof GLOSARIO === 'undefined'){
+    document.getElementById('glos').innerHTML='<div class="err">❌ No se cargó glosario_data.js</div>';
+    return;
+  }
+
+  // Agrupar por sector
+  const grupos = {};
+  for(const [ticker, d] of Object.entries(GLOSARIO)){
+    const k = d.sector || 'Otros';
+    if(!grupos[k]) grupos[k] = [];
+    grupos[k].push({ticker, ...d});
+  }
+
+  let h = `<div style="margin-bottom:12px;font-size:10px;color:#3a3a5e">
+    ${Object.keys(GLOSARIO).length} instrumentos · Ordenados por sector
+    <span style="margin-left:20px">
+      Riesgo: 
+      <span style="color:#00e676">● Bajo</span>
+      <span style="color:#ffd600;margin-left:8px">● Medio</span>
+      <span style="color:#ff6d00;margin-left:8px">● Alto</span>
+      <span style="color:#ff1744;margin-left:8px">● Muy Alto</span>
+    </span>
+  </div>`;
+
+  // Buscador interno
+  h += `<div style="margin-bottom:12px">
+    <input id="glosSearch" type="text" placeholder="Buscar ticker o empresa..."
+      style="background:#0d0d18;border:1px solid #1a1a2e;border-radius:3px;
+             padding:6px 12px;font-family:var(--mono);font-size:11px;
+             color:#c8ccd8;outline:none;width:280px"
+      oninput="filtrarGlosario(this.value)">
+  </div>`;
+
+  h += `<div style="width:100%;overflow-x:auto">`;
+
+  for(const [sector, items] of Object.entries(grupos)){
+    h += `<div class="glos-sector" style="margin-bottom:20px">
+      <div style="font-family:var(--sans);font-size:14px;font-weight:700;
+                  color:#8888c0;letter-spacing:2px;padding:8px 14px;
+                  background:#0d0d18;border-left:3px solid #4f8ef7;margin-bottom:2px">
+        ${sector} <span style="color:#3a3a5e;font-size:11px;font-weight:400">(${items.length})</span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;min-width:700px">
+        <thead>
+          <tr style="background:#0a0a14">
+            <th style="text-align:left;padding:5px 12px;font-size:9px;color:#3a3a5e;letter-spacing:1px;min-width:90px">TICKER</th>
+            <th style="text-align:left;padding:5px 12px;font-size:9px;color:#3a3a5e;letter-spacing:1px;min-width:200px">NOMBRE</th>
+            <th style="text-align:left;padding:5px 12px;font-size:9px;color:#3a3a5e;letter-spacing:1px;min-width:80px">PAÍS</th>
+            <th style="text-align:left;padding:5px 12px;font-size:9px;color:#3a3a5e;letter-spacing:1px;min-width:90px">RIESGO</th>
+            <th style="text-align:left;padding:5px 12px;font-size:9px;color:#3a3a5e;letter-spacing:1px">DESCRIPCIÓN</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+    for(const item of items){
+      const rc = riesgoColor(item.riesgo);
+      h += `<tr class="glos-row" data-search="${item.ticker.toLowerCase()} ${item.nombre.toLowerCase()} ${item.pais.toLowerCase()}"
+                style="border-bottom:1px solid rgba(15,15,30,.8)">
+        <td style="padding:6px 12px;white-space:nowrap">
+          <div style="display:flex;align-items:center;gap:6px">
+            ${logoImg(item.ticker)}
+            <span style="color:#c8ccd8;font-weight:700;font-size:12px">${item.ticker}</span>
+          </div>
+        </td>
+        <td style="padding:6px 12px;color:#7a7aaa;font-size:11px;white-space:nowrap">${item.nombre}</td>
+        <td style="padding:6px 12px;color:#4a4a7a;font-size:11px">${item.pais}</td>
+        <td style="padding:6px 12px;white-space:nowrap">
+          <span style="color:${rc};font-size:10px;font-weight:700">● ${item.riesgo.toUpperCase()}</span>
+        </td>
+        <td style="padding:6px 12px;color:#5a5a8a;font-size:11px;line-height:1.5">${item.desc}</td>
+      </tr>`;
+    }
+    h += `</tbody></table></div>`;
+  }
+  h += `</div>`;
+  document.getElementById('glos').innerHTML = h;
+}
+
+function filtrarGlosario(q){
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('.glos-row').forEach(row=>{
+    const txt = row.getAttribute('data-search')||'';
+    row.style.display = (!q || txt.includes(q)) ? '' : 'none';
+  });
+  // Ocultar sectores vacíos
+  document.querySelectorAll('.glos-sector').forEach(sec=>{
+    const vis = [...sec.querySelectorAll('.glos-row')].filter(r=>r.style.display!=='none');
+    sec.style.display = vis.length ? '' : 'none';
+  });
+}
+
+// Activar glosario cuando se carga el script
+function sw(id,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  const fb=document.getElementById('filterBar');
+  if(fb) fb.style.display=(['ind','med','h1','sem'].includes(id)&&window._datos)?'flex':'none';
+  window._activeTab=id;
+  if(id==='glos' && document.getElementById('glos').innerHTML==='') renderGlosario();
+  if(id==='opc') loadOpciones();
+  if(id==='wl') renderWatchlist();
+  const q=document.getElementById('searchBox').value;
+  if(q && id!=='glos') filterTickers(q);
+}
+</script>
+<script src="glosario_data.js"></script>
+</body>
+</html>
