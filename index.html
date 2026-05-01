@@ -166,11 +166,13 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 
 /* RSI */
 .rsi{display:inline-block;padding:2px 8px;border-radius:2px;font-size:var(--fs-rsi);font-weight:700;min-width:38px;text-align:center}
+.r-sbv3{background:#006622;color:#00ff88;box-shadow:0 0 18px rgba(0,255,136,.9),0 0 6px rgba(0,255,136,.6);border:1px solid rgba(0,255,136,.4);animation:pulse-green 1s infinite}
 .r-sbv2{background:#004d1f;color:#00ff88;box-shadow:0 0 12px rgba(0,255,136,.55);border:1px solid rgba(0,255,136,.2)}
 .r-sbv1{color:#00c853;font-weight:600}
 .r-neu {color:#252540;font-weight:400}
 .r-hi1 {color:#ff7043;font-weight:600}
 .r-hi2 {background:#4d0010;color:#ff1744;box-shadow:0 0 12px rgba(255,23,68,.55);border:1px solid rgba(255,23,68,.2)}
+.r-hi3 {background:#660008;color:#ff1744;box-shadow:0 0 18px rgba(255,23,68,.9),0 0 6px rgba(255,23,68,.6);border:1px solid rgba(255,23,68,.4);animation:pulse-red 1s infinite}
 
 /* MEDIAS SEMANALES — colores suaves, solo SMA200 intensa */
 .dw-up   { color:#4a7a5a }           /* suave arriba */
@@ -191,9 +193,11 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 /* RSI 1H */
 .grid1h{display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:4px;padding:8px 10px}
 .cell1h{padding:6px 3px;border-radius:3px;text-align:center;font-size:11px;font-weight:700}
-.c-over{background:#4d0010;color:#ff1744;box-shadow:0 0 8px rgba(255,23,68,.45)}
-.c-sbv {background:#004d1f;color:#00ff88;box-shadow:0 0 8px rgba(0,255,136,.45)}
-.c-neu {background:#0a0a18;color:#1a1a30;font-weight:400}
+.c-over-ex{background:#660008;color:#ff1744;box-shadow:0 0 14px rgba(255,23,68,.9);animation:pulse-red 1s infinite}
+.c-over   {background:#4d0010;color:#ff1744;box-shadow:0 0 8px rgba(255,23,68,.45)}
+.c-sbv-ex {background:#006622;color:#00ff88;box-shadow:0 0 14px rgba(0,255,136,.9);animation:pulse-green 1s infinite}
+.c-sbv    {background:#004d1f;color:#00ff88;box-shadow:0 0 8px rgba(0,255,136,.45)}
+.c-neu    {background:#0a0a18;color:#1a1a30;font-weight:400}
 .val1h{font-size:9px;margin-top:2px;opacity:.6}
 
 /* SEÑALES — chips más anchos */
@@ -658,11 +662,27 @@ tr.row-sell:hover td{background:rgba(255,23,68,.16)!important}
 const JSON_URL='https://juancg00ginversiones.github.io/JCGdashboard/jcg_data.json';
 
 function clsChg(v){if(v===null)return'cz';if(v>5)return'cpp';if(v>0)return'cp';if(v<-5)return'cnn';if(v<0)return'cn';return'cz'}
-function clsRsi(v){if(v===null)return'r-neu';if(v<=30)return'r-sbv2';if(v<=45)return'r-sbv1';if(v>=70)return'r-hi2';if(v>=65)return'r-hi1';return'r-neu'}
+function clsRsi(v){
+  if(v===null) return 'r-neu';
+  if(v<=20)  return 'r-sbv3';  // ≤20 verde EXTREMO pulsante
+  if(v<=30)  return 'r-sbv2';  // ≤30 verde fuerte
+  if(v<=45)  return 'r-sbv1';  // 30-45 verde suave
+  if(v>=78)  return 'r-hi3';   // ≥78 rojo EXTREMO pulsante
+  if(v>=70)  return 'r-hi2';   // 70-78 rojo fuerte
+  if(v>=65)  return 'r-hi1';   // 65-70 naranja
+  return 'r-neu';
+}
 function clsMrn(v){if(v===null)return'm-neu';if(v<0)return'm-mar';if(v<20)return'm-lo';if(v<85)return'm-neu';if(v<=105)return'm-hi1';return'm-hi2'}
 function clsMcd(v){if(v===null)return'mne';if(v>30)return'mhi';if(v<-30)return'mlo';return'mne'}
 function clsDist(v){if(v===null)return'd-neu';if(v>5)return'd-faru';if(v>1)return'd-nearu';if(v<-5)return'd-fard';if(v<-1)return'd-neard';return'd-neu'}
-function cls1h(v){if(v===null||v===undefined)return'c-neu';if(v>=70)return'c-over';if(v<=30)return'c-sbv';return'c-neu'}
+function cls1h(v){
+  if(v===null||v===undefined) return 'c-neu';
+  if(v>=78) return 'c-over-ex';  // extremo
+  if(v>=70) return 'c-over';
+  if(v<=20) return 'c-sbv-ex';   // extremo
+  if(v<=30) return 'c-sbv';
+  return 'c-neu';
+}
 function fv(v,d){if(v===null||v===undefined)return'--';return parseFloat(v).toFixed(d!==undefined?d:1)}
 function fc(v){if(v===null)return'--';return(v>=0?'+':'')+parseFloat(v).toFixed(2)+'%'}
 function fd(v){if(v===null)return'--';return(v>=0?'▲':'▼')+Math.abs(parseFloat(v)).toFixed(1)+'%'}
@@ -883,10 +903,14 @@ function histTable(hist){
 
 // ── SEMANAL ──────────────────────────────────────────────
 function clsRsiW(v){
-  if(v===null)return'r-neu';
-  if(v<=30)return'r-sbv2';if(v<=45)return'r-sbv1';
-  if(v>=70)return'r-hi2';if(v>=65)return'r-hi1';
-  return'r-neu';
+  if(v===null) return 'r-neu';
+  if(v<=20)  return 'r-sbv3';
+  if(v<=30)  return 'r-sbv2';
+  if(v<=45)  return 'r-sbv1';
+  if(v>=78)  return 'r-hi3';
+  if(v>=70)  return 'r-hi2';
+  if(v>=65)  return 'r-hi1';
+  return 'r-neu';
 }
 function clsMrnW(v){
   if(v===null)return'm-neu';
@@ -1193,7 +1217,11 @@ function applyFilter(){
       if(!t||!window._datos||!window._datos[t]){cell.style.display=activeFilter?'none':'';return;}
       const d=window._datos[t];
       if(!activeFilter){cell.style.display='';return;}
-      const match = activeFilter==='buy' ? isBuySignal(d) : isSellSignal(d);
+      // RSI 1H: usa SOLO el RSI horario, no el diario ni el KONCORD
+      const rsi1h=d.rsi_1h;
+      const buy1h  = rsi1h!==null && rsi1h<=30;
+      const sell1h = rsi1h!==null && rsi1h>=70;
+      const match  = activeFilter==='buy' ? buy1h : sell1h;
       cell.style.display=match?'':'none';
     });
     // ocultar sectores sin chips visibles
