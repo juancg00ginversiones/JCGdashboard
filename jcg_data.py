@@ -165,6 +165,27 @@ def calcular_semanal(ticker):
         precio_sem_prev = float(c.iloc[-2]) if len(c) >= 2 else precio
         pct_semana = round(((precio - precio_sem_prev) / precio_sem_prev) * 100, 2)
 
+        # Percentil histórico semanal
+        rsi_pct_1w    = None
+        marron_pct_1w = None
+        rsi_alerta_1w    = None
+        marron_alerta_1w = None
+        try:
+            rsi_w_series = rsi_wilder(c).dropna()  # historial completo
+            if len(rsi_w_series) >= 30 and rsi_val is not None:
+                pct_rw = float((rsi_w_series < rsi_val).sum() / len(rsi_w_series) * 100)
+                rsi_pct_1w = round(pct_rw, 1)
+                if pct_rw <= 5:   rsi_alerta_1w = "minimo"
+                elif pct_rw >= 95: rsi_alerta_1w = "maximo"
+            marron_w_series = marron_w.dropna()  # historial completo
+            if len(marron_w_series) >= 30 and not pd.isna(marron_w.iloc[-1]):
+                pct_mw = float((marron_w_series < float(marron_w.iloc[-1])).sum() / len(marron_w_series) * 100)
+                marron_pct_1w = round(pct_mw, 1)
+                if pct_mw <= 5:   marron_alerta_1w = "minimo"
+                elif pct_mw >= 95: marron_alerta_1w = "maximo"
+        except:
+            pass
+
         return {
             "rsi_1w":          rsi_val,
             "marron_1w":       marron_v,
@@ -369,6 +390,28 @@ def procesar_ticker(ticker):
             elif rsi_val >= 68:
                 hist_rsi = analizar_rsi_historico(ticker, 70, c)
 
+        # PERCENTIL HISTÓRICO — RSI y KONCORD diario (historial completo 10 años)
+        rsi_pct_hist    = None
+        marron_pct_hist = None
+        rsi_alerta      = None
+        marron_alerta   = None
+        try:
+            rsi_full = rsi_c.dropna()  # todos los datos disponibles ~10 años
+            if len(rsi_full) >= 100 and rsi_val is not None:
+                pct = float((rsi_full < rsi_val).sum() / len(rsi_full) * 100)
+                rsi_pct_hist = round(pct, 1)
+                if pct <= 5:    rsi_alerta = "minimo"
+                elif pct >= 95: rsi_alerta = "maximo"
+
+            marron_full = marron.dropna()  # todos los datos disponibles ~10 años
+            if len(marron_full) >= 100 and not pd.isna(marron_v):
+                pct_m = float((marron_full < float(marron_v)).sum() / len(marron_full) * 100)
+                marron_pct_hist = round(pct_m, 1)
+                if pct_m <= 5:    marron_alerta = "minimo"
+                elif pct_m >= 95: marron_alerta = "maximo"
+        except:
+            pass
+
         # Datos semanales
         semanal = calcular_semanal(ticker)
 
@@ -379,6 +422,10 @@ def procesar_ticker(ticker):
             "rsi_cruza_alza": rsi_cruza_alza,
             "rsi_1h":      None,
             "rsi_1w":          semanal["rsi_1w"]          if semanal else None,
+            "rsi_pct_1w":      semanal.get("rsi_pct_1w")    if semanal else None,
+            "marron_pct_1w":   semanal.get("marron_pct_1w") if semanal else None,
+            "rsi_alerta_1w":   semanal.get("rsi_alerta_1w") if semanal else None,
+            "marron_alerta_1w":semanal.get("marron_alerta_1w") if semanal else None,
             "marron_1w":       semanal["marron_1w"]       if semanal else None,
             "media_k_1w":      semanal["media_k_1w"]      if semanal else None,
             "konc_dir_1w":     semanal["konc_dir_1w"]     if semanal else None,
@@ -397,6 +444,10 @@ def procesar_ticker(ticker):
             "dist_ema200": dist_pct(precio, float(ema200.iloc[-1])),
             "wt_signal":   wt_signal,
             "hist_rsi":    hist_rsi,
+            "rsi_pct_hist":    rsi_pct_hist,
+            "marron_pct_hist": marron_pct_hist,
+            "rsi_alerta":      rsi_alerta,
+            "marron_alerta":   marron_alerta,
         }
     except Exception as e:
         print(f"  ⚠ {ticker}: {e}")
