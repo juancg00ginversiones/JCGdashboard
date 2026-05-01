@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-05-01 19:34",
+  "actualizado": "2026-05-01 20:37",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -431,8 +431,8 @@
           }
         ]
       },
-      "rsi_pct_hist": 93.0,
-      "marron_pct_hist": 76.0,
+      "rsi_pct_hist": 71.7,
+      "marron_pct_hist": 96.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETFs"
@@ -541,9 +541,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 95.4,
-      "marron_pct_hist": 85.1,
-      "rsi_alerta": "maximo",
+      "rsi_pct_hist": 74.9,
+      "marron_pct_hist": 102.2,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETFs"
     },
@@ -576,8 +576,8 @@
       "dist_ema200": 5.85,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 71.0,
-      "marron_pct_hist": 70.6,
+      "rsi_pct_hist": 63.0,
+      "marron_pct_hist": 91.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETFs"
@@ -611,8 +611,8 @@
       "dist_ema200": 12.75,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 90.4,
-      "marron_pct_hist": 75.2,
+      "rsi_pct_hist": 67.5,
+      "marron_pct_hist": 90.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETFs"
@@ -646,8 +646,8 @@
       "dist_ema200": -8.55,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 81.2,
-      "marron_pct_hist": 71.8,
+      "rsi_pct_hist": 61.7,
+      "marron_pct_hist": 85.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETFs"
@@ -681,8 +681,8 @@
       "dist_ema200": 16.49,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 44.3,
-      "marron_pct_hist": 35.8,
+      "rsi_pct_hist": 49.5,
+      "marron_pct_hist": 45.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETFs"
@@ -716,8 +716,8 @@
       "dist_ema200": -1.11,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 57.4,
-      "marron_pct_hist": 61.7,
+      "rsi_pct_hist": 52.9,
+      "marron_pct_hist": 71.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETFs"
@@ -751,8 +751,8 @@
       "dist_ema200": 9.29,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 75.6,
-      "marron_pct_hist": 64.7,
+      "rsi_pct_hist": 65.2,
+      "marron_pct_hist": 88.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETFs"
@@ -786,8 +786,8 @@
       "dist_ema200": 6.02,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 69.4,
-      "marron_pct_hist": 65.0,
+      "rsi_pct_hist": 61.6,
+      "marron_pct_hist": 87.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETFs"
@@ -896,8 +896,8 @@
           }
         ]
       },
-      "rsi_pct_hist": 92.9,
-      "marron_pct_hist": 74.7,
+      "rsi_pct_hist": 71.7,
+      "marron_pct_hist": 95.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETFs"
@@ -931,8 +931,8 @@
       "dist_ema200": 4.62,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 59.5,
-      "marron_pct_hist": 51.8,
+      "rsi_pct_hist": 57.0,
+      "marron_pct_hist": 71.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETFs"
@@ -1041,8 +1041,8 @@
           }
         ]
       },
-      "rsi_pct_hist": 93.7,
-      "marron_pct_hist": 85.2,
+      "rsi_pct_hist": 73.5,
+      "marron_pct_hist": 102.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1076,8 +1076,8 @@
       "dist_ema200": 0.96,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 56.6,
-      "marron_pct_hist": 54.0,
+      "rsi_pct_hist": 57.0,
+      "marron_pct_hist": 76.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1115,8 +1115,8 @@
         "wt2": -59.3
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 23.3,
-      "marron_pct_hist": 31.2,
+      "rsi_pct_hist": 45.3,
+      "marron_pct_hist": 48.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1150,8 +1150,8 @@
       "dist_ema200": 17.71,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 66.1,
-      "marron_pct_hist": 58.5,
+      "rsi_pct_hist": 57.2,
+      "marron_pct_hist": 72.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1185,8 +1185,8 @@
       "dist_ema200": 8.74,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 50.7,
-      "marron_pct_hist": 57.9,
+      "rsi_pct_hist": 55.4,
+      "marron_pct_hist": 79.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1220,8 +1220,8 @@
       "dist_ema200": 3.63,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 67.3,
-      "marron_pct_hist": 58.2,
+      "rsi_pct_hist": 59.9,
+      "marron_pct_hist": 79.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1255,8 +1255,8 @@
       "dist_ema200": 3.96,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 63.5,
-      "marron_pct_hist": 94.4,
+      "rsi_pct_hist": 58.1,
+      "marron_pct_hist": 107.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1290,8 +1290,8 @@
       "dist_ema200": 7.99,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 43.2,
-      "marron_pct_hist": 46.6,
+      "rsi_pct_hist": 52.2,
+      "marron_pct_hist": 66.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1325,8 +1325,8 @@
       "dist_ema200": 7.0,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 80.5,
-      "marron_pct_hist": 73.0,
+      "rsi_pct_hist": 62.5,
+      "marron_pct_hist": 88.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1360,8 +1360,8 @@
       "dist_ema200": 6.77,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 52.5,
-      "marron_pct_hist": 63.4,
+      "rsi_pct_hist": 54.7,
+      "marron_pct_hist": 82.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1395,8 +1395,8 @@
       "dist_ema200": 4.04,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 51.0,
-      "marron_pct_hist": 49.0,
+      "rsi_pct_hist": 55.7,
+      "marron_pct_hist": 73.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1430,8 +1430,8 @@
       "dist_ema200": 4.11,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 25.5,
-      "marron_pct_hist": 20.9,
+      "rsi_pct_hist": 44.3,
+      "marron_pct_hist": 34.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1540,9 +1540,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 97.6,
-      "marron_pct_hist": 87.2,
-      "rsi_alerta": "maximo",
+      "rsi_pct_hist": 77.0,
+      "marron_pct_hist": 102.9,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
     },
@@ -1575,8 +1575,8 @@
       "dist_ema200": 13.83,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 30.7,
-      "marron_pct_hist": 31.0,
+      "rsi_pct_hist": 45.7,
+      "marron_pct_hist": 45.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1610,8 +1610,8 @@
       "dist_ema200": 14.19,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 38.6,
-      "marron_pct_hist": 31.6,
+      "rsi_pct_hist": 48.3,
+      "marron_pct_hist": 43.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "ETF Sectores USA"
@@ -1649,8 +1649,8 @@
         "wt2": -43.3
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 20.0,
-      "marron_pct_hist": 22.8,
+      "rsi_pct_hist": 43.2,
+      "marron_pct_hist": 38.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Commodities"
@@ -1684,8 +1684,8 @@
       "dist_ema200": 15.4,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 42.8,
-      "marron_pct_hist": 42.1,
+      "rsi_pct_hist": 48.9,
+      "marron_pct_hist": 54.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Commodities"
@@ -1719,8 +1719,8 @@
       "dist_ema200": 19.79,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 66.2,
-      "marron_pct_hist": 69.2,
+      "rsi_pct_hist": 56.3,
+      "marron_pct_hist": 81.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Commodities"
@@ -1754,8 +1754,8 @@
       "dist_ema200": 56.74,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 79.0,
-      "marron_pct_hist": 73.3,
+      "rsi_pct_hist": 61.6,
+      "marron_pct_hist": 87.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Commodities"
@@ -1789,8 +1789,8 @@
       "dist_ema200": 5.1,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 16.2,
-      "marron_pct_hist": 15.7,
+      "rsi_pct_hist": 39.6,
+      "marron_pct_hist": 25.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Commodities"
@@ -1824,8 +1824,8 @@
       "dist_ema200": 10.39,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 77.6,
-      "marron_pct_hist": 89.6,
+      "rsi_pct_hist": 66.4,
+      "marron_pct_hist": 107.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Magnificas"
@@ -1859,8 +1859,8 @@
       "dist_ema200": -5.72,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 46.8,
-      "marron_pct_hist": 53.4,
+      "rsi_pct_hist": 54.5,
+      "marron_pct_hist": 76.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Magnificas"
@@ -1894,8 +1894,8 @@
       "dist_ema200": 11.45,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 40.2,
-      "marron_pct_hist": 44.8,
+      "rsi_pct_hist": 53.0,
+      "marron_pct_hist": 69.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Magnificas"
@@ -2004,9 +2004,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 98.8,
-      "marron_pct_hist": 86.8,
-      "rsi_alerta": "maximo",
+      "rsi_pct_hist": 78.1,
+      "marron_pct_hist": 102.9,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
     },
@@ -2114,10 +2114,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 99.0,
-      "marron_pct_hist": 99.0,
-      "rsi_alerta": "maximo",
-      "marron_alerta": "maximo",
+      "rsi_pct_hist": 82.5,
+      "marron_pct_hist": 122.8,
+      "rsi_alerta": null,
+      "marron_alerta": null,
       "sector": "Comm. Services"
     },
     "META": {
@@ -2149,8 +2149,8 @@
       "dist_ema200": -6.4,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 15.5,
-      "marron_pct_hist": 27.6,
+      "rsi_pct_hist": 40.7,
+      "marron_pct_hist": 46.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Comm. Services"
@@ -2184,8 +2184,8 @@
       "dist_ema200": 0.27,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 63.3,
-      "marron_pct_hist": 69.5,
+      "rsi_pct_hist": 56.1,
+      "marron_pct_hist": 83.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -2294,8 +2294,8 @@
           }
         ]
       },
-      "rsi_pct_hist": 90.2,
-      "marron_pct_hist": 69.0,
+      "rsi_pct_hist": 69.0,
+      "marron_pct_hist": 87.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Magnificas"
@@ -2329,8 +2329,8 @@
       "dist_ema200": -19.01,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 50.6,
-      "marron_pct_hist": 68.0,
+      "rsi_pct_hist": 53.5,
+      "marron_pct_hist": 87.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -2364,8 +2364,8 @@
       "dist_ema200": 33.77,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 43.6,
-      "marron_pct_hist": 42.4,
+      "rsi_pct_hist": 52.8,
+      "marron_pct_hist": 63.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -2474,9 +2474,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 98.0,
-      "marron_pct_hist": 94.1,
-      "rsi_alerta": "maximo",
+      "rsi_pct_hist": 79.8,
+      "marron_pct_hist": 112.7,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
     },
@@ -2513,8 +2513,8 @@
         "wt2": -61.7
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 17.2,
-      "marron_pct_hist": 12.6,
+      "rsi_pct_hist": 38.9,
+      "marron_pct_hist": 19.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -2623,8 +2623,8 @@
           }
         ]
       },
-      "rsi_pct_hist": 91.0,
-      "marron_pct_hist": 86.4,
+      "rsi_pct_hist": 70.9,
+      "marron_pct_hist": 101.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -2658,8 +2658,8 @@
       "dist_ema200": -0.23,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 79.2,
-      "marron_pct_hist": 89.3,
+      "rsi_pct_hist": 61.3,
+      "marron_pct_hist": 100.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -2693,8 +2693,8 @@
       "dist_ema200": -11.6,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 23.1,
-      "marron_pct_hist": 27.7,
+      "rsi_pct_hist": 42.6,
+      "marron_pct_hist": 40.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -2803,10 +2803,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 99.8,
-      "marron_pct_hist": 98.0,
-      "rsi_alerta": "maximo",
-      "marron_alerta": "maximo",
+      "rsi_pct_hist": 87.5,
+      "marron_pct_hist": 120.0,
+      "rsi_alerta": null,
+      "marron_alerta": null,
       "sector": "Technology"
     },
     "LRCX": {
@@ -2838,8 +2838,8 @@
       "dist_ema200": 38.21,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 46.8,
-      "marron_pct_hist": 38.7,
+      "rsi_pct_hist": 54.1,
+      "marron_pct_hist": 59.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -2948,8 +2948,8 @@
           }
         ]
       },
-      "rsi_pct_hist": 91.9,
-      "marron_pct_hist": 84.6,
+      "rsi_pct_hist": 71.9,
+      "marron_pct_hist": 100.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -2983,8 +2983,8 @@
       "dist_ema200": -7.18,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 58.5,
-      "marron_pct_hist": 54.7,
+      "rsi_pct_hist": 56.7,
+      "marron_pct_hist": 71.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3018,8 +3018,8 @@
       "dist_ema200": 1.2,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 66.8,
-      "marron_pct_hist": 74.1,
+      "rsi_pct_hist": 60.2,
+      "marron_pct_hist": 91.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3128,10 +3128,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 99.0,
-      "marron_pct_hist": 98.7,
-      "rsi_alerta": "maximo",
-      "marron_alerta": "maximo",
+      "rsi_pct_hist": 83.4,
+      "marron_pct_hist": 125.1,
+      "rsi_alerta": null,
+      "marron_alerta": null,
       "sector": "Technology"
     },
     "RGTI": {
@@ -3163,8 +3163,8 @@
       "dist_ema200": -9.7,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 73.4,
-      "marron_pct_hist": 69.8,
+      "rsi_pct_hist": 54.5,
+      "marron_pct_hist": 70.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3198,8 +3198,8 @@
       "dist_ema200": 27.71,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 53.2,
-      "marron_pct_hist": 60.2,
+      "rsi_pct_hist": 52.1,
+      "marron_pct_hist": 70.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3233,8 +3233,8 @@
       "dist_ema200": -25.35,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 32.3,
-      "marron_pct_hist": 48.8,
+      "rsi_pct_hist": 43.8,
+      "marron_pct_hist": 57.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3343,9 +3343,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 98.0,
-      "marron_pct_hist": 93.0,
-      "rsi_alerta": "maximo",
+      "rsi_pct_hist": 77.3,
+      "marron_pct_hist": 108.1,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
     },
@@ -3378,8 +3378,8 @@
       "dist_ema200": -6.61,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 56.1,
-      "marron_pct_hist": 58.2,
+      "rsi_pct_hist": 52.3,
+      "marron_pct_hist": 68.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3413,8 +3413,8 @@
       "dist_ema200": 27.11,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 77.1,
-      "marron_pct_hist": 61.8,
+      "rsi_pct_hist": 61.8,
+      "marron_pct_hist": 75.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3448,8 +3448,8 @@
       "dist_ema200": 38.01,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 80.7,
-      "marron_pct_hist": 78.1,
+      "rsi_pct_hist": 67.4,
+      "marron_pct_hist": 95.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3483,8 +3483,8 @@
       "dist_ema200": -3.7,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 46.5,
-      "marron_pct_hist": 54.2,
+      "rsi_pct_hist": 50.6,
+      "marron_pct_hist": 69.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3518,8 +3518,8 @@
       "dist_ema200": -17.35,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 43.7,
-      "marron_pct_hist": 56.5,
+      "rsi_pct_hist": 51.3,
+      "marron_pct_hist": 74.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3557,8 +3557,8 @@
         "wt2": -33.8
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 21.3,
-      "marron_pct_hist": 34.9,
+      "rsi_pct_hist": 43.7,
+      "marron_pct_hist": 51.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3667,9 +3667,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 98.0,
-      "marron_pct_hist": 82.0,
-      "rsi_alerta": "maximo",
+      "rsi_pct_hist": 76.7,
+      "marron_pct_hist": 95.8,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
     },
@@ -3702,8 +3702,8 @@
       "dist_ema200": -13.12,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 86.3,
-      "marron_pct_hist": 79.9,
+      "rsi_pct_hist": 65.0,
+      "marron_pct_hist": 91.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -3812,10 +3812,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 87.8,
-      "marron_pct_hist": 99.2,
+      "rsi_pct_hist": 68.0,
+      "marron_pct_hist": 124.9,
       "rsi_alerta": null,
-      "marron_alerta": "maximo",
+      "marron_alerta": null,
       "sector": "Technology"
     },
     "SWKS": {
@@ -3922,10 +3922,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 98.2,
-      "marron_pct_hist": 98.6,
-      "rsi_alerta": "maximo",
-      "marron_alerta": "maximo",
+      "rsi_pct_hist": 75.5,
+      "marron_pct_hist": 118.4,
+      "rsi_alerta": null,
+      "marron_alerta": null,
       "sector": "Technology"
     },
     "MSI": {
@@ -3961,8 +3961,8 @@
         "wt2": -43.5
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 22.9,
-      "marron_pct_hist": 34.1,
+      "rsi_pct_hist": 45.5,
+      "marron_pct_hist": 54.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -3996,8 +3996,8 @@
       "dist_ema200": -19.71,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 62.4,
-      "marron_pct_hist": 65.2,
+      "rsi_pct_hist": 54.7,
+      "marron_pct_hist": 76.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -4031,8 +4031,8 @@
       "dist_ema200": -8.54,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 88.2,
-      "marron_pct_hist": 81.9,
+      "rsi_pct_hist": 66.2,
+      "marron_pct_hist": 92.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Comm. Services"
@@ -4066,8 +4066,8 @@
       "dist_ema200": -35.15,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 74.4,
-      "marron_pct_hist": 77.7,
+      "rsi_pct_hist": 53.7,
+      "marron_pct_hist": 76.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -4101,8 +4101,8 @@
       "dist_ema200": -16.11,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 60.2,
-      "marron_pct_hist": 65.9,
+      "rsi_pct_hist": 49.8,
+      "marron_pct_hist": 64.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -4136,8 +4136,8 @@
       "dist_ema200": -9.17,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 72.7,
-      "marron_pct_hist": 78.5,
+      "rsi_pct_hist": 56.9,
+      "marron_pct_hist": 86.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Technology"
@@ -4171,8 +4171,8 @@
       "dist_ema200": 1.89,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 72.8,
-      "marron_pct_hist": 61.4,
+      "rsi_pct_hist": 60.0,
+      "marron_pct_hist": 77.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4206,8 +4206,8 @@
       "dist_ema200": -1.77,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 39.3,
-      "marron_pct_hist": 48.9,
+      "rsi_pct_hist": 51.6,
+      "marron_pct_hist": 70.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4241,8 +4241,8 @@
       "dist_ema200": 6.12,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 66.2,
-      "marron_pct_hist": 55.3,
+      "rsi_pct_hist": 59.8,
+      "marron_pct_hist": 74.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4276,8 +4276,8 @@
       "dist_ema200": 19.58,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 63.1,
-      "marron_pct_hist": 55.0,
+      "rsi_pct_hist": 58.0,
+      "marron_pct_hist": 72.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4311,8 +4311,8 @@
       "dist_ema200": -17.9,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 58.8,
-      "marron_pct_hist": 63.4,
+      "rsi_pct_hist": 50.8,
+      "marron_pct_hist": 66.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4346,8 +4346,8 @@
       "dist_ema200": -19.05,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 31.2,
-      "marron_pct_hist": 41.1,
+      "rsi_pct_hist": 43.5,
+      "marron_pct_hist": 48.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4381,8 +4381,8 @@
       "dist_ema200": 63.23,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 84.3,
-      "marron_pct_hist": 67.9,
+      "rsi_pct_hist": 63.6,
+      "marron_pct_hist": 77.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4416,8 +4416,8 @@
       "dist_ema200": 16.66,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 60.3,
-      "marron_pct_hist": 65.0,
+      "rsi_pct_hist": 52.7,
+      "marron_pct_hist": 73.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4451,8 +4451,8 @@
       "dist_ema200": 5.89,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 60.1,
-      "marron_pct_hist": 59.3,
+      "rsi_pct_hist": 58.4,
+      "marron_pct_hist": 79.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4486,8 +4486,8 @@
       "dist_ema200": -6.97,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 15.9,
-      "marron_pct_hist": 25.5,
+      "rsi_pct_hist": 43.2,
+      "marron_pct_hist": 47.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4521,8 +4521,8 @@
       "dist_ema200": -10.71,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 69.5,
-      "marron_pct_hist": 69.4,
+      "rsi_pct_hist": 59.2,
+      "marron_pct_hist": 85.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4556,8 +4556,8 @@
       "dist_ema200": 23.3,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 78.8,
-      "marron_pct_hist": 74.3,
+      "rsi_pct_hist": 59.4,
+      "marron_pct_hist": 81.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4573,8 +4573,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 24.59,
-      "media_k_1w": 56.51,
+      "marron_1w": 24.6,
+      "media_k_1w": 56.53,
       "konc_dir_1w": "dn",
       "pct_semana": 3.44,
       "dist_wma10_1w": -0.92,
@@ -4591,8 +4591,8 @@
       "dist_ema200": -1.88,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 28.3,
-      "marron_pct_hist": 28.2,
+      "rsi_pct_hist": 45.6,
+      "marron_pct_hist": 43.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4626,8 +4626,8 @@
       "dist_ema200": 10.47,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 65.7,
-      "marron_pct_hist": 62.7,
+      "rsi_pct_hist": 57.8,
+      "marron_pct_hist": 77.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4661,8 +4661,8 @@
       "dist_ema200": 0.8,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 78.6,
-      "marron_pct_hist": 85.5,
+      "rsi_pct_hist": 63.9,
+      "marron_pct_hist": 99.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4696,8 +4696,8 @@
       "dist_ema200": -1.63,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 38.3,
-      "marron_pct_hist": 40.9,
+      "rsi_pct_hist": 48.0,
+      "marron_pct_hist": 55.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4731,8 +4731,8 @@
       "dist_ema200": -7.6,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 60.8,
-      "marron_pct_hist": 62.1,
+      "rsi_pct_hist": 58.1,
+      "marron_pct_hist": 81.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4766,8 +4766,8 @@
       "dist_ema200": 12.97,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 60.3,
-      "marron_pct_hist": 60.0,
+      "rsi_pct_hist": 57.4,
+      "marron_pct_hist": 78.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4801,8 +4801,8 @@
       "dist_ema200": -9.82,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 20.8,
-      "marron_pct_hist": 34.0,
+      "rsi_pct_hist": 44.2,
+      "marron_pct_hist": 56.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4836,8 +4836,8 @@
       "dist_ema200": -17.38,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 20.5,
-      "marron_pct_hist": 24.9,
+      "rsi_pct_hist": 40.9,
+      "marron_pct_hist": 36.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Financial"
@@ -4862,7 +4862,7 @@
       "dist_ema50_1w": 12.46,
       "dist_sma200_1w": 7.21,
       "macd_h": -30.28,
-      "marron": 60.13,
+      "marron": 60.12,
       "media_k": 83.21,
       "konc_dir": "dn",
       "dist_ema21": -0.32,
@@ -4871,8 +4871,8 @@
       "dist_ema200": 11.77,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 51.6,
-      "marron_pct_hist": 51.2,
+      "rsi_pct_hist": 51.1,
+      "marron_pct_hist": 60.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -4906,8 +4906,8 @@
       "dist_ema200": -11.21,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 18.9,
-      "marron_pct_hist": 20.9,
+      "rsi_pct_hist": 42.3,
+      "marron_pct_hist": 35.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -4941,8 +4941,8 @@
       "dist_ema200": 18.49,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 75.6,
-      "marron_pct_hist": 67.9,
+      "rsi_pct_hist": 61.3,
+      "marron_pct_hist": 83.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -4976,8 +4976,8 @@
       "dist_ema200": 10.98,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 64.3,
-      "marron_pct_hist": 67.7,
+      "rsi_pct_hist": 56.7,
+      "marron_pct_hist": 81.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5011,8 +5011,8 @@
       "dist_ema200": -2.77,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 21.1,
-      "marron_pct_hist": 37.3,
+      "rsi_pct_hist": 40.4,
+      "marron_pct_hist": 47.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5046,8 +5046,8 @@
       "dist_ema200": 7.09,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 30.3,
-      "marron_pct_hist": 39.5,
+      "rsi_pct_hist": 44.7,
+      "marron_pct_hist": 49.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5081,8 +5081,8 @@
       "dist_ema200": -9.66,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 16.7,
-      "marron_pct_hist": 20.0,
+      "rsi_pct_hist": 40.1,
+      "marron_pct_hist": 32.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5116,8 +5116,8 @@
       "dist_ema200": -2.28,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 34.8,
-      "marron_pct_hist": 45.8,
+      "rsi_pct_hist": 46.1,
+      "marron_pct_hist": 56.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5230,9 +5230,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 4.1,
-      "marron_pct_hist": 6.2,
-      "rsi_alerta": "minimo",
+      "rsi_pct_hist": 31.8,
+      "marron_pct_hist": 13.7,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
     },
@@ -5265,8 +5265,8 @@
       "dist_ema200": -26.19,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 12.7,
-      "marron_pct_hist": 40.4,
+      "rsi_pct_hist": 35.2,
+      "marron_pct_hist": 51.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5375,8 +5375,8 @@
           }
         ]
       },
-      "rsi_pct_hist": 92.7,
-      "marron_pct_hist": 91.6,
+      "rsi_pct_hist": 69.8,
+      "marron_pct_hist": 104.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5410,8 +5410,8 @@
       "dist_ema200": 8.8,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 81.8,
-      "marron_pct_hist": 76.0,
+      "rsi_pct_hist": 60.7,
+      "marron_pct_hist": 85.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5445,8 +5445,8 @@
       "dist_ema200": 23.83,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 82.1,
-      "marron_pct_hist": 66.2,
+      "rsi_pct_hist": 64.5,
+      "marron_pct_hist": 83.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5484,8 +5484,8 @@
         "wt2": -53.5
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 24.2,
-      "marron_pct_hist": 18.2,
+      "rsi_pct_hist": 45.8,
+      "marron_pct_hist": 34.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5519,8 +5519,8 @@
       "dist_ema200": -3.09,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 42.7,
-      "marron_pct_hist": 38.7,
+      "rsi_pct_hist": 48.3,
+      "marron_pct_hist": 49.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5554,8 +5554,8 @@
       "dist_ema200": -10.47,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 27.9,
-      "marron_pct_hist": 33.0,
+      "rsi_pct_hist": 46.4,
+      "marron_pct_hist": 49.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5589,8 +5589,8 @@
       "dist_ema200": -6.63,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 14.4,
-      "marron_pct_hist": 21.4,
+      "rsi_pct_hist": 40.2,
+      "marron_pct_hist": 37.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5624,8 +5624,8 @@
       "dist_ema200": -19.03,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 71.5,
-      "marron_pct_hist": 68.9,
+      "rsi_pct_hist": 58.4,
+      "marron_pct_hist": 79.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5659,8 +5659,8 @@
       "dist_ema200": 5.73,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 27.5,
-      "marron_pct_hist": 20.9,
+      "rsi_pct_hist": 45.4,
+      "marron_pct_hist": 35.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -5694,8 +5694,8 @@
       "dist_ema200": -6.99,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 57.8,
-      "marron_pct_hist": 58.5,
+      "rsi_pct_hist": 52.4,
+      "marron_pct_hist": 68.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -5729,8 +5729,8 @@
       "dist_ema200": -11.76,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 73.2,
-      "marron_pct_hist": 93.7,
+      "rsi_pct_hist": 61.7,
+      "marron_pct_hist": 109.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -5764,8 +5764,8 @@
       "dist_ema200": 5.64,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 59.9,
-      "marron_pct_hist": 66.8,
+      "rsi_pct_hist": 55.4,
+      "marron_pct_hist": 82.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -5799,8 +5799,8 @@
       "dist_ema200": 0.56,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 16.9,
-      "marron_pct_hist": 13.6,
+      "rsi_pct_hist": 38.5,
+      "marron_pct_hist": 22.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -5834,8 +5834,8 @@
       "dist_ema200": 8.97,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 55.4,
-      "marron_pct_hist": 46.4,
+      "rsi_pct_hist": 53.6,
+      "marron_pct_hist": 59.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -5873,8 +5873,8 @@
         "wt2": -41.4
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 34.3,
-      "marron_pct_hist": 35.4,
+      "rsi_pct_hist": 48.8,
+      "marron_pct_hist": 54.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -5908,8 +5908,8 @@
       "dist_ema200": 26.47,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 71.6,
-      "marron_pct_hist": 76.8,
+      "rsi_pct_hist": 59.7,
+      "marron_pct_hist": 91.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -5943,8 +5943,8 @@
       "dist_ema200": -0.76,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 31.3,
-      "marron_pct_hist": 36.2,
+      "rsi_pct_hist": 44.9,
+      "marron_pct_hist": 47.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -5978,8 +5978,8 @@
       "dist_ema200": 13.32,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 25.0,
-      "marron_pct_hist": 27.8,
+      "rsi_pct_hist": 46.3,
+      "marron_pct_hist": 46.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -6088,9 +6088,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 0.5,
-      "marron_pct_hist": 6.5,
-      "rsi_alerta": "minimo",
+      "rsi_pct_hist": 23.0,
+      "marron_pct_hist": 13.3,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
     },
@@ -6123,8 +6123,8 @@
       "dist_ema200": -7.14,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 17.0,
-      "marron_pct_hist": 22.8,
+      "rsi_pct_hist": 39.0,
+      "marron_pct_hist": 34.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -6233,9 +6233,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 3.2,
-      "marron_pct_hist": 6.3,
-      "rsi_alerta": "minimo",
+      "rsi_pct_hist": 30.6,
+      "marron_pct_hist": 13.7,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
     },
@@ -6272,8 +6272,8 @@
         "wt2": -32.2
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 38.9,
-      "marron_pct_hist": 34.4,
+      "rsi_pct_hist": 48.0,
+      "marron_pct_hist": 45.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -6307,8 +6307,8 @@
       "dist_ema200": 11.72,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 80.9,
-      "marron_pct_hist": 76.5,
+      "rsi_pct_hist": 63.2,
+      "marron_pct_hist": 90.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -6346,8 +6346,8 @@
         "wt2": -60.8
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 8.0,
-      "marron_pct_hist": 12.2,
+      "rsi_pct_hist": 35.6,
+      "marron_pct_hist": 22.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -6381,8 +6381,8 @@
       "dist_ema200": -5.93,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 75.1,
-      "marron_pct_hist": 87.1,
+      "rsi_pct_hist": 62.0,
+      "marron_pct_hist": 100.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -6416,8 +6416,8 @@
       "dist_ema200": -4.34,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 22.1,
-      "marron_pct_hist": 48.6,
+      "rsi_pct_hist": 42.9,
+      "marron_pct_hist": 64.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -6451,8 +6451,8 @@
       "dist_ema200": 2.7,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 67.7,
-      "marron_pct_hist": 86.2,
+      "rsi_pct_hist": 59.3,
+      "marron_pct_hist": 101.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -6486,8 +6486,8 @@
       "dist_ema200": 46.72,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 39.2,
-      "marron_pct_hist": 36.5,
+      "rsi_pct_hist": 50.6,
+      "marron_pct_hist": 54.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Industrials"
@@ -6521,8 +6521,8 @@
       "dist_ema200": 30.17,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 89.3,
-      "marron_pct_hist": 89.8,
+      "rsi_pct_hist": 67.7,
+      "marron_pct_hist": 103.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Energy"
@@ -6556,8 +6556,8 @@
       "dist_ema200": 12.5,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 42.7,
-      "marron_pct_hist": 39.5,
+      "rsi_pct_hist": 49.9,
+      "marron_pct_hist": 55.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Energy"
@@ -6591,8 +6591,8 @@
       "dist_ema200": 33.26,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 86.4,
-      "marron_pct_hist": 91.9,
+      "rsi_pct_hist": 65.7,
+      "marron_pct_hist": 106.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Energy"
@@ -6626,8 +6626,8 @@
       "dist_ema200": 19.05,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 59.0,
-      "marron_pct_hist": 51.6,
+      "rsi_pct_hist": 52.0,
+      "marron_pct_hist": 60.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Energy"
@@ -6661,8 +6661,8 @@
       "dist_ema200": 20.61,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 72.7,
-      "marron_pct_hist": 68.6,
+      "rsi_pct_hist": 60.8,
+      "marron_pct_hist": 85.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Energy"
@@ -6771,8 +6771,8 @@
           }
         ]
       },
-      "rsi_pct_hist": 94.1,
-      "marron_pct_hist": 90.8,
+      "rsi_pct_hist": 69.5,
+      "marron_pct_hist": 103.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Energy"
@@ -6806,8 +6806,8 @@
       "dist_ema200": 15.02,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 42.4,
-      "marron_pct_hist": 43.3,
+      "rsi_pct_hist": 49.3,
+      "marron_pct_hist": 57.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Energy"
@@ -6841,8 +6841,8 @@
       "dist_ema200": 29.72,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 58.9,
-      "marron_pct_hist": 64.7,
+      "rsi_pct_hist": 56.3,
+      "marron_pct_hist": 80.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Energy"
@@ -6876,8 +6876,8 @@
       "dist_ema200": 1.07,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 25.5,
-      "marron_pct_hist": 23.6,
+      "rsi_pct_hist": 41.5,
+      "marron_pct_hist": 31.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Basic Materials"
@@ -6915,8 +6915,8 @@
         "wt2": -36.2
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 43.6,
-      "marron_pct_hist": 36.3,
+      "rsi_pct_hist": 50.5,
+      "marron_pct_hist": 50.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Basic Materials"
@@ -6950,8 +6950,8 @@
       "dist_ema200": 30.07,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 72.0,
-      "marron_pct_hist": 66.3,
+      "rsi_pct_hist": 57.6,
+      "marron_pct_hist": 76.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Basic Materials"
@@ -6985,8 +6985,8 @@
       "dist_ema200": -3.83,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 10.8,
-      "marron_pct_hist": 12.3,
+      "rsi_pct_hist": 38.8,
+      "marron_pct_hist": 24.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Basic Materials"
@@ -7020,8 +7020,8 @@
       "dist_ema200": 6.43,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 13.3,
-      "marron_pct_hist": 13.6,
+      "rsi_pct_hist": 37.4,
+      "marron_pct_hist": 22.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Basic Materials"
@@ -7059,8 +7059,8 @@
         "wt2": -51.6
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 29.1,
-      "marron_pct_hist": 27.0,
+      "rsi_pct_hist": 43.5,
+      "marron_pct_hist": 35.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Basic Materials"
@@ -7098,8 +7098,8 @@
         "wt2": -62.8
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 16.9,
-      "marron_pct_hist": 15.5,
+      "rsi_pct_hist": 37.8,
+      "marron_pct_hist": 22.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Basic Materials"
@@ -7133,8 +7133,8 @@
       "dist_ema200": 12.22,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 32.5,
-      "marron_pct_hist": 28.1,
+      "rsi_pct_hist": 45.6,
+      "marron_pct_hist": 40.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Basic Materials"
@@ -7243,10 +7243,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 99.7,
-      "marron_pct_hist": 98.4,
-      "rsi_alerta": "maximo",
-      "marron_alerta": "maximo",
+      "rsi_pct_hist": 83.3,
+      "marron_pct_hist": 119.0,
+      "rsi_alerta": null,
+      "marron_alerta": null,
       "sector": "Basic Materials"
     },
     "SCCO": {
@@ -7278,8 +7278,8 @@
       "dist_ema200": 12.04,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 18.7,
-      "marron_pct_hist": 12.4,
+      "rsi_pct_hist": 42.0,
+      "marron_pct_hist": 25.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Basic Materials"
@@ -7289,7 +7289,7 @@
       "pct_dia": -2.47,
       "rsi_1d": 34.2,
       "rsi_cruza_alza": false,
-      "rsi_1h": 34.2,
+      "rsi_1h": 34.1,
       "rsi_1w": 47.7,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -7313,8 +7313,8 @@
       "dist_ema200": 2.72,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 7.8,
-      "marron_pct_hist": 7.8,
+      "rsi_pct_hist": 34.2,
+      "marron_pct_hist": 14.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Basic Materials"
@@ -7348,8 +7348,8 @@
       "dist_ema200": 8.2,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 15.0,
-      "marron_pct_hist": 11.6,
+      "rsi_pct_hist": 39.2,
+      "marron_pct_hist": 22.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Basic Materials"
@@ -7383,8 +7383,8 @@
       "dist_ema200": -2.98,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 63.9,
-      "marron_pct_hist": 70.4,
+      "rsi_pct_hist": 54.5,
+      "marron_pct_hist": 79.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Comm. Services"
@@ -7418,8 +7418,8 @@
       "dist_ema200": -6.68,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 19.6,
-      "marron_pct_hist": 19.7,
+      "rsi_pct_hist": 41.9,
+      "marron_pct_hist": 32.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Comm. Services"
@@ -7528,9 +7528,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 2.0,
-      "marron_pct_hist": 0.2,
-      "rsi_alerta": "minimo",
+      "rsi_pct_hist": 26.9,
+      "marron_pct_hist": -7.7,
+      "rsi_alerta": null,
       "marron_alerta": "minimo",
       "sector": "Comm. Services"
     },
@@ -7638,8 +7638,8 @@
           }
         ]
       },
-      "rsi_pct_hist": 92.5,
-      "marron_pct_hist": 88.4,
+      "rsi_pct_hist": 71.2,
+      "marron_pct_hist": 101.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Comm. Services"
@@ -7677,8 +7677,8 @@
         "wt2": -33.6
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 32.2,
-      "marron_pct_hist": 39.9,
+      "rsi_pct_hist": 45.3,
+      "marron_pct_hist": 50.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Comm. Services"
@@ -7712,8 +7712,8 @@
       "dist_ema200": 10.54,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 64.5,
-      "marron_pct_hist": 70.3,
+      "rsi_pct_hist": 55.5,
+      "marron_pct_hist": 80.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Comm. Services"
@@ -7822,10 +7822,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 98.9,
-      "marron_pct_hist": 98.9,
-      "rsi_alerta": "maximo",
-      "marron_alerta": "maximo",
+      "rsi_pct_hist": 77.0,
+      "marron_pct_hist": 120.1,
+      "rsi_alerta": null,
+      "marron_alerta": null,
       "sector": "Comm. Services"
     },
     "SPOT": {
@@ -7857,8 +7857,8 @@
       "dist_ema200": -19.75,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 7.6,
-      "marron_pct_hist": 14.1,
+      "rsi_pct_hist": 34.0,
+      "marron_pct_hist": 24.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Comm. Services"
@@ -7892,8 +7892,8 @@
       "dist_ema200": -6.95,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 33.7,
-      "marron_pct_hist": 45.4,
+      "rsi_pct_hist": 48.6,
+      "marron_pct_hist": 63.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Comm. Services"
@@ -7910,7 +7910,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 55.98,
-      "media_k_1w": 66.6,
+      "media_k_1w": 66.59,
       "konc_dir_1w": "dn",
       "pct_semana": 1.33,
       "dist_wma10_1w": 1.89,
@@ -7927,8 +7927,8 @@
       "dist_ema200": 3.06,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 52.6,
-      "marron_pct_hist": 66.5,
+      "rsi_pct_hist": 53.9,
+      "marron_pct_hist": 84.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Comm. Services"
@@ -7962,8 +7962,8 @@
       "dist_ema200": 19.0,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 48.7,
-      "marron_pct_hist": 57.4,
+      "rsi_pct_hist": 50.6,
+      "marron_pct_hist": 68.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Defensive"
@@ -7997,10 +7997,10 @@
       "dist_ema200": 2.74,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 67.6,
-      "marron_pct_hist": 98.0,
+      "rsi_pct_hist": 57.6,
+      "marron_pct_hist": 116.0,
       "rsi_alerta": null,
-      "marron_alerta": "maximo",
+      "marron_alerta": null,
       "sector": "Consumer Defensive"
     },
     "COST": {
@@ -8032,8 +8032,8 @@
       "dist_ema200": 5.37,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 48.6,
-      "marron_pct_hist": 54.4,
+      "rsi_pct_hist": 55.5,
+      "marron_pct_hist": 78.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Defensive"
@@ -8142,9 +8142,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 3.5,
-      "marron_pct_hist": 9.4,
-      "rsi_alerta": "minimo",
+      "rsi_pct_hist": 28.7,
+      "marron_pct_hist": 18.4,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Defensive"
     },
@@ -8177,8 +8177,8 @@
       "dist_ema200": 8.54,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 69.9,
-      "marron_pct_hist": 78.0,
+      "rsi_pct_hist": 59.9,
+      "marron_pct_hist": 93.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Defensive"
@@ -8212,10 +8212,10 @@
       "dist_ema200": 4.75,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 90.3,
-      "marron_pct_hist": 98.8,
+      "rsi_pct_hist": 67.5,
+      "marron_pct_hist": 116.9,
       "rsi_alerta": null,
-      "marron_alerta": "maximo",
+      "marron_alerta": null,
       "sector": "Consumer Defensive"
     },
     "PEP": {
@@ -8247,8 +8247,8 @@
       "dist_ema200": 5.01,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 49.5,
-      "marron_pct_hist": 73.0,
+      "rsi_pct_hist": 53.2,
+      "marron_pct_hist": 88.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Defensive"
@@ -8282,8 +8282,8 @@
       "dist_ema200": -1.42,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 51.2,
-      "marron_pct_hist": 63.7,
+      "rsi_pct_hist": 53.9,
+      "marron_pct_hist": 82.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Defensive"
@@ -8317,8 +8317,8 @@
       "dist_ema200": 18.37,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 68.8,
-      "marron_pct_hist": 70.7,
+      "rsi_pct_hist": 59.5,
+      "marron_pct_hist": 86.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Defensive"
@@ -8352,8 +8352,8 @@
       "dist_ema200": 15.43,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 67.2,
-      "marron_pct_hist": 78.0,
+      "rsi_pct_hist": 61.0,
+      "marron_pct_hist": 96.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Defensive"
@@ -8387,8 +8387,8 @@
       "dist_ema200": 11.47,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 83.9,
-      "marron_pct_hist": 88.5,
+      "rsi_pct_hist": 63.3,
+      "marron_pct_hist": 101.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Defensive"
@@ -8422,8 +8422,8 @@
       "dist_ema200": -1.88,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 38.6,
-      "marron_pct_hist": 50.7,
+      "rsi_pct_hist": 49.7,
+      "marron_pct_hist": 69.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -8532,9 +8532,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 1.5,
-      "marron_pct_hist": 9.9,
-      "rsi_alerta": "minimo",
+      "rsi_pct_hist": 28.5,
+      "marron_pct_hist": 19.9,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
     },
@@ -8571,10 +8571,10 @@
         "wt2": -52.4
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 9.7,
-      "marron_pct_hist": 4.8,
+      "rsi_pct_hist": 35.4,
+      "marron_pct_hist": 10.3,
       "rsi_alerta": null,
-      "marron_alerta": "minimo",
+      "marron_alerta": null,
       "sector": "HealthCare"
     },
     "BMY": {
@@ -8606,8 +8606,8 @@
       "dist_ema200": 8.75,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 39.4,
-      "marron_pct_hist": 47.0,
+      "rsi_pct_hist": 47.8,
+      "marron_pct_hist": 61.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -8641,9 +8641,9 @@
       "dist_ema200": -15.28,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 3.6,
-      "marron_pct_hist": 12.8,
-      "rsi_alerta": "minimo",
+      "rsi_pct_hist": 32.2,
+      "marron_pct_hist": 23.2,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
     },
@@ -8676,8 +8676,8 @@
       "dist_ema200": 3.78,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 18.3,
-      "marron_pct_hist": 18.8,
+      "rsi_pct_hist": 40.2,
+      "marron_pct_hist": 29.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -8711,8 +8711,8 @@
       "dist_ema200": -8.46,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 25.6,
-      "marron_pct_hist": 27.7,
+      "rsi_pct_hist": 45.0,
+      "marron_pct_hist": 45.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -8750,8 +8750,8 @@
         "wt2": -59.7
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 59.2,
-      "marron_pct_hist": 64.4,
+      "rsi_pct_hist": 57.9,
+      "marron_pct_hist": 83.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -8789,8 +8789,8 @@
         "wt2": -73.1
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 6.0,
-      "marron_pct_hist": 9.8,
+      "rsi_pct_hist": 32.5,
+      "marron_pct_hist": 17.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -8828,8 +8828,8 @@
         "wt2": -63.7
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 21.0,
-      "marron_pct_hist": 18.4,
+      "rsi_pct_hist": 43.2,
+      "marron_pct_hist": 30.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -8863,8 +8863,8 @@
       "dist_ema200": 9.74,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 13.1,
-      "marron_pct_hist": 10.7,
+      "rsi_pct_hist": 34.7,
+      "marron_pct_hist": 17.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -8898,8 +8898,8 @@
       "dist_ema200": 2.66,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 22.3,
-      "marron_pct_hist": 18.1,
+      "rsi_pct_hist": 41.5,
+      "marron_pct_hist": 25.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -8933,8 +8933,8 @@
       "dist_ema200": -9.77,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 15.4,
-      "marron_pct_hist": 23.4,
+      "rsi_pct_hist": 39.8,
+      "marron_pct_hist": 37.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -9043,10 +9043,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 99.9,
-      "marron_pct_hist": 96.1,
-      "rsi_alerta": "maximo",
-      "marron_alerta": "maximo",
+      "rsi_pct_hist": 82.9,
+      "marron_pct_hist": 111.4,
+      "rsi_alerta": null,
+      "marron_alerta": null,
       "sector": "HealthCare"
     },
     "VRTX": {
@@ -9082,8 +9082,8 @@
         "wt2": -74.0
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 10.0,
-      "marron_pct_hist": 9.1,
+      "rsi_pct_hist": 38.7,
+      "marron_pct_hist": 19.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -9117,8 +9117,8 @@
       "dist_ema200": 9.57,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 64.7,
-      "marron_pct_hist": 80.8,
+      "rsi_pct_hist": 53.1,
+      "marron_pct_hist": 87.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "HealthCare"
@@ -9152,8 +9152,8 @@
       "dist_ema200": -0.3,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 50.9,
-      "marron_pct_hist": 72.0,
+      "rsi_pct_hist": 54.9,
+      "marron_pct_hist": 88.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Utilities"
@@ -9187,8 +9187,8 @@
       "dist_ema200": -2.79,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 66.3,
-      "marron_pct_hist": 65.6,
+      "rsi_pct_hist": 56.3,
+      "marron_pct_hist": 78.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Utilities"
@@ -9222,8 +9222,8 @@
       "dist_ema200": -6.04,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 29.8,
-      "marron_pct_hist": 39.0,
+      "rsi_pct_hist": 46.6,
+      "marron_pct_hist": 56.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Utilities"
@@ -9257,8 +9257,8 @@
       "dist_ema200": -40.15,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 10.5,
-      "marron_pct_hist": 17.6,
+      "rsi_pct_hist": 34.4,
+      "marron_pct_hist": 27.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Latam / Otros"
@@ -9292,8 +9292,8 @@
       "dist_ema200": -10.86,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 23.0,
-      "marron_pct_hist": 12.8,
+      "rsi_pct_hist": 39.5,
+      "marron_pct_hist": 20.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Latam / Otros"
@@ -9327,8 +9327,8 @@
       "dist_ema200": -6.67,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 43.2,
-      "marron_pct_hist": 56.7,
+      "rsi_pct_hist": 48.3,
+      "marron_pct_hist": 68.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "China"
@@ -9362,8 +9362,8 @@
       "dist_ema200": 4.99,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 70.7,
-      "marron_pct_hist": 75.8,
+      "rsi_pct_hist": 55.9,
+      "marron_pct_hist": 82.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "China"
@@ -9397,8 +9397,8 @@
       "dist_ema200": 1.63,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 65.5,
-      "marron_pct_hist": 61.5,
+      "rsi_pct_hist": 55.2,
+      "marron_pct_hist": 70.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "China"
@@ -9432,8 +9432,8 @@
       "dist_ema200": 7.32,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 37.6,
-      "marron_pct_hist": 35.9,
+      "rsi_pct_hist": 43.7,
+      "marron_pct_hist": 40.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "China"
@@ -9467,8 +9467,8 @@
       "dist_ema200": -4.09,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 74.2,
-      "marron_pct_hist": 85.2,
+      "rsi_pct_hist": 59.6,
+      "marron_pct_hist": 95.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "China"
@@ -9506,8 +9506,8 @@
         "wt2": -32.6
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 43.0,
-      "marron_pct_hist": 36.7,
+      "rsi_pct_hist": 48.2,
+      "marron_pct_hist": 46.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "China"
@@ -9545,8 +9545,8 @@
         "wt2": -56.7
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 15.5,
-      "marron_pct_hist": 16.4,
+      "rsi_pct_hist": 38.6,
+      "marron_pct_hist": 23.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "China"
@@ -9580,8 +9580,8 @@
       "dist_ema200": 18.95,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 62.7,
-      "marron_pct_hist": 56.7,
+      "rsi_pct_hist": 55.9,
+      "marron_pct_hist": 70.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Mexico"
@@ -9619,10 +9619,10 @@
         "wt2": -68.2
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 5.6,
-      "marron_pct_hist": 3.6,
+      "rsi_pct_hist": 34.4,
+      "marron_pct_hist": 10.3,
       "rsi_alerta": null,
-      "marron_alerta": "minimo",
+      "marron_alerta": null,
       "sector": "Mexico"
     },
     "CX": {
@@ -9654,8 +9654,8 @@
       "dist_ema200": 16.32,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 70.7,
-      "marron_pct_hist": 66.7,
+      "rsi_pct_hist": 58.4,
+      "marron_pct_hist": 79.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Mexico"
@@ -9672,7 +9672,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 57.56,
-      "media_k_1w": 75.83,
+      "media_k_1w": 75.86,
       "konc_dir_1w": "dn",
       "pct_semana": 0.49,
       "dist_wma10_1w": 1.44,
@@ -9689,8 +9689,8 @@
       "dist_ema200": 6.71,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 55.8,
-      "marron_pct_hist": 53.6,
+      "rsi_pct_hist": 52.8,
+      "marron_pct_hist": 66.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Mexico"
@@ -9724,8 +9724,8 @@
       "dist_ema200": 2.88,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 37.5,
-      "marron_pct_hist": 44.7,
+      "rsi_pct_hist": 48.9,
+      "marron_pct_hist": 60.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Mexico"
@@ -9759,8 +9759,8 @@
       "dist_ema200": 2.24,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 16.6,
-      "marron_pct_hist": 10.6,
+      "rsi_pct_hist": 40.0,
+      "marron_pct_hist": 21.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Africa"
@@ -9794,8 +9794,8 @@
       "dist_ema200": -8.55,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 30.5,
-      "marron_pct_hist": 34.7,
+      "rsi_pct_hist": 44.7,
+      "marron_pct_hist": 42.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Africa"
@@ -9830,7 +9830,7 @@
       "wt_signal": null,
       "hist_rsi": null,
       "rsi_pct_hist": 44.5,
-      "marron_pct_hist": 41.4,
+      "marron_pct_hist": 40.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Africa"
@@ -9864,8 +9864,8 @@
       "dist_ema200": 73.86,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 57.1,
-      "marron_pct_hist": 55.9,
+      "rsi_pct_hist": 52.5,
+      "marron_pct_hist": 66.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Canada"
@@ -9899,8 +9899,8 @@
       "dist_ema200": 52.24,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 78.4,
-      "marron_pct_hist": 77.9,
+      "rsi_pct_hist": 64.6,
+      "marron_pct_hist": 92.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Canada"
@@ -9934,10 +9934,10 @@
       "dist_ema200": 24.87,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 96.5,
-      "marron_pct_hist": 96.3,
-      "rsi_alerta": "maximo",
-      "marron_alerta": "maximo",
+      "rsi_pct_hist": 67.8,
+      "marron_pct_hist": 113.1,
+      "rsi_alerta": null,
+      "marron_alerta": null,
       "sector": "Canada"
     },
     "MUX": {
@@ -9969,8 +9969,8 @@
       "dist_ema200": 9.74,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 26.5,
-      "marron_pct_hist": 33.0,
+      "rsi_pct_hist": 41.9,
+      "marron_pct_hist": 39.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Canada"
@@ -10004,8 +10004,8 @@
       "dist_ema200": -6.58,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 13.6,
-      "marron_pct_hist": 13.2,
+      "rsi_pct_hist": 37.9,
+      "marron_pct_hist": 20.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Canada"
@@ -10039,8 +10039,8 @@
       "dist_ema200": 21.88,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 57.6,
-      "marron_pct_hist": 53.3,
+      "rsi_pct_hist": 52.8,
+      "marron_pct_hist": 63.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Canada"
@@ -10074,8 +10074,8 @@
       "dist_ema200": 9.58,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 17.8,
-      "marron_pct_hist": 18.8,
+      "rsi_pct_hist": 40.0,
+      "marron_pct_hist": 28.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Canada"
@@ -10109,8 +10109,8 @@
       "dist_ema200": -2.98,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 51.3,
-      "marron_pct_hist": 45.7,
+      "rsi_pct_hist": 55.0,
+      "marron_pct_hist": 67.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Canada"
@@ -10126,8 +10126,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 69.83,
-      "media_k_1w": 86.16,
+      "marron_1w": 69.87,
+      "media_k_1w": 86.2,
       "konc_dir_1w": "dn",
       "pct_semana": 0.69,
       "dist_wma10_1w": -1.36,
@@ -10148,8 +10148,8 @@
         "wt2": -43.9
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 34.1,
-      "marron_pct_hist": 31.5,
+      "rsi_pct_hist": 44.1,
+      "marron_pct_hist": 37.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -10183,8 +10183,8 @@
       "dist_ema200": 8.57,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 69.7,
-      "marron_pct_hist": 71.1,
+      "rsi_pct_hist": 55.3,
+      "marron_pct_hist": 77.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -10218,8 +10218,8 @@
       "dist_ema200": 11.64,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 42.7,
-      "marron_pct_hist": 40.0,
+      "rsi_pct_hist": 47.6,
+      "marron_pct_hist": 48.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -10328,8 +10328,8 @@
           }
         ]
       },
-      "rsi_pct_hist": 93.9,
-      "marron_pct_hist": 82.2,
+      "rsi_pct_hist": 69.8,
+      "marron_pct_hist": 95.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -10367,8 +10367,8 @@
         "wt2": -30.2
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 30.9,
-      "marron_pct_hist": 39.1,
+      "rsi_pct_hist": 45.7,
+      "marron_pct_hist": 52.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -10402,8 +10402,8 @@
       "dist_ema200": 1.7,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 29.5,
-      "marron_pct_hist": 32.4,
+      "rsi_pct_hist": 42.1,
+      "marron_pct_hist": 37.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -10437,8 +10437,8 @@
       "dist_ema200": 41.9,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 77.3,
-      "marron_pct_hist": 74.3,
+      "rsi_pct_hist": 62.8,
+      "marron_pct_hist": 90.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -10547,9 +10547,9 @@
           }
         ]
       },
-      "rsi_pct_hist": 4.6,
-      "marron_pct_hist": 6.5,
-      "rsi_alerta": "minimo",
+      "rsi_pct_hist": 29.9,
+      "marron_pct_hist": 13.5,
+      "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
     },
@@ -10582,8 +10582,8 @@
       "dist_ema200": 18.74,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 27.5,
-      "marron_pct_hist": 21.6,
+      "rsi_pct_hist": 44.4,
+      "marron_pct_hist": 33.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -10617,8 +10617,8 @@
       "dist_ema200": 2.76,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 37.4,
-      "marron_pct_hist": 39.2,
+      "rsi_pct_hist": 45.1,
+      "marron_pct_hist": 44.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -10652,8 +10652,8 @@
       "dist_ema200": 49.76,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 90.6,
-      "marron_pct_hist": 80.7,
+      "rsi_pct_hist": 66.7,
+      "marron_pct_hist": 94.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Reino Unido"
@@ -10691,8 +10691,8 @@
         "wt2": -56.8
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 8.2,
-      "marron_pct_hist": 6.9,
+      "rsi_pct_hist": 35.3,
+      "marron_pct_hist": 14.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Reino Unido"
@@ -10726,8 +10726,8 @@
       "dist_ema200": 7.53,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 58.2,
-      "marron_pct_hist": 57.3,
+      "rsi_pct_hist": 55.4,
+      "marron_pct_hist": 72.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Reino Unido"
@@ -10761,8 +10761,8 @@
       "dist_ema200": 22.63,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 57.2,
-      "marron_pct_hist": 54.8,
+      "rsi_pct_hist": 54.4,
+      "marron_pct_hist": 68.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Reino Unido"
@@ -10796,8 +10796,8 @@
       "dist_ema200": -11.25,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 53.4,
-      "marron_pct_hist": 60.1,
+      "rsi_pct_hist": 52.7,
+      "marron_pct_hist": 74.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Reino Unido"
@@ -10831,8 +10831,8 @@
       "dist_ema200": 5.13,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 8.6,
-      "marron_pct_hist": 6.5,
+      "rsi_pct_hist": 34.3,
+      "marron_pct_hist": 12.7,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Reino Unido"
@@ -10866,8 +10866,8 @@
       "dist_ema200": 22.03,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 78.1,
-      "marron_pct_hist": 63.0,
+      "rsi_pct_hist": 64.3,
+      "marron_pct_hist": 81.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Reino Unido"
@@ -10901,8 +10901,8 @@
       "dist_ema200": 10.25,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 49.4,
-      "marron_pct_hist": 46.9,
+      "rsi_pct_hist": 51.3,
+      "marron_pct_hist": 58.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Reino Unido"
@@ -10936,8 +10936,8 @@
       "dist_ema200": 10.73,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 54.6,
-      "marron_pct_hist": 53.5,
+      "rsi_pct_hist": 53.9,
+      "marron_pct_hist": 70.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Reino Unido"
@@ -10971,8 +10971,8 @@
       "dist_ema200": 25.3,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 70.2,
-      "marron_pct_hist": 59.7,
+      "rsi_pct_hist": 59.9,
+      "marron_pct_hist": 76.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Reino Unido"
@@ -11006,8 +11006,8 @@
       "dist_ema200": 22.06,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 87.3,
-      "marron_pct_hist": 85.5,
+      "rsi_pct_hist": 65.4,
+      "marron_pct_hist": 95.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Reino Unido"
@@ -11045,8 +11045,8 @@
         "wt2": -49.2
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 14.3,
-      "marron_pct_hist": 19.4,
+      "rsi_pct_hist": 38.6,
+      "marron_pct_hist": 32.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Europa"
@@ -11080,8 +11080,8 @@
       "dist_ema200": 21.6,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 40.9,
-      "marron_pct_hist": 40.5,
+      "rsi_pct_hist": 51.6,
+      "marron_pct_hist": 60.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Europa"
@@ -11115,8 +11115,8 @@
       "dist_ema200": 9.85,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 41.6,
-      "marron_pct_hist": 37.7,
+      "rsi_pct_hist": 49.7,
+      "marron_pct_hist": 51.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Europa"
@@ -11150,8 +11150,8 @@
       "dist_ema200": 36.09,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 63.9,
-      "marron_pct_hist": 52.7,
+      "rsi_pct_hist": 56.0,
+      "marron_pct_hist": 66.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Europa"
@@ -11185,8 +11185,8 @@
       "dist_ema200": 7.61,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 13.9,
-      "marron_pct_hist": 20.7,
+      "rsi_pct_hist": 40.9,
+      "marron_pct_hist": 38.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Europa"
@@ -11220,8 +11220,8 @@
       "dist_ema200": 12.86,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 64.3,
-      "marron_pct_hist": 60.7,
+      "rsi_pct_hist": 58.9,
+      "marron_pct_hist": 78.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Europa"
@@ -11259,8 +11259,8 @@
         "wt2": -62.5
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 24.3,
-      "marron_pct_hist": 21.5,
+      "rsi_pct_hist": 44.0,
+      "marron_pct_hist": 34.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Europa"
@@ -11294,8 +11294,8 @@
       "dist_ema200": -23.16,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 28.9,
-      "marron_pct_hist": 41.5,
+      "rsi_pct_hist": 45.6,
+      "marron_pct_hist": 57.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Europa"
@@ -11329,8 +11329,8 @@
       "dist_ema200": 13.8,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 36.3,
-      "marron_pct_hist": 32.5,
+      "rsi_pct_hist": 48.7,
+      "marron_pct_hist": 48.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Europa"
@@ -11364,8 +11364,8 @@
       "dist_ema200": 27.83,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 74.1,
-      "marron_pct_hist": 67.3,
+      "rsi_pct_hist": 60.7,
+      "marron_pct_hist": 81.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Europa"
@@ -11399,8 +11399,8 @@
       "dist_ema200": 23.0,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 64.6,
-      "marron_pct_hist": 53.5,
+      "rsi_pct_hist": 57.3,
+      "marron_pct_hist": 69.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Asia"
@@ -11434,8 +11434,8 @@
       "dist_ema200": -20.7,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 16.2,
-      "marron_pct_hist": 33.1,
+      "rsi_pct_hist": 38.4,
+      "marron_pct_hist": 44.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Asia"
@@ -11469,8 +11469,8 @@
       "dist_ema200": -15.76,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 20.2,
-      "marron_pct_hist": 43.6,
+      "rsi_pct_hist": 40.9,
+      "marron_pct_hist": 52.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Asia"
@@ -11508,8 +11508,8 @@
         "wt2": -45.9
       },
       "hist_rsi": null,
-      "rsi_pct_hist": 10.7,
-      "marron_pct_hist": 14.0,
+      "rsi_pct_hist": 35.4,
+      "marron_pct_hist": 24.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Asia"
@@ -11618,10 +11618,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 99.0,
-      "marron_pct_hist": 98.5,
-      "rsi_alerta": "maximo",
-      "marron_alerta": "maximo",
+      "rsi_pct_hist": 79.2,
+      "marron_pct_hist": 120.1,
+      "rsi_alerta": null,
+      "marron_alerta": null,
       "sector": "Asia"
     },
     "SE": {
@@ -11653,8 +11653,8 @@
       "dist_ema200": -27.43,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 41.4,
-      "marron_pct_hist": 48.8,
+      "rsi_pct_hist": 49.1,
+      "marron_pct_hist": 61.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Asia"
@@ -11688,8 +11688,8 @@
       "dist_ema200": -16.53,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 11.1,
-      "marron_pct_hist": 12.0,
+      "rsi_pct_hist": 36.3,
+      "marron_pct_hist": 22.5,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Asia"
@@ -11798,10 +11798,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 1.9,
-      "marron_pct_hist": 4.5,
-      "rsi_alerta": "minimo",
-      "marron_alerta": "minimo",
+      "rsi_pct_hist": 29.4,
+      "marron_pct_hist": 12.5,
+      "rsi_alerta": null,
+      "marron_alerta": null,
       "sector": "Asia"
     },
     "TSM": {
@@ -11833,8 +11833,8 @@
       "dist_ema200": 28.74,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 74.8,
-      "marron_pct_hist": 75.0,
+      "rsi_pct_hist": 63.4,
+      "marron_pct_hist": 91.2,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Asia"
@@ -11868,8 +11868,8 @@
       "dist_ema200": -10.61,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 9.4,
-      "marron_pct_hist": 11.7,
+      "rsi_pct_hist": 33.6,
+      "marron_pct_hist": 17.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Argentina"
@@ -11903,8 +11903,8 @@
       "dist_ema200": -2.54,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 6.1,
-      "marron_pct_hist": 6.7,
+      "rsi_pct_hist": 33.3,
+      "marron_pct_hist": 13.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Argentina"
@@ -11938,8 +11938,8 @@
       "dist_ema200": -14.74,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 7.6,
-      "marron_pct_hist": 5.8,
+      "rsi_pct_hist": 33.1,
+      "marron_pct_hist": 12.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Argentina"
@@ -12048,10 +12048,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 5.2,
-      "marron_pct_hist": 3.0,
+      "rsi_pct_hist": 29.6,
+      "marron_pct_hist": 4.2,
       "rsi_alerta": null,
-      "marron_alerta": "minimo",
+      "marron_alerta": null,
       "sector": "Argentina"
     },
     "LOMA": {
@@ -12083,8 +12083,8 @@
       "dist_ema200": -2.67,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 21.7,
-      "marron_pct_hist": 21.7,
+      "rsi_pct_hist": 41.1,
+      "marron_pct_hist": 31.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Argentina"
@@ -12118,8 +12118,8 @@
       "dist_ema200": -7.47,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 57.3,
-      "marron_pct_hist": 52.6,
+      "rsi_pct_hist": 56.3,
+      "marron_pct_hist": 69.6,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Argentina"
@@ -12153,8 +12153,8 @@
       "dist_ema200": -1.19,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 12.0,
-      "marron_pct_hist": 22.3,
+      "rsi_pct_hist": 38.3,
+      "marron_pct_hist": 34.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Argentina"
@@ -12263,10 +12263,10 @@
           }
         ]
       },
-      "rsi_pct_hist": 6.4,
-      "marron_pct_hist": 2.7,
+      "rsi_pct_hist": 30.7,
+      "marron_pct_hist": 4.8,
       "rsi_alerta": null,
-      "marron_alerta": "minimo",
+      "marron_alerta": null,
       "sector": "Argentina"
     },
     "YPF": {
@@ -12298,8 +12298,8 @@
       "dist_ema200": 18.08,
       "wt_signal": null,
       "hist_rsi": null,
-      "rsi_pct_hist": 59.4,
-      "marron_pct_hist": 57.2,
+      "rsi_pct_hist": 53.4,
+      "marron_pct_hist": 64.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Argentina"
