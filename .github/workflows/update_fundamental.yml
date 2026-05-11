@@ -2,10 +2,10 @@ name: Actualizar Fundamental (semanal)
 
 on:
   schedule:
-    # Domingos a las 22:00 UTC = 19:00 Argentina
-    - cron: '0 22 * * 0'
+    # Domingos a las 20:00 UTC = 17:00 AR
+    # (2 horas ANTES del keepalive de update_data para evitar conflictos)
+    - cron: '0 20 * * 0'
 
-  # Manual cuando quieras
   workflow_dispatch:
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
           python-version: '3.11'
 
       - name: Instalar dependencias
-        run: pip install yfinance pandas numpy requests
+        run: pip install yfinance pandas numpy requests --quiet
 
       - name: Correr análisis fundamental
         run: python fundamental.py
