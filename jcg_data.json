@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-05-14 18:47",
+  "actualizado": "2026-05-14 19:16",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -482,35 +482,35 @@
       "wt_signal": null,
       "hist_rsi": {
         "nivel": 70,
-        "total_eventos": 144,
+        "total_eventos": 142,
         "resumen": [
           {
             "tramo": "1d",
-            "avg": -0.04,
+            "avg": -0.02,
             "pos": 79,
-            "total": 144,
-            "prob": 54.9
+            "total": 142,
+            "prob": 55.6
           },
           {
             "tramo": "2d",
-            "avg": -0.01,
+            "avg": 0.05,
             "pos": 91,
-            "total": 144,
-            "prob": 63.2
+            "total": 142,
+            "prob": 64.1
           },
           {
             "tramo": "5d",
-            "avg": 0.09,
+            "avg": 0.2,
             "pos": 81,
-            "total": 144,
-            "prob": 56.2
+            "total": 142,
+            "prob": 57.0
           },
           {
             "tramo": "1m",
-            "avg": 0.85,
+            "avg": 0.88,
             "pos": 96,
-            "total": 142,
-            "prob": 67.6
+            "total": 140,
+            "prob": 68.6
           }
         ],
         "ultimos": [
@@ -1368,7 +1368,7 @@
       "pct_dia": -0.75,
       "rsi_1d": 51.9,
       "rsi_cruza_alza": false,
-      "rsi_1h": 41.5,
+      "rsi_1h": null,
       "rsi_1w": 60.5,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -1410,8 +1410,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 95.15,
-      "media_k_1w": 80.98,
+      "marron_1w": 95.14,
+      "media_k_1w": 80.95,
       "konc_dir_1w": "up",
       "pct_semana": -1.13,
       "dist_wma10_1w": 1.07,
@@ -5916,7 +5916,7 @@
             "ret_1d": -1.39,
             "ret_2d": -2.57,
             "ret_5d": -4.1,
-            "ret_1m": -5.62
+            "ret_1m": -5.63
           },
           {
             "dir": "↓",
@@ -11637,7 +11637,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 100.44,
-      "media_k_1w": 80.98,
+      "media_k_1w": 80.99,
       "konc_dir_1w": "up",
       "pct_semana": -2.89,
       "dist_wma10_1w": 8.33,
@@ -12219,8 +12219,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 49.7,
-      "media_k_1w": 70.88,
+      "marron_1w": 49.41,
+      "media_k_1w": 70.38,
       "konc_dir_1w": "dn",
       "pct_semana": -4.97,
       "dist_wma10_1w": -2.31,
@@ -13771,35 +13771,35 @@
       "pct_dia": 0.71,
       "hist": {
         "nivel": 70,
-        "total_eventos": 144,
+        "total_eventos": 142,
         "resumen": [
           {
             "tramo": "1d",
-            "avg": -0.04,
+            "avg": -0.02,
             "pos": 79,
-            "total": 144,
-            "prob": 54.9
+            "total": 142,
+            "prob": 55.6
           },
           {
             "tramo": "2d",
-            "avg": -0.01,
+            "avg": 0.05,
             "pos": 91,
-            "total": 144,
-            "prob": 63.2
+            "total": 142,
+            "prob": 64.1
           },
           {
             "tramo": "5d",
-            "avg": 0.09,
+            "avg": 0.2,
             "pos": 81,
-            "total": 144,
-            "prob": 56.2
+            "total": 142,
+            "prob": 57.0
           },
           {
             "tramo": "1m",
-            "avg": 0.85,
+            "avg": 0.88,
             "pos": 96,
-            "total": 142,
-            "prob": 67.6
+            "total": 140,
+            "prob": 68.6
           }
         ],
         "ultimos": [
@@ -15793,7 +15793,7 @@
             "ret_1d": -1.39,
             "ret_2d": -2.57,
             "ret_5d": -4.1,
-            "ret_1m": -5.62
+            "ret_1m": -5.63
           },
           {
             "dir": "↓",
