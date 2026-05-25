@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-05-25 19:11",
+  "actualizado": "2026-05-25 19:37",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1271,8 +1271,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 68.08,
-      "media_k_1w": 73.32,
+      "marron_1w": 68.07,
+      "media_k_1w": 73.29,
       "konc_dir_1w": "dn",
       "pct_semana": 0.19,
       "dist_wma10_1w": 1.33,
@@ -1347,8 +1347,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 88.46,
-      "media_k_1w": 81.29,
+      "marron_1w": 88.45,
+      "media_k_1w": 81.27,
       "konc_dir_1w": "up",
       "pct_semana": 3.08,
       "dist_wma10_1w": 2.05,
@@ -2449,7 +2449,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 140.32,
-      "media_k_1w": 102.14,
+      "media_k_1w": 102.15,
       "konc_dir_1w": "up",
       "pct_semana": 1.86,
       "dist_wma10_1w": 21.52,
@@ -5420,8 +5420,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 84.37,
-      "media_k_1w": 59.22,
+      "marron_1w": 84.39,
+      "media_k_1w": 59.26,
       "konc_dir_1w": "up",
       "pct_semana": 12.82,
       "dist_wma10_1w": 17.16,
@@ -8847,7 +8847,7 @@
             "ret_1d": -1.69,
             "ret_2d": -2.54,
             "ret_5d": -3.68,
-            "ret_1m": 15.97
+            "ret_1m": 15.98
           },
           {
             "dir": "↑",
@@ -9905,7 +9905,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 67.93,
-      "media_k_1w": 73.4,
+      "media_k_1w": 73.38,
       "konc_dir_1w": "dn",
       "pct_semana": 2.72,
       "dist_wma10_1w": 3.77,
@@ -10388,8 +10388,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 82.63,
-      "media_k_1w": 85.55,
+      "marron_1w": 82.67,
+      "media_k_1w": 85.63,
       "konc_dir_1w": "dn",
       "pct_semana": 4.23,
       "dist_wma10_1w": 4.35,
@@ -11399,8 +11399,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 98.57,
-      "media_k_1w": 78.31,
+      "marron_1w": 98.56,
+      "media_k_1w": 78.28,
       "konc_dir_1w": "up",
       "pct_semana": 3.67,
       "dist_wma10_1w": 6.22,
@@ -14369,7 +14369,7 @@
             "ret_1d": -1.69,
             "ret_2d": -2.54,
             "ret_5d": -3.68,
-            "ret_1m": 15.97
+            "ret_1m": 15.98
           },
           {
             "dir": "↑",
