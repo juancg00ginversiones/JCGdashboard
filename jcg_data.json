@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-05-27 18:21",
+  "actualizado": "2026-05-27 18:54",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1336,7 +1336,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 93.0,
-      "media_k_1w": 82.32,
+      "media_k_1w": 82.35,
       "konc_dir_1w": "up",
       "pct_semana": 0.16,
       "dist_wma10_1w": 1.5,
@@ -4917,7 +4917,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 22.41,
-      "media_k_1w": 46.82,
+      "media_k_1w": 46.8,
       "konc_dir_1w": "dn",
       "pct_semana": -5.04,
       "dist_wma10_1w": -4.51,
@@ -5442,7 +5442,7 @@
             "ret_1d": -1.39,
             "ret_2d": -2.57,
             "ret_5d": -4.1,
-            "ret_1m": -5.63
+            "ret_1m": -5.62
           },
           {
             "dir": "↓",
@@ -10270,7 +10270,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 77.62,
-      "media_k_1w": 88.84,
+      "media_k_1w": 88.83,
       "konc_dir_1w": "dn",
       "pct_semana": -0.65,
       "dist_wma10_1w": -1.66,
@@ -10401,7 +10401,7 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.15,
+            "avg": 0.14,
             "pos": 44,
             "total": 84,
             "prob": 52.4
@@ -11004,8 +11004,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 41.96,
-      "media_k_1w": 70.01,
+      "marron_1w": 43.17,
+      "media_k_1w": 70.52,
       "konc_dir_1w": "dn",
       "pct_semana": 2.59,
       "dist_wma10_1w": -3.47,
@@ -14576,7 +14576,7 @@
             "ret_1d": -1.39,
             "ret_2d": -2.57,
             "ret_5d": -4.1,
-            "ret_1m": -5.63
+            "ret_1m": -5.62
           },
           {
             "dir": "↓",
@@ -15444,7 +15444,7 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.15,
+            "avg": 0.14,
             "pos": 44,
             "total": 84,
             "prob": 52.4
