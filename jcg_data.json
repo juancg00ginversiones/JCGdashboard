@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-05-27 19:45",
+  "actualizado": "2026-05-27 19:58",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1264,7 +1264,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 66.62,
-      "media_k_1w": 72.68,
+      "media_k_1w": 72.7,
       "konc_dir_1w": "dn",
       "pct_semana": -0.26,
       "dist_wma10_1w": 0.72,
@@ -9241,7 +9241,7 @@
             "ret_1d": -1.69,
             "ret_2d": -2.54,
             "ret_5d": -3.68,
-            "ret_1m": 15.98
+            "ret_1m": 15.97
           },
           {
             "dir": "↑",
@@ -10377,8 +10377,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 76.66,
-      "media_k_1w": 73.67,
+      "marron_1w": 76.67,
+      "media_k_1w": 73.69,
       "konc_dir_1w": "up",
       "pct_semana": 2.53,
       "dist_wma10_1w": 4.8,
@@ -10401,7 +10401,7 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.14,
+            "avg": 0.15,
             "pos": 44,
             "total": 84,
             "prob": 52.4
@@ -10932,8 +10932,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 90.27,
-      "media_k_1w": 85.99,
+      "marron_1w": 90.24,
+      "media_k_1w": 85.94,
       "konc_dir_1w": "up",
       "pct_semana": 2.19,
       "dist_wma10_1w": 4.97,
@@ -11948,7 +11948,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 106.11,
-      "media_k_1w": 80.82,
+      "media_k_1w": 80.79,
       "konc_dir_1w": "up",
       "pct_semana": 1.93,
       "dist_wma10_1w": 5.97,
@@ -15322,7 +15322,7 @@
             "ret_1d": -1.69,
             "ret_2d": -2.54,
             "ret_5d": -3.68,
-            "ret_1m": 15.98
+            "ret_1m": 15.97
           },
           {
             "dir": "↑",
@@ -15444,7 +15444,7 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.14,
+            "avg": 0.15,
             "pos": 44,
             "total": 84,
             "prob": 52.4
