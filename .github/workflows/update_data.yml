@@ -2,9 +2,15 @@ name: Actualizar datos JCGdashboard
 
 on:
   schedule:
-    # ── SÁBADO Y DOMINGO ── keepalive para que GitHub no suspenda el workflow
-    - cron: '0 22 * * 6'   # sábado 19:00 AR
-    - cron: '0 22 * * 0'   # domingo 19:00 AR
+    # ── KEEPALIVE MADRUGADA ── para que GitHub no suspenda el workflow
+    # Corre cada 2 horas durante la madrugada AR (no hay mercado igual)
+    - cron: '0 2 * * *'    # 23:00 AR
+    - cron: '0 4 * * *'    # 01:00 AR
+    - cron: '0 6 * * *'    # 03:00 AR
+    - cron: '0 8 * * *'    # 05:00 AR
+    - cron: '0 10 * * *'   # 07:00 AR
+    - cron: '0 11 * * *'   # 08:00 AR — pre apertura
+    - cron: '30 11 * * *'  # 08:30 AR — pre apertura
 
     # ── LUNES A VIERNES ── cada 30 min, 9:00 a 21:30 AR
     - cron: '0 12 * * 1-5'
