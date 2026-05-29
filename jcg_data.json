@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-05-29 08:24",
+  "actualizado": "2026-05-29 09:51",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1264,7 +1264,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 66.09,
-      "media_k_1w": 72.63,
+      "media_k_1w": 72.65,
       "konc_dir_1w": "dn",
       "pct_semana": -0.44,
       "dist_wma10_1w": 0.57,
@@ -5288,7 +5288,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 20.89,
-      "media_k_1w": 46.68,
+      "media_k_1w": 46.66,
       "konc_dir_1w": "dn",
       "pct_semana": -5.32,
       "dist_wma10_1w": -4.75,
@@ -8847,7 +8847,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 85.42,
-      "media_k_1w": 71.63,
+      "media_k_1w": 71.62,
       "konc_dir_1w": "up",
       "pct_semana": -5.51,
       "dist_wma10_1w": 2.18,
@@ -9596,7 +9596,7 @@
             "ret_1d": -1.69,
             "ret_2d": -2.54,
             "ret_5d": -3.68,
-            "ret_1m": 15.97
+            "ret_1m": 15.98
           },
           {
             "dir": "↑",
@@ -11359,7 +11359,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 89.55,
-      "media_k_1w": 85.96,
+      "media_k_1w": 85.95,
       "konc_dir_1w": "up",
       "pct_semana": 0.0,
       "dist_wma10_1w": 3.15,
@@ -11430,8 +11430,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 41.94,
-      "media_k_1w": 70.01,
+      "marron_1w": 43.14,
+      "media_k_1w": 70.51,
       "konc_dir_1w": "dn",
       "pct_semana": 1.44,
       "dist_wma10_1w": -4.36,
@@ -12373,8 +12373,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 105.45,
-      "media_k_1w": 80.75,
+      "marron_1w": 105.44,
+      "media_k_1w": 80.73,
       "konc_dir_1w": "up",
       "pct_semana": 1.11,
       "dist_wma10_1w": 5.28,
@@ -16173,7 +16173,7 @@
             "ret_1d": -1.69,
             "ret_2d": -2.54,
             "ret_5d": -3.68,
-            "ret_1m": 15.97
+            "ret_1m": 15.98
           },
           {
             "dir": "↑",
