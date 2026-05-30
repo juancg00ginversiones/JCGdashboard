@@ -991,6 +991,8 @@ function metodoDiario(d){
   if(d.rsi_1d===null||d.marron===null) return false;
   // RSI debe estar cruzando al alza su WMA21 — entrada fresca
   if(!d.rsi_cruza_alza) return false;
+  // EMA21 debe estar en tendencia alcista (hoy > hace 3 días) — filtra laterales
+  if(d.ema21_sube === false) return false;
   // Anuladores
   if(d.rsi_1d >= 65)   return false;  // RSI saturado
   if(d.marron >= 100)  return false;  // KONCORD saturado
@@ -1519,8 +1521,10 @@ async function doLoginFromLanding(){
   errEl.textContent = '';
   if(!email||!comitente||!password){ errEl.textContent='Completá todos los campos'; return; }
 
-  const { data: usuario } = await supa.from('usuarios_dashboard').select('id,activo')
-    .eq('usuario', email).eq('cuenta_comitente', comitente).maybeSingle();
+  // Verificar via RPC segura
+  const { data: usuario } = await supa.rpc('validar_usuario', {
+    p_email: email, p_comitente: comitente
+  });
   if(!usuario){ errEl.textContent='Email o comitente no autorizado'; return; }
   if(!usuario.activo){ errEl.textContent='Cuenta suspendida. Contactá a JCG'; return; }
 
@@ -1599,15 +1603,13 @@ async function doLogin(){
     errEl.textContent='Completá todos los campos'; return;
   }
 
-  // Verificar que el email + comitente existan en la tabla
-  const { data: usuario, error: err1 } = await supa
-    .from('usuarios_dashboard')
-    .select('id,activo')
-    .eq('usuario', email)
-    .eq('cuenta_comitente', comitente)
-    .maybeSingle();
+  // Verificar via RPC (función segura del lado del servidor — no expone la tabla)
+  const { data: usuario, error: err1 } = await supa.rpc('validar_usuario', {
+    p_email:     email,
+    p_comitente: comitente
+  });
 
-  if(err1||!usuario){
+  if(err1 || !usuario){
     errEl.textContent='Email o número de comitente no autorizado'; return;
   }
   if(!usuario.activo){
@@ -1640,15 +1642,13 @@ async function doRegister(){
     errEl.textContent='La contraseña debe tener al menos 6 caracteres'; return;
   }
 
-  // Verificar autorización
-  const { data: usuario } = await supa
-    .from('usuarios_dashboard')
-    .select('id,activo')
-    .eq('usuario', email)
-    .eq('cuenta_comitente', comitente)
-    .maybeSingle();
+  // Verificar autorización via RPC (seguro — no expone la tabla)
+  const { data: usuario, error: errRpc } = await supa.rpc('validar_usuario', {
+    p_email:     email,
+    p_comitente: comitente
+  });
 
-  if(!usuario){
+  if(errRpc || !usuario){
     errEl.textContent='Email o comitente no registrado. Contactá al administrador'; return;
   }
   if(!usuario.activo){
@@ -1660,11 +1660,12 @@ async function doRegister(){
     errEl.textContent = err.message; return;
   }
 
-  // Vincular auth_user_id a la tabla
+  // Vincular auth_user_id via RPC segura
   if(authData.user){
-    await supa.from('usuarios_dashboard')
-      .update({ auth_user_id: authData.user.id })
-      .eq('id', usuario.id);
+    await supa.rpc('vincular_auth_user', {
+      p_email:       email,
+      p_auth_user_id: authData.user.id
+    });
   }
 
   okEl.textContent='✅ Cuenta creada. Ya podés ingresar con tu contraseña.';
