@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-05-30 06:55",
+  "actualizado": "2026-05-30 08:27",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -605,9 +605,9 @@
           {
             "tramo": "2d",
             "avg": -0.06,
-            "pos": 53,
+            "pos": 52,
             "total": 106,
-            "prob": 50.0
+            "prob": 49.1
           },
           {
             "tramo": "5d",
@@ -1413,8 +1413,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 62.16,
-      "media_k_1w": 72.27,
+      "marron_1w": 62.17,
+      "media_k_1w": 72.29,
       "konc_dir_1w": "dn",
       "pct_semana": -2.23,
       "dist_wma10_1w": -0.91,
@@ -2654,7 +2654,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 134.61,
-      "media_k_1w": 105.08,
+      "media_k_1w": 105.07,
       "konc_dir_1w": "up",
       "pct_semana": 0.01,
       "dist_wma10_1w": 15.5,
@@ -6063,8 +6063,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 112.41,
-      "media_k_1w": 64.04,
+      "marron_1w": 112.39,
+      "media_k_1w": 64.0,
       "konc_dir_1w": "up",
       "pct_semana": 16.81,
       "dist_wma10_1w": 27.51,
@@ -6121,7 +6121,7 @@
             "ret_1d": -1.39,
             "ret_2d": -2.57,
             "ret_5d": -4.1,
-            "ret_1m": -5.63
+            "ret_1m": -5.62
           },
           {
             "dir": "↓",
@@ -7470,7 +7470,7 @@
           {
             "dir": "↓",
             "rsi": 68.1,
-            "ret_1d": -0.54,
+            "ret_1d": -0.55,
             "ret_2d": 1.07,
             "ret_5d": 2.06,
             "ret_1m": -6.57
@@ -11116,7 +11116,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 75.89,
-      "media_k_1w": 73.6,
+      "media_k_1w": 73.62,
       "konc_dir_1w": "up",
       "pct_semana": 0.35,
       "dist_wma10_1w": 2.99,
@@ -11583,8 +11583,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 89.34,
-      "media_k_1w": 85.83,
+      "marron_1w": 89.37,
+      "media_k_1w": 85.91,
       "konc_dir_1w": "up",
       "pct_semana": 0.31,
       "dist_wma10_1w": 3.41,
@@ -11655,8 +11655,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 41.34,
-      "media_k_1w": 69.95,
+      "marron_1w": 42.51,
+      "media_k_1w": 70.39,
       "konc_dir_1w": "dn",
       "pct_semana": 0.58,
       "dist_wma10_1w": -5.04,
@@ -11692,7 +11692,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 96.87,
-      "media_k_1w": 83.89,
+      "media_k_1w": 83.9,
       "konc_dir_1w": "up",
       "pct_semana": -5.26,
       "dist_wma10_1w": 0.3,
@@ -12270,8 +12270,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 67.54,
-      "media_k_1w": 68.66,
+      "marron_1w": 67.7,
+      "media_k_1w": 69.1,
       "konc_dir_1w": "dn",
       "pct_semana": 2.05,
       "dist_wma10_1w": 2.37,
@@ -12599,7 +12599,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 105.86,
-      "media_k_1w": 80.76,
+      "media_k_1w": 80.8,
       "konc_dir_1w": "up",
       "pct_semana": 1.44,
       "dist_wma10_1w": 5.55,
@@ -13897,9 +13897,9 @@
           {
             "tramo": "2d",
             "avg": -0.06,
-            "pos": 53,
+            "pos": 52,
             "total": 106,
-            "prob": 50.0
+            "prob": 49.1
           },
           {
             "tramo": "5d",
@@ -16055,7 +16055,7 @@
             "ret_1d": -1.39,
             "ret_2d": -2.57,
             "ret_5d": -4.1,
-            "ret_1m": -5.63
+            "ret_1m": -5.62
           },
           {
             "dir": "↓",
@@ -16388,7 +16388,7 @@
           {
             "dir": "↓",
             "rsi": 68.1,
-            "ret_1d": -0.54,
+            "ret_1d": -0.55,
             "ret_2d": 1.07,
             "ret_5d": 2.06,
             "ret_1m": -6.57
