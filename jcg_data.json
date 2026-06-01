@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-06-01 20:15",
+  "actualizado": "2026-06-01 20:24",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -757,7 +757,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 39.87,
-      "media_k_1w": 82.01,
+      "media_k_1w": 82.02,
       "konc_dir_1w": "dn",
       "pct_semana": -0.67,
       "dist_wma10_1w": -4.79,
@@ -906,7 +906,7 @@
           },
           {
             "tramo": "5d",
-            "avg": -0.11,
+            "avg": -0.12,
             "pos": 58,
             "total": 100,
             "prob": 58.0
@@ -1418,7 +1418,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 48.25,
-      "media_k_1w": 70.11,
+      "media_k_1w": 70.13,
       "konc_dir_1w": "dn",
       "pct_semana": -1.06,
       "dist_wma10_1w": -1.71,
@@ -2264,7 +2264,7 @@
       "dist_ema50_1w": -5.91,
       "dist_sma200_1w": 30.86,
       "macd_h": 10.65,
-      "marron": 58.12,
+      "marron": 58.11,
       "media_k": 49.56,
       "konc_dir": "up",
       "dist_ema21": -3.05,
@@ -4059,7 +4059,7 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 85.64,
+      "marron_1w": 85.65,
       "media_k_1w": 28.95,
       "konc_dir_1w": "up",
       "pct_semana": 9.24,
@@ -4068,8 +4068,8 @@
       "dist_ema50_1w": -0.62,
       "dist_sma200_1w": -3.4,
       "macd_h": 195.46,
-      "marron": 134.84,
-      "media_k": 79.45,
+      "marron": 134.86,
+      "media_k": 79.46,
       "konc_dir": "up",
       "dist_ema21": 31.11,
       "ema21_sube": true,
@@ -4154,7 +4154,7 @@
         ]
       },
       "rsi_pct_hist": 78.3,
-      "marron_pct_hist": 134.8,
+      "marron_pct_hist": 134.9,
       "rsi_alerta": null,
       "marron_alerta": "maximo",
       "sector": "Technology"
@@ -5750,7 +5750,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 22.83,
-      "media_k_1w": 44.63,
+      "media_k_1w": 44.65,
       "konc_dir_1w": "dn",
       "pct_semana": 1.59,
       "dist_wma10_1w": -0.95,
@@ -6358,7 +6358,7 @@
             "ret_1d": -1.39,
             "ret_2d": -2.57,
             "ret_5d": -4.1,
-            "ret_1m": -5.62
+            "ret_1m": -5.63
           },
           {
             "dir": "↓",
@@ -8408,7 +8408,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 78.14,
-      "media_k_1w": 80.3,
+      "media_k_1w": 80.31,
       "konc_dir_1w": "dn",
       "pct_semana": 2.02,
       "dist_wma10_1w": 5.28,
@@ -11356,8 +11356,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 74.51,
-      "media_k_1w": 73.66,
+      "marron_1w": 74.52,
+      "media_k_1w": 73.67,
       "konc_dir_1w": "up",
       "pct_semana": -0.84,
       "dist_wma10_1w": 1.42,
@@ -11824,8 +11824,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 84.17,
-      "media_k_1w": 85.72,
+      "marron_1w": 84.15,
+      "media_k_1w": 85.67,
       "konc_dir_1w": "dn",
       "pct_semana": 0.93,
       "dist_wma10_1w": 3.24,
@@ -12519,8 +12519,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 63.4,
-      "media_k_1w": 68.16,
+      "marron_1w": 63.54,
+      "media_k_1w": 68.58,
       "konc_dir_1w": "dn",
       "pct_semana": -0.91,
       "dist_wma10_1w": 0.97,
@@ -12848,7 +12848,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 99.81,
-      "media_k_1w": 82.47,
+      "media_k_1w": 82.5,
       "konc_dir_1w": "up",
       "pct_semana": -0.32,
       "dist_wma10_1w": 3.59,
@@ -14383,7 +14383,7 @@
           },
           {
             "tramo": "5d",
-            "avg": -0.11,
+            "avg": -0.12,
             "pos": 58,
             "total": 100,
             "prob": 58.0
@@ -16699,7 +16699,7 @@
             "ret_1d": -1.39,
             "ret_2d": -2.57,
             "ret_5d": -4.1,
-            "ret_1m": -5.62
+            "ret_1m": -5.63
           },
           {
             "dir": "↓",
