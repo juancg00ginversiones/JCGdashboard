@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-06-15 19:19",
+  "actualizado": "2026-06-15 19:36",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -2098,7 +2098,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 116.12,
-      "media_k_1w": 109.34,
+      "media_k_1w": 109.33,
       "konc_dir_1w": "up",
       "pct_semana": -0.77,
       "dist_wma10_1w": 4.13,
@@ -4759,8 +4759,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 28.4,
-      "media_k_1w": 38.98,
+      "marron_1w": 28.51,
+      "media_k_1w": 39.23,
       "konc_dir_1w": "dn",
       "pct_semana": 0.46,
       "dist_wma10_1w": 1.54,
@@ -9631,8 +9631,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 89.03,
-      "media_k_1w": 85.25,
+      "marron_1w": 89.02,
+      "media_k_1w": 85.23,
       "konc_dir_1w": "up",
       "pct_semana": 0.0,
       "dist_wma10_1w": 2.49,
@@ -10322,8 +10322,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 76.86,
-      "media_k_1w": 68.54,
+      "marron_1w": 76.93,
+      "media_k_1w": 68.9,
       "konc_dir_1w": "up",
       "pct_semana": -0.18,
       "dist_wma10_1w": 1.76,
@@ -10647,7 +10647,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 92.33,
-      "media_k_1w": 83.01,
+      "media_k_1w": 83.04,
       "konc_dir_1w": "up",
       "pct_semana": 0.73,
       "dist_wma10_1w": 1.42,
@@ -10881,7 +10881,7 @@
           {
             "dir": "↑",
             "rsi": 38.3,
-            "ret_1d": -3.64,
+            "ret_1d": -3.65,
             "ret_2d": -0.99,
             "ret_5d": 1.83,
             "ret_1m": 3.56
@@ -13453,7 +13453,7 @@
           {
             "dir": "↑",
             "rsi": 38.3,
-            "ret_1d": -3.64,
+            "ret_1d": -3.65,
             "ret_2d": -0.99,
             "ret_5d": 1.83,
             "ret_1m": 3.56
