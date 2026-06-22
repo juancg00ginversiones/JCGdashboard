@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-06-22 20:04",
+  "actualizado": "2026-06-22 20:13",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1039,8 +1039,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 80.88,
-      "media_k_1w": 83.83,
+      "marron_1w": 80.87,
+      "media_k_1w": 83.81,
       "konc_dir_1w": "dn",
       "pct_semana": 0.36,
       "dist_wma10_1w": -0.61,
@@ -7622,7 +7622,7 @@
       "pct_dia": 0.41,
       "rsi_1d": 31.1,
       "rsi_cruza_alza": false,
-      "rsi_1h": null,
+      "rsi_1h": 36.4,
       "rsi_1w": 36.0,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -9962,7 +9962,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 74.16,
-      "media_k_1w": 84.34,
+      "media_k_1w": 84.35,
       "konc_dir_1w": "dn",
       "pct_semana": -1.44,
       "dist_wma10_1w": -0.74,
@@ -10538,7 +10538,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 75.71,
-      "media_k_1w": 83.83,
+      "media_k_1w": 83.81,
       "konc_dir_1w": "dn",
       "pct_semana": 0.64,
       "dist_wma10_1w": -0.41,
@@ -10684,8 +10684,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 36.55,
-      "media_k_1w": 58.91,
+      "marron_1w": 37.14,
+      "media_k_1w": 59.56,
       "konc_dir_1w": "dn",
       "pct_semana": 2.08,
       "dist_wma10_1w": -1.21,
@@ -11853,7 +11853,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 107.02,
-      "media_k_1w": 85.72,
+      "media_k_1w": 85.74,
       "konc_dir_1w": "up",
       "pct_semana": 2.68,
       "dist_wma10_1w": 5.11,
@@ -12150,7 +12150,7 @@
           {
             "dir": "↑",
             "rsi": 38.3,
-            "ret_1d": -3.64,
+            "ret_1d": -3.65,
             "ret_2d": -0.99,
             "ret_5d": 1.83,
             "ret_1m": 3.56
@@ -15692,7 +15692,7 @@
           {
             "dir": "↑",
             "rsi": 38.3,
-            "ret_1d": -3.64,
+            "ret_1d": -3.65,
             "ret_2d": -0.99,
             "ret_5d": 1.83,
             "ret_1m": 3.56
