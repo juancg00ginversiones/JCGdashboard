@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-06-24 03:11",
+  "actualizado": "2026-06-24 04:35",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1118,8 +1118,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 90.08,
-      "media_k_1w": 84.66,
+      "marron_1w": 90.07,
+      "media_k_1w": 84.64,
       "konc_dir_1w": "up",
       "pct_semana": 2.67,
       "dist_wma10_1w": 1.25,
@@ -2295,7 +2295,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 109.16,
-      "media_k_1w": 109.07,
+      "media_k_1w": 109.06,
       "konc_dir_1w": "up",
       "pct_semana": 1.35,
       "dist_wma10_1w": 3.03,
@@ -4187,7 +4187,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 52.55,
-      "media_k_1w": 45.04,
+      "media_k_1w": 45.03,
       "konc_dir_1w": "up",
       "pct_semana": 1.6,
       "dist_wma10_1w": 2.87,
@@ -4733,8 +4733,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 66.87,
-      "media_k_1w": 68.87,
+      "marron_1w": 66.89,
+      "media_k_1w": 68.91,
       "konc_dir_1w": "dn",
       "pct_semana": -0.43,
       "dist_wma10_1w": -3.02,
@@ -5378,7 +5378,7 @@
       "pct_dia": 2.75,
       "rsi_1d": 50.3,
       "rsi_cruza_alza": false,
-      "rsi_1h": 56.5,
+      "rsi_1h": 57.2,
       "rsi_1w": 47.5,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -5645,7 +5645,7 @@
           },
           {
             "tramo": "1m",
-            "avg": 3.87,
+            "avg": 3.86,
             "pos": 64,
             "total": 87,
             "prob": 73.6
@@ -7624,7 +7624,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 69.22,
-      "media_k_1w": 71.64,
+      "media_k_1w": 71.65,
       "konc_dir_1w": "dn",
       "pct_semana": 0.16,
       "dist_wma10_1w": -0.65,
@@ -7725,7 +7725,7 @@
             "ret_1d": 0.01,
             "ret_2d": -1.5,
             "ret_5d": -1.0,
-            "ret_1m": 0.21
+            "ret_1m": 0.2
           },
           {
             "dir": "↑",
@@ -8568,7 +8568,7 @@
       "pct_dia": 1.15,
       "rsi_1d": 49.1,
       "rsi_cruza_alza": false,
-      "rsi_1h": 52.1,
+      "rsi_1h": 55.9,
       "rsi_1w": 44.5,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -9706,7 +9706,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 72.16,
-      "media_k_1w": 84.16,
+      "media_k_1w": 84.17,
       "konc_dir_1w": "dn",
       "pct_semana": -2.31,
       "dist_wma10_1w": -1.46,
@@ -9814,7 +9814,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 80.85,
-      "media_k_1w": 75.72,
+      "media_k_1w": 75.71,
       "konc_dir_1w": "up",
       "pct_semana": -2.33,
       "dist_wma10_1w": -0.15,
@@ -10282,7 +10282,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 75.19,
-      "media_k_1w": 83.79,
+      "media_k_1w": 83.76,
       "konc_dir_1w": "dn",
       "pct_semana": 1.28,
       "dist_wma10_1w": 0.11,
@@ -10428,8 +10428,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 37.48,
-      "media_k_1w": 59.59,
+      "marron_1w": 37.47,
+      "media_k_1w": 59.54,
       "konc_dir_1w": "dn",
       "pct_semana": 2.08,
       "dist_wma10_1w": -1.21,
@@ -11130,8 +11130,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 93.5,
-      "media_k_1w": 71.44,
+      "marron_1w": 93.46,
+      "media_k_1w": 71.11,
       "konc_dir_1w": "up",
       "pct_semana": 3.43,
       "dist_wma10_1w": 4.88,
@@ -11835,7 +11835,7 @@
           {
             "dir": "↑",
             "rsi": 38.3,
-            "ret_1d": -3.64,
+            "ret_1d": -3.65,
             "ret_2d": -0.99,
             "ret_5d": 1.83,
             "ret_1m": 3.56
@@ -13832,7 +13832,7 @@
           },
           {
             "tramo": "1m",
-            "avg": 3.87,
+            "avg": 3.86,
             "pos": 64,
             "total": 87,
             "prob": 73.6
@@ -14345,7 +14345,7 @@
             "ret_1d": 0.01,
             "ret_2d": -1.5,
             "ret_5d": -1.0,
-            "ret_1m": 0.21
+            "ret_1m": 0.2
           },
           {
             "dir": "↑",
@@ -15260,7 +15260,7 @@
           {
             "dir": "↑",
             "rsi": 38.3,
-            "ret_1d": -3.64,
+            "ret_1d": -3.65,
             "ret_2d": -0.99,
             "ret_5d": 1.83,
             "ret_1m": 3.56
