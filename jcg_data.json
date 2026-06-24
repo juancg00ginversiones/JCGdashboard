@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-06-23 20:58",
+  "actualizado": "2026-06-23 22:28",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1046,8 +1046,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 57.49,
-      "media_k_1w": 68.2,
+      "marron_1w": 57.5,
+      "media_k_1w": 68.22,
       "konc_dir_1w": "dn",
       "pct_semana": 1.2,
       "dist_wma10_1w": 0.2,
@@ -4733,8 +4733,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 67.35,
-      "media_k_1w": 68.92,
+      "marron_1w": 67.36,
+      "media_k_1w": 68.95,
       "konc_dir_1w": "dn",
       "pct_semana": -0.43,
       "dist_wma10_1w": -3.02,
@@ -6664,38 +6664,113 @@
     },
     "DD": {
       "ticker": "DD",
-      "pct_dia": -2.18,
-      "rsi_1d": 45.5,
+      "pct_dia": -67.72,
+      "rsi_1d": 12.0,
       "rsi_cruza_alza": false,
       "rsi_1h": 32.0,
-      "rsi_1w": 45.8,
+      "rsi_1w": 19.3,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 136.45,
-      "media_k_1w": 66.14,
-      "konc_dir_1w": "up",
-      "pct_semana": -2.18,
-      "dist_wma10_1w": -2.2,
-      "dist_ema30_1w": -4.47,
-      "dist_ema50_1w": -10.95,
-      "dist_sma200_1w": -28.9,
-      "macd_h": -4.07,
-      "marron": 45.47,
-      "media_k": 54.85,
+      "marron_1w": -3.01,
+      "media_k_1w": 71.98,
+      "konc_dir_1w": "dn",
+      "pct_semana": -67.39,
+      "dist_wma10_1w": -63.02,
+      "dist_ema30_1w": -63.55,
+      "dist_ema50_1w": -61.68,
+      "dist_sma200_1w": -49.52,
+      "macd_h": -221.86,
+      "marron": -29.42,
+      "media_k": 48.06,
       "konc_dir": "dn",
-      "dist_ema21": -1.94,
+      "dist_ema21": -65.28,
       "ema21_sube": false,
-      "dist_sma30": -3.02,
-      "dist_ema150": -5.19,
-      "dist_ema200": -8.78,
+      "dist_sma30": -66.93,
+      "dist_ema150": -64.61,
+      "dist_ema200": -63.37,
       "wt_signal": null,
-      "hist_rsi": null,
-      "rsi_pct_hist": 45.5,
-      "marron_pct_hist": 45.5,
-      "rsi_alerta": null,
-      "marron_alerta": null,
+      "hist_rsi": {
+        "nivel": 30,
+        "total_eventos": 47,
+        "resumen": [
+          {
+            "tramo": "1d",
+            "avg": -0.37,
+            "pos": 23,
+            "total": 46,
+            "prob": 50.0
+          },
+          {
+            "tramo": "2d",
+            "avg": -0.68,
+            "pos": 22,
+            "total": 46,
+            "prob": 47.8
+          },
+          {
+            "tramo": "5d",
+            "avg": -2.16,
+            "pos": 18,
+            "total": 46,
+            "prob": 39.1
+          },
+          {
+            "tramo": "1m",
+            "avg": 0.73,
+            "pos": 28,
+            "total": 46,
+            "prob": 60.9
+          }
+        ],
+        "ultimos": [
+          {
+            "dir": "↓",
+            "rsi": 26.0,
+            "ret_1d": -12.75,
+            "ret_2d": -14.75,
+            "ret_5d": -14.93,
+            "ret_1m": -3.64
+          },
+          {
+            "dir": "↑",
+            "rsi": 33.4,
+            "ret_1d": -6.92,
+            "ret_2d": -4.94,
+            "ret_5d": -4.36,
+            "ret_1m": 7.78
+          },
+          {
+            "dir": "↓",
+            "rsi": 29.1,
+            "ret_1d": 2.13,
+            "ret_2d": 5.74,
+            "ret_5d": 4.3,
+            "ret_1m": 23.6
+          },
+          {
+            "dir": "↑",
+            "rsi": 31.8,
+            "ret_1d": 3.53,
+            "ret_2d": 2.67,
+            "ret_5d": 2.07,
+            "ret_1m": 19.9
+          },
+          {
+            "dir": "↓",
+            "rsi": 12.0,
+            "ret_1d": null,
+            "ret_2d": null,
+            "ret_5d": null,
+            "ret_1m": null
+          }
+        ]
+      },
+      "rsi_pct_hist": 12.0,
+      "marron_pct_hist": -29.4,
+      "rsi_alerta": "minimo",
+      "marron_alerta": "minimo",
       "sector": "Basic Materials"
     },
     "DOW": {
@@ -7725,7 +7800,7 @@
             "ret_1d": 0.01,
             "ret_2d": -1.5,
             "ret_5d": -1.0,
-            "ret_1m": 0.21
+            "ret_1m": 0.2
           },
           {
             "dir": "↑",
@@ -8568,7 +8643,7 @@
       "pct_dia": 1.15,
       "rsi_1d": 49.1,
       "rsi_cruza_alza": false,
-      "rsi_1h": 52.1,
+      "rsi_1h": 55.9,
       "rsi_1w": 44.5,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -9813,8 +9888,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 81.13,
-      "media_k_1w": 75.75,
+      "marron_1w": 81.12,
+      "media_k_1w": 75.73,
       "konc_dir_1w": "up",
       "pct_semana": -2.33,
       "dist_wma10_1w": -0.15,
@@ -10281,8 +10356,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 75.7,
-      "media_k_1w": 83.83,
+      "marron_1w": 75.69,
+      "media_k_1w": 83.8,
       "konc_dir_1w": "dn",
       "pct_semana": 1.28,
       "dist_wma10_1w": 0.11,
@@ -10428,8 +10503,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 37.3,
-      "media_k_1w": 59.53,
+      "marron_1w": 36.74,
+      "media_k_1w": 58.92,
       "konc_dir_1w": "dn",
       "pct_semana": 2.08,
       "dist_wma10_1w": -1.21,
@@ -11130,8 +11205,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 93.26,
-      "media_k_1w": 71.09,
+      "marron_1w": 93.3,
+      "media_k_1w": 71.42,
       "konc_dir_1w": "up",
       "pct_semana": 3.43,
       "dist_wma10_1w": 4.88,
@@ -11534,7 +11609,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 105.87,
-      "media_k_1w": 85.64,
+      "media_k_1w": 85.61,
       "konc_dir_1w": "up",
       "pct_semana": 0.92,
       "dist_wma10_1w": 3.66,
@@ -14047,6 +14122,88 @@
       }
     },
     {
+      "ticker": "DD",
+      "sector": "Basic Materials",
+      "rsi_1d": 12.0,
+      "pct_dia": -67.72,
+      "hist": {
+        "nivel": 30,
+        "total_eventos": 47,
+        "resumen": [
+          {
+            "tramo": "1d",
+            "avg": -0.37,
+            "pos": 23,
+            "total": 46,
+            "prob": 50.0
+          },
+          {
+            "tramo": "2d",
+            "avg": -0.68,
+            "pos": 22,
+            "total": 46,
+            "prob": 47.8
+          },
+          {
+            "tramo": "5d",
+            "avg": -2.16,
+            "pos": 18,
+            "total": 46,
+            "prob": 39.1
+          },
+          {
+            "tramo": "1m",
+            "avg": 0.73,
+            "pos": 28,
+            "total": 46,
+            "prob": 60.9
+          }
+        ],
+        "ultimos": [
+          {
+            "dir": "↓",
+            "rsi": 26.0,
+            "ret_1d": -12.75,
+            "ret_2d": -14.75,
+            "ret_5d": -14.93,
+            "ret_1m": -3.64
+          },
+          {
+            "dir": "↑",
+            "rsi": 33.4,
+            "ret_1d": -6.92,
+            "ret_2d": -4.94,
+            "ret_5d": -4.36,
+            "ret_1m": 7.78
+          },
+          {
+            "dir": "↓",
+            "rsi": 29.1,
+            "ret_1d": 2.13,
+            "ret_2d": 5.74,
+            "ret_5d": 4.3,
+            "ret_1m": 23.6
+          },
+          {
+            "dir": "↑",
+            "rsi": 31.8,
+            "ret_1d": 3.53,
+            "ret_2d": 2.67,
+            "ret_5d": 2.07,
+            "ret_1m": 19.9
+          },
+          {
+            "dir": "↓",
+            "rsi": 12.0,
+            "ret_1d": null,
+            "ret_2d": null,
+            "ret_5d": null,
+            "ret_1m": null
+          }
+        ]
+      }
+    },
+    {
       "ticker": "DOW",
       "sector": "Basic Materials",
       "rsi_1d": 26.9,
@@ -14345,7 +14502,7 @@
             "ret_1d": 0.01,
             "ret_2d": -1.5,
             "ret_5d": -1.0,
-            "ret_1m": 0.21
+            "ret_1m": 0.2
           },
           {
             "dir": "↑",
