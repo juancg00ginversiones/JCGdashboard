@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-06-26 19:48",
+  "actualizado": "2026-06-26 20:01",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -5043,8 +5043,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 14.02,
-      "media_k_1w": 36.22,
+      "marron_1w": 14.16,
+      "media_k_1w": 36.46,
       "konc_dir_1w": "dn",
       "pct_semana": -3.18,
       "dist_wma10_1w": -2.91,
@@ -6699,7 +6699,7 @@
           },
           {
             "tramo": "5d",
-            "avg": 1.01,
+            "avg": 1.02,
             "pos": 51,
             "total": 87,
             "prob": 58.6
@@ -8327,7 +8327,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 73.94,
-      "media_k_1w": 72.08,
+      "media_k_1w": 72.07,
       "konc_dir_1w": "up",
       "pct_semana": 2.17,
       "dist_wma10_1w": 0.97,
@@ -11045,8 +11045,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 78.92,
-      "media_k_1w": 75.53,
+      "marron_1w": 78.93,
+      "media_k_1w": 75.55,
       "konc_dir_1w": "up",
       "pct_semana": -2.25,
       "dist_wma10_1w": -0.08,
@@ -11588,8 +11588,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 81.95,
-      "media_k_1w": 84.38,
+      "marron_1w": 81.94,
+      "media_k_1w": 84.37,
       "konc_dir_1w": "dn",
       "pct_semana": 3.82,
       "dist_wma10_1w": 2.15,
@@ -11735,8 +11735,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 35.3,
-      "media_k_1w": 59.34,
+      "marron_1w": 35.32,
+      "media_k_1w": 59.39,
       "konc_dir_1w": "dn",
       "pct_semana": 2.98,
       "dist_wma10_1w": -0.5,
@@ -15796,7 +15796,7 @@
           },
           {
             "tramo": "5d",
-            "avg": 1.01,
+            "avg": 1.02,
             "pos": 51,
             "total": 87,
             "prob": 58.6
