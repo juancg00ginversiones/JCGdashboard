@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-06-29 03:52",
+  "actualizado": "2026-06-29 05:53",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -4278,7 +4278,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 43.18,
-      "media_k_1w": 44.19,
+      "media_k_1w": 44.17,
       "konc_dir_1w": "dn",
       "pct_semana": -1.12,
       "dist_wma10_1w": 0.61,
@@ -11046,7 +11046,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 78.58,
-      "media_k_1w": 75.52,
+      "media_k_1w": 75.5,
       "konc_dir_1w": "up",
       "pct_semana": -2.25,
       "dist_wma10_1w": -0.08,
@@ -11588,8 +11588,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 82.13,
-      "media_k_1w": 84.39,
+      "marron_1w": 82.14,
+      "media_k_1w": 84.41,
       "konc_dir_1w": "dn",
       "pct_semana": 3.82,
       "dist_wma10_1w": 2.15,
@@ -11735,8 +11735,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 34.92,
-      "media_k_1w": 59.36,
+      "marron_1w": 34.19,
+      "media_k_1w": 58.69,
       "konc_dir_1w": "dn",
       "pct_semana": 2.98,
       "dist_wma10_1w": -0.5,
@@ -11772,7 +11772,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 71.53,
-      "media_k_1w": 85.25,
+      "media_k_1w": 85.26,
       "konc_dir_1w": "dn",
       "pct_semana": -0.48,
       "dist_wma10_1w": -7.15,
@@ -13209,7 +13209,7 @@
           {
             "dir": "↑",
             "rsi": 38.3,
-            "ret_1d": -3.65,
+            "ret_1d": -3.64,
             "ret_2d": -0.99,
             "ret_5d": 1.83,
             "ret_1m": 3.56
@@ -18051,7 +18051,7 @@
           {
             "dir": "↑",
             "rsi": 38.3,
-            "ret_1d": -3.65,
+            "ret_1d": -3.64,
             "ret_2d": -0.99,
             "ret_5d": 1.83,
             "ret_1m": 3.56
