@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-07-05 07:07",
+  "actualizado": "2026-07-05 08:39",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -455,9 +455,9 @@
           {
             "tramo": "2d",
             "avg": -0.05,
-            "pos": 56,
+            "pos": 57,
             "total": 111,
-            "prob": 50.5
+            "prob": 51.4
           },
           {
             "tramo": "5d",
@@ -5254,8 +5254,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 61.3,
-      "media_k_1w": 68.38,
+      "marron_1w": 61.28,
+      "media_k_1w": 68.35,
       "konc_dir_1w": "dn",
       "pct_semana": -5.45,
       "dist_wma10_1w": -6.95,
@@ -5477,8 +5477,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 20.03,
-      "media_k_1w": 34.01,
+      "marron_1w": 19.93,
+      "media_k_1w": 33.79,
       "konc_dir_1w": "dn",
       "pct_semana": 4.03,
       "dist_wma10_1w": 0.69,
@@ -11608,8 +11608,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 77.67,
-      "media_k_1w": 83.8,
+      "marron_1w": 77.69,
+      "media_k_1w": 83.88,
       "konc_dir_1w": "dn",
       "pct_semana": -4.02,
       "dist_wma10_1w": -1.85,
@@ -12457,8 +12457,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 104.98,
-      "media_k_1w": 74.12,
+      "marron_1w": 104.95,
+      "media_k_1w": 73.81,
       "konc_dir_1w": "up",
       "pct_semana": 6.5,
       "dist_wma10_1w": 8.69,
@@ -13007,7 +13007,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 103.25,
-      "media_k_1w": 85.48,
+      "media_k_1w": 85.47,
       "konc_dir_1w": "up",
       "pct_semana": 4.29,
       "dist_wma10_1w": 4.34,
@@ -14364,9 +14364,9 @@
           {
             "tramo": "2d",
             "avg": -0.05,
-            "pos": 56,
+            "pos": 57,
             "total": 111,
-            "prob": 50.5
+            "prob": 51.4
           },
           {
             "tramo": "5d",
