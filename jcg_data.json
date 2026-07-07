@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-07-06 21:09",
+  "actualizado": "2026-07-06 22:19",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -455,9 +455,9 @@
           {
             "tramo": "2d",
             "avg": -0.05,
-            "pos": 56,
+            "pos": 57,
             "total": 111,
-            "prob": 50.5
+            "prob": 51.4
           },
           {
             "tramo": "5d",
@@ -4400,7 +4400,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 82.98,
-      "media_k_1w": 48.87,
+      "media_k_1w": 48.88,
       "konc_dir_1w": "up",
       "pct_semana": 3.73,
       "dist_wma10_1w": 7.93,
@@ -5171,8 +5171,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 61.03,
-      "media_k_1w": 67.73,
+      "marron_1w": 61.02,
+      "media_k_1w": 67.7,
       "konc_dir_1w": "dn",
       "pct_semana": 3.52,
       "dist_wma10_1w": -3.36,
@@ -5319,8 +5319,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 27.54,
-      "media_k_1w": 33.17,
+      "marron_1w": 27.63,
+      "media_k_1w": 33.38,
       "konc_dir_1w": "dn",
       "pct_semana": -0.4,
       "dist_wma10_1w": 0.28,
@@ -10607,8 +10607,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 80.81,
-      "media_k_1w": 76.41,
+      "marron_1w": 80.82,
+      "media_k_1w": 76.43,
       "konc_dir_1w": "up",
       "pct_semana": 0.65,
       "dist_wma10_1w": 0.36,
@@ -11932,8 +11932,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 112.35,
-      "media_k_1w": 77.59,
+      "marron_1w": 112.32,
+      "media_k_1w": 77.3,
       "konc_dir_1w": "up",
       "pct_semana": 1.82,
       "dist_wma10_1w": 8.22,
@@ -12486,7 +12486,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 108.12,
-      "media_k_1w": 87.52,
+      "media_k_1w": 87.53,
       "konc_dir_1w": "up",
       "pct_semana": 2.68,
       "dist_wma10_1w": 5.51,
@@ -14106,9 +14106,9 @@
           {
             "tramo": "2d",
             "avg": -0.05,
-            "pos": 56,
+            "pos": 57,
             "total": 111,
-            "prob": 50.5
+            "prob": 51.4
           },
           {
             "tramo": "5d",
