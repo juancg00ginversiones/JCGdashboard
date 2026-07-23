@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-07-23 19:34",
+  "actualizado": "2026-07-23 19:47",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1121,8 +1121,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 66.3,
-      "media_k_1w": 69.72,
+      "marron_1w": 66.29,
+      "media_k_1w": 69.71,
       "konc_dir_1w": "dn",
       "pct_semana": -2.32,
       "dist_wma10_1w": -1.09,
@@ -1198,7 +1198,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 92.33,
-      "media_k_1w": 87.8,
+      "media_k_1w": 87.79,
       "konc_dir_1w": "up",
       "pct_semana": -1.03,
       "dist_wma10_1w": 0.51,
@@ -4794,8 +4794,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 18.63,
-      "media_k_1w": 31.7,
+      "marron_1w": 18.7,
+      "media_k_1w": 31.88,
       "konc_dir_1w": "dn",
       "pct_semana": -1.83,
       "dist_wma10_1w": -3.79,
@@ -5700,31 +5700,31 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.37,
-            "pos": 63,
+            "avg": 0.33,
+            "pos": 62,
             "total": 107,
-            "prob": 58.9
+            "prob": 57.9
           },
           {
             "tramo": "2d",
-            "avg": 0.57,
-            "pos": 67,
+            "avg": 0.5,
+            "pos": 66,
             "total": 107,
-            "prob": 62.6
+            "prob": 61.7
           },
           {
             "tramo": "5d",
-            "avg": 1.0,
-            "pos": 73,
-            "total": 107,
-            "prob": 68.2
-          },
-          {
-            "tramo": "1m",
-            "avg": 1.86,
+            "avg": 0.94,
             "pos": 72,
             "total": 107,
             "prob": 67.3
+          },
+          {
+            "tramo": "1m",
+            "avg": 1.81,
+            "pos": 71,
+            "total": 107,
+            "prob": 66.4
           }
         ],
         "ultimos": [
@@ -6919,7 +6919,7 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 52.58,
+      "marron_1w": 52.57,
       "media_k_1w": 72.1,
       "konc_dir_1w": "dn",
       "pct_semana": 8.77,
@@ -9564,8 +9564,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 61.64,
-      "media_k_1w": 73.15,
+      "marron_1w": 61.63,
+      "media_k_1w": 73.14,
       "konc_dir_1w": "dn",
       "pct_semana": -0.75,
       "dist_wma10_1w": -2.24,
@@ -10187,7 +10187,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 62.83,
-      "media_k_1w": 78.2,
+      "media_k_1w": 78.18,
       "konc_dir_1w": "dn",
       "pct_semana": 1.98,
       "dist_wma10_1w": -0.76,
@@ -10262,8 +10262,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 56.77,
-      "media_k_1w": 55.97,
+      "marron_1w": 57.49,
+      "media_k_1w": 56.65,
       "konc_dir_1w": "up",
       "pct_semana": 3.39,
       "dist_wma10_1w": 4.88,
@@ -10298,8 +10298,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 88.18,
-      "media_k_1w": 82.68,
+      "marron_1w": 88.16,
+      "media_k_1w": 82.64,
       "konc_dir_1w": "up",
       "pct_semana": 1.06,
       "dist_wma10_1w": 6.24,
@@ -13246,31 +13246,31 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.37,
-            "pos": 63,
+            "avg": 0.33,
+            "pos": 62,
             "total": 107,
-            "prob": 58.9
+            "prob": 57.9
           },
           {
             "tramo": "2d",
-            "avg": 0.57,
-            "pos": 67,
+            "avg": 0.5,
+            "pos": 66,
             "total": 107,
-            "prob": 62.6
+            "prob": 61.7
           },
           {
             "tramo": "5d",
-            "avg": 1.0,
-            "pos": 73,
-            "total": 107,
-            "prob": 68.2
-          },
-          {
-            "tramo": "1m",
-            "avg": 1.86,
+            "avg": 0.94,
             "pos": 72,
             "total": 107,
             "prob": 67.3
+          },
+          {
+            "tramo": "1m",
+            "avg": 1.81,
+            "pos": 71,
+            "total": 107,
+            "prob": 66.4
           }
         ],
         "ultimos": [
