@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-07-24 08:46",
+  "actualizado": "2026-07-24 09:27",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1122,7 +1122,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 66.11,
-      "media_k_1w": 69.69,
+      "media_k_1w": 69.7,
       "konc_dir_1w": "dn",
       "pct_semana": -2.32,
       "dist_wma10_1w": -1.09,
@@ -1197,8 +1197,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 92.11,
-      "media_k_1w": 87.78,
+      "marron_1w": 92.1,
+      "media_k_1w": 87.77,
       "konc_dir_1w": "up",
       "pct_semana": -1.03,
       "dist_wma10_1w": 0.51,
@@ -4183,7 +4183,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 97.95,
-      "media_k_1w": 57.76,
+      "media_k_1w": 57.75,
       "konc_dir_1w": "up",
       "pct_semana": 0.05,
       "dist_wma10_1w": 4.8,
@@ -4650,8 +4650,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 70.84,
-      "media_k_1w": 68.16,
+      "marron_1w": 70.85,
+      "media_k_1w": 68.18,
       "konc_dir_1w": "up",
       "pct_semana": -0.56,
       "dist_wma10_1w": -0.74,
@@ -4794,8 +4794,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 18.43,
-      "media_k_1w": 31.86,
+      "marron_1w": 18.35,
+      "media_k_1w": 31.67,
       "konc_dir_1w": "dn",
       "pct_semana": -1.83,
       "dist_wma10_1w": -3.79,
@@ -5700,31 +5700,31 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.33,
-            "pos": 62,
+            "avg": 0.37,
+            "pos": 63,
             "total": 107,
-            "prob": 57.9
+            "prob": 58.9
           },
           {
             "tramo": "2d",
-            "avg": 0.5,
-            "pos": 66,
+            "avg": 0.57,
+            "pos": 67,
             "total": 107,
-            "prob": 61.7
+            "prob": 62.6
           },
           {
             "tramo": "5d",
-            "avg": 0.94,
-            "pos": 72,
+            "avg": 1.0,
+            "pos": 73,
             "total": 107,
-            "prob": 67.3
+            "prob": 68.2
           },
           {
             "tramo": "1m",
-            "avg": 1.81,
-            "pos": 71,
+            "avg": 1.86,
+            "pos": 72,
             "total": 107,
-            "prob": 66.4
+            "prob": 67.3
           }
         ],
         "ultimos": [
@@ -6920,7 +6920,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 52.86,
-      "media_k_1w": 72.13,
+      "media_k_1w": 72.12,
       "konc_dir_1w": "dn",
       "pct_semana": 8.77,
       "dist_wma10_1w": 1.26,
@@ -9564,8 +9564,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 61.77,
-      "media_k_1w": 73.16,
+      "marron_1w": 61.76,
+      "media_k_1w": 73.15,
       "konc_dir_1w": "dn",
       "pct_semana": -0.75,
       "dist_wma10_1w": -2.24,
@@ -10186,8 +10186,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 63.06,
-      "media_k_1w": 78.22,
+      "marron_1w": 63.04,
+      "media_k_1w": 78.15,
       "konc_dir_1w": "dn",
       "pct_semana": 1.98,
       "dist_wma10_1w": -0.76,
@@ -10298,8 +10298,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 88.81,
-      "media_k_1w": 82.74,
+      "marron_1w": 88.79,
+      "media_k_1w": 82.69,
       "konc_dir_1w": "up",
       "pct_semana": 1.06,
       "dist_wma10_1w": 6.24,
@@ -10881,8 +10881,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 99.99,
-      "media_k_1w": 81.14,
+      "marron_1w": 99.95,
+      "media_k_1w": 80.89,
       "konc_dir_1w": "up",
       "pct_semana": 0.5,
       "dist_wma10_1w": 2.94,
@@ -11281,7 +11281,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 104.57,
-      "media_k_1w": 90.52,
+      "media_k_1w": 90.5,
       "konc_dir_1w": "up",
       "pct_semana": 0.34,
       "dist_wma10_1w": 2.37,
@@ -13246,31 +13246,31 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.33,
-            "pos": 62,
+            "avg": 0.37,
+            "pos": 63,
             "total": 107,
-            "prob": 57.9
+            "prob": 58.9
           },
           {
             "tramo": "2d",
-            "avg": 0.5,
-            "pos": 66,
+            "avg": 0.57,
+            "pos": 67,
             "total": 107,
-            "prob": 61.7
+            "prob": 62.6
           },
           {
             "tramo": "5d",
-            "avg": 0.94,
-            "pos": 72,
+            "avg": 1.0,
+            "pos": 73,
             "total": 107,
-            "prob": 67.3
+            "prob": 68.2
           },
           {
             "tramo": "1m",
-            "avg": 1.81,
-            "pos": 71,
+            "avg": 1.86,
+            "pos": 72,
             "total": 107,
-            "prob": 66.4
+            "prob": 67.3
           }
         ],
         "ultimos": [
