@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-07-29 21:00",
+  "actualizado": "2026-07-29 21:56",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -4625,7 +4625,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 108.92,
-      "media_k_1w": 62.45,
+      "media_k_1w": 62.44,
       "konc_dir_1w": "up",
       "pct_semana": 2.45,
       "dist_wma10_1w": 5.68,
@@ -5386,8 +5386,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 27.72,
-      "media_k_1w": 31.35,
+      "marron_1w": 27.78,
+      "media_k_1w": 31.52,
       "konc_dir_1w": "dn",
       "pct_semana": 2.55,
       "dist_wma10_1w": -0.45,
@@ -6014,7 +6014,7 @@
           },
           {
             "tramo": "5d",
-            "avg": -0.0,
+            "avg": 0.0,
             "pos": 70,
             "total": 120,
             "prob": 58.3
@@ -11232,8 +11232,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 63.92,
-      "media_k_1w": 76.84,
+      "marron_1w": 63.91,
+      "media_k_1w": 76.8,
       "konc_dir_1w": "dn",
       "pct_semana": 1.31,
       "dist_wma10_1w": -0.06,
@@ -11304,8 +11304,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 57.87,
-      "media_k_1w": 56.65,
+      "marron_1w": 57.28,
+      "media_k_1w": 56.05,
       "konc_dir_1w": "up",
       "pct_semana": -1.67,
       "dist_wma10_1w": 1.22,
@@ -11844,8 +11844,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 98.77,
-      "media_k_1w": 82.76,
+      "marron_1w": 98.73,
+      "media_k_1w": 82.53,
       "konc_dir_1w": "up",
       "pct_semana": -2.49,
       "dist_wma10_1w": 0.23,
@@ -15282,7 +15282,7 @@
           },
           {
             "tramo": "5d",
-            "avg": -0.0,
+            "avg": 0.0,
             "pos": 70,
             "total": 120,
             "prob": 58.3
