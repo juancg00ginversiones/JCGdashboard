@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-06 05:12",
+  "actualizado": "2026-08-06 07:34",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1186,7 +1186,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 82.03,
-      "media_k_1w": 88.25,
+      "media_k_1w": 88.24,
       "konc_dir_1w": "dn",
       "pct_semana": 0.29,
       "dist_wma10_1w": 0.29,
@@ -4021,7 +4021,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 113.57,
-      "media_k_1w": 67.17,
+      "media_k_1w": 67.18,
       "konc_dir_1w": "up",
       "pct_semana": 2.64,
       "dist_wma10_1w": 6.73,
@@ -4786,8 +4786,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 31.4,
-      "media_k_1w": 31.53,
+      "marron_1w": 31.34,
+      "media_k_1w": 31.36,
       "konc_dir_1w": "dn",
       "pct_semana": 1.24,
       "dist_wma10_1w": 0.58,
@@ -5216,32 +5216,32 @@
     },
     "EA": {
       "ticker": "EA",
-      "pct_dia": -0.1,
-      "rsi_1d": 75.6,
+      "pct_dia": 0.0,
+      "rsi_1d": 82.3,
       "rsi_cruza_alza": false,
       "rsi_1h": 56.8,
-      "rsi_1w": 73.3,
+      "rsi_1w": 73.7,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 123.14,
-      "media_k_1w": 90.91,
+      "marron_1w": 128.44,
+      "media_k_1w": 85.68,
       "konc_dir_1w": "up",
-      "pct_semana": -0.08,
-      "dist_wma10_1w": 0.98,
-      "dist_ema30_1w": 3.86,
-      "dist_ema50_1w": 7.49,
-      "dist_sma200_1w": 39.06,
-      "macd_h": -1.01,
-      "marron": 85.39,
-      "media_k": 100.26,
-      "konc_dir": "dn",
-      "dist_ema21": 0.73,
+      "pct_semana": 0.38,
+      "dist_wma10_1w": 1.77,
+      "dist_ema30_1w": 4.42,
+      "dist_ema50_1w": 8.15,
+      "dist_sma200_1w": 39.92,
+      "macd_h": 8.22,
+      "marron": 126.86,
+      "media_k": 104.28,
+      "konc_dir": "up",
+      "dist_ema21": 1.61,
       "ema21_sube": true,
-      "dist_sma30": 1.21,
-      "dist_ema150": 4.31,
-      "dist_ema200": 6.16,
+      "dist_sma30": 2.24,
+      "dist_ema150": 4.92,
+      "dist_ema200": 6.83,
       "wt_signal": null,
       "hist_rsi": {
         "nivel": 70,
@@ -5270,10 +5270,10 @@
           },
           {
             "tramo": "1m",
-            "avg": 0.47,
-            "pos": 60,
-            "total": 92,
-            "prob": 65.2
+            "avg": 0.39,
+            "pos": 56,
+            "total": 88,
+            "prob": 63.6
           }
         ],
         "ultimos": [
@@ -5283,7 +5283,7 @@
             "ret_1d": -0.12,
             "ret_2d": -0.12,
             "ret_5d": 0.54,
-            "ret_1m": 2.15
+            "ret_1m": null
           },
           {
             "dir": "↓",
@@ -5291,7 +5291,7 @@
             "ret_1d": 0.0,
             "ret_2d": 0.11,
             "ret_5d": 0.58,
-            "ret_1m": 2.29
+            "ret_1m": null
           },
           {
             "dir": "↑",
@@ -5314,13 +5314,13 @@
             "rsi": 70.5,
             "ret_1d": 0.3,
             "ret_2d": 0.58,
-            "ret_5d": 1.16,
+            "ret_5d": 1.48,
             "ret_1m": null
           }
         ]
       },
-      "rsi_pct_hist": 75.6,
-      "marron_pct_hist": 85.4,
+      "rsi_pct_hist": 82.3,
+      "marron_pct_hist": 126.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Consumer Cyclical"
@@ -9365,7 +9365,7 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 41.26,
+      "marron_1w": 41.27,
       "media_k_1w": 73.67,
       "konc_dir_1w": "dn",
       "pct_semana": -5.25,
@@ -9549,7 +9549,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 88.75,
-      "media_k_1w": 74.8,
+      "media_k_1w": 74.79,
       "konc_dir_1w": "up",
       "pct_semana": 0.01,
       "dist_wma10_1w": 2.31,
@@ -10124,8 +10124,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 96.93,
-      "media_k_1w": 84.9,
+      "marron_1w": 96.94,
+      "media_k_1w": 84.94,
       "konc_dir_1w": "up",
       "pct_semana": 3.63,
       "dist_wma10_1w": 9.53,
@@ -10707,8 +10707,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 110.31,
-      "media_k_1w": 85.57,
+      "marron_1w": 110.33,
+      "media_k_1w": 85.78,
       "konc_dir_1w": "up",
       "pct_semana": 1.3,
       "dist_wma10_1w": 4.2,
@@ -11111,7 +11111,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 118.49,
-      "media_k_1w": 94.92,
+      "media_k_1w": 94.93,
       "konc_dir_1w": "up",
       "pct_semana": 2.83,
       "dist_wma10_1w": 8.27,
@@ -13079,8 +13079,8 @@
     {
       "ticker": "EA",
       "sector": "Consumer Cyclical",
-      "rsi_1d": 75.6,
-      "pct_dia": -0.1,
+      "rsi_1d": 82.3,
+      "pct_dia": 0.0,
       "hist": {
         "nivel": 70,
         "total_eventos": 95,
@@ -13108,10 +13108,10 @@
           },
           {
             "tramo": "1m",
-            "avg": 0.47,
-            "pos": 60,
-            "total": 92,
-            "prob": 65.2
+            "avg": 0.39,
+            "pos": 56,
+            "total": 88,
+            "prob": 63.6
           }
         ],
         "ultimos": [
@@ -13121,7 +13121,7 @@
             "ret_1d": -0.12,
             "ret_2d": -0.12,
             "ret_5d": 0.54,
-            "ret_1m": 2.15
+            "ret_1m": null
           },
           {
             "dir": "↓",
@@ -13129,7 +13129,7 @@
             "ret_1d": 0.0,
             "ret_2d": 0.11,
             "ret_5d": 0.58,
-            "ret_1m": 2.29
+            "ret_1m": null
           },
           {
             "dir": "↑",
@@ -13152,7 +13152,7 @@
             "rsi": 70.5,
             "ret_1d": 0.3,
             "ret_2d": 0.58,
-            "ret_5d": 1.16,
+            "ret_5d": 1.48,
             "ret_1m": null
           }
         ]
