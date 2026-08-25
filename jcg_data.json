@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-25 05:35",
+  "actualizado": "2026-08-25 07:38",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1113,8 +1113,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 95.82,
-      "media_k_1w": 75.16,
+      "marron_1w": 95.81,
+      "media_k_1w": 75.15,
       "konc_dir_1w": "up",
       "pct_semana": 1.7,
       "dist_wma10_1w": 2.08,
@@ -5090,8 +5090,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 40.46,
-      "media_k_1w": 33.7,
+      "marron_1w": 40.49,
+      "media_k_1w": 33.83,
       "konc_dir_1w": "up",
       "pct_semana": 0.59,
       "dist_wma10_1w": 0.32,
@@ -10764,7 +10764,7 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.15,
+            "avg": 0.14,
             "pos": 44,
             "total": 84,
             "prob": 52.4
@@ -11508,8 +11508,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 28.9,
-      "media_k_1w": 62.63,
+      "marron_1w": 28.89,
+      "media_k_1w": 62.61,
       "konc_dir_1w": "dn",
       "pct_semana": 1.39,
       "dist_wma10_1w": -1.62,
@@ -11655,8 +11655,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 24.88,
-      "media_k_1w": 47.28,
+      "marron_1w": 24.89,
+      "media_k_1w": 47.31,
       "konc_dir_1w": "dn",
       "pct_semana": 1.29,
       "dist_wma10_1w": -5.35,
@@ -11664,8 +11664,8 @@
       "dist_ema50_1w": -5.22,
       "dist_sma200_1w": 20.46,
       "macd_h": -34.63,
-      "marron": 24.24,
-      "media_k": 24.65,
+      "marron": 24.96,
+      "media_k": 25.76,
       "konc_dir": "dn",
       "dist_ema21": -3.32,
       "ema21_sube": false,
@@ -11675,7 +11675,7 @@
       "wt_signal": null,
       "hist_rsi": null,
       "rsi_pct_hist": 39.2,
-      "marron_pct_hist": 24.2,
+      "marron_pct_hist": 25.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -12274,8 +12274,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 96.43,
-      "media_k_1w": 89.39,
+      "marron_1w": 96.45,
+      "media_k_1w": 89.55,
       "konc_dir_1w": "up",
       "pct_semana": 0.33,
       "dist_wma10_1w": -0.15,
@@ -16798,7 +16798,7 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.15,
+            "avg": 0.14,
             "pos": 44,
             "total": 84,
             "prob": 52.4
