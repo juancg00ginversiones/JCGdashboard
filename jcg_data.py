@@ -10,25 +10,25 @@ warnings.filterwarnings("ignore")
 # SECTORES
 # ══════════════════════════════════════════════════════════
 SECTORES_USA = {
-    "ETFs":               ["SPY","QQQ","DIA","IWM","IBIT","EWZ","FXI","MAGS","RSP","VIX","IVV","ARKK"],
+    "ETFs":               ["SPY","QQQ","DIA","IWM","IBIT","EWZ","FXI","MAGS","RSP","VIX","IVV","ARKK","GSG","CORN","SOYB","BBCA","BBAX"],
     "ETF Sectores USA":   ["XLK","XLF","XLV","XLE","XLI","XLY","XLP","XLB","XLRE","XLU","XLC","IBB","SMH","COPX","ILF"],
     "Commodities":        ["GLD","SLV","URA","USO","GDX"],
     "Magnificas":         ["AAPL","MSFT","NVDA","AMZN","GOOGL","META","TSLA","AVGO"],
     "Technology":         ["ADBE","AMAT","AMD","ASTS","CSCO","FSLR","IBM","INTC","LRCX","MU","ORCL","PANW","QCOM","RGTI","RKLB","SNOW","TXN","UBER",
-                           "CRWV","ALAB","PLTR","CRM","NOW","MRVL","MSTR","TEAM","SWKS","MSI","DOCU","SNAP","AI","PATH","TEM","CRWD","ANET","NBIS"],
+                           "CRWV","ALAB","PLTR","CRM","NOW","MRVL","MSTR","TEAM","SWKS","MSI","DOCU","SNAP","AI","PATH","TEM","CRWD","ANET","NBIS","KLAC","DELL","WDC","SKHY"],
     "Financial":          ["AIG","AXP","BAC","C","COIN","HOOD","HUT","IREN","JPM","MA","PYPL","RIOT","SCHW","USB","V","WFC",
-                           "BX","GS","MMC","SPGI","EFX","FISV"],
+                           "BX","GS","MMC","SPGI","EFX","FISV","MS","IBKR"],
     "Consumer Cyclical":  ["AMZN","ARCO","BKNG","EBAY","ETSY","F","GM","HD","LVS","MCD","NKE","SBUX","TSLA",
                            "ABNB","ROST","TJX","CCL","RACE","DECK","PINS","EA","TTM"],
     "Industrials":        ["AAL","ADP","BA","CAAP","DAL","DE","FDX","GE","HWM","LMT","MMM","RTX","UAL","UNP",
                            "HON","HPQ","MSI","SYY","ORLY","GLW"],
-    "Energy":             ["BKR","CVX","HAL","OXY","PSX","SLB","XOM","VIST","COP","GLNG"],
-    "Basic Materials":    ["CDE","DD","DOW","ECL","FCX","HL","MOS","NEM","NUE","SCCO","AEM","KGC","MP","CCJ"],
+    "Energy":             ["BKR","CVX","HAL","OXY","PSX","SLB","XOM","VIST","COP","GLNG","GEV","TLN"],
+    "Basic Materials":    ["CDE","DD","DOW","ECL","FCX","HL","MOS","NEM","NUE","SCCO","AEM","KGC","MP","CCJ","LIN","SHW"],
     "Comm. Services":     ["DIS","GOOGL","META","NFLX","RBLX","ROKU","T","VZ","ZM","SNAP","SPOT","TMUS","PM"],
     "Consumer Defensive": ["BG","CL","COST","HSY","KO","MDLZ","PEP","PG","TGT","WMT","CVS"],
-    "HealthCare":         ["ABBV","ABT","AMGN","BMY","DHR","GILD","ISRG","LLY","MDT","MRK","MRNA","PFE","TMO","UNH","VRTX","BIIB","HIMS"],
+    "HealthCare":         ["ABBV","ABT","AMGN","BMY","DHR","GILD","ISRG","LLY","MDT","MRK","MRNA","PFE","TMO","UNH","VRTX","BIIB","HIMS","NTRA"],
     "Utilities":          ["CEG","OKLO","VST","NEE"],
-    "Latam / Otros":      ["GLOB","STNE","PKS","O","SNDK","ONDS"],
+    "Latam / Otros":      ["GLOB","STNE","PKS","O","SNDK","ONDS","WELL","PLD"],
 }
 SECTORES_WORLD = {
     "China":       ["BABA","BIDU","JD","NIO","NTES","PDD","XPEV"],
