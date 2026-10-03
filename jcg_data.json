@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-02 21:15",
+  "actualizado": "2026-10-02 21:39",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -11126,8 +11126,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 62.64,
-      "media_k_1w": 79.71,
+      "marron_1w": 62.63,
+      "media_k_1w": 79.7,
       "konc_dir_1w": "dn",
       "pct_semana": -3.38,
       "dist_wma10_1w": -3.22,
@@ -11678,8 +11678,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 65.95,
-      "media_k_1w": 52.82,
+      "marron_1w": 65.79,
+      "media_k_1w": 52.36,
       "konc_dir_1w": "up",
       "pct_semana": 7.04,
       "dist_wma10_1w": 6.19,
@@ -12851,7 +12851,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 84.84,
-      "media_k_1w": 99.95,
+      "media_k_1w": 99.96,
       "konc_dir_1w": "dn",
       "pct_semana": -4.84,
       "dist_wma10_1w": -3.36,
