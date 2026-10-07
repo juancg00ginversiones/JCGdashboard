@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-07 18:56",
+  "actualizado": "2026-10-07 19:13",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -425,35 +425,35 @@
       "wt_signal": null,
       "hist_rsi": {
         "nivel": 70,
-        "total_eventos": 140,
+        "total_eventos": 138,
         "resumen": [
           {
             "tramo": "1d",
-            "avg": -0.03,
+            "avg": -0.01,
             "pos": 76,
-            "total": 139,
-            "prob": 54.7
+            "total": 137,
+            "prob": 55.5
           },
           {
             "tramo": "2d",
-            "avg": 0.03,
+            "avg": 0.09,
             "pos": 89,
-            "total": 138,
-            "prob": 64.5
+            "total": 136,
+            "prob": 65.4
           },
           {
             "tramo": "5d",
-            "avg": 0.19,
+            "avg": 0.3,
             "pos": 80,
-            "total": 138,
-            "prob": 58.0
+            "total": 136,
+            "prob": 58.8
           },
           {
             "tramo": "1m",
-            "avg": 1.02,
+            "avg": 1.05,
             "pos": 92,
-            "total": 138,
-            "prob": 66.7
+            "total": 136,
+            "prob": 67.6
           }
         ],
         "ultimos": [
@@ -1031,7 +1031,7 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 43.25,
+      "marron_1w": 43.26,
       "media_k_1w": 84.85,
       "konc_dir_1w": "dn",
       "pct_semana": -1.32,
@@ -1395,7 +1395,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 18.12,
-      "media_k_1w": 59.89,
+      "media_k_1w": 59.88,
       "konc_dir_1w": "dn",
       "pct_semana": 1.45,
       "dist_wma10_1w": -1.08,
@@ -1466,8 +1466,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": -0.53,
-      "media_k_1w": 57.28,
+      "marron_1w": -0.52,
+      "media_k_1w": 57.29,
       "konc_dir_1w": "dn",
       "pct_semana": -0.59,
       "dist_wma10_1w": -3.9,
@@ -4441,7 +4441,7 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 46.4,
+      "marron_1w": 46.39,
       "media_k_1w": 74.59,
       "konc_dir_1w": "dn",
       "pct_semana": -1.16,
@@ -10974,7 +10974,7 @@
       "pct_dia": 0.32,
       "rsi_1d": 43.8,
       "rsi_cruza_alza": false,
-      "rsi_1h": null,
+      "rsi_1h": 50.5,
       "rsi_1w": 52.8,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -11484,6 +11484,117 @@
       "marron_alerta": null,
       "sector": "Canada"
     },
+    "SHOP": {
+      "ticker": "SHOP",
+      "pct_dia": 0.97,
+      "rsi_1d": 71.2,
+      "rsi_cruza_alza": true,
+      "rsi_1h": 71.5,
+      "rsi_1w": 63.9,
+      "rsi_pct_1w": null,
+      "marron_pct_1w": null,
+      "rsi_alerta_1w": null,
+      "marron_alerta_1w": null,
+      "marron_1w": 100.47,
+      "media_k_1w": 76.47,
+      "konc_dir_1w": "up",
+      "pct_semana": 9.67,
+      "dist_wma10_1w": 13.04,
+      "dist_ema30_1w": 23.91,
+      "dist_ema50_1w": 26.78,
+      "dist_sma200_1w": 75.57,
+      "macd_h": 97.0,
+      "marron": 111.93,
+      "media_k": 73.91,
+      "konc_dir": "up",
+      "dist_ema21": 12.36,
+      "ema21_sube": true,
+      "dist_sma30": 16.06,
+      "dist_ema150": 24.86,
+      "dist_ema200": 26.1,
+      "wt_signal": null,
+      "hist_rsi": {
+        "nivel": 70,
+        "total_eventos": 141,
+        "resumen": [
+          {
+            "tramo": "1d",
+            "avg": 0.32,
+            "pos": 79,
+            "total": 141,
+            "prob": 56.0
+          },
+          {
+            "tramo": "2d",
+            "avg": 0.58,
+            "pos": 82,
+            "total": 140,
+            "prob": 58.6
+          },
+          {
+            "tramo": "5d",
+            "avg": 0.79,
+            "pos": 82,
+            "total": 140,
+            "prob": 58.6
+          },
+          {
+            "tramo": "1m",
+            "avg": 3.93,
+            "pos": 95,
+            "total": 140,
+            "prob": 67.9
+          }
+        ],
+        "ultimos": [
+          {
+            "dir": "↑",
+            "rsi": 71.3,
+            "ret_1d": 2.38,
+            "ret_2d": 0.69,
+            "ret_5d": 1.81,
+            "ret_1m": -11.53
+          },
+          {
+            "dir": "↓",
+            "rsi": 69.9,
+            "ret_1d": -1.44,
+            "ret_2d": 3.88,
+            "ret_5d": -3.95,
+            "ret_1m": -17.04
+          },
+          {
+            "dir": "↑",
+            "rsi": 71.5,
+            "ret_1d": -2.66,
+            "ret_2d": -6.23,
+            "ret_5d": -7.16,
+            "ret_1m": -15.54
+          },
+          {
+            "dir": "↓",
+            "rsi": 66.8,
+            "ret_1d": -3.67,
+            "ret_2d": -5.02,
+            "ret_5d": -3.29,
+            "ret_1m": -15.85
+          },
+          {
+            "dir": "↑",
+            "rsi": 70.3,
+            "ret_1d": 0.97,
+            "ret_2d": null,
+            "ret_5d": null,
+            "ret_1m": null
+          }
+        ]
+      },
+      "rsi_pct_hist": 71.2,
+      "marron_pct_hist": 111.9,
+      "rsi_alerta": null,
+      "marron_alerta": null,
+      "sector": "Canada"
+    },
     "ABEV": {
       "ticker": "ABEV",
       "pct_dia": -2.17,
@@ -11495,8 +11606,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 78.88,
-      "media_k_1w": 56.4,
+      "marron_1w": 78.87,
+      "media_k_1w": 56.39,
       "konc_dir_1w": "up",
       "pct_semana": 5.35,
       "dist_wma10_1w": 5.78,
@@ -11576,8 +11687,8 @@
       "dist_ema50_1w": 27.91,
       "dist_sma200_1w": 63.72,
       "macd_h": 143.28,
-      "marron": 120.48,
-      "media_k": 82.25,
+      "marron": 119.99,
+      "media_k": 82.13,
       "konc_dir": "up",
       "dist_ema21": 17.69,
       "ema21_sube": true,
@@ -11662,7 +11773,7 @@
         ]
       },
       "rsi_pct_hist": 73.3,
-      "marron_pct_hist": 120.5,
+      "marron_pct_hist": 120.0,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -11678,8 +11789,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 105.18,
-      "media_k_1w": 84.58,
+      "marron_1w": 105.17,
+      "media_k_1w": 84.56,
       "konc_dir_1w": "up",
       "pct_semana": 0.2,
       "dist_wma10_1w": 2.24,
@@ -14051,35 +14162,35 @@
       "pct_dia": -0.25,
       "hist": {
         "nivel": 70,
-        "total_eventos": 140,
+        "total_eventos": 138,
         "resumen": [
           {
             "tramo": "1d",
-            "avg": -0.03,
+            "avg": -0.01,
             "pos": 76,
-            "total": 139,
-            "prob": 54.7
+            "total": 137,
+            "prob": 55.5
           },
           {
             "tramo": "2d",
-            "avg": 0.03,
+            "avg": 0.09,
             "pos": 89,
-            "total": 138,
-            "prob": 64.5
+            "total": 136,
+            "prob": 65.4
           },
           {
             "tramo": "5d",
-            "avg": 0.19,
+            "avg": 0.3,
             "pos": 80,
-            "total": 138,
-            "prob": 58.0
+            "total": 136,
+            "prob": 58.8
           },
           {
             "tramo": "1m",
-            "avg": 1.02,
+            "avg": 1.05,
             "pos": 92,
-            "total": 138,
-            "prob": 66.7
+            "total": 136,
+            "prob": 67.6
           }
         ],
         "ultimos": [
@@ -16497,6 +16608,88 @@
             "dir": "↓",
             "rsi": 26.7,
             "ret_1d": null,
+            "ret_2d": null,
+            "ret_5d": null,
+            "ret_1m": null
+          }
+        ]
+      }
+    },
+    {
+      "ticker": "SHOP",
+      "sector": "Canada",
+      "rsi_1d": 71.2,
+      "pct_dia": 0.97,
+      "hist": {
+        "nivel": 70,
+        "total_eventos": 141,
+        "resumen": [
+          {
+            "tramo": "1d",
+            "avg": 0.32,
+            "pos": 79,
+            "total": 141,
+            "prob": 56.0
+          },
+          {
+            "tramo": "2d",
+            "avg": 0.58,
+            "pos": 82,
+            "total": 140,
+            "prob": 58.6
+          },
+          {
+            "tramo": "5d",
+            "avg": 0.79,
+            "pos": 82,
+            "total": 140,
+            "prob": 58.6
+          },
+          {
+            "tramo": "1m",
+            "avg": 3.93,
+            "pos": 95,
+            "total": 140,
+            "prob": 67.9
+          }
+        ],
+        "ultimos": [
+          {
+            "dir": "↑",
+            "rsi": 71.3,
+            "ret_1d": 2.38,
+            "ret_2d": 0.69,
+            "ret_5d": 1.81,
+            "ret_1m": -11.53
+          },
+          {
+            "dir": "↓",
+            "rsi": 69.9,
+            "ret_1d": -1.44,
+            "ret_2d": 3.88,
+            "ret_5d": -3.95,
+            "ret_1m": -17.04
+          },
+          {
+            "dir": "↑",
+            "rsi": 71.5,
+            "ret_1d": -2.66,
+            "ret_2d": -6.23,
+            "ret_5d": -7.16,
+            "ret_1m": -15.54
+          },
+          {
+            "dir": "↓",
+            "rsi": 66.8,
+            "ret_1d": -3.67,
+            "ret_2d": -5.02,
+            "ret_5d": -3.29,
+            "ret_1m": -15.85
+          },
+          {
+            "dir": "↑",
+            "rsi": 70.3,
+            "ret_1d": 0.97,
             "ret_2d": null,
             "ret_5d": null,
             "ret_1m": null
