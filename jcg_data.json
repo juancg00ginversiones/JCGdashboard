@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-13 23:06",
+  "actualizado": "2026-10-13 23:50",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -5440,7 +5440,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 21.86,
-      "media_k_1w": 55.14,
+      "media_k_1w": 55.12,
       "konc_dir_1w": "dn",
       "pct_semana": -0.58,
       "dist_wma10_1w": -6.1,
@@ -6052,7 +6052,7 @@
       "pct_dia": 0.76,
       "rsi_1d": 60.8,
       "rsi_cruza_alza": true,
-      "rsi_1h": 68.6,
+      "rsi_1h": 75.6,
       "rsi_1w": 61.4,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -9358,7 +9358,7 @@
       "pct_dia": 0.12,
       "rsi_1d": 56.4,
       "rsi_cruza_alza": false,
-      "rsi_1h": 57.6,
+      "rsi_1h": 55.5,
       "rsi_1w": 69.0,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -11187,8 +11187,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 76.73,
-      "media_k_1w": 58.4,
+      "marron_1w": 76.72,
+      "media_k_1w": 58.38,
       "konc_dir_1w": "up",
       "pct_semana": 0.94,
       "dist_wma10_1w": 6.13,
@@ -11260,7 +11260,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 108.73,
-      "media_k_1w": 63.6,
+      "media_k_1w": 63.58,
       "konc_dir_1w": "up",
       "pct_semana": -2.56,
       "dist_wma10_1w": 12.37,
@@ -11268,8 +11268,8 @@
       "dist_ema50_1w": 22.42,
       "dist_sma200_1w": 57.41,
       "macd_h": 74.58,
-      "marron": 87.99,
-      "media_k": 86.51,
+      "marron": 88.28,
+      "media_k": 86.82,
       "konc_dir": "up",
       "dist_ema21": 8.38,
       "ema21_sube": true,
@@ -11279,7 +11279,7 @@
       "wt_signal": null,
       "hist_rsi": null,
       "rsi_pct_hist": 64.8,
-      "marron_pct_hist": 88.0,
+      "marron_pct_hist": 88.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -11315,7 +11315,7 @@
       "wt_signal": null,
       "hist_rsi": null,
       "rsi_pct_hist": 59.0,
-      "marron_pct_hist": 81.9,
+      "marron_pct_hist": 81.8,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -12538,8 +12538,8 @@
     },
     "SHEL": {
       "ticker": "SHEL",
-      "pct_dia": 1.41,
-      "rsi_1d": 71.9,
+      "pct_dia": 1.38,
+      "rsi_1d": 74.7,
       "rsi_cruza_alza": true,
       "rsi_1h": 74.9,
       "rsi_1w": 70.7,
@@ -12547,23 +12547,23 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 113.21,
-      "media_k_1w": 88.92,
+      "marron_1w": 113.51,
+      "media_k_1w": 88.94,
       "konc_dir_1w": "up",
       "pct_semana": 2.8,
       "dist_wma10_1w": 5.99,
       "dist_ema30_1w": 15.79,
       "dist_ema50_1w": 21.74,
       "dist_sma200_1w": 55.62,
-      "macd_h": 20.65,
-      "marron": 119.87,
-      "media_k": 85.3,
+      "macd_h": 27.6,
+      "marron": 118.88,
+      "media_k": 88.36,
       "konc_dir": "up",
-      "dist_ema21": 5.04,
+      "dist_ema21": 5.86,
       "ema21_sube": true,
-      "dist_sma30": 6.06,
-      "dist_ema150": 15.81,
-      "dist_ema200": 18.83,
+      "dist_sma30": 7.09,
+      "dist_ema150": 17.14,
+      "dist_ema200": 20.22,
       "wt_signal": null,
       "hist_rsi": {
         "nivel": 70,
@@ -12571,10 +12571,10 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.06,
-            "pos": 46,
-            "total": 86,
-            "prob": 53.5
+            "avg": 0.07,
+            "pos": 47,
+            "total": 87,
+            "prob": 54.0
           },
           {
             "tramo": "2d",
@@ -12592,10 +12592,10 @@
           },
           {
             "tramo": "1m",
-            "avg": 0.55,
-            "pos": 43,
-            "total": 83,
-            "prob": 51.8
+            "avg": 0.63,
+            "pos": 44,
+            "total": 84,
+            "prob": 52.4
           }
         ],
         "ultimos": [
@@ -12613,7 +12613,7 @@
             "ret_1d": 2.59,
             "ret_2d": -0.78,
             "ret_5d": -3.3,
-            "ret_1m": null
+            "ret_1m": 6.78
           },
           {
             "dir": "↑",
@@ -12634,15 +12634,15 @@
           {
             "dir": "↑",
             "rsi": 71.9,
-            "ret_1d": null,
+            "ret_1d": 1.38,
             "ret_2d": null,
             "ret_5d": null,
             "ret_1m": null
           }
         ]
       },
-      "rsi_pct_hist": 71.9,
-      "marron_pct_hist": 119.9,
+      "rsi_pct_hist": 74.7,
+      "marron_pct_hist": 118.9,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Europa"
@@ -16078,18 +16078,18 @@
     {
       "ticker": "SHEL",
       "sector": "Europa",
-      "rsi_1d": 71.9,
-      "pct_dia": 1.41,
+      "rsi_1d": 74.7,
+      "pct_dia": 1.38,
       "hist": {
         "nivel": 70,
         "total_eventos": 87,
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.06,
-            "pos": 46,
-            "total": 86,
-            "prob": 53.5
+            "avg": 0.07,
+            "pos": 47,
+            "total": 87,
+            "prob": 54.0
           },
           {
             "tramo": "2d",
@@ -16107,10 +16107,10 @@
           },
           {
             "tramo": "1m",
-            "avg": 0.55,
-            "pos": 43,
-            "total": 83,
-            "prob": 51.8
+            "avg": 0.63,
+            "pos": 44,
+            "total": 84,
+            "prob": 52.4
           }
         ],
         "ultimos": [
@@ -16128,7 +16128,7 @@
             "ret_1d": 2.59,
             "ret_2d": -0.78,
             "ret_5d": -3.3,
-            "ret_1m": null
+            "ret_1m": 6.78
           },
           {
             "dir": "↑",
@@ -16149,7 +16149,7 @@
           {
             "dir": "↑",
             "rsi": 71.9,
-            "ret_1d": null,
+            "ret_1d": 1.38,
             "ret_2d": null,
             "ret_5d": null,
             "ret_1m": null
