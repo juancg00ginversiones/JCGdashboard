@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-20 19:58",
+  "actualizado": "2026-10-20 20:20",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1462,7 +1462,7 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 31.83,
+      "marron_1w": 31.84,
       "media_k_1w": 52.98,
       "konc_dir_1w": "dn",
       "pct_semana": 0.52,
@@ -4878,7 +4878,7 @@
           },
           {
             "tramo": "5d",
-            "avg": 0.14,
+            "avg": 0.15,
             "pos": 53,
             "total": 95,
             "prob": 55.8
@@ -5730,8 +5730,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 6.91,
-      "media_k_1w": 58.46,
+      "marron_1w": 6.93,
+      "media_k_1w": 58.52,
       "konc_dir_1w": "dn",
       "pct_semana": -0.09,
       "dist_wma10_1w": -6.63,
@@ -6176,7 +6176,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 22.47,
-      "media_k_1w": 52.61,
+      "media_k_1w": 52.6,
       "konc_dir_1w": "dn",
       "pct_semana": -2.25,
       "dist_wma10_1w": -4.49,
@@ -9116,9 +9116,9 @@
           {
             "tramo": "5d",
             "avg": -0.32,
-            "pos": 46,
+            "pos": 45,
             "total": 88,
-            "prob": 52.3
+            "prob": 51.1
           },
           {
             "tramo": "1m",
@@ -10099,7 +10099,7 @@
           },
           {
             "tramo": "5d",
-            "avg": -0.09,
+            "avg": -0.08,
             "pos": 56,
             "total": 112,
             "prob": 50.0
@@ -13147,8 +13147,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 94.4,
-      "media_k_1w": 62.24,
+      "marron_1w": 94.39,
+      "media_k_1w": 62.22,
       "konc_dir_1w": "up",
       "pct_semana": 0.91,
       "dist_wma10_1w": 6.81,
@@ -13295,7 +13295,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 94.97,
-      "media_k_1w": 65.79,
+      "media_k_1w": 65.81,
       "konc_dir_1w": "up",
       "pct_semana": 3.03,
       "dist_wma10_1w": 8.94,
@@ -13303,8 +13303,8 @@
       "dist_ema50_1w": 20.55,
       "dist_sma200_1w": 55.5,
       "macd_h": -22.25,
-      "marron": 75.18,
-      "media_k": 82.52,
+      "marron": 75.21,
+      "media_k": 82.61,
       "konc_dir": "dn",
       "dist_ema21": 5.16,
       "ema21_sube": true,
@@ -13330,8 +13330,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 91.43,
-      "media_k_1w": 85.76,
+      "marron_1w": 91.44,
+      "media_k_1w": 85.79,
       "konc_dir_1w": "up",
       "pct_semana": 4.38,
       "dist_wma10_1w": 4.26,
@@ -14142,8 +14142,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 36.35,
-      "media_k_1w": 72.22,
+      "marron_1w": 36.32,
+      "media_k_1w": 72.13,
       "konc_dir_1w": "dn",
       "pct_semana": -1.28,
       "dist_wma10_1w": -3.71,
@@ -14946,8 +14946,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 45.11,
-      "media_k_1w": 76.46,
+      "marron_1w": 45.12,
+      "media_k_1w": 76.47,
       "konc_dir_1w": "dn",
       "pct_semana": -1.7,
       "dist_wma10_1w": -4.34,
@@ -17392,7 +17392,7 @@
           },
           {
             "tramo": "5d",
-            "avg": 0.14,
+            "avg": 0.15,
             "pos": 53,
             "total": 95,
             "prob": 55.8
@@ -18951,9 +18951,9 @@
           {
             "tramo": "5d",
             "avg": -0.32,
-            "pos": 46,
+            "pos": 45,
             "total": 88,
-            "prob": 52.3
+            "prob": 51.1
           },
           {
             "tramo": "1m",
@@ -19278,7 +19278,7 @@
           },
           {
             "tramo": "5d",
-            "avg": -0.09,
+            "avg": -0.08,
             "pos": 56,
             "total": 112,
             "prob": 50.0
