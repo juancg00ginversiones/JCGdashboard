@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-27 04:29",
+  "actualizado": "2026-10-27 06:30",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -6031,8 +6031,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 12.93,
-      "media_k_1w": 54.32,
+      "marron_1w": 12.91,
+      "media_k_1w": 54.27,
       "konc_dir_1w": "dn",
       "pct_semana": 2.23,
       "dist_wma10_1w": -3.45,
@@ -6248,7 +6248,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 11.35,
-      "media_k_1w": 48.55,
+      "media_k_1w": 48.54,
       "konc_dir_1w": "dn",
       "pct_semana": -0.17,
       "dist_wma10_1w": -6.18,
@@ -9397,9 +9397,9 @@
           {
             "tramo": "5d",
             "avg": -0.31,
-            "pos": 48,
+            "pos": 47,
             "total": 93,
-            "prob": 51.6
+            "prob": 50.5
           },
           {
             "tramo": "1m",
@@ -9904,7 +9904,7 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 97.2,
+      "marron_1w": 97.21,
       "media_k_1w": 86.91,
       "konc_dir_1w": "up",
       "pct_semana": 1.2,
@@ -13939,8 +13939,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 7.56,
-      "media_k_1w": 53.97,
+      "marron_1w": 7.71,
+      "media_k_1w": 54.3,
       "konc_dir_1w": "dn",
       "pct_semana": 2.44,
       "dist_wma10_1w": -4.91,
@@ -19310,9 +19310,9 @@
           {
             "tramo": "5d",
             "avg": -0.31,
-            "pos": 48,
+            "pos": 47,
             "total": 93,
-            "prob": 51.6
+            "prob": 50.5
           },
           {
             "tramo": "1m",
