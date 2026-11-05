@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-05 08:45",
+  "actualizado": "2026-11-05 10:36",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -1273,7 +1273,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 88.27,
-      "media_k_1w": 83.46,
+      "media_k_1w": 83.47,
       "konc_dir_1w": "up",
       "pct_semana": 2.1,
       "dist_wma10_1w": 2.51,
@@ -6337,8 +6337,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 31.51,
-      "media_k_1w": 52.79,
+      "marron_1w": 31.5,
+      "media_k_1w": 52.74,
       "konc_dir_1w": "dn",
       "pct_semana": 5.25,
       "dist_wma10_1w": 2.7,
@@ -9072,7 +9072,7 @@
       "rsi_pct_hist": 74.8,
       "marron_pct_hist": 135.0,
       "rsi_alerta": null,
-      "marron_alerta": null,
+      "marron_alerta": "maximo",
       "sector": "Basic Materials"
     },
     "DOW": {
@@ -9798,9 +9798,9 @@
           {
             "tramo": "5d",
             "avg": -0.27,
-            "pos": 49,
+            "pos": 50,
             "total": 96,
-            "prob": 51.0
+            "prob": 52.1
           },
           {
             "tramo": "1m",
@@ -14526,7 +14526,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 11.88,
-      "media_k_1w": 56.99,
+      "media_k_1w": 56.98,
       "konc_dir_1w": "dn",
       "pct_semana": 0.78,
       "dist_wma10_1w": -24.06,
@@ -14534,8 +14534,8 @@
       "dist_ema50_1w": -22.61,
       "dist_sma200_1w": -2.21,
       "macd_h": -239.88,
-      "marron": 15.23,
-      "media_k": 40.26,
+      "marron": 15.2,
+      "media_k": 40.19,
       "konc_dir": "dn",
       "dist_ema21": -20.54,
       "ema21_sube": false,
@@ -14641,7 +14641,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 53.24,
-      "media_k_1w": 81.22,
+      "media_k_1w": 81.2,
       "konc_dir_1w": "dn",
       "pct_semana": -1.29,
       "dist_wma10_1w": -6.0,
@@ -15452,8 +15452,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 15.82,
-      "media_k_1w": 62.92,
+      "marron_1w": 15.8,
+      "media_k_1w": 62.84,
       "konc_dir_1w": "dn",
       "pct_semana": 5.4,
       "dist_wma10_1w": -2.5,
@@ -21317,9 +21317,9 @@
           {
             "tramo": "5d",
             "avg": -0.27,
-            "pos": 49,
+            "pos": 50,
             "total": 96,
-            "prob": 51.0
+            "prob": 52.1
           },
           {
             "tramo": "1m",
