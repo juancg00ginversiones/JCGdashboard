@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-07 13:59",
+  "actualizado": "2026-11-08 05:43",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -4316,7 +4316,7 @@
       "pct_dia": 1.21,
       "rsi_1d": 48.3,
       "rsi_cruza_alza": false,
-      "rsi_1h": 47.3,
+      "rsi_1h": null,
       "rsi_1w": 56.9,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -11910,7 +11910,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 25.79,
-      "media_k_1w": 56.29,
+      "media_k_1w": 56.27,
       "konc_dir_1w": "dn",
       "pct_semana": 4.89,
       "dist_wma10_1w": -6.89,
@@ -11981,8 +11981,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 11.69,
-      "media_k_1w": 57.31,
+      "marron_1w": 11.48,
+      "media_k_1w": 56.96,
       "konc_dir_1w": "dn",
       "pct_semana": -0.24,
       "dist_wma10_1w": -24.73,
@@ -11990,8 +11990,8 @@
       "dist_ema50_1w": -23.37,
       "dist_sma200_1w": -3.19,
       "macd_h": -184.99,
-      "marron": 21.68,
-      "media_k": 36.72,
+      "marron": 22.26,
+      "media_k": 36.81,
       "konc_dir": "dn",
       "dist_ema21": -18.26,
       "ema21_sube": false,
@@ -12076,7 +12076,7 @@
         ]
       },
       "rsi_pct_hist": 28.7,
-      "marron_pct_hist": 21.7,
+      "marron_pct_hist": 22.3,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -12093,7 +12093,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 46.55,
-      "media_k_1w": 80.61,
+      "media_k_1w": 80.59,
       "konc_dir_1w": "dn",
       "pct_semana": -6.01,
       "dist_wma10_1w": -9.75,
@@ -13299,7 +13299,7 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 38.61,
+      "marron_1w": 38.62,
       "media_k_1w": 81.0,
       "konc_dir_1w": "dn",
       "pct_semana": 1.14,
@@ -13480,7 +13480,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 33.09,
-      "media_k_1w": 68.31,
+      "media_k_1w": 68.3,
       "konc_dir_1w": "dn",
       "pct_semana": 0.92,
       "dist_wma10_1w": -3.03,
@@ -14694,7 +14694,7 @@
           },
           {
             "tramo": "2d",
-            "avg": -2.05,
+            "avg": -2.04,
             "pos": 33,
             "total": 89,
             "prob": 37.1
@@ -19240,7 +19240,7 @@
           },
           {
             "tramo": "2d",
-            "avg": -2.05,
+            "avg": -2.04,
             "pos": 33,
             "total": 89,
             "prob": 37.1
