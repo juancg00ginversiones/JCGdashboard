@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-11 08:37",
+  "actualizado": "2026-11-11 10:04",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -5256,7 +5256,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 34.64,
-      "media_k_1w": 46.02,
+      "media_k_1w": 46.01,
       "konc_dir_1w": "dn",
       "pct_semana": -0.09,
       "dist_wma10_1w": 0.85,
@@ -5423,7 +5423,7 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.04,
+            "avg": 0.05,
             "pos": 64,
             "total": 119,
             "prob": 53.8
@@ -11245,8 +11245,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 15.54,
-      "media_k_1w": 53.21,
+      "marron_1w": 15.71,
+      "media_k_1w": 53.54,
       "konc_dir_1w": "dn",
       "pct_semana": 1.18,
       "dist_wma10_1w": -20.03,
@@ -11254,8 +11254,8 @@
       "dist_ema50_1w": -21.78,
       "dist_sma200_1w": -2.11,
       "macd_h": -114.76,
-      "marron": 26.25,
-      "media_k": 34.85,
+      "marron": 26.4,
+      "media_k": 34.94,
       "konc_dir": "dn",
       "dist_ema21": -14.87,
       "ema21_sube": false,
@@ -11340,7 +11340,7 @@
         ]
       },
       "rsi_pct_hist": 31.3,
-      "marron_pct_hist": 26.2,
+      "marron_pct_hist": 26.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -15365,7 +15365,7 @@
         "resumen": [
           {
             "tramo": "1d",
-            "avg": 0.04,
+            "avg": 0.05,
             "pos": 64,
             "total": 119,
             "prob": 53.8
