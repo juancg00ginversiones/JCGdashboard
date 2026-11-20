@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-19 23:31",
+  "actualizado": "2026-11-19 23:47",
   "sectores_usa": {
     "ETFs": [
       "SPY",
@@ -663,7 +663,7 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 36.0,
+      "marron_1w": 35.99,
       "media_k_1w": 66.26,
       "konc_dir_1w": "dn",
       "pct_semana": -9.91,
@@ -1695,7 +1695,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 105.61,
-      "media_k_1w": 79.92,
+      "media_k_1w": 79.91,
       "konc_dir_1w": "up",
       "pct_semana": -2.7,
       "dist_wma10_1w": 1.57,
@@ -3041,7 +3041,7 @@
       "pct_dia": -3.65,
       "rsi_1d": 37.0,
       "rsi_cruza_alza": false,
-      "rsi_1h": 36.0,
+      "rsi_1h": 36.1,
       "rsi_1w": 38.7,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -3411,7 +3411,7 @@
       "pct_dia": 1.92,
       "rsi_1d": 31.0,
       "rsi_cruza_alza": true,
-      "rsi_1h": 47.6,
+      "rsi_1h": 47.8,
       "rsi_1w": 36.1,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -3562,7 +3562,7 @@
       "pct_dia": -2.1,
       "rsi_1d": 35.9,
       "rsi_cruza_alza": false,
-      "rsi_1h": 39.6,
+      "rsi_1h": 39.7,
       "rsi_1w": 41.8,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -4712,7 +4712,7 @@
       "pct_dia": 0.86,
       "rsi_1d": 46.2,
       "rsi_cruza_alza": false,
-      "rsi_1h": 34.7,
+      "rsi_1h": 34.4,
       "rsi_1w": 59.7,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -6392,7 +6392,7 @@
       "pct_dia": 2.86,
       "rsi_1d": 48.2,
       "rsi_cruza_alza": false,
-      "rsi_1h": 25.6,
+      "rsi_1h": 25.7,
       "rsi_1w": 51.6,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -6936,7 +6936,7 @@
       "pct_dia": -2.23,
       "rsi_1d": 45.7,
       "rsi_cruza_alza": false,
-      "rsi_1h": 31.5,
+      "rsi_1h": 31.3,
       "rsi_1w": 45.5,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -6972,7 +6972,7 @@
       "pct_dia": -1.43,
       "rsi_1d": 53.7,
       "rsi_cruza_alza": false,
-      "rsi_1h": 27.7,
+      "rsi_1h": 31.6,
       "rsi_1w": 63.8,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -8141,7 +8141,7 @@
       "pct_dia": 0.44,
       "rsi_1d": 43.5,
       "rsi_cruza_alza": false,
-      "rsi_1h": 35.0,
+      "rsi_1h": 34.9,
       "rsi_1w": 54.2,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -8177,7 +8177,7 @@
       "pct_dia": -0.25,
       "rsi_1d": 29.8,
       "rsi_cruza_alza": false,
-      "rsi_1h": 38.7,
+      "rsi_1h": 38.6,
       "rsi_1w": 31.5,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -8694,7 +8694,7 @@
       "pct_dia": -4.46,
       "rsi_1d": 29.5,
       "rsi_cruza_alza": false,
-      "rsi_1h": 23.1,
+      "rsi_1h": 23.0,
       "rsi_1w": 33.3,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -8877,7 +8877,7 @@
       "pct_dia": -1.19,
       "rsi_1d": 41.5,
       "rsi_cruza_alza": false,
-      "rsi_1h": 34.2,
+      "rsi_1h": 34.3,
       "rsi_1w": 52.3,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -9568,6 +9568,42 @@
       "marron_alerta": null,
       "sector": "Comm. Services"
     },
+    "ROKU": {
+      "ticker": "ROKU",
+      "pct_dia": 0.09,
+      "rsi_1d": 61.0,
+      "rsi_cruza_alza": true,
+      "rsi_1h": null,
+      "rsi_1w": 67.9,
+      "rsi_pct_1w": null,
+      "marron_pct_1w": null,
+      "rsi_alerta_1w": null,
+      "marron_alerta_1w": null,
+      "marron_1w": 90.83,
+      "media_k_1w": 91.79,
+      "konc_dir_1w": "dn",
+      "pct_semana": 3.48,
+      "dist_wma10_1w": 3.04,
+      "dist_ema30_1w": 12.85,
+      "dist_ema50_1w": 22.71,
+      "dist_sma200_1w": 84.68,
+      "macd_h": 13.95,
+      "marron": 88.13,
+      "media_k": 83.0,
+      "konc_dir": "up",
+      "dist_ema21": 2.08,
+      "ema21_sube": true,
+      "dist_sma30": 3.28,
+      "dist_ema150": 13.74,
+      "dist_ema200": 19.0,
+      "wt_signal": null,
+      "hist_rsi": null,
+      "rsi_pct_hist": 61.0,
+      "marron_pct_hist": 88.1,
+      "rsi_alerta": null,
+      "marron_alerta": null,
+      "sector": "Comm. Services"
+    },
     "T": {
       "ticker": "T",
       "pct_dia": -0.46,
@@ -9753,7 +9789,7 @@
       "pct_dia": -3.27,
       "rsi_1d": 34.8,
       "rsi_cruza_alza": false,
-      "rsi_1h": 31.7,
+      "rsi_1h": 31.6,
       "rsi_1w": 48.8,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -10116,7 +10152,7 @@
       "pct_dia": -1.43,
       "rsi_1d": 59.1,
       "rsi_cruza_alza": false,
-      "rsi_1h": 34.9,
+      "rsi_1h": 35.0,
       "rsi_1w": 72.6,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -10266,7 +10302,7 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 99.88,
+      "marron_1w": 99.87,
       "media_k_1w": 93.5,
       "konc_dir_1w": "up",
       "pct_semana": -3.89,
@@ -11280,7 +11316,7 @@
       "pct_dia": -1.23,
       "rsi_1d": 41.0,
       "rsi_cruza_alza": false,
-      "rsi_1h": 31.2,
+      "rsi_1h": 31.3,
       "rsi_1w": 40.1,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -11451,6 +11487,121 @@
       "hist_rsi": null,
       "rsi_pct_hist": 49.2,
       "marron_pct_hist": 53.1,
+      "rsi_alerta": null,
+      "marron_alerta": null,
+      "sector": "Latam / Otros"
+    },
+    "SNDK": {
+      "ticker": "SNDK",
+      "pct_dia": -2.71,
+      "rsi_1d": 29.4,
+      "rsi_cruza_alza": false,
+      "rsi_1h": 35.9,
+      "rsi_1w": 83.1,
+      "rsi_pct_1w": null,
+      "marron_pct_1w": null,
+      "rsi_alerta_1w": null,
+      "marron_alerta_1w": null,
+      "marron_1w": 115.99,
+      "media_k_1w": 65.36,
+      "konc_dir_1w": "up",
+      "pct_semana": 582.62,
+      "dist_wma10_1w": 191.79,
+      "dist_ema30_1w": 274.22,
+      "dist_ema50_1w": 354.4,
+      "dist_sma200_1w": null,
+      "macd_h": -88.03,
+      "marron": 19.08,
+      "media_k": 19.26,
+      "konc_dir": "dn",
+      "dist_ema21": -25.07,
+      "ema21_sube": false,
+      "dist_sma30": -33.9,
+      "dist_ema150": -41.35,
+      "dist_ema200": -37.33,
+      "wt_signal": {
+        "tipo": "FUERTE",
+        "momento": "HOY",
+        "wt2": -61.2
+      },
+      "hist_rsi": {
+        "nivel": 30,
+        "total_eventos": 11,
+        "resumen": [
+          {
+            "tramo": "1d",
+            "avg": -2.42,
+            "pos": 4,
+            "total": 10,
+            "prob": 40.0
+          },
+          {
+            "tramo": "2d",
+            "avg": -3.69,
+            "pos": 5,
+            "total": 10,
+            "prob": 50.0
+          },
+          {
+            "tramo": "5d",
+            "avg": -10.6,
+            "pos": 1,
+            "total": 10,
+            "prob": 10.0
+          },
+          {
+            "tramo": "1m",
+            "avg": -21.49,
+            "pos": 1,
+            "total": 4,
+            "prob": 25.0
+          }
+        ],
+        "ultimos": [
+          {
+            "dir": "↓",
+            "rsi": 24.1,
+            "ret_1d": 3.55,
+            "ret_2d": 9.93,
+            "ret_5d": 16.25,
+            "ret_1m": null
+          },
+          {
+            "dir": "↑",
+            "rsi": 30.0,
+            "ret_1d": -2.99,
+            "ret_2d": 10.29,
+            "ret_5d": -8.73,
+            "ret_1m": null
+          },
+          {
+            "dir": "↓",
+            "rsi": 29.2,
+            "ret_1d": 13.69,
+            "ret_2d": 9.01,
+            "ret_5d": -7.3,
+            "ret_1m": null
+          },
+          {
+            "dir": "↑",
+            "rsi": 37.4,
+            "ret_1d": -4.11,
+            "ret_2d": -9.48,
+            "ret_5d": -20.61,
+            "ret_1m": null
+          },
+          {
+            "dir": "↓",
+            "rsi": 29.4,
+            "ret_1d": null,
+            "ret_2d": null,
+            "ret_5d": null,
+            "ret_1m": null
+          }
+        ]
+      },
+      "rsi_pct_hist": 29.4,
+      "marron_pct_hist": 19.1,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Latam / Otros"
@@ -12239,7 +12390,7 @@
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
       "marron_1w": 103.69,
-      "media_k_1w": 88.98,
+      "media_k_1w": 88.97,
       "konc_dir_1w": "up",
       "pct_semana": -2.39,
       "dist_wma10_1w": 1.59,
@@ -13241,8 +13392,8 @@
       "dist_ema50_1w": -29.16,
       "dist_sma200_1w": -12.42,
       "macd_h": -24.57,
-      "marron": 30.29,
-      "media_k": 32.78,
+      "marron": 30.4,
+      "media_k": 32.89,
       "konc_dir": "dn",
       "dist_ema21": -16.1,
       "ema21_sube": false,
@@ -13327,7 +13478,7 @@
         ]
       },
       "rsi_pct_hist": 27.7,
-      "marron_pct_hist": 30.3,
+      "marron_pct_hist": 30.4,
       "rsi_alerta": null,
       "marron_alerta": null,
       "sector": "Brasil"
@@ -13343,8 +13494,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 34.24,
-      "media_k_1w": 73.13,
+      "marron_1w": 35.01,
+      "media_k_1w": 73.49,
       "konc_dir_1w": "dn",
       "pct_semana": -1.36,
       "dist_wma10_1w": -6.06,
@@ -13825,8 +13976,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 15.05,
-      "media_k_1w": 45.73,
+      "marron_1w": 14.94,
+      "media_k_1w": 45.45,
       "konc_dir_1w": "dn",
       "pct_semana": -6.78,
       "dist_wma10_1w": -5.1,
@@ -14005,8 +14156,8 @@
       "marron_pct_1w": null,
       "rsi_alerta_1w": null,
       "marron_alerta_1w": null,
-      "marron_1w": 12.4,
-      "media_k_1w": 54.5,
+      "marron_1w": 12.43,
+      "media_k_1w": 54.57,
       "konc_dir_1w": "dn",
       "pct_semana": -4.41,
       "dist_wma10_1w": -4.66,
@@ -14509,7 +14660,7 @@
       "pct_dia": -2.57,
       "rsi_1d": 39.7,
       "rsi_cruza_alza": false,
-      "rsi_1h": 22.0,
+      "rsi_1h": 22.1,
       "rsi_1w": 50.0,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -14656,7 +14807,7 @@
       "pct_dia": -2.98,
       "rsi_1d": 34.8,
       "rsi_cruza_alza": false,
-      "rsi_1h": 21.2,
+      "rsi_1h": 20.7,
       "rsi_1w": 51.5,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -15205,7 +15356,7 @@
       "pct_dia": 0.39,
       "rsi_1d": 59.5,
       "rsi_cruza_alza": false,
-      "rsi_1h": 43.6,
+      "rsi_1h": 43.8,
       "rsi_1w": 61.1,
       "rsi_pct_1w": null,
       "marron_pct_1w": null,
@@ -16346,6 +16497,16 @@
         "tipo": "FUERTE",
         "momento": "HOY",
         "wt2": -53.9
+      }
+    },
+    {
+      "ticker": "SNDK",
+      "sector": "Latam / Otros",
+      "rsi_1d": 29.4,
+      "signal": {
+        "tipo": "FUERTE",
+        "momento": "HOY",
+        "wt2": -61.2
       }
     },
     {
@@ -19992,6 +20153,88 @@
             "rsi": 28.3,
             "ret_1d": -0.35,
             "ret_2d": 0.35,
+            "ret_5d": null,
+            "ret_1m": null
+          }
+        ]
+      }
+    },
+    {
+      "ticker": "SNDK",
+      "sector": "Latam / Otros",
+      "rsi_1d": 29.4,
+      "pct_dia": -2.71,
+      "hist": {
+        "nivel": 30,
+        "total_eventos": 11,
+        "resumen": [
+          {
+            "tramo": "1d",
+            "avg": -2.42,
+            "pos": 4,
+            "total": 10,
+            "prob": 40.0
+          },
+          {
+            "tramo": "2d",
+            "avg": -3.69,
+            "pos": 5,
+            "total": 10,
+            "prob": 50.0
+          },
+          {
+            "tramo": "5d",
+            "avg": -10.6,
+            "pos": 1,
+            "total": 10,
+            "prob": 10.0
+          },
+          {
+            "tramo": "1m",
+            "avg": -21.49,
+            "pos": 1,
+            "total": 4,
+            "prob": 25.0
+          }
+        ],
+        "ultimos": [
+          {
+            "dir": "↓",
+            "rsi": 24.1,
+            "ret_1d": 3.55,
+            "ret_2d": 9.93,
+            "ret_5d": 16.25,
+            "ret_1m": null
+          },
+          {
+            "dir": "↑",
+            "rsi": 30.0,
+            "ret_1d": -2.99,
+            "ret_2d": 10.29,
+            "ret_5d": -8.73,
+            "ret_1m": null
+          },
+          {
+            "dir": "↓",
+            "rsi": 29.2,
+            "ret_1d": 13.69,
+            "ret_2d": 9.01,
+            "ret_5d": -7.3,
+            "ret_1m": null
+          },
+          {
+            "dir": "↑",
+            "rsi": 37.4,
+            "ret_1d": -4.11,
+            "ret_2d": -9.48,
+            "ret_5d": -20.61,
+            "ret_1m": null
+          },
+          {
+            "dir": "↓",
+            "rsi": 29.4,
+            "ret_1d": null,
+            "ret_2d": null,
             "ret_5d": null,
             "ret_1m": null
           }
